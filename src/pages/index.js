@@ -1,14 +1,20 @@
-import { Inter } from 'next/font/google'
+import UserLayout from '@/layouts/UserLayout'
+import HomeView from '@/views/HomeView'
 import Head from 'next/head'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
-        <title>Home Page</title>
+        <title>Home</title>
       </Head>
+      <HomeView />
     </>
   )
 }
+
+Home.getLayout = function getLayout(children) {
+  return <UserLayout>{children}</UserLayout>
+}
+
+export default Home

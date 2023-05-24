@@ -1,5 +1,6 @@
+import '../styles/globals.css'
 import { AppProviders } from '@/contexts'
-import '@/styles/globals.css'
+import '@/styles/bar-of-progress.css'
 import ProgressBar from '@badrap/bar-of-progress'
 import { SessionProvider } from 'next-auth/react'
 import Router from 'next/router'
