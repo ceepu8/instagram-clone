@@ -1,3 +1,4 @@
+import ThemeProvider from './themeProvider'
 import { ReactQueryProvider } from '@/contexts/ReactQuery'
 import { useStore } from '@/store'
 import PropTypes from 'prop-types'
@@ -14,7 +15,9 @@ export function AppProviders({ children, locale, pageProps }) {
     <SSRProvider>
       <Provider store={store}>
         <PersistGateClient persistor={persistor}>
-          <ReactQueryProvider pageProps={pageProps}>{children}</ReactQueryProvider>
+          <ReactQueryProvider pageProps={pageProps}>
+            <ThemeProvider>{children}</ThemeProvider>
+          </ReactQueryProvider>
         </PersistGateClient>
       </Provider>
     </SSRProvider>
