@@ -1,18 +1,27 @@
 import Button from '@/components/base/Button'
-import { ThemeSwitch } from '@/components/shared'
+import { Switch } from '@/components/shared'
 import { HeartIcon, MessageCircle, Send, Smile } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
 const AppSideBar = () => {
+  const { theme, setTheme } = useTheme()
+
   return (
     <div>
-      <ThemeSwitch />
+      <Switch
+        label="Dark mode"
+        onChange={(checked) => {
+          const _theme = checked ? 'dark' : 'light'
+          setTheme(_theme)
+        }}
+      />
       <div className="flex flex-col gap-y-4">
         <div className="flex">
-          <Button variant="primary" size="small">
+          <Button variant="text" size="small">
             Hello Tist
           </Button>
-          <Button variant="primary">Hello Tist</Button>
-          <Button variant="primary" size="large">
+          <Button variant="text">Hello Tist</Button>
+          <Button variant="text" size="large">
             Hello Tist
           </Button>
         </div>

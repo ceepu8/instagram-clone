@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,13 +14,14 @@ module.exports = {
     colors: {
       black: 'var(--black)',
       white: 'var(--white)',
-      primary: 'var(--primary)',
+      gainsboro: 'var(--gainsboro)',
+      text: 'var(--text)',
       footer: 'var(--footer)',
       background: 'var(--background)',
       comment: 'var(--comment)',
       hover: 'var(--hover)',
       red: 'var(--red)',
-      'vivid-cerulean': 'var(--vivid-cerulean)',
+      primary: 'var(--primary)',
       crayola: 'var(--crayola)',
       'philippine-gray': 'var(--philippine-gray)',
     },
@@ -30,5 +34,5 @@ module.exports = {
     },
     container: {},
   },
-  plugins: [],
+  plugins: [require('tailwindcss-radix')],
 }

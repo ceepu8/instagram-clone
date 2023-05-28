@@ -5,7 +5,7 @@ function Button({
   children,
   Icon,
   onClick,
-  variant = 'primary',
+  variant = 'text',
   size = 'medium',
   type = 'button',
   className,
@@ -16,11 +16,11 @@ function Button({
   let iconClasses = ''
 
   switch (variant) {
-    case 'primary':
+    case 'text':
       buttonClasses = cn(
         baseButtonClasses,
         'rounded-lg text-white',
-        'bg-vivid-cerulean hover:bg-crayola',
+        'bg-primary hover:bg-crayola',
         size,
         className
       )
@@ -39,7 +39,7 @@ function Button({
       break
 
     case 'text-only':
-      buttonClasses = cn(baseButtonClasses, 'text-vivid-cerulean hover:text-hover')
+      buttonClasses = cn(baseButtonClasses, 'text-primary hover:text-hover')
       break
 
     default:
