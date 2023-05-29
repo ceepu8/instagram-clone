@@ -1,7 +1,60 @@
+import Button from '@/components/base/Button'
+import { Switch } from '@/components/shared'
+import { HeartIcon, MessageCircle, Send, Smile } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import React from 'react'
 
 const HomeView = () => {
-  return <div className="dark:text-white">HomeView</div>
+  const { theme, setTheme } = useTheme()
+
+  return (
+    <div className="dark:text-white">
+      <Switch
+        label="Dark mode"
+        onChange={(checked) => {
+          const _theme = checked ? 'dark' : 'light'
+          setTheme(_theme)
+        }}
+      />
+      <div className="flex flex-col gap-y-4">
+        <div className="flex">
+          <Button variant="text" size="small">
+            Hello Tist
+          </Button>
+          <Button variant="text">Hello Tist</Button>
+          <Button variant="text" size="large">
+            Hello Tist
+          </Button>
+        </div>
+        <div className="flex">
+          <Button variant="icon" icon={HeartIcon} />
+          <Button variant="icon" icon={MessageCircle} />
+          <Button variant="icon" icon={Send} />
+          <Button variant="icon" size="small" icon={Smile} />
+        </div>
+
+        <div className="flex">
+          <Button variant="text-only" size="small">
+            Follow
+          </Button>
+          <Button variant="text-only" size="medium">
+            Follow
+          </Button>
+          <Button variant="text-only" size="large">
+            Follow
+          </Button>
+        </div>
+
+        <div className="flex">
+          <p className="text-comment">View all comment</p>
+        </div>
+
+        <div>
+          <span className="text-footer text-xs">© 2023 INSTAGRAM FROM META</span>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default HomeView

@@ -12,11 +12,14 @@
     --footer: #c7c7c7;
     --comment: #737373;
     --hover: #00376b;
+    --nav-hover: #f2f2f2;
+    --divide: #dbdbdb;
 
     --red: #ed4956;
     --primary: #0095f6;
     --crayola: #1a77f2;
     --philippine-gray: #8e8e8e;
+    --anti-flash-gray: #f2f2f2;
   }
 
   [data-theme='dark'] {
@@ -30,11 +33,14 @@
     --background: #000000;
     --comment: #a8a8a8;
     --hover: #e0f1ff;
+    --nav-hover: #1a1a1a;
+    --divide: #262626;
 
     --red: #ed4956;
     --primary: #0095f6;
     --crayola: #1a77f2;
     --philippine-gray: #8e8e8e;
+    --anti-flash-gray: #f2f2f2;
   }
 
   body {

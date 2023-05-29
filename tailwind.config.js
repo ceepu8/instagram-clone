@@ -20,10 +20,14 @@ module.exports = {
       background: 'var(--background)',
       comment: 'var(--comment)',
       hover: 'var(--hover)',
+      'nav-hover': 'var(--nav-hover)',
+      divide: 'var(--divide)',
+
       red: 'var(--red)',
       primary: 'var(--primary)',
       crayola: 'var(--crayola)',
       'philippine-gray': 'var(--philippine-gray)',
+      'anti-flash-gray': 'var(--anti-flash-gray)',
     },
     screens: {
       sm: '640px',

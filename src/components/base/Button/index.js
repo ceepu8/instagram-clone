@@ -3,14 +3,14 @@ import React from 'react'
 
 function Button({
   children,
-  Icon,
+  icon: Icon,
   onClick,
   variant = 'text',
   size = 'medium',
   type = 'button',
   className,
 }) {
-  const baseButtonClasses = 'font-bold focus:outline-none'
+  const baseButtonClasses = 'focus:outline-none'
   let buttonClasses = ''
   let btnSizeClasses = ''
   let iconClasses = ''
@@ -19,31 +19,30 @@ function Button({
     case 'text':
       buttonClasses = cn(
         baseButtonClasses,
-        'rounded-lg text-white',
+        'rounded-lg text-white font-bold',
         'bg-primary hover:bg-crayola',
-        size,
-        className
+        size
       )
       break
 
     case 'icon':
-      buttonClasses = cn(baseButtonClasses, 'hover:text-philippine-gray  ', className)
+      buttonClasses = cn(baseButtonClasses, 'hover:text-philippine-gray')
       break
 
     case 'text-icon':
       buttonClasses = cn(
         baseButtonClasses,
-        'bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full flex items-center',
-        className
+        'bg-gray-200 hover:bg-nav-hover text-gray-700 rounded-md flex items-center justify-start gap-x-4 group w-full'
       )
+      iconClasses = cn('transition-all duration-150 mx-0 group-hover:scale-110')
       break
 
     case 'text-only':
-      buttonClasses = cn(baseButtonClasses, 'text-primary hover:text-hover')
+      buttonClasses = cn(baseButtonClasses, 'text-primary hover:text-hover font-bold')
       break
 
     default:
-      buttonClasses = cn(baseButtonClasses, className)
+      buttonClasses = cn(baseButtonClasses)
   }
 
   btnSizeClasses =
@@ -59,16 +58,16 @@ function Button({
           'text-lg w-12 h-12': size === 'large',
         })
 
-  iconClasses = cn({
+  const iconSize = cn({
     'w-4 mx-auto h-4 leading-4': size === 'small',
     'w-6 mx-auto h-6 leading-6': size === 'medium',
     'w-8 mx-auto h-8 leading-8': size === 'large',
   })
 
   return (
-    <button className={cn(buttonClasses, btnSizeClasses)} onClick={onClick} type={type}>
+    <button className={cn(buttonClasses, btnSizeClasses, className)} onClick={onClick} type={type}>
       {variant === 'icon' && <span className="sr-only">Add</span>}
-      {Icon && <Icon className={cn(iconClasses)} />}
+      {Icon && <Icon className={cn(iconSize, iconClasses)} />}
       {children}
     </button>
   )
