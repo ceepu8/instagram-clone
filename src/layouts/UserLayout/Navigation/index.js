@@ -3,7 +3,7 @@ import { FacebookMessengerIcon } from '@/components/icons'
 import { Compass, Film, Heart, Home, Menu, PlusSquare, Search } from 'lucide-react'
 import Image from 'next/image'
 
-const navItems = [
+const NAV_ITEMS = [
   {
     route: '/',
     icon: Home,
@@ -60,7 +60,7 @@ const Navigation = () => {
   return (
     <div className="flex flex-1 flex-col">
       <div className="flex-1 space-y-2">
-        {navItems.map((e) => {
+        {NAV_ITEMS.map((e) => {
           const { onPress, route, icon, label, content } = e || {}
           return (
             <NavItem key={label} route={route} onPress={onPress} icon={icon}>

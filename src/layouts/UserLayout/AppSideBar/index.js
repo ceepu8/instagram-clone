@@ -1,11 +1,12 @@
 import Navigation from '../Navigation'
 import { InstagramLetterIcon } from '@/components/icons'
+import Link from 'next/link'
 
 const SideBarLogo = () => {
   return (
-    <div className="pl-3 py-8">
+    <Link href="/" className="pl-3 py-8">
       <InstagramLetterIcon width={110} height="auto" />
-    </div>
+    </Link>
   )
 }
 
