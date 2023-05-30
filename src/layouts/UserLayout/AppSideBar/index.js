@@ -1,6 +1,6 @@
 import Navigation from '../Navigation'
+import { Link } from '@/components/base'
 import { InstagramLetterIcon } from '@/components/icons'
-import Link from 'next/link'
 
 const SideBarLogo = () => {
   return (

@@ -1,13 +1,8 @@
+import { checkRouteActive } from '@/utils'
 import { Pressable } from '@react-aria/interactions'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
-
-export const checkRouteActive = (router, route) => {
-  const active =
-    router.asPath === route || router.pathname === route || router.asPath.endsWith(route)
-
-  return active
-}
+import { memo } from 'react'
 
 const NavItem = ({ onPress, children, icon: Icon, route }) => {
   const router = useRouter()
@@ -20,11 +15,11 @@ const NavItem = ({ onPress, children, icon: Icon, route }) => {
           active ? 'font-bold' : ''
         )}
       >
-        {Icon && <Icon width="30" height="30" className={cn({})} />}
+        {Icon && <Icon width="30" height="30" />}
         {children}
       </div>
     </Pressable>
   )
 }
 
-export default NavItem
+export default memo(NavItem)
