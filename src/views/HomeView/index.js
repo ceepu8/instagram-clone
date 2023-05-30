@@ -1,4 +1,5 @@
 import Button from '@/components/base/Button'
+import { FacebookMessengerIcon } from '@/components/icons'
 import { Switch } from '@/components/shared'
 import { HeartIcon, MessageCircle, Send, Smile } from 'lucide-react'
 import { useTheme } from 'next-themes'
@@ -17,30 +18,72 @@ const HomeView = () => {
         }}
       />
       <div className="flex flex-col gap-y-4">
-        <div className="flex">
-          <Button variant="text" size="small">
+        <div className="flex space-x-3">
+          <Button variant="primary" size="small">
             Hello Tist
           </Button>
-          <Button variant="text">Hello Tist</Button>
-          <Button variant="text" size="large">
+          <Button variant="primary">Hello Tist</Button>
+          <Button variant="primary" size="large">
             Hello Tist
           </Button>
         </div>
+
+        <div className="flex space-x-4">
+          <Button variant="secondary" size="small">
+            Hello Tist
+          </Button>
+          <Button variant="secondary">Hello Tist</Button>
+          <Button variant="secondary" size="large">
+            Hello Tist
+          </Button>
+        </div>
+
+        <div className="flex space-x-4">
+          <Button variant="text-secondary" icon={HeartIcon} iconOnly />
+          <Button variant="text-secondary" icon={MessageCircle} iconOnly />
+          <Button variant="text-secondary" icon={Send} iconOnly />
+          <Button variant="text-secondary" size="extra-small" icon={Smile} iconOnly />
+        </div>
+
+        <div className="flex space-x-4">
+          <Button variant="text-primary" size="large" icon={HeartIcon} iconOnly />
+          <Button variant="text-primary" size="large" icon={MessageCircle} iconOnly />
+          <Button variant="text-primary" size="large" icon={Send} iconOnly />
+          <Button variant="text-primary" size="small" icon={Smile} iconOnly />
+        </div>
+
+        <div className="flex space-x-4">
+          <Button variant="primary" icon={FacebookMessengerIcon} fullWidth>
+            Message
+          </Button>
+          <Button variant="secondary">Following</Button>
+        </div>
+
+        <Button variant="primary" icon={FacebookMessengerIcon} fullWidth>
+          Message
+        </Button>
+        <Button variant="secondary">Following</Button>
+
         <div className="flex">
-          <Button variant="icon" icon={HeartIcon} />
-          <Button variant="icon" icon={MessageCircle} />
-          <Button variant="icon" icon={Send} />
-          <Button variant="icon" size="small" icon={Smile} />
+          <Button variant="text-primary" size="small">
+            Follow
+          </Button>
+          <Button variant="text-primary" size="medium">
+            Follow
+          </Button>
+          <Button variant="text-primary" size="large">
+            Follow
+          </Button>
         </div>
 
         <div className="flex">
-          <Button variant="text-only" size="small">
+          <Button variant="text-secondary" size="small">
             Follow
           </Button>
-          <Button variant="text-only" size="medium">
+          <Button variant="text-secondary" size="medium">
             Follow
           </Button>
-          <Button variant="text-only" size="large">
+          <Button variant="text-secondary" size="large">
             Follow
           </Button>
         </div>

@@ -8,6 +8,7 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/layouts/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/views/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
@@ -22,6 +23,15 @@ module.exports = {
       hover: 'var(--hover)',
       'nav-hover': 'var(--nav-hover)',
       divide: 'var(--divide)',
+
+      'btn-primary': 'var(--btn-primary)',
+      'btn-primary-hover': 'var(--btn-primary-hover)',
+      'btn-secondary': 'var(--btn-secondary)',
+      'btn-secondary-hover': 'var(--btn-secondary-hover)',
+      'btn-text-primary': 'var(--btn-text-primary)',
+      'btn-text-primary-hover': 'var(--btn-text-primary-hover)',
+      'btn-text-secondary': 'var(--btn-text-secondary)',
+      'btn-text-secondary-hover': 'var(--btn-text-secondary-hover)',
 
       red: 'var(--red)',
       primary: 'var(--primary)',
