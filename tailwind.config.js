@@ -1,25 +1,43 @@
 /** @type {import('tailwindcss').Config} */
+
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/layouts/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/views/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
     colors: {
       black: 'var(--black)',
       white: 'var(--white)',
-      primary: 'var(--primary)',
+      gainsboro: 'var(--gainsboro)',
+      text: 'var(--text)',
       footer: 'var(--footer)',
       background: 'var(--background)',
       comment: 'var(--comment)',
       hover: 'var(--hover)',
+      'nav-hover': 'var(--nav-hover)',
+      divide: 'var(--divide)',
+
+      'btn-primary': 'var(--btn-primary)',
+      'btn-primary-hover': 'var(--btn-primary-hover)',
+      'btn-secondary': 'var(--btn-secondary)',
+      'btn-secondary-hover': 'var(--btn-secondary-hover)',
+      'btn-text-primary': 'var(--btn-text-primary)',
+      'btn-text-primary-hover': 'var(--btn-text-primary-hover)',
+      'btn-text-secondary': 'var(--btn-text-secondary)',
+      'btn-text-secondary-hover': 'var(--btn-text-secondary-hover)',
+
       red: 'var(--red)',
-      'vivid-cerulean': 'var(--vivid-cerulean)',
+      primary: 'var(--primary)',
       crayola: 'var(--crayola)',
       'philippine-gray': 'var(--philippine-gray)',
+      'anti-flash-gray': 'var(--anti-flash-gray)',
     },
     screens: {
       sm: '640px',
@@ -30,5 +48,5 @@ module.exports = {
     },
     container: {},
   },
-  plugins: [],
+  plugins: [require('tailwindcss-radix')],
 }

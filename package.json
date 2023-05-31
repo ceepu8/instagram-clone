@@ -13,7 +13,9 @@
     "@hookform/resolvers": "^3.1.0",
     "@radix-ui/react-popover": "^1.0.5",
     "@radix-ui/react-select": "^1.2.1",
+    "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tabs": "^1.0.3",
+    "@react-aria/interactions": "^3.15.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.7",
     "@tanstack/react-query-devtools": "^4.29.7",
@@ -21,8 +23,6 @@
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.7",
-    "eslint": "^8.41.0",
-    "eslint-config-next": "^13.4.3",
     "framer-motion": "^10.12.12",
     "lodash": "^4.17.21",
     "lucide-react": "^0.221.0",
@@ -37,6 +37,8 @@
     "react-redux": "^8.0.5",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
+    "tailwindcss": "^3.3.2",
+    "tailwindcss-radix": "^2.8.0",
     "yarn": "^1.22.19",
     "yup": "^1.1.1"
   },
@@ -47,7 +49,9 @@
     "@tanstack/eslint-plugin-query": "^4.29.8",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "cssnano": "^6.0.1",
+    "eslint": "^8.41.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "^13.4.4",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-jsx-a11y": "^6.7.1",
@@ -60,7 +64,6 @@
     "postcss-preset-env": "^8.4.1",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4"
   }
 }
