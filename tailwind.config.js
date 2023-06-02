@@ -23,6 +23,7 @@ module.exports = {
       hover: 'var(--hover)',
       'nav-hover': 'var(--nav-hover)',
       divide: 'var(--divide)',
+      popover: 'var(--popover)',
 
       'btn-primary': 'var(--btn-primary)',
       'btn-primary-hover': 'var(--btn-primary-hover)',

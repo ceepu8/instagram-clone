@@ -4,7 +4,7 @@ import { InstagramLetterIcon } from '@/components/icons'
 
 const SideBarLogo = () => {
   return (
-    <Link href="/" className="pl-3 py-8">
+    <Link href="/" className="pl-3 py-8 text-text">
       <InstagramLetterIcon width={110} height="auto" />
     </Link>
   )

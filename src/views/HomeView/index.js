@@ -1,4 +1,5 @@
 import Button from '@/components/base/Button'
+import Popover from '@/components/base/Popover'
 import { FacebookMessengerIcon } from '@/components/icons'
 import { Switch } from '@/components/shared'
 import { HeartIcon, MessageCircle, Send, Smile } from 'lucide-react'
@@ -95,6 +96,8 @@ const HomeView = () => {
         <div>
           <span className="text-footer text-xs">© 2023 INSTAGRAM FROM META</span>
         </div>
+
+        <Popover>123</Popover>
       </div>
     </div>
   )
