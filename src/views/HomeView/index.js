@@ -1,23 +1,14 @@
 import Button from '@/components/base/Button'
-import Popover from '@/components/base/Popover'
 import { FacebookMessengerIcon } from '@/components/icons'
 import { Switch } from '@/components/shared'
 import { HeartIcon, MessageCircle, Send, Smile } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import React from 'react'
 
 const HomeView = () => {
   const { theme, setTheme } = useTheme()
 
   return (
     <div className="dark:text-white">
-      <Switch
-        label="Dark mode"
-        onChange={(checked) => {
-          const _theme = checked ? 'dark' : 'light'
-          setTheme(_theme)
-        }}
-      />
       <div className="flex flex-col gap-y-4">
         <div className="flex space-x-3">
           <Button variant="primary" size="small">
@@ -97,7 +88,7 @@ const HomeView = () => {
           <span className="text-footer text-xs">© 2023 INSTAGRAM FROM META</span>
         </div>
 
-        <Popover>123</Popover>
+        <div></div>
       </div>
     </div>
   )

@@ -1,4 +1,3 @@
-import Button from '../Button'
 import * as PopoverPrimitives from '@radix-ui/react-popover'
 import cn from 'classnames'
 import { X } from 'lucide-react'
@@ -17,15 +16,15 @@ const CloseIcon = () => {
   )
 }
 
-const Popover = ({ children, trigger, hasCloseIcon = false }) => (
-  <PopoverPrimitives.Root>
-    <PopoverPrimitives.Trigger asChild>{trigger}</PopoverPrimitives.Trigger>
+const Popover = ({ children, trigger, hasCloseIcon = false }) => {
+  return (
+    <PopoverPrimitives.Root>
+      <PopoverPrimitives.Trigger asChild>{trigger}</PopoverPrimitives.Trigger>
 
-    <PopoverPrimitives.Portal>
       <PopoverPrimitives.Content
         className={cn(
           'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
-          'z-50 rounded-2xl p-2 shadow-md md:w-56',
+          'z-50 rounded-2xl p-2 shadow-55 md:w-56',
           'min-w-[290px] ml-4',
           'bg-popover'
         )}
@@ -35,8 +34,8 @@ const Popover = ({ children, trigger, hasCloseIcon = false }) => (
         {hasCloseIcon && <CloseIcon />}
         {/* <PopoverPrimitives.Arrow className="fill-popover" /> */}
       </PopoverPrimitives.Content>
-    </PopoverPrimitives.Portal>
-  </PopoverPrimitives.Root>
-)
+    </PopoverPrimitives.Root>
+  )
+}
 
 export default Popover
