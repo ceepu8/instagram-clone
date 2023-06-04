@@ -25,6 +25,7 @@ module.exports = {
       divide: 'var(--divide)',
       popover: 'var(--popover)',
       'popover-divide': 'var(--popover-divide)',
+      'nav-menu-item': 'var(--nav-menu-item)',
 
       'btn-primary': 'var(--btn-primary)',
       'btn-primary-hover': 'var(--btn-primary-hover)',

@@ -6,7 +6,7 @@ const EmptyDirectPage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Instagram</title>
       </Head>
       <EmptyDirectView />
     </>

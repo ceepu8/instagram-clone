@@ -5,7 +5,15 @@ import { useRouter } from 'next/router'
 import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-const NavItem = ({ onPress, children, icon: Icon, route, size = 'medium' }) => {
+const NavItem = ({
+  onPress,
+  children,
+  icon: Icon,
+  route,
+  size = 'medium',
+  className,
+  ...props
+}) => {
   const router = useRouter()
   const active = checkRouteActive(router, route)
 
@@ -21,7 +29,8 @@ const NavItem = ({ onPress, children, icon: Icon, route, size = 'medium' }) => {
           cn(
             'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-4 rounded-lg cursor-pointer transition-all duration-150',
             active ? 'font-bold' : '',
-            _size.letter
+            _size.letter,
+            className
           )
         )}
       >

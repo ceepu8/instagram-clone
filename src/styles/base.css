@@ -18,6 +18,8 @@
     --popover: #ffffff;
     --popover-divide: #f2f2f2;
 
+    --nav-menu-item: #f2f2f2;
+
     --btn-primary: #0095f6;
     --btn-primary-hover: #1a77f2;
     --btn-secondary: #efefef;
@@ -50,6 +52,8 @@
 
     --popover: #262626;
     --popover-divide: #353535;
+
+    --nav-menu-item: #3c3c3c;
 
     --btn-primary: #0095f6;
     --btn-primary-hover: #1a77f2;
