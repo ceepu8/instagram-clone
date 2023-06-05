@@ -1,8 +1,4 @@
-import Button from '../Button'
-import Popover from '../Popover'
-import { EmojiPicker } from '@/components/shared'
 import cn from 'classnames'
-import { SmileIcon } from 'lucide-react'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 

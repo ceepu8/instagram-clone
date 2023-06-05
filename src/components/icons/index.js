@@ -19,7 +19,7 @@ import {
   Smile,
 } from 'lucide-react'
 
-const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
+export const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@ const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
   )
 }
 
-const InstagramLetterIcon = ({ width = 24, height = 24, ...props }) => {
+export const InstagramLetterIcon = ({ width = 24, height = 24, ...props }) => {
   return (
     <svg
       aria-label="Instagram"
@@ -78,5 +78,3 @@ export {
   Send,
   Smile,
 }
-
-export { InstagramLetterIcon, FacebookMessengerIcon }

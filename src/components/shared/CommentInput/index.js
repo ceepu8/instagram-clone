@@ -1,9 +1,7 @@
 import { Button, Input, Popover } from '@/components/base'
+import { SmileIcon } from '@/components/icons'
 import { useInputState } from '@/hooks/useInputState'
-import cn from 'classnames'
 import EmojiPicker from 'emoji-picker-react'
-import { SmileIcon } from 'lucide-react'
-import PropTypes from 'prop-types'
 import { useState } from 'react'
 
 const CommentInput = () => {

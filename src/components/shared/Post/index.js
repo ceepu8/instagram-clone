@@ -1,7 +1,13 @@
 import CommentInput from '../CommentInput'
 import ProfilePreview from '../ProfilePreview'
 import { Button, HoverCard, LineBreak, Link } from '@/components/base'
-import { BookmarkIcon, HeartIcon, MessageCircle, MoreHorizontalIcon, Send } from 'lucide-react'
+import {
+  BookmarkIcon,
+  HeartIcon,
+  MessageCircle,
+  MoreHorizontalIcon,
+  Send,
+} from '@/components/icons'
 import Image from 'next/image'
 
 const UserProfileImage = ({ imageUrl = '' }) => {
