@@ -15,6 +15,8 @@ module.exports = {
     colors: {
       black: 'var(--black)',
       white: 'var(--white)',
+      transparent: 'transparent',
+
       gainsboro: 'var(--gainsboro)',
       text: 'var(--text)',
       footer: 'var(--footer)',
@@ -26,6 +28,7 @@ module.exports = {
       popover: 'var(--popover)',
       'popover-divide': 'var(--popover-divide)',
       'nav-menu-item': 'var(--nav-menu-item)',
+      link: 'var(--link)',
 
       'btn-primary': 'var(--btn-primary)',
       'btn-primary-hover': 'var(--btn-primary-hover)',

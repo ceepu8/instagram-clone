@@ -1,4 +1,5 @@
 import cn from 'classnames'
+import propTypes from 'prop-types'
 import { forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -81,10 +82,22 @@ const Button = forwardRef((props, ref) => {
       onClick={onClick}
       type={type}
     >
-      {Icon && <Icon className={twMerge(iconSize)} />}
+      {Icon && <Icon className={cn(iconSize)} />}
       {children}
     </button>
   )
 })
+
+Button.propTypes = {
+  children: propTypes.node,
+  icon: propTypes.elementType,
+  onClick: propTypes.func,
+  variant: propTypes.oneOf(['primary', 'secondary', 'text-primary', 'text-secondary']),
+  size: propTypes.oneOf(['extra-small', 'small', 'medium', 'large']),
+  type: propTypes.oneOf(['button', 'submit', 'reset']),
+  iconOnly: propTypes.bool,
+  fullWidth: propTypes.bool,
+  rootClassName: propTypes.string,
+}
 
 export default Button

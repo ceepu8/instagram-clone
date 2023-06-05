@@ -73,8 +73,8 @@ export default function MainMenu(props) {
               {item.label}
             </NavItem>
           )}
-          {index === 4 && <LineBreak className="bg-popover-divide h-[6px]" />}
-          {index === 5 && <LineBreak className="bg-popover-divide" />}
+          {index === 4 && <LineBreak className="bg-popover-divide h-[6px] -mx-2" />}
+          {index === 5 && <LineBreak className="bg-popover-divide -mx-2" />}
         </Fragment>
       ))}
     </div>
