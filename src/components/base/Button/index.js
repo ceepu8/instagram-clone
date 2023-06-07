@@ -63,14 +63,14 @@ const Button = forwardRef((props, ref) => {
     children &&
     cn({
       'text-xs py-1 px-3': size === 'small',
-      'text-sm py-2 px-4': size === 'medium',
+      'text-md py-2 px-4': size === 'medium',
       'text-lg py-2 px-6': size === 'large',
     })
 
   const iconSize = cn({
     'w-3 h-3 leading-3': size === 'small',
-    'w-4 h-4 leading-4': size === 'medium',
-    'w-6 h-6 leading-6': size === 'large',
+    'w-6 h-6 leading-6': size === 'medium',
+    'w-8 h-8 leading-8': size === 'large',
   })
 
   return (
