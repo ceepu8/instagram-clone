@@ -1,6 +1,8 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch'
+import { Pressable } from '@react-aria/interactions'
 import cn from 'classnames'
 import { forwardRef, useId } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 const styles = {
   root: cn(
@@ -29,18 +31,18 @@ const Switch = forwardRef(
         <div className="flex items-center">
           {label && (
             <label htmlFor={id}>
-              <span className={cn('text-sm pr-4', labelStyle)}>{label}</span>
+              <span className={twMerge('text-sm pr-4', labelStyle)}>{label}</span>
             </label>
           )}
           <SwitchPrimitive.Root
             ref={ref}
             id={id}
             checked={checked}
-            className={cn(rootStyle, styles.root)}
+            className={twMerge(styles.root, rootStyle)}
             onCheckedChange={onChange}
             {...rest}
           >
-            <SwitchPrimitive.Thumb className={cn(thumbStyle, styles.thumb)} />
+            <SwitchPrimitive.Thumb className={twMerge(styles.thumb, thumbStyle)} />
           </SwitchPrimitive.Root>
         </div>
       </form>

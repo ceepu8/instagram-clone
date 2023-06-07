@@ -1,4 +1,25 @@
-export const FacebookMessengerIcon = ({ width = 24, height = 24 }) => {
+import {
+  X,
+  Menu,
+  AlertTriangle,
+  Bookmark,
+  History,
+  Settings,
+  Sun,
+  ChevronLeft,
+  Compass,
+  Film,
+  Heart,
+  Home,
+  PlusSquare,
+  Search,
+  HeartIcon,
+  MessageCircle,
+  Send,
+  Smile,
+} from 'lucide-react'
+
+const FacebookMessengerIcon = ({ width = 24, height = 24 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +34,7 @@ export const FacebookMessengerIcon = ({ width = 24, height = 24 }) => {
   )
 }
 
-export const InstagramLetterIcon = ({ width = 24, height = 24 }) => {
+const InstagramLetterIcon = ({ width = 24, height = 24 }) => {
   return (
     <svg
       aria-label="Instagram"
@@ -34,3 +55,26 @@ export const InstagramLetterIcon = ({ width = 24, height = 24 }) => {
     </svg>
   )
 }
+
+export {
+  X,
+  Menu,
+  AlertTriangle,
+  Bookmark,
+  History,
+  Settings,
+  Sun,
+  ChevronLeft,
+  Compass,
+  Film,
+  Heart,
+  Home,
+  PlusSquare,
+  Search,
+  HeartIcon,
+  MessageCircle,
+  Send,
+  Smile,
+}
+
+export { InstagramLetterIcon, FacebookMessengerIcon }

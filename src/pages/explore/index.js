@@ -7,7 +7,7 @@ const ExplorePage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Instagram</title>
       </Head>
       <ExploreView />
     </>

@@ -1,17 +1,20 @@
 import cn from 'classnames'
-import React from 'react'
+import { forwardRef } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-function Button({
-  children,
-  icon: Icon,
-  onClick,
-  variant = 'text',
-  size = 'medium',
-  type = 'button',
-  iconOnly = false,
-  fullWidth = false,
-  className,
-}) {
+const Button = forwardRef((props, ref) => {
+  const {
+    children,
+    icon: Icon,
+    onClick,
+    variant = 'text',
+    size = 'medium',
+    type = 'button',
+    iconOnly = false,
+    fullWidth = false,
+    rootClassName,
+    ...rest
+  } = props || {}
   const baseButtonClasses = cn(
     'focus:outline-none flex items-center justify-center gap-x-2',
     fullWidth ? 'max-w-full' : 'max-w-fit'
@@ -25,8 +28,7 @@ function Button({
       buttonClasses = cn(
         baseButtonClasses,
         'rounded-lg text-white font-bold',
-        'bg-btn-primary hover:bg-btn-primary-hover',
-        size
+        'bg-btn-primary hover:bg-btn-primary-hover'
       )
       break
 
@@ -34,8 +36,7 @@ function Button({
       buttonClasses = cn(
         baseButtonClasses,
         'rounded-lg text-black font-bold',
-        'bg-btn-secondary hover:bg-btn-secondary-hover',
-        size
+        'bg-btn-secondary hover:bg-btn-secondary-hover'
       )
       break
 
@@ -66,18 +67,24 @@ function Button({
     })
 
   const iconSize = cn({
-    'w-4 mx-auto h-4 leading-4': size === 'extra-small',
-    'w-5 mx-auto h-5 leading-5': size === 'small',
-    'w-7 mx-auto h-7 leading-7': size === 'medium',
-    'w-9 mx-auto h-9 leading-9': size === 'large',
+    'w-4 h-4 leading-4': size === 'extra-small',
+    'w-5 h-5 leading-5': size === 'small',
+    'w-7 h-7 leading-7': size === 'medium',
+    'w-9 h-9 leading-9': size === 'large',
   })
 
   return (
-    <button className={cn(buttonClasses, btnSizeClasses, className)} onClick={onClick} type={type}>
-      {Icon && <Icon className={cn(iconSize)} />}
+    <button
+      ref={ref}
+      className={twMerge(buttonClasses, btnSizeClasses, rootClassName)}
+      onClick={onClick}
+      type={type}
+      {...rest}
+    >
+      {Icon && <Icon className={twMerge(iconSize)} />}
       {children}
     </button>
   )
-}
+})
 
 export default Button

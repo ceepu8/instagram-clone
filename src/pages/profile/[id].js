@@ -7,7 +7,7 @@ const ProfilePage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Instagram</title>
       </Head>
       <ProfileView />
     </>

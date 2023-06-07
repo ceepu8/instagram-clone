@@ -5,7 +5,7 @@ const UserLayout = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Instagram Clone</title>
+        <title>Instagram</title>
         <meta name="description" content="Smoky-Instagram" />
       </Head>
       <div className="grid grid-cols-6 min-h-screen">

@@ -6,7 +6,7 @@ const InDirectPage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Instagram</title>
       </Head>
       <InDirectView />
     </>

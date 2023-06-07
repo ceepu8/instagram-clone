@@ -23,6 +23,9 @@ module.exports = {
       hover: 'var(--hover)',
       'nav-hover': 'var(--nav-hover)',
       divide: 'var(--divide)',
+      popover: 'var(--popover)',
+      'popover-divide': 'var(--popover-divide)',
+      'nav-menu-item': 'var(--nav-menu-item)',
 
       'btn-primary': 'var(--btn-primary)',
       'btn-primary-hover': 'var(--btn-primary-hover)',
@@ -38,6 +41,9 @@ module.exports = {
       crayola: 'var(--crayola)',
       'philippine-gray': 'var(--philippine-gray)',
       'anti-flash-gray': 'var(--anti-flash-gray)',
+    },
+    boxShadow: {
+      55: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px',
     },
     screens: {
       sm: '640px',

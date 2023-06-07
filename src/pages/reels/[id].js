@@ -7,7 +7,7 @@ const ReelsPage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Instagram</title>
       </Head>
       <ReelsView />
     </>
