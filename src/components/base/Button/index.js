@@ -11,7 +11,6 @@ const Button = forwardRef((props, ref) => {
     variant = 'text',
     size = 'medium',
     type = 'button',
-    iconOnly = false,
     fullWidth = false,
     rootClassName,
     ...rest
@@ -60,7 +59,7 @@ const Button = forwardRef((props, ref) => {
   }
 
   btnSizeClasses =
-    !iconOnly &&
+    children &&
     cn({
       'text-xs py-1 px-3': size === 'small',
       'text-sm py-2 px-4': size === 'medium',
@@ -68,10 +67,9 @@ const Button = forwardRef((props, ref) => {
     })
 
   const iconSize = cn({
-    'w-3 h-3 leading-3': size === 'extra-small',
-    'w-4 h-4 leading-4': size === 'small',
-    'w-6 h-6 leading-6': size === 'medium',
-    'w-9 h-9 leading-9': size === 'large',
+    'w-3 h-3 leading-3': size === 'small',
+    'w-4 h-4 leading-4': size === 'medium',
+    'w-6 h-6 leading-6': size === 'large',
   })
 
   return (
@@ -89,11 +87,10 @@ const Button = forwardRef((props, ref) => {
 })
 
 Button.propTypes = {
-  children: propTypes.node,
   icon: propTypes.elementType,
   onClick: propTypes.func,
   variant: propTypes.oneOf(['primary', 'secondary', 'text-primary', 'text-secondary']),
-  size: propTypes.oneOf(['extra-small', 'small', 'medium', 'large']),
+  size: propTypes.oneOf(['small', 'medium', 'large']),
   type: propTypes.oneOf(['button', 'submit', 'reset']),
   iconOnly: propTypes.bool,
   fullWidth: propTypes.bool,

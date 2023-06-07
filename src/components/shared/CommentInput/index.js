@@ -37,7 +37,7 @@ const CommentInput = () => {
       )}
       <Popover
         contentClassName="p-0"
-        trigger={<Button variant="text-secondary" size="extra-small" icon={SmileIcon} iconOnly />}
+        trigger={<Button variant="text-secondary" size="small" icon={SmileIcon} />}
       >
         <EmojiPicker onEmojiClick={handleInputEmoji} />
       </Popover>

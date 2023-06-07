@@ -65,6 +65,7 @@ export default function MainMenu(props) {
         <Fragment key={item.key}>
           {item.label && (
             <NavItem
+              key={item.label}
               onPress={item.onPress}
               icon={item.icon}
               size="small"

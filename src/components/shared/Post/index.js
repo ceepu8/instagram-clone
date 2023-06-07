@@ -39,7 +39,7 @@ const Post = () => {
         <Button
           variant="text-secondary"
           icon={MoreHorizontalIcon}
-          iconOnly
+          size="large"
           rootClassName="ml-auto"
         />
       </div>
@@ -54,10 +54,10 @@ const Post = () => {
       </div>
 
       <div className="flex gap-x-3">
-        <Button variant="text-secondary" icon={HeartIcon} iconOnly />
-        <Button variant="text-secondary" icon={MessageCircle} iconOnly />
-        <Button variant="text-secondary" icon={Send} iconOnly />
-        <Button variant="text-secondary" icon={BookmarkIcon} iconOnly rootClassName="ml-auto" />
+        <Button variant="text-secondary" size="large" icon={HeartIcon} />
+        <Button variant="text-secondary" size="large" icon={MessageCircle} />
+        <Button variant="text-secondary" size="large" icon={Send} />
+        <Button variant="text-secondary" size="large" icon={BookmarkIcon} rootClassName="ml-auto" />
       </div>
 
       <div className="text-left">
@@ -73,7 +73,6 @@ const Post = () => {
 
         <Button
           variant="text-secondary"
-          size="large"
           rootClassName="text-comment hover:text-none p-0 font-medium"
         >
           more
