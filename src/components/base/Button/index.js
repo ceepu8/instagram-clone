@@ -75,11 +75,11 @@ const Button = forwardRef((props, ref) => {
 
   return (
     <button
-      {...rest}
       ref={ref}
       className={twMerge(buttonClasses, btnSizeClasses, rootClassName)}
       onClick={onClick}
       type={type}
+      {...rest}
     >
       {Icon && <Icon className={twMerge(iconSize)} />}
       {children}
