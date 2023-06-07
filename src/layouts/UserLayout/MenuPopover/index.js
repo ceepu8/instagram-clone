@@ -8,12 +8,12 @@ import cn from 'classnames'
 import { useState } from 'react'
 
 const PopoverContent = () => {
-  const [menu, setMenu] = useState(POPOVER_MENU_KEYS.MAIN_KEYS)
+  const [menu, setMenu] = useState(POPOVER_MENU_KEYS.MAIN)
 
   return (
     <div>
-      {menu === POPOVER_MENU_KEYS.MAIN_KEYS && <MainMenu setMenu={setMenu} />}
-      {menu === POPOVER_MENU_KEYS.SWITCH_APPEARANCE_KEY && <SwitchAppearance setMenu={setMenu} />}
+      {menu === POPOVER_MENU_KEYS.MAIN && <MainMenu setMenu={setMenu} />}
+      {menu === POPOVER_MENU_KEYS.SWITCH_APPEARANCE && <SwitchAppearance setMenu={setMenu} />}
       {/* ... if more other popovers */}
     </div>
   )
