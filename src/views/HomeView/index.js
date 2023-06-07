@@ -87,8 +87,6 @@ const HomeView = () => {
         <div>
           <span className="text-footer text-xs">© 2023 INSTAGRAM FROM META</span>
         </div>
-
-        <div></div>
       </div>
     </div>
   )

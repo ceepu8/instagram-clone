@@ -40,7 +40,7 @@ const SwitchAppearance = (props) => {
           variant="text-secondary"
           icon={ChevronLeft}
           size="small"
-          onClick={() => setMenu(POPOVER_MENU_KEYS.MAIN_KEYS)}
+          onClick={() => setMenu(POPOVER_MENU_KEYS.MAIN)}
         />
         <h1 className="text-lg font-semibold">Switch Appearance</h1>
       </div>
