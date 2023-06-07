@@ -1,7 +1,7 @@
 import Button from '@/components/base/Button'
 import { FacebookMessengerIcon } from '@/components/icons'
+import { HeartIcon, MessageCircle, Send, Smile } from '@/components/icons'
 import { Switch } from '@/components/shared'
-import { HeartIcon, MessageCircle, Send, Smile } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 const HomeView = () => {

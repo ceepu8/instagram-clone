@@ -1,6 +1,6 @@
+import { X } from '@/components/icons'
 import * as PopoverPrimitives from '@radix-ui/react-popover'
 import cn from 'classnames'
-import { X } from 'lucide-react'
 
 const CloseIcon = () => {
   return (

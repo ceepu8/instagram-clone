@@ -1,14 +1,14 @@
 import MenuPopover from '../MenuPopover'
 import NavItem from '../NavItem'
 import { FacebookMessengerIcon } from '@/components/icons'
-import { ROUTES } from '@/constants'
-import { Compass, Film, Heart, Home, PlusSquare, Search } from 'lucide-react'
+import { Compass, Film, Heart, Home, PlusSquare, Search } from '@/components/icons'
+import { Routes } from '@/constants'
 import Image from 'next/image'
 
 const Navigation = () => {
   const NAV_ITEMS = [
     {
-      route: ROUTES.HOME,
+      route: Routes.HOME,
       icon: Home,
       label: 'Home',
     },
@@ -18,17 +18,17 @@ const Navigation = () => {
       label: 'Search',
     },
     {
-      route: ROUTES.EXPLORE,
+      route: Routes.EXPLORE,
       icon: Compass,
       label: 'Explore',
     },
     {
-      route: ROUTES.REELS + '/123',
+      route: `${Routes.REELS}/123`,
       icon: Film,
       label: 'Reels',
     },
     {
-      route: ROUTES.DIRECT_INBOX,
+      route: Routes.DIRECT_INBOX,
       icon: FacebookMessengerIcon,
       label: 'Messages',
     },
@@ -43,7 +43,7 @@ const Navigation = () => {
       label: 'Create',
     },
     {
-      route: ROUTES.PROFILE + '/123',
+      route: `${Routes.PROFILE}/123`,
       content: (
         <>
           <Image
