@@ -27,7 +27,7 @@ const CommentInput = () => {
           value={value}
           onChange={getInputOnChange}
           placeholder="Add a comment..."
-          className="placeholder-comment font-medium"
+          className="placeholder-comment font-medium text-sm"
         />
       </div>
       {value && (

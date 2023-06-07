@@ -12,7 +12,7 @@ const SideBarLogo = () => {
 
 const AppSideBar = () => {
   return (
-    <div className="p-4 flex flex-col h-full border-solid border-r-[1.5px] border-divide">
+    <div className="p-3 flex flex-col h-full border-solid border-r-[1.5px] border-divide max-h-full fixed max-w-[var(--nav-medium-width)] w-full">
       <SideBarLogo />
       <Navigation />
     </div>

@@ -10,16 +10,14 @@ const HomeView = () => {
   const { theme, setTheme } = useTheme()
 
   return (
-    <div className="dark:text-white">
-      <div className="flex">
-        <div className="max-w-[var(--feed-width-post)] mx-auto">
-          <div className="text-center divide-y-[1px] divide-divide">
-            <Post />
-            <Post />
-          </div>
+    <div className="flex justify-center gap-16">
+      <div className="max-w-[var(--feed-width-post)]">
+        <div className="text-center divide-y-[1px] divide-divide">
+          <Post />
+          <Post />
         </div>
-        <div></div>
       </div>
+      <div className="max-w-[var(--feed-sidebar-width)] w-full lg:block hidden">Feed Sidebar</div>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import Image from 'next/image'
 const UserProfileImage = ({ imageUrl = '' }) => {
   const triggerBtn = (
     <Button variant="text-secondary" rootClassName="pl-2 pr-0">
-      <Image width={30} height={30} src={imageUrl} alt="profile-image" className="rounded-full" />
+      <Image width={24} height={24} src={imageUrl} alt="profile-image" className="rounded-full" />
     </Button>
   )
   return (
@@ -68,11 +68,12 @@ const Post = () => {
           <Link href="/">
             <span className="text-link">@guineavitamins</span>
           </Link>
-          &nbsp; with love. the cuteness for breakfast *shining
+          &nbsp; with love. the cuteness for breakfast *shining...
         </span>
 
         <Button
           variant="text-secondary"
+          size="large"
           rootClassName="text-comment hover:text-none p-0 font-medium"
         >
           more

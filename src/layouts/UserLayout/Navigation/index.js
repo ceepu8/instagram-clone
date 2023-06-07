@@ -47,8 +47,8 @@ const Navigation = () => {
       content: (
         <>
           <Image
-            width={30}
-            height={30}
+            width={24}
+            height={24}
             src="/profile.jpeg"
             alt="profile-image"
             className="rounded-full"

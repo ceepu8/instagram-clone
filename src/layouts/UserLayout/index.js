@@ -8,11 +8,9 @@ const UserLayout = ({ children }) => {
         <title>Instagram</title>
         <meta name="description" content="Smoky-Instagram" />
       </Head>
-      <div className="grid grid-cols-6 min-h-screen">
-        <div className="col-span-1">
-          <AppSideBar />
-        </div>
-        <div className="col-span-5">{children}</div>
+      <div>
+        <AppSideBar />
+        <div className="pl-[var(--nav-medium-width)]">{children}</div>
       </div>
     </>
   )

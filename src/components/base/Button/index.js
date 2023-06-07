@@ -62,15 +62,15 @@ const Button = forwardRef((props, ref) => {
   btnSizeClasses =
     !iconOnly &&
     cn({
-      'text-sm py-1 px-3': size === 'small',
-      'text-base py-2 px-4': size === 'medium',
+      'text-xs py-1 px-3': size === 'small',
+      'text-sm py-2 px-4': size === 'medium',
       'text-lg py-2 px-6': size === 'large',
     })
 
   const iconSize = cn({
-    'w-4 h-4 leading-4': size === 'extra-small',
-    'w-5 h-5 leading-5': size === 'small',
-    'w-7 h-7 leading-7': size === 'medium',
+    'w-3 h-3 leading-3': size === 'extra-small',
+    'w-4 h-4 leading-4': size === 'small',
+    'w-6 h-6 leading-6': size === 'medium',
     'w-9 h-9 leading-9': size === 'large',
   })
 

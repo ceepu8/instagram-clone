@@ -33,7 +33,7 @@ const MenuPopover = () => {
   )
 
   return (
-    <Popover trigger={trigger}>
+    <Popover trigger={trigger} contentClassName="w-[266px]">
       <PopoverContent />
     </Popover>
   )

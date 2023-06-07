@@ -37,8 +37,10 @@
     --philippine-gray: #8e8e8e;
     --anti-flash-gray: #f2f2f2;
 
+    --nav-medium-width: 244px;
     --feed-width-story: 630px;
     --feed-width-post: 470px;
+    --feed-sidebar-width: 319px;
   }
 
   [data-theme='dark'] {
@@ -77,8 +79,10 @@
     --philippine-gray: #8e8e8e;
     --anti-flash-gray: #f2f2f2;
 
+    --nav-medium-width: 244px;
     --feed-width-story: 630px;
     --feed-width-post: 470px;
+    --feed-sidebar-width: 319px;
   }
 
   body {
