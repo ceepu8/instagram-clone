@@ -2,18 +2,18 @@ import MainMenu from './MainMenu'
 import SwitchAppearance from './SwitchAppearance'
 import { Button } from '@/components/base'
 import Popover from '@/components/base/Popover'
-import { MAIN_KEYS, SWITCH_APPEARANCE_KEY } from '@/constants'
+import { Menu } from '@/components/icons'
+import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import cn from 'classnames'
-import { Menu } from 'lucide-react'
 import { useState } from 'react'
 
 const PopoverContent = () => {
-  const [menu, setMenu] = useState(MAIN_KEYS)
+  const [menu, setMenu] = useState(POPOVER_MENU_KEYS.MAIN_KEYS)
 
   return (
     <div>
-      {menu === MAIN_KEYS && <MainMenu setMenu={setMenu} />}
-      {menu === SWITCH_APPEARANCE_KEY && <SwitchAppearance setMenu={setMenu} />}
+      {menu === POPOVER_MENU_KEYS.MAIN_KEYS && <MainMenu setMenu={setMenu} />}
+      {menu === POPOVER_MENU_KEYS.SWITCH_APPEARANCE_KEY && <SwitchAppearance setMenu={setMenu} />}
       {/* ... if more other popovers */}
     </div>
   )

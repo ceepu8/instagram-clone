@@ -1,15 +1,7 @@
 import NavItem from '../NavItem'
 import { LineBreak } from '@/components/base'
-import {
-  LOG_OUT_KEY,
-  REPORT_PROBLEM_KEY,
-  SAVED_KEY,
-  SETTINGS_KEY,
-  SWITCH_ACCOUNT_KEY,
-  SWITCH_APPEARANCE_KEY,
-  YOUR_ACTIVITY_KEY,
-} from '@/constants'
-import { AlertTriangle, Bookmark, History, Settings, Sun } from 'lucide-react'
+import { Settings, AlertTriangle, Bookmark, History, Sun } from '@/components/icons'
+import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import propTypes from 'prop-types'
 import { Fragment } from 'react'
 
@@ -18,49 +10,49 @@ export default function MainMenu(props) {
 
   const POPOVER_ITEMS = [
     {
-      key: SETTINGS_KEY,
+      key: POPOVER_MENU_KEYS.SETTINGS_KEY,
       onPress: () => {},
       icon: Settings,
       label: 'Settings',
     },
     {
-      key: YOUR_ACTIVITY_KEY,
+      key: POPOVER_MENU_KEYS.YOUR_ACTIVITY_KEY,
       onPress: () => {},
       icon: History,
       label: 'Your Activity',
     },
     {
-      key: SAVED_KEY,
+      key: POPOVER_MENU_KEYS.SAVED_KEY,
       onPress: () => {},
       icon: Bookmark,
       label: 'Saved',
     },
     {
-      key: SWITCH_APPEARANCE_KEY,
+      key: POPOVER_MENU_KEYS.SWITCH_APPEARANCE_KEY,
       onPress: () => {
-        setMenu(SWITCH_APPEARANCE_KEY)
+        setMenu(POPOVER_MENU_KEYS.SWITCH_APPEARANCE_KEY)
       },
       icon: Sun,
       label: 'Switch Appearance',
     },
     {
-      key: REPORT_PROBLEM_KEY,
+      key: POPOVER_MENU_KEYS.REPORT_PROBLEM_KEY,
       onPress: () => {},
       icon: AlertTriangle,
       label: 'Report a problem',
     },
     {
-      key: SWITCH_ACCOUNT_KEY,
+      key: POPOVER_MENU_KEYS.SWITCH_ACCOUNT_KEY,
       label: 'Switch account',
     },
     {
-      key: LOG_OUT_KEY,
+      key: POPOVER_MENU_KEYS.LOG_OUT_KEY,
       label: 'Log out',
     },
   ]
 
   return (
-    <div>
+    <div className="flex flex-col">
       {POPOVER_ITEMS.map((item, index) => (
         <Fragment key={item.key}>
           {item.label && (

@@ -1,7 +1,7 @@
+import { X } from '@/components/icons'
 import * as PopoverPrimitives from '@radix-ui/react-popover'
 import cn from 'classnames'
-import { X } from 'lucide-react'
-import propTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { twMerge } from 'tailwind-merge'
 
 const CloseIcon = () => {
@@ -44,10 +44,10 @@ const Popover = ({
 }
 
 Popover.propTypes = {
-  children: propTypes.node.isRequired,
-  trigger: propTypes.node.isRequired,
-  hasCloseIcon: propTypes.bool,
-  hasArrow: propTypes.bool,
+  children: PropTypes.node.isRequired,
+  trigger: PropTypes.node.isRequired,
+  hasCloseIcon: PropTypes.bool,
+  hasArrow: PropTypes.bool,
 }
 
 export default Popover

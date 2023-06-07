@@ -1,22 +1,19 @@
 import { Button, LineBreak } from '@/components/base'
+import { ChevronLeft } from '@/components/icons'
 import { Switch } from '@/components/shared'
-import { DARK_THEME, LIGHT_THEME, MAIN_KEYS } from '@/constants'
+import { DARK_THEME, LIGHT_THEME } from '@/constants'
+import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import { Pressable } from '@react-aria/interactions'
-import { ChevronLeft } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 const SwitchAppearance = (props) => {
   const { setMenu } = props || {}
 
   const { theme, setTheme } = useTheme()
-
-  const onToggle = (checked) => {
-    const newTheme = checked ? DARK_THEME : LIGHT_THEME
-    setTheme(newTheme)
-  }
+  const isDarkTheme = theme === DARK_THEME
 
   const handleThemeToggle = () => {
-    setTheme(theme === DARK_THEME ? LIGHT_THEME : DARK_THEME)
+    setTheme(isDarkTheme ? LIGHT_THEME : DARK_THEME)
   }
 
   const renderThemeSwitch = () => {
@@ -25,8 +22,8 @@ const SwitchAppearance = (props) => {
         <div className="p-4 hover:bg-nav-menu-item rounded-lg cursor-pointer">
           <Switch
             label="Dark mode"
-            checked={theme === DARK_THEME}
-            onChange={onToggle}
+            checked={isDarkTheme}
+            onChange={handleThemeToggle}
             labelStyle="text-base"
             rootStyle="ml-auto w-[32px] h-[19.5px]"
             thumbStyle="w-[16px] h-[16px] group-radix-state-checked:translate-x-[13px]"
@@ -43,7 +40,7 @@ const SwitchAppearance = (props) => {
           variant="text-secondary"
           icon={ChevronLeft}
           size="small"
-          onClick={() => setMenu(MAIN_KEYS)}
+          onClick={() => setMenu(POPOVER_MENU_KEYS.MAIN_KEYS)}
         />
         <h1 className="text-lg font-semibold">Switch Appearance</h1>
       </div>

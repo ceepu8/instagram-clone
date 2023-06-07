@@ -1,14 +1,7 @@
-import { HoverCard } from '@/components/base'
-import Button from '@/components/base/Button'
-import { FacebookMessengerIcon } from '@/components/icons'
-import { Post, Switch } from '@/components/shared'
-import { HeartIcon, MessageCircle, Send, Smile } from 'lucide-react'
+import { Post } from '@/components/shared'
 import { useTheme } from 'next-themes'
-import Image from 'next/image'
 
 const HomeView = () => {
-  const { theme, setTheme } = useTheme()
-
   return (
     <div className="flex justify-center gap-16">
       <div className="max-w-[var(--feed-width-post)]">
