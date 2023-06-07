@@ -54,7 +54,12 @@ const Post = () => {
       </div>
 
       <div className="flex gap-x-3">
-        <Button variant="text-secondary" size="large" icon={HeartIcon} />
+        <Button
+          variant="text-secondary"
+          size="large"
+          icon={HeartIcon}
+          iconClassName="fill-red stroke-red"
+        />
         <Button variant="text-secondary" size="large" icon={MessageCircle} />
         <Button variant="text-secondary" size="large" icon={Send} />
         <Button variant="text-secondary" size="large" icon={BookmarkIcon} rootClassName="ml-auto" />

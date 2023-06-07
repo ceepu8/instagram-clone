@@ -13,6 +13,7 @@ const Button = forwardRef((props, ref) => {
     type = 'button',
     fullWidth = false,
     rootClassName,
+    iconClassName,
     ...rest
   } = props || {}
   const baseButtonClasses = cn(
@@ -80,7 +81,7 @@ const Button = forwardRef((props, ref) => {
       onClick={onClick}
       type={type}
     >
-      {Icon && <Icon className={cn(iconSize)} />}
+      {Icon && <Icon className={twMerge(iconSize, iconClassName)} />}
       {children}
     </button>
   )
@@ -95,6 +96,7 @@ Button.propTypes = {
   iconOnly: propTypes.bool,
   fullWidth: propTypes.bool,
   rootClassName: propTypes.string,
+  iconClassName: propTypes.string,
 }
 
 export default Button
