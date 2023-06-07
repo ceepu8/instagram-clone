@@ -84,6 +84,7 @@ const Post = () => {
 
         <Button
           variant="text-secondary"
+          size="large"
           rootClassName="text-comment hover:text-none p-0 font-medium"
         >
           more
