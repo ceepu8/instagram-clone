@@ -1,13 +1,10 @@
 import { Button, Input, Popover } from '@/components/base'
 import { SmileIcon } from '@/components/icons'
-import { useInputState } from '@/hooks/useInputState'
 import EmojiPicker from 'emoji-picker-react'
 
-const CommentInput = () => {
-  const [value, getInputOnChange] = useInputState('')
-
+const CommentInput = ({ onChange, value }) => {
   const handleInputEmoji = (e) => {
-    getInputOnChange((prev) => prev + e.emoji)
+    onChange((prev) => prev + e.emoji)
   }
 
   const renderPostButton = value && (
@@ -21,7 +18,7 @@ const CommentInput = () => {
       <Input
         clean={true}
         value={value}
-        onChange={getInputOnChange}
+        onChange={onChange}
         placeholder="Add a comment..."
         inputClassName="placeholder-comment font-medium text-sm"
         wrapperClassName="flex-1"

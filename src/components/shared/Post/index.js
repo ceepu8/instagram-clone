@@ -9,6 +9,7 @@ import {
   MoreHorizontalIcon,
   Send,
 } from '@/components/icons'
+import { useInputState } from '@/hooks/useInputState'
 import cn from 'classnames'
 import Image from 'next/image'
 import { Fragment } from 'react'
@@ -116,25 +117,26 @@ const PostContent = () => {
   )
 }
 
-const PostComment = () => {
+const PostComment = ({ value, onChange }) => {
   return (
     <Fragment>
-      <Button variant="text-secondary" size="small" rootClassName="text-comment p-0 font-medium">
+      <Button variant="text-secondary" rootClassName="text-comment text-sm h-fit p-0 font-medium">
         View all comments
       </Button>
-      <CommentInput className="placeholder-comment font-medium" />
+      <CommentInput value={value} onChange={onChange} className="placeholder-comment font-medium" />
     </Fragment>
   )
 }
 
 const Post = () => {
+  const [comment, getCommentInputOnChange] = useInputState('')
   return (
     <div className="space-y-2 py-4">
       <PostHeader />
       <PostImage />
       <PostActions />
       <PostContent />
-      <PostComment />
+      <PostComment value={comment} onChange={getCommentInputOnChange} />
     </div>
   )
 }

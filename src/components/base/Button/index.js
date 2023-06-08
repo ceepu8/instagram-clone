@@ -18,7 +18,7 @@ const Button = forwardRef((props, ref) => {
   } = props || {}
   const baseButtonClasses = cn(
     'focus:outline-none flex items-center justify-center gap-x-2',
-    fullWidth ? 'max-w-full' : 'max-w-fit'
+    fullWidth ? 'w-full' : ''
   )
 
   let buttonClasses = ''
@@ -61,11 +61,19 @@ const Button = forwardRef((props, ref) => {
 
   btnSizeClasses =
     children &&
+    variant !== 'text-secondary' &&
+    variant !== 'text-primary' &&
     cn({
-      'text-sm py-1 px-3': size === 'small',
-      'text-md py-2 px-4': size === 'medium',
-      'text-lg py-2 px-6': size === 'large',
+      'w-[100px] h-[32px]': size === 'small',
+      'w-[150px] h-[40px]': size === 'medium',
+      'w-[200px] h-[48px]': size === 'large',
     })
+
+  let btnTextSizeClasses = cn({
+    'text-sm': size === 'small',
+    'text-base': size === 'medium',
+    'text-lg': size === 'large',
+  })
 
   const iconSize = cn({
     'w-3 h-3 leading-3': size === 'extra-small',
@@ -77,7 +85,7 @@ const Button = forwardRef((props, ref) => {
   return (
     <button
       ref={ref}
-      className={twMerge(buttonClasses, btnSizeClasses, rootClassName)}
+      className={twMerge(btnSizeClasses, btnTextSizeClasses, buttonClasses, rootClassName)}
       onClick={onClick}
       type={type}
       {...rest}

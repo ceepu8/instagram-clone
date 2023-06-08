@@ -4,11 +4,17 @@ import React from 'react'
 
 const ProfilePreview = () => {
   return (
-    <div>
-      <Button variant="primary" icon={FacebookMessengerIcon} fullWidth>
+    <div className="flex space-x-2">
+      <Button
+        variant="primary"
+        rootClassName="flex-1 text-sm h-[32px]"
+        icon={FacebookMessengerIcon}
+      >
         Message
       </Button>
-      <Button variant="secondary">Following</Button>
+      <Button variant="secondary" rootClassName="flex-1 text-sm h-[32px]">
+        Following
+      </Button>
     </div>
   )
 }
