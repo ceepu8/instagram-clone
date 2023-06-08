@@ -86,6 +86,5 @@ export {
   Moon,
   MoreHorizontalIcon,
 }
-}
 
 export { InstagramLetterIcon, FacebookMessengerIcon }

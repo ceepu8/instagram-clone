@@ -1,6 +1,5 @@
 import { Button, LineBreak, Switch } from '@/components/base'
 import { ChevronLeft, Moon, Sun } from '@/components/icons'
-import { ChevronLeft } from '@/components/icons'
 import { DARK_THEME, LIGHT_THEME } from '@/constants'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import { Pressable } from '@react-aria/interactions'

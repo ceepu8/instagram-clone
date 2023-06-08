@@ -22,7 +22,7 @@ const HoverCard = ({ trigger, children, hasArrow = false, className }) => {
         className={twMerge(
           'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
           'max-w-md rounded-lg p-4 md:w-full',
-          'bg-white dark:bg-gray-800',
+          'bg-background',
           'focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75',
           'shadow-55',
           className
