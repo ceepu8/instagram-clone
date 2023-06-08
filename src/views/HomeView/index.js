@@ -1,5 +1,6 @@
 import { Post } from '@/components/shared'
-import { useTheme } from 'next-themes'
+import Button from '@/components/base/Button'
+import { HeartIcon, MessageCircle, Send, Smile, FacebookMessengerIcon } from '@/components/icons'
 
 const HomeView = () => {
   return (

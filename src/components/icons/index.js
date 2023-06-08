@@ -3,6 +3,7 @@ import {
   Menu,
   AlertTriangle,
   BookmarkIcon,
+  Bookmark,
   History,
   Settings,
   Sun,
@@ -22,7 +23,7 @@ import {
   MoreHorizontalIcon,
 } from 'lucide-react'
 
-export const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
+const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +39,7 @@ export const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => 
   )
 }
 
-export const InstagramLetterIcon = ({ width = 24, height = 24, ...props }) => {
+const InstagramLetterIcon = ({ width = 24, height = 24, ...props }) => {
   return (
     <svg
       aria-label="Instagram"
@@ -66,6 +67,7 @@ export {
   Menu,
   AlertTriangle,
   BookmarkIcon,
+  Bookmark,
   History,
   Settings,
   Sun,
@@ -84,3 +86,6 @@ export {
   Moon,
   MoreHorizontalIcon,
 }
+}
+
+export { InstagramLetterIcon, FacebookMessengerIcon }
