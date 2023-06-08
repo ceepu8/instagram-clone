@@ -1,6 +1,6 @@
 import NavItem from '../NavItem'
 import { LineBreak } from '@/components/base'
-import { Settings, AlertTriangle, Bookmark, History, Sun } from '@/components/icons'
+import { Settings, AlertTriangle, Bookmark, History, Sun, BookmarkIcon } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
@@ -24,7 +24,7 @@ export default function MainMenu(props) {
     {
       key: POPOVER_MENU_KEYS.SAVED,
       onPress: () => {},
-      icon: Bookmark,
+      icon: BookmarkIcon,
       label: 'Saved',
     },
     {
@@ -57,6 +57,7 @@ export default function MainMenu(props) {
         <Fragment key={item.key}>
           {item.label && (
             <NavItem
+              key={item.label}
               onPress={item.onPress}
               icon={item.icon}
               size="small"
@@ -65,8 +66,8 @@ export default function MainMenu(props) {
               {item.label}
             </NavItem>
           )}
-          {index === 4 && <LineBreak className="bg-popover-divide h-[6px]" />}
-          {index === 5 && <LineBreak className="bg-popover-divide" />}
+          {index === 4 && <LineBreak className="bg-popover-divide h-[6px] -mx-2" />}
+          {index === 5 && <LineBreak className="bg-popover-divide -mx-2" />}
         </Fragment>
       ))}
     </div>

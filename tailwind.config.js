@@ -15,8 +15,10 @@ module.exports = {
     colors: {
       black: 'var(--black)',
       white: 'var(--white)',
+      transparent: 'transparent',
       gainsboro: 'var(--gainsboro)',
-      text: 'var(--text)',
+
+      base: 'var(--base)',
       footer: 'var(--footer)',
       background: 'var(--background)',
       comment: 'var(--comment)',
@@ -26,6 +28,7 @@ module.exports = {
       popover: 'var(--popover)',
       'popover-divide': 'var(--popover-divide)',
       'nav-menu-item': 'var(--nav-menu-item)',
+      link: 'var(--link)',
 
       'btn-primary': 'var(--btn-primary)',
       'btn-primary-hover': 'var(--btn-primary-hover)',
@@ -48,9 +51,8 @@ module.exports = {
     screens: {
       sm: '640px',
       md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      '2xl': '1536px',
+      lg: '1160px',
+      xl: '1264px',
     },
     container: {},
   },

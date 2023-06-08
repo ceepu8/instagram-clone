@@ -22,18 +22,18 @@ const PopoverContent = () => {
 const MenuPopover = () => {
   const triggerBtnStyle = cn(
     'group',
-    'px-3 gap-x-2 justify-start hover:bg-nav-hover p-3 rounded-lg cursor-pointer',
+    'px-3 gap-x-4 mb-4 justify-start hover:bg-nav-hover p-3 rounded-lg cursor-pointer',
     'radix-state-open:font-bold'
   )
 
   const trigger = (
-    <Button icon={Menu} size="large" rootClassName={triggerBtnStyle} fullWidth>
+    <Button icon={Menu} rootClassName={triggerBtnStyle} iconClassName="w-[25px] h-[25px]" fullWidth>
       More
     </Button>
   )
 
   return (
-    <Popover trigger={trigger}>
+    <Popover trigger={trigger} contentClassName="w-[266px]">
       <PopoverContent />
     </Popover>
   )

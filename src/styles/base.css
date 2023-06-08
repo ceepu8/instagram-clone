@@ -7,7 +7,7 @@
 
     --gainsboro: #dbdbdb;
 
-    --text: #000000;
+    --base: #000000;
     --background: #ffffff;
     --footer: #c7c7c7;
     --comment: #737373;
@@ -17,6 +17,8 @@
 
     --popover: #ffffff;
     --popover-divide: #f2f2f2;
+
+    --link: #01376b;
 
     --nav-menu-item: #f2f2f2;
 
@@ -34,6 +36,11 @@
     --crayola: #1a77f2;
     --philippine-gray: #8e8e8e;
     --anti-flash-gray: #f2f2f2;
+
+    --nav-medium-width: 244px;
+    --feed-width-story: 630px;
+    --feed-width-post: 470px;
+    --feed-sidebar-width: 319px;
   }
 
   [data-theme='dark'] {
@@ -42,7 +49,7 @@
 
     --gainsboro: #dbdbdb;
 
-    --text: #f5f5f5;
+    --base: #f5f5f5;
     --footer: #737373;
     --background: #000000;
     --comment: #a8a8a8;
@@ -52,6 +59,8 @@
 
     --popover: #262626;
     --popover-divide: #353535;
+
+    --link: #e0f1ff;
 
     --nav-menu-item: #3c3c3c;
 
@@ -69,6 +78,11 @@
     --crayola: #1a77f2;
     --philippine-gray: #8e8e8e;
     --anti-flash-gray: #f2f2f2;
+
+    --nav-medium-width: 244px;
+    --feed-width-story: 630px;
+    --feed-width-post: 470px;
+    --feed-sidebar-width: 319px;
   }
 
   body {

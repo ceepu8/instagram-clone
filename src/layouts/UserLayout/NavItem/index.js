@@ -18,8 +18,8 @@ const NavItem = ({
   const active = checkRouteActive(router, route)
 
   const _size = {
-    icon: size === 'medium' ? '30px' : '20px',
-    letter: size === 'medium' ? 'text-lg' : '',
+    icon: size === 'medium' ? '24px' : '20px',
+    letter: size === 'medium' ? 'text-md' : 'text-sm',
   }
 
   return (
@@ -27,14 +27,14 @@ const NavItem = ({
       <div
         className={twMerge(
           cn(
-            'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-4 rounded-lg cursor-pointer transition-all duration-150',
+            'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-3 rounded-lg cursor-pointer transition-all duration-150',
             active ? 'font-bold' : '',
             _size.letter,
             className
           )
         )}
       >
-        {Icon && <Icon width={_size.icon} height={_size.icon} />}
+        {Icon && <Icon width={_size.icon} height={_size.icon} className="shrink-0" />}
         {children}
       </div>
     </Pressable>
