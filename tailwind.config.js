@@ -16,9 +16,9 @@ module.exports = {
       black: 'var(--black)',
       white: 'var(--white)',
       transparent: 'transparent',
-
       gainsboro: 'var(--gainsboro)',
-      text: 'var(--text)',
+
+      base: 'var(--base)',
       footer: 'var(--footer)',
       background: 'var(--background)',
       comment: 'var(--comment)',

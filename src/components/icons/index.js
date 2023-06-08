@@ -2,7 +2,7 @@ import {
   X,
   Menu,
   AlertTriangle,
-  Bookmark,
+  BookmarkIcon,
   History,
   Settings,
   Sun,
@@ -17,6 +17,9 @@ import {
   MessageCircle,
   Send,
   Smile,
+  SmileIcon,
+  Moon,
+  MoreHorizontalIcon,
 } from 'lucide-react'
 
 export const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
@@ -62,7 +65,7 @@ export {
   X,
   Menu,
   AlertTriangle,
-  Bookmark,
+  BookmarkIcon,
   History,
   Settings,
   Sun,
@@ -77,4 +80,7 @@ export {
   MessageCircle,
   Send,
   Smile,
+  SmileIcon,
+  Moon,
+  MoreHorizontalIcon,
 }

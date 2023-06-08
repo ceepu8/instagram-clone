@@ -1,6 +1,5 @@
-import { Button, LineBreak } from '@/components/base'
-import { ChevronLeft } from '@/components/icons'
-import { Switch } from '@/components/shared'
+import { Button, LineBreak, Switch } from '@/components/base'
+import { ChevronLeft, Moon, Sun } from '@/components/icons'
 import { DARK_THEME, LIGHT_THEME } from '@/constants'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import { Pressable } from '@react-aria/interactions'
@@ -24,9 +23,9 @@ const SwitchAppearance = (props) => {
             label="Dark mode"
             checked={isDarkTheme}
             onChange={handleThemeToggle}
-            labelStyle="text-base"
-            rootStyle="ml-auto w-[32px] h-[19.5px]"
-            thumbStyle="w-[16px] h-[16px] group-radix-state-checked:translate-x-[13px]"
+            labelStyle="text-sm"
+            rootStyle="ml-auto w-[26px] h-[16px] border-[1.5px]"
+            thumbStyle="w-[13px] h-[13px] group-radix-state-checked:translate-x-[10px]"
           />
         </div>
       </Pressable>
@@ -35,14 +34,15 @@ const SwitchAppearance = (props) => {
 
   return (
     <div>
-      <div className="flex items-center">
+      <div className="flex items-center gap-x-2 px-2 py-1">
         <Button
           variant="text-secondary"
           icon={ChevronLeft}
           size="small"
           onClick={() => setMenu(POPOVER_MENU_KEYS.MAIN)}
         />
-        <h1 className="text-lg font-semibold">Switch Appearance</h1>
+        <h1 className="font-semibold mr-auto">Switch Appearance</h1>
+        {isDarkTheme ? <Moon width={16.5} height={16.5} /> : <Sun width={16.5} height={16.5} />}
       </div>
       <LineBreak className="bg-popover-divide" />
       {renderThemeSwitch()}

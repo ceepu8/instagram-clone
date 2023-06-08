@@ -1,5 +1,4 @@
 export { default as CommentInput } from './CommentInput'
 export { default as EmojiPicker } from './EmojiPicker'
 export { default as Post } from './Post'
-export { default as ProfilePreview } from './ProfilePreview'
-export { default as Switch } from './Switch'
+export { default as CardProfilePreview } from './CardProfilePreview'

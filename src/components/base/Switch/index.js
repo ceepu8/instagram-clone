@@ -1,5 +1,4 @@
 import * as SwitchPrimitive from '@radix-ui/react-switch'
-import { Pressable } from '@react-aria/interactions'
 import cn from 'classnames'
 import { forwardRef, useId } from 'react'
 import { twMerge } from 'tailwind-merge'
