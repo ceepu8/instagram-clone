@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import React from 'react'
 
 import UserLayout from '@/layouts/UserLayout'
 import ExploreView from '@/views/ExploreView'

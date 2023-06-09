@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Button } from '@/components/base'
 import { FacebookMessengerIcon } from '@/components/icons'
 
