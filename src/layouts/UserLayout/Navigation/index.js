@@ -1,9 +1,18 @@
+import Image from 'next/image'
+
+import {
+  Compass,
+  FacebookMessengerIcon,
+  Film,
+  Heart,
+  Home,
+  PlusSquare,
+  Search,
+} from '@/components/icons'
+import { Routes } from '@/constants'
+
 import MenuPopover from '../MenuPopover'
 import NavItem from '../NavItem'
-import { FacebookMessengerIcon } from '@/components/icons'
-import { Compass, Film, Heart, Home, PlusSquare, Search } from '@/components/icons'
-import { Routes } from '@/constants'
-import Image from 'next/image'
 
 const Navigation = () => {
   const NAV_ITEMS = [

@@ -1,6 +1,7 @@
+import Head from 'next/head'
+
 import UserLayout from '@/layouts/UserLayout'
 import EmptyDirectView from '@/views/DirectView/EmptyDirectView'
-import Head from 'next/head'
 
 const EmptyDirectPage = () => {
   return (

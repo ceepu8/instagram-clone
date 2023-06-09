@@ -1,11 +1,13 @@
-import MainMenu from './MainMenu'
-import SwitchAppearance from './SwitchAppearance'
+import clsx from 'clsx'
+import { useState } from 'react'
+
 import { Button } from '@/components/base'
 import Popover from '@/components/base/Popover'
 import { Menu } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
-import cn from 'classnames'
-import { useState } from 'react'
+
+import MainMenu from './MainMenu'
+import SwitchAppearance from './SwitchAppearance'
 
 const PopoverContent = () => {
   const [menu, setMenu] = useState(POPOVER_MENU_KEYS.MAIN)
@@ -20,7 +22,7 @@ const PopoverContent = () => {
 }
 
 const MenuPopover = () => {
-  const triggerBtnStyle = cn(
+  const triggerBtnStyle = clsx(
     'group',
     'px-3 gap-x-4 mb-4 justify-start hover:bg-nav-hover p-3 rounded-lg cursor-pointer',
     'radix-state-open:font-bold'

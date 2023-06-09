@@ -1,5 +1,6 @@
-import AppSideBar from './AppSideBar'
 import Head from 'next/head'
+
+import AppSideBar from './AppSideBar'
 
 const UserLayout = ({ children }) => {
   return (

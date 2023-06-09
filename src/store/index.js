@@ -1,8 +1,10 @@
-import storage from './syncStorage'
-import rootReducer from '@/store/reducers'
 import { configureStore } from '@reduxjs/toolkit'
 import { useMemo } from 'react'
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+
+import rootReducer from '@/store/reducers'
+
+import storage from './syncStorage'
 
 const persistConfig = {
   key: 'root',

@@ -1,8 +1,7 @@
 import { Button } from '@/components/base'
 import { FacebookMessengerIcon } from '@/components/icons'
-import React from 'react'
 
-const ProfilePreview = () => {
+const CardProfilePreview = () => {
   return (
     <div className="flex space-x-2">
       <Button
@@ -19,4 +18,4 @@ const ProfilePreview = () => {
   )
 }
 
-export default ProfilePreview
+export default CardProfilePreview

@@ -1,7 +1,7 @@
+import Head from 'next/head'
+
 import UserLayout from '@/layouts/UserLayout'
 import ProfileView from '@/views/ProfileView'
-import Head from 'next/head'
-import React from 'react'
 
 const ProfilePage = () => {
   return (

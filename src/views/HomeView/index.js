@@ -1,6 +1,4 @@
 import { Post } from '@/components/shared'
-import Button from '@/components/base/Button'
-import { HeartIcon, MessageCircle, Send, Smile, FacebookMessengerIcon } from '@/components/icons'
 
 const HomeView = () => {
   return (

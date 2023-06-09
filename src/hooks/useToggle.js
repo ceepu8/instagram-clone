@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 function useToggle(defaultValue = false) {
   const [value, setValue] = useState(!!defaultValue)

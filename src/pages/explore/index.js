@@ -1,7 +1,7 @@
+import Head from 'next/head'
+
 import UserLayout from '@/layouts/UserLayout'
 import ExploreView from '@/views/ExploreView'
-import Head from 'next/head'
-import React from 'react'
 
 const ExplorePage = () => {
   return (

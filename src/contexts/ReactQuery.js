@@ -1,7 +1,8 @@
-import { DEBUG } from '@/constants'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useState } from 'react'
+
+import { DEBUG } from '@/constants'
 
 const RQ_DEFAULT_QUERIES_OPTIONS = {
   refetchOnWindowFocus: false,

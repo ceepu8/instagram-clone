@@ -1,13 +1,8 @@
 import UserLayout from '@/layouts/UserLayout'
 import HomeView from '@/views/HomeView'
-import Head from 'next/head'
 
 const Home = () => {
-  return (
-    <>
-      <HomeView />
-    </>
-  )
+  return <HomeView />
 }
 
 Home.getLayout = function getLayout(children) {

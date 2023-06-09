@@ -1,7 +1,8 @@
-import { useAutoPosition } from '@/hooks'
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card'
 import propTypes from 'prop-types'
 import { twMerge } from 'tailwind-merge'
+
+import { useAutoPosition } from '@/hooks'
 
 const HoverCard = ({ trigger, children, hasArrow = false, className }) => {
   const { popoverPosition, popoverRef } = useAutoPosition()
