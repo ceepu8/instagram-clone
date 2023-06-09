@@ -12,4 +12,6 @@ module.exports = {
   bracketSameLine: false,
   tailwindConfig: './tailwind.config.js',
   endOfLine: 'auto',
+  importOrder: ['^@(server|trpc)/(.*)$', '^@/(.*)$', '^[./]'],
+  importOrderSeparation: true,
 }

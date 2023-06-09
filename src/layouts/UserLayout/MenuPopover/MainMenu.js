@@ -1,13 +1,13 @@
-import NavItem from '../NavItem'
-import { LineBreak } from '@/components/base'
-import { Settings, AlertTriangle, Bookmark, History, Sun, BookmarkIcon } from '@/components/icons'
-import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 
-export default function MainMenu(props) {
-  const { setMenu } = props || {}
+import { LineBreak } from '@/components/base'
+import { AlertTriangle, BookmarkIcon, History, Settings, Sun } from '@/components/icons'
+import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 
+import NavItem from '../NavItem'
+
+export default function MainMenu({ setMenu }) {
   const POPOVER_ITEMS = [
     {
       key: POPOVER_MENU_KEYS.SETTINGS,

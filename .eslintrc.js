@@ -12,7 +12,6 @@ module.exports = {
     'plugin:@next/next/recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
-    'next/core-web-vitals',
     'plugin:prettier/recommended',
   ],
   parserOptions: {
@@ -33,7 +32,7 @@ module.exports = {
       },
     },
   },
-  plugins: ['react', 'react-hooks', 'simple-import-sort'],
+  plugins: ['react', 'react-hooks', 'simple-import-sort', '@tanstack/query'],
   rules: {
     'prettier/prettier': [
       'error',
@@ -90,5 +89,7 @@ module.exports = {
     ],
     'jsx-a11y/label-has-associated-control': 'off',
     'import/no-anonymous-default-export': 'off',
+    '@tanstack/query/exhaustive-deps': 'error',
+    '@tanstack/query/prefer-query-object-syntax': 'error',
   },
 }
