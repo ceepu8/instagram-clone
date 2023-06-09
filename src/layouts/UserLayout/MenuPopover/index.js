@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import clsx from 'clsx'
 import { useState } from 'react'
 
 import { Button } from '@/components/base'
@@ -22,7 +22,7 @@ const PopoverContent = () => {
 }
 
 const MenuPopover = () => {
-  const triggerBtnStyle = cn(
+  const triggerBtnStyle = clsx(
     'group',
     'px-3 gap-x-4 mb-4 justify-start hover:bg-nav-hover p-3 rounded-lg cursor-pointer',
     'radix-state-open:font-bold'

@@ -1,4 +1,4 @@
-import cn from 'classnames'
+import clsx from 'clsx'
 import Image from 'next/image'
 
 import Button from '@/components/base/Button'
@@ -94,7 +94,7 @@ const PostActions = () => {
             variant="text-secondary"
             icon={icon}
             onClick={onPress}
-            rootClassName={cn({
+            rootClassName={clsx({
               'ml-auto': isLast,
             })}
           />
