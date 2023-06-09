@@ -69,7 +69,7 @@ const Button = forwardRef((props, ref) => {
       'w-[200px] h-[48px]': size === 'large',
     })
 
-  let btnTextSizeClasses = cn({
+  const btnTextSizeClasses = cn({
     'text-sm': size === 'small',
     'text-base': size === 'medium',
     'text-lg': size === 'large',

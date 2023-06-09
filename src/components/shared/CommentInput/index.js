@@ -1,6 +1,7 @@
+import EmojiPicker from 'emoji-picker-react'
+
 import { Button, Input, Popover } from '@/components/base'
 import { SmileIcon } from '@/components/icons'
-import EmojiPicker from 'emoji-picker-react'
 
 const CommentInput = ({ onChange, value }) => {
   const handleInputEmoji = (e) => {
@@ -16,7 +17,7 @@ const CommentInput = ({ onChange, value }) => {
   return (
     <div className="flex items-center w-full relative space-x-2">
       <Input
-        clean={true}
+        clean
         value={value}
         onChange={onChange}
         placeholder="Add a comment..."

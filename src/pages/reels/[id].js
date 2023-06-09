@@ -1,7 +1,8 @@
-import UserLayout from '@/layouts/UserLayout'
-import ReelsView from '@/views/ReelsView'
 import Head from 'next/head'
 import React from 'react'
+
+import UserLayout from '@/layouts/UserLayout'
+import ReelsView from '@/views/ReelsView'
 
 const ReelsPage = () => {
   return (

@@ -1,5 +1,6 @@
-import { CardProfilePreview } from '..'
-import CommentInput from '../CommentInput'
+import cn from 'classnames'
+import Image from 'next/image'
+
 import Button from '@/components/base/Button'
 import HoverCard from '@/components/base/HoverCard'
 import {
@@ -10,9 +11,9 @@ import {
   Send,
 } from '@/components/icons'
 import { useInputState } from '@/hooks/useInputState'
-import cn from 'classnames'
-import Image from 'next/image'
-import { Fragment } from 'react'
+
+import CardProfilePreview from '../CardProfilePreview'
+import CommentInput from '../CommentInput'
 
 const PreviewProfileHoverCard = ({ triggerContent }) => {
   const triggerBtn = (
@@ -119,12 +120,12 @@ const PostContent = () => {
 
 const PostComment = ({ value, onChange }) => {
   return (
-    <Fragment>
+    <>
       <Button variant="text-secondary" rootClassName="text-comment text-sm h-fit p-0 font-medium">
         View all comments
       </Button>
       <CommentInput value={value} onChange={onChange} className="placeholder-comment font-medium" />
-    </Fragment>
+    </>
   )
 }
 

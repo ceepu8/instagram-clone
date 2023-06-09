@@ -10,8 +10,8 @@ const useAutoPosition = () => {
         const popoverRect = popoverRef.current.getBoundingClientRect()
         const { innerWidth, innerHeight } = window
 
-        let top = popoverRect.top
-        let left = popoverRect.left
+        let { top } = popoverRect
+        let { left } = popoverRect
 
         if (top + popoverRect.height > innerHeight) {
           top = Math.max(0, innerHeight - popoverRect.height)

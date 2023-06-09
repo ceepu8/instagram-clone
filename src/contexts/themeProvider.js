@@ -1,5 +1,6 @@
-import { DARK_THEME, LIGHT_THEME } from '@/constants'
 import { ThemeProvider as NextThemeProvider } from 'next-themes'
+
+import { DARK_THEME, LIGHT_THEME } from '@/constants'
 
 const ThemeProvider = ({ children }) => {
   return (

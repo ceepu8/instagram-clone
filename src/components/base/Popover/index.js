@@ -1,8 +1,9 @@
-import { X } from '@/components/icons'
 import * as PopoverPrimitives from '@radix-ui/react-popover'
 import cn from 'classnames'
 import PropTypes from 'prop-types'
 import { twMerge } from 'tailwind-merge'
+
+import { X } from '@/components/icons'
 
 const CloseIcon = () => {
   return (

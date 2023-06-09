@@ -1,6 +1,7 @@
+import Head from 'next/head'
+
 import UserLayout from '@/layouts/UserLayout'
 import InDirectView from '@/views/DirectView/InDirectView'
-import Head from 'next/head'
 
 const InDirectPage = () => {
   return (

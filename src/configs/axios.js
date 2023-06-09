@@ -1,6 +1,7 @@
-import { API_ROOT, TIMEOUT } from '@/constants'
 import axios from 'axios'
 import { getSession, signOut } from 'next-auth/react'
+
+import { API_ROOT, TIMEOUT } from '@/constants'
 
 const instance = axios.create({
   baseURL: API_ROOT,

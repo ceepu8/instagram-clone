@@ -1,11 +1,13 @@
-import MainMenu from './MainMenu'
-import SwitchAppearance from './SwitchAppearance'
+import cn from 'classnames'
+import { useState } from 'react'
+
 import { Button } from '@/components/base'
 import Popover from '@/components/base/Popover'
 import { Menu } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
-import cn from 'classnames'
-import { useState } from 'react'
+
+import MainMenu from './MainMenu'
+import SwitchAppearance from './SwitchAppearance'
 
 const PopoverContent = () => {
   const [menu, setMenu] = useState(POPOVER_MENU_KEYS.MAIN)

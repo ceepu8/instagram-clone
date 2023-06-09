@@ -1,19 +1,12 @@
-import { checkRouteActive } from '@/utils'
 import { Pressable } from '@react-aria/interactions'
 import cn from 'classnames'
 import { useRouter } from 'next/router'
 import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-const NavItem = ({
-  onPress,
-  children,
-  icon: Icon,
-  route,
-  size = 'medium',
-  className,
-  ...props
-}) => {
+import { checkRouteActive } from '@/utils'
+
+const NavItem = ({ onPress, children, icon: Icon, route, size = 'medium', className }) => {
   const router = useRouter()
   const active = checkRouteActive(router, route)
 
