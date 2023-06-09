@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import clsx from 'clsx'
 import propTypes from 'prop-types'
 import { forwardRef } from 'react'
@@ -87,7 +88,7 @@ const Button = forwardRef((props, ref) => {
       ref={ref}
       className={twMerge(btnSizeClasses, btnTextSizeClasses, buttonClasses, rootClassName)}
       onClick={onClick}
-      type={type}
+      type={type || 'button'}
       {...rest}
     >
       {Icon && <Icon className={twMerge(iconSize, iconClassName)} />}
