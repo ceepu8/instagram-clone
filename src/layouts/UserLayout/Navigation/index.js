@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import Image from 'next/image'
+import { useState } from 'react'
 
 import {
   Compass,
@@ -11,20 +11,25 @@ import {
   Search,
 } from '@/components/icons'
 import { Routes } from '@/constants'
+import { cn } from '@/utils'
 
 import MenuPopover from '../MenuPopover'
 import NavItem from '../NavItem'
 
 const Navigation = ({ sideBarActive, setSideBarActive }) => {
+  const [navSelected, setNavSelected] = useState('')
   const NAV_ITEMS = [
     {
+      key: 'home',
       route: Routes.HOME,
       icon: Home,
       label: 'Home',
     },
     {
+      key: 'search',
       onPress: () => {
         setSideBarActive((prev) => !prev)
+        setNavSelected('search')
       },
       icon: Search,
       label: 'Search',
@@ -45,13 +50,16 @@ const Navigation = ({ sideBarActive, setSideBarActive }) => {
       label: 'Messages',
     },
     {
+      key: 'notifications',
       onPress: () => {
         setSideBarActive((prev) => !prev)
+        setNavSelected('notifications')
       },
       icon: Heart,
       label: 'Notifications',
     },
     {
+      key: 'create',
       onPress: () => {
         setSideBarActive((prev) => !prev)
       },
@@ -77,16 +85,26 @@ const Navigation = ({ sideBarActive, setSideBarActive }) => {
     return (
       <div className="flex-1 space-y-2">
         {NAV_ITEMS.map((item) => {
+          const isNavSelected = item.key === navSelected
           return (
             <NavItem
-              key={item?.label}
-              className={clsx('transition-all duration-150', {
-                'max-w-fit': sideBarActive,
-              })}
+              key={item?.key}
+              className={cn(
+                'transition-all duration-150 border-solid border-[1px] border-transparent',
+                {
+                  'max-w-fit border-base': sideBarActive && isNavSelected,
+                }
+              )}
               {...item}
             >
               {item?.content}
-              {!sideBarActive && item?.label}
+              <span
+                className={cn('visible opacity-100 duration-150 delay-[125ms] transition-all', {
+                  'invisible opacity-0': sideBarActive,
+                })}
+              >
+                {item?.label}
+              </span>
             </NavItem>
           )
         })}
