@@ -1,10 +1,11 @@
-import clsx from 'clsx'
+import { Pressable } from '@react-aria/interactions'
 import { useState } from 'react'
 
 import { Button } from '@/components/base'
 import Popover from '@/components/base/Popover'
 import { Menu } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
+import { cn } from '@/utils'
 
 import MainMenu from './MainMenu'
 import SwitchAppearance from './SwitchAppearance'
@@ -21,21 +22,23 @@ const PopoverContent = () => {
   )
 }
 
-const MenuPopover = () => {
-  const triggerBtnStyle = clsx(
-    'group',
-    'px-3 gap-x-4 mb-4 justify-start hover:bg-nav-hover p-3 rounded-lg cursor-pointer',
-    'radix-state-open:font-bold'
-  )
-
+const MenuPopover = ({ sideBarActive }) => {
   const trigger = (
-    <Button icon={Menu} rootClassName={triggerBtnStyle} iconClassName="w-[25px] h-[25px]" fullWidth>
-      More
-    </Button>
+    <div
+      className={cn(
+        'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-3 rounded-lg cursor-pointer text-md transition-all duration-300 w-full',
+        {
+          'w-fit': sideBarActive,
+        }
+      )}
+    >
+      <Menu width={25} height={25} />
+      {!sideBarActive && 'More'}
+    </div>
   )
 
   return (
-    <Popover trigger={trigger} contentClassName="w-[266px]">
+    <Popover trigger={trigger} contentClassName="w-[266px] z-50">
       <PopoverContent />
     </Popover>
   )

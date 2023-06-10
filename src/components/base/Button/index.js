@@ -9,7 +9,7 @@ const Button = forwardRef((props, ref) => {
     children,
     icon: Icon,
     onClick,
-    variant = 'text',
+    variant = 'primary',
     size = 'medium',
     type = 'button',
     fullWidth = false,

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Image from 'next/image'
 
 import {
@@ -14,7 +15,7 @@ import { Routes } from '@/constants'
 import MenuPopover from '../MenuPopover'
 import NavItem from '../NavItem'
 
-const Navigation = () => {
+const Navigation = ({ sideBarActive, setSideBarActive }) => {
   const NAV_ITEMS = [
     {
       route: Routes.HOME,
@@ -22,7 +23,9 @@ const Navigation = () => {
       label: 'Home',
     },
     {
-      onPress: () => {},
+      onPress: () => {
+        setSideBarActive((prev) => !prev)
+      },
       icon: Search,
       label: 'Search',
     },
@@ -42,28 +45,30 @@ const Navigation = () => {
       label: 'Messages',
     },
     {
-      onPress: () => {},
+      onPress: () => {
+        setSideBarActive((prev) => !prev)
+      },
       icon: Heart,
       label: 'Notifications',
     },
     {
-      onPress: () => {},
+      onPress: () => {
+        setSideBarActive((prev) => !prev)
+      },
       icon: PlusSquare,
       label: 'Create',
     },
     {
       route: `${Routes.PROFILE}/123`,
+      label: 'Profile',
       content: (
-        <>
-          <Image
-            width={24}
-            height={24}
-            src="/profile.jpeg"
-            alt="profile-image"
-            className="rounded-full"
-          />
-          <span>Profile</span>
-        </>
+        <Image
+          width={24}
+          height={24}
+          src="/profile.jpeg"
+          alt="profile-image"
+          className="rounded-full"
+        />
       ),
     },
   ]
@@ -73,9 +78,15 @@ const Navigation = () => {
       <div className="flex-1 space-y-2">
         {NAV_ITEMS.map((item) => {
           return (
-            <NavItem key={item?.label} {...item}>
-              {item?.label}
+            <NavItem
+              key={item?.label}
+              className={clsx('transition-all duration-150', {
+                'max-w-fit': sideBarActive,
+              })}
+              {...item}
+            >
               {item?.content}
+              {!sideBarActive && item?.label}
             </NavItem>
           )
         })}
@@ -85,7 +96,7 @@ const Navigation = () => {
   return (
     <div className="flex flex-1 flex-col">
       {renderNavItems()}
-      <MenuPopover />
+      <MenuPopover sideBarActive={sideBarActive} />
     </div>
   )
 }
