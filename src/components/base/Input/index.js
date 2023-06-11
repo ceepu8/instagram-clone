@@ -32,7 +32,7 @@ const Input = forwardRef(
       !clean &&
       cn({
         'bg-red': isFocused,
-        'border-red border-solid border-[1px]': error,
+        'border-red border-solid border': error,
       })
 
     return (

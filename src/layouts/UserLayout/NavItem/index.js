@@ -31,7 +31,7 @@ const NavItem = ({
             'flex items-center gap-x-4 p-3',
             'hover:bg-nav-hover font-medium rounded-lg',
             'cursor-pointer transition-all duration-150',
-            'border-[1px] border-solid border-transparent',
+            'border border-solid border-transparent',
             isSelecting ? 'max-w-fit border-base' : '',
             active ? 'font-bold' : '',
             _size.letter,

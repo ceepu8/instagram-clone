@@ -49,7 +49,7 @@ const PostHeader = () => {
 
 const PostImage = () => {
   return (
-    <div className="border-solid border-divide border-[1px] rounded">
+    <div className="border-solid border-divide border rounded">
       <Image
         width={1200}
         height={1200}
