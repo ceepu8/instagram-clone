@@ -90,21 +90,13 @@ const Navigation = ({ navSelected, setNavSelected }) => {
         {NAV_ITEMS.map((item) => {
           const isNavSelected = item.key === navSelected
           return (
-            <NavItem
-              key={item?.key}
-              className={cn(
-                'transition-all duration-150 border-solid border-[1px] border-transparent',
-                {
-                  'max-w-fit border-base': isNavSelected,
-                }
-              )}
-              {...item}
-            >
+            <NavItem key={item?.key} isSelecting={isNavSelected} {...item}>
               {item?.content}
               <span
-                className={cn('visible opacity-100 duration-[100ms] delay-[50ms] transition-all', {
-                  'invisible opacity-0': navSelected,
-                })}
+                className={cn(
+                  'duration-[100ms] delay-[50ms] transition-all',
+                  navSelected ? 'invisible opacity-0' : 'visible opacity-100'
+                )}
               >
                 {item?.label}
               </span>

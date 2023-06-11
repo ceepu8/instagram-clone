@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash'
 import { useState } from 'react'
 
 import Popover from '@/components/base/Popover'
@@ -25,16 +24,19 @@ const MenuPopover = ({ navSelected }) => {
   const trigger = (
     <div
       className={cn(
-        'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-3 rounded-lg cursor-pointer text-md transition-all duration-300 w-full'
+        'flex items-center gap-x-4 p-3 w-full',
+        'hover:bg-nav-hover rounded-lg font-medium text-md',
+        'transition-all duration-300 cursor-pointer'
       )}
     >
       <Menu width={25} height={25} className="shrink-0" />
       <span
-        className={cn('visible opacity-100 duration-[100ms] delay-[50ms] transition-all', {
-          'invisible opacity-0': !isEmpty(navSelected),
-        })}
+        className={cn(
+          'duration-[100ms] delay-[50ms] transition-all',
+          navSelected ? 'invisible opacity-0' : 'visible opacity-100'
+        )}
       >
-        {!navSelected && 'More'}
+        More
       </span>
     </div>
   )

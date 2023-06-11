@@ -13,18 +13,14 @@ const SideBarLogo = ({ navSelected }) => {
     <InstagramIcon
       width={24}
       height={24}
-      className={cn(iconStyle, 'scale-0 invisible', {
-        'scale-100 visible': navSelected,
-      })}
+      className={cn(iconStyle, navSelected ? 'scale-100 visible' : 'scale-0 invisible')}
     />
   )
   const renderLetterLogo = (
     <InstagramLetterIcon
       width={103}
       height={60}
-      className={cn(iconStyle, 'opacity-0 invisible', {
-        'opacity-100 visible': !navSelected,
-      })}
+      className={cn(iconStyle, !navSelected ? 'opacity-100 visible' : 'opacity-0 invisible')}
     />
   )
 
@@ -44,12 +40,10 @@ const AppSideBar = () => {
   return (
     <div
       className={cn(
-        'p-3 flex flex-col h-full fixed w-[var(--nav-medium-width)]',
+        'p-3 flex flex-col h-full fixed',
         'border-solid border-r-[1.5px] border-divide',
         'transition-all duration-300',
-        {
-          'w-[--nav-narrow-width]': navSelected,
-        }
+        navSelected ? 'w-[--nav-narrow-width]' : 'w-[var(--nav-medium-width)]'
       )}
     >
       <SideBarLogo navSelected={navSelected} />

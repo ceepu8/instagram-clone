@@ -1,12 +1,20 @@
 import { Pressable } from '@react-aria/interactions'
-import clsx from 'clsx'
 import { useRouter } from 'next/router'
+import PropTypes from 'prop-types'
 import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { checkRouteActive } from '@/utils'
+import { checkRouteActive, cn } from '@/utils'
 
-const NavItem = ({ onPress, children, icon: Icon, route, size = 'medium', className }) => {
+const NavItem = ({
+  onPress,
+  children,
+  icon: Icon,
+  route,
+  size = 'medium',
+  className,
+  isSelecting = false,
+}) => {
   const router = useRouter()
   const active = checkRouteActive(router, route)
 
@@ -19,8 +27,12 @@ const NavItem = ({ onPress, children, icon: Icon, route, size = 'medium', classN
     <Pressable onPress={() => (route ? router.push(route) : onPress?.())}>
       <div
         className={twMerge(
-          clsx(
-            'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-3 rounded-lg cursor-pointer transition-all duration-150',
+          cn(
+            'flex items-center gap-x-4 p-3',
+            'hover:bg-nav-hover font-medium rounded-lg',
+            'cursor-pointer transition-all duration-150',
+            'border-[1px] border-solid border-transparent',
+            isSelecting ? 'max-w-fit border-base' : '',
             active ? 'font-bold' : '',
             _size.letter,
             className
@@ -32,6 +44,16 @@ const NavItem = ({ onPress, children, icon: Icon, route, size = 'medium', classN
       </div>
     </Pressable>
   )
+}
+
+NavItem.propTypes = {
+  onPress: PropTypes.func,
+  children: PropTypes.node,
+  icon: PropTypes.node,
+  route: PropTypes.string,
+  size: PropTypes.oneOf('medium', 'small'),
+  className: PropTypes.string,
+  isSelecting: PropTypes.bool,
 }
 
 export default memo(NavItem)
