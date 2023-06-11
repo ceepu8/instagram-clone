@@ -5,6 +5,7 @@ import { Menu } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
 import { cn } from '@/utils'
 
+import NavItem from '../NavItem'
 import MainMenu from './MainMenu'
 import SwitchAppearance from './SwitchAppearance'
 
