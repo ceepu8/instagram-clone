@@ -9,7 +9,7 @@ const UserLayout = ({ children }) => {
         <title>Instagram</title>
         <meta name="description" content="Smoky-Instagram" />
       </Head>
-      <div>
+      <div className="w-screen h-screen">
         <AppSideBar />
         <div className="pl-[var(--nav-medium-width)]">{children}</div>
       </div>

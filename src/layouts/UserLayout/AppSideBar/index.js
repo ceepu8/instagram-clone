@@ -1,21 +1,53 @@
+import { useState } from 'react'
+
 import { Link } from '@/components/base'
-import { InstagramLetterIcon } from '@/components/icons'
+import { InstagramIcon, InstagramLetterIcon } from '@/components/icons'
+import { cn } from '@/utils'
 
 import Navigation from '../Navigation'
 
-const SideBarLogo = () => {
+const SideBarLogo = ({ navSelected }) => {
+  const iconStyle = 'shrink-0 transition-all duration-300 absolute left-3 -translate-y-1/2 top-1/2'
+
+  const renderLogo = (
+    <InstagramIcon
+      width={24}
+      height={24}
+      className={cn(iconStyle, navSelected ? 'scale-100 visible' : 'scale-0 invisible')}
+    />
+  )
+  const renderLetterLogo = (
+    <InstagramLetterIcon
+      width={103}
+      height={60}
+      className={cn(iconStyle, !navSelected ? 'opacity-100 visible' : 'opacity-0 invisible')}
+    />
+  )
+
   return (
-    <Link href="/" className="pl-3 py-8 text-base">
-      <InstagramLetterIcon width={110} height="auto" />
-    </Link>
+    <div className="min-h-[80px] pl-3 flex items-center relative">
+      <Link href="/" className={cn('text-base')}>
+        {renderLogo}
+        {renderLetterLogo}
+      </Link>
+    </div>
   )
 }
 
 const AppSideBar = () => {
+  const [navSelected, setNavSelected] = useState('')
+
   return (
-    <div className="p-3 flex flex-col h-full border-solid border-r-[1.5px] border-divide max-h-full fixed max-w-[var(--nav-medium-width)] w-full">
-      <SideBarLogo />
-      <Navigation />
+    <div
+      className={cn(
+        'p-3 flex flex-col h-full fixed',
+        'border-solid border-r-[1.5px] border-divide',
+        'transition-all duration-300',
+        navSelected ? 'w-[--nav-narrow-width]' : 'w-[var(--nav-medium-width)]'
+      )}
+    >
+      <SideBarLogo navSelected={navSelected} />
+      <Navigation navSelected={navSelected} setNavSelected={setNavSelected} />
     </div>
   )
 }

@@ -26,7 +26,7 @@ const SwitchAppearance = (props) => {
             onChange={handleThemeToggle}
             labelStyle="text-sm"
             rootStyle="ml-auto w-[26px] h-[16px] border-[1.5px]"
-            thumbStyle="w-[13px] h-[13px] group-radix-state-checked:translate-x-[10px]"
+            thumbStyle="w-[13.5px] h-[13.5px] group-radix-state-checked:translate-x-[10px]"
           />
         </div>
       </Pressable>

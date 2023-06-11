@@ -8,3 +8,14 @@ export const POPOVER_MENU_KEYS = {
   SWITCH_ACCOUNT: 'switch-account',
   LOG_OUT: 'log-out',
 }
+
+export const SIDEBAR_MENU_KEYS = {
+  HOME: 'home',
+  SEARCH: 'search',
+  EXPLORE: 'explore',
+  REELS: 'reels',
+  MESSAGES: 'messages',
+  NOTIFICATIONS: 'notifications',
+  CREATE: 'create',
+  PROFILE: 'profile',
+}
