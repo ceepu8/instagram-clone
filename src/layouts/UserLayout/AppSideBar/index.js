@@ -6,35 +6,31 @@ import { cn } from '@/utils'
 
 import Navigation from '../Navigation'
 
-const SideBarLogo = ({ sideBarActive }) => {
+const SideBarLogo = ({ navSelected }) => {
+  const iconStyle = 'shrink-0 transition-all duration-300 absolute left-3 -translate-y-1/2 top-1/2'
+
   const renderLogo = (
     <InstagramIcon
       width={24}
       height={24}
-      className={cn(
-        'shrink-0 transition-all duration-300 scale-0 invisible relative top-[40px] left-0',
-        {
-          'scale-100 visible': sideBarActive,
-        }
-      )}
+      className={cn(iconStyle, 'scale-0 invisible', {
+        'scale-100 visible': navSelected,
+      })}
     />
   )
   const renderLetterLogo = (
     <InstagramLetterIcon
       width={103}
-      height={80}
-      className={cn(
-        'shrink-0 transition-all duration-300 opacity-100 visible relative top-[-12px] left-0',
-        {
-          'opacity-0 invisible': sideBarActive,
-        }
-      )}
+      height={60}
+      className={cn(iconStyle, 'opacity-0 invisible', {
+        'opacity-100 visible': !navSelected,
+      })}
     />
   )
 
   return (
-    <div className="max-h-[80px] flex items-center">
-      <Link href="/" className={cn('pl-3 text-base')}>
+    <div className="min-h-[80px] pl-3 flex items-center relative">
+      <Link href="/" className={cn('text-base')}>
         {renderLogo}
         {renderLetterLogo}
       </Link>
@@ -43,21 +39,21 @@ const SideBarLogo = ({ sideBarActive }) => {
 }
 
 const AppSideBar = () => {
-  const [active, setActive] = useState(true)
+  const [navSelected, setNavSelected] = useState('')
 
   return (
     <div
       className={cn(
-        'p-3 flex flex-col h-full max-h-full fixed max-w-[var(--nav-medium-width)] w-full',
+        'p-3 flex flex-col h-full fixed w-[var(--nav-medium-width)]',
         'border-solid border-r-[1.5px] border-divide',
         'transition-all duration-300',
         {
-          'max-w-[72px]': active,
+          'w-[--nav-narrow-width]': navSelected,
         }
       )}
     >
-      <SideBarLogo sideBarActive={active} />
-      <Navigation sideBarActive={active} setSideBarActive={setActive} />
+      <SideBarLogo navSelected={navSelected} />
+      <Navigation navSelected={navSelected} setNavSelected={setNavSelected} />
     </div>
   )
 }

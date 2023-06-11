@@ -1,7 +1,6 @@
-import { Pressable } from '@react-aria/interactions'
+import { isEmpty } from 'lodash'
 import { useState } from 'react'
 
-import { Button } from '@/components/base'
 import Popover from '@/components/base/Popover'
 import { Menu } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
@@ -22,18 +21,21 @@ const PopoverContent = () => {
   )
 }
 
-const MenuPopover = ({ sideBarActive }) => {
+const MenuPopover = ({ navSelected }) => {
   const trigger = (
     <div
       className={cn(
-        'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-3 rounded-lg cursor-pointer text-md transition-all duration-300 w-full',
-        {
-          'w-fit': sideBarActive,
-        }
+        'flex items-center gap-x-4 hover:bg-nav-hover font-medium p-3 rounded-lg cursor-pointer text-md transition-all duration-300 w-full'
       )}
     >
-      <Menu width={25} height={25} />
-      {!sideBarActive && 'More'}
+      <Menu width={25} height={25} className="shrink-0" />
+      <span
+        className={cn('visible opacity-100 duration-[100ms] delay-[50ms] transition-all', {
+          'invisible opacity-0': !isEmpty(navSelected),
+        })}
+      >
+        {!navSelected && 'More'}
+      </span>
     </div>
   )
 

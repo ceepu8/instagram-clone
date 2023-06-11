@@ -1,6 +1,7 @@
-import clsx from 'clsx'
 import PropTypes from 'prop-types'
 import { forwardRef, useState } from 'react'
+
+import { cn } from '@/utils'
 
 const Input = forwardRef(
   (
@@ -29,7 +30,7 @@ const Input = forwardRef(
 
     const inputClasses =
       !clean &&
-      clsx({
+      cn({
         'bg-red': isFocused,
         'border-red border-solid border-[1px]': error,
       })
@@ -44,7 +45,7 @@ const Input = forwardRef(
           onBlur={handleInputBlur}
           onFocus={() => setIsFocused(true)}
           placeholder={placeholder}
-          className={clsx(inputClasses, 'w-full bg-transparent', inputClassName)}
+          className={cn(inputClasses, 'w-full bg-transparent', inputClassName)}
           autoCapitalize="off"
           spellCheck="false"
           autoComplete="off"

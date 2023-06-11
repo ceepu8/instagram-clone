@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useState } from 'react'
 
 import {
   Compass,
@@ -11,72 +10,76 @@ import {
   Search,
 } from '@/components/icons'
 import { Routes } from '@/constants'
+import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { cn } from '@/utils'
 
 import MenuPopover from '../MenuPopover'
 import NavItem from '../NavItem'
 
-const Navigation = ({ sideBarActive, setSideBarActive }) => {
-  const [navSelected, setNavSelected] = useState('')
+const Navigation = ({ navSelected, setNavSelected }) => {
+  const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
+
   const NAV_ITEMS = [
     {
-      key: 'home',
+      key: SIDEBAR_MENU_KEYS.HOME,
       route: Routes.HOME,
       icon: Home,
       label: 'Home',
     },
     {
-      key: 'search',
+      key: SIDEBAR_MENU_KEYS.SEARCH,
       onPress: () => {
-        setSideBarActive((prev) => !prev)
-        setNavSelected('search')
+        doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
       },
       icon: Search,
       label: 'Search',
     },
     {
+      key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       icon: Compass,
       label: 'Explore',
     },
     {
+      key: SIDEBAR_MENU_KEYS.REELS,
       route: `${Routes.REELS}/123`,
       icon: Film,
       label: 'Reels',
     },
     {
+      key: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
       icon: FacebookMessengerIcon,
       label: 'Messages',
     },
     {
-      key: 'notifications',
+      key: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
       onPress: () => {
-        setSideBarActive((prev) => !prev)
-        setNavSelected('notifications')
+        doSetNavSelected(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
       },
       icon: Heart,
       label: 'Notifications',
     },
     {
-      key: 'create',
-      onPress: () => {
-        setSideBarActive((prev) => !prev)
-      },
+      key: SIDEBAR_MENU_KEYS.CREATE,
+      onPress: () => {},
       icon: PlusSquare,
       label: 'Create',
     },
     {
+      key: SIDEBAR_MENU_KEYS.PROFILE,
       route: `${Routes.PROFILE}/123`,
       label: 'Profile',
       content: (
-        <Image
-          width={24}
-          height={24}
-          src="/profile.jpeg"
-          alt="profile-image"
-          className="rounded-full"
-        />
+        <div className="shrink-0">
+          <Image
+            width={24}
+            height={24}
+            src="/profile.jpeg"
+            alt="profile-image"
+            className="rounded-full"
+          />
+        </div>
       ),
     },
   ]
@@ -92,15 +95,15 @@ const Navigation = ({ sideBarActive, setSideBarActive }) => {
               className={cn(
                 'transition-all duration-150 border-solid border-[1px] border-transparent',
                 {
-                  'max-w-fit border-base': sideBarActive && isNavSelected,
+                  'max-w-fit border-base': isNavSelected,
                 }
               )}
               {...item}
             >
               {item?.content}
               <span
-                className={cn('visible opacity-100 duration-150 delay-[125ms] transition-all', {
-                  'invisible opacity-0': sideBarActive,
+                className={cn('visible opacity-100 duration-[100ms] delay-[50ms] transition-all', {
+                  'invisible opacity-0': navSelected,
                 })}
               >
                 {item?.label}
@@ -114,7 +117,7 @@ const Navigation = ({ sideBarActive, setSideBarActive }) => {
   return (
     <div className="flex flex-1 flex-col">
       {renderNavItems()}
-      <MenuPopover sideBarActive={sideBarActive} />
+      <MenuPopover navSelected={navSelected} />
     </div>
   )
 }
