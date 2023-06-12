@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { SlideOutPanel } from '@/components/shared'
 import NotificationPanel from '@/components/shared/SlideOutPanel/NotificationsPanel'
 import SearchPanel from '@/components/shared/SlideOutPanel/SearchPanel'

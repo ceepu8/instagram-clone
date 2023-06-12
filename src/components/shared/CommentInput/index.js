@@ -1,6 +1,7 @@
 import EmojiPicker from 'emoji-picker-react'
 
-import { Button, Input, Popover } from '@/components/base'
+import { Button, Popover } from '@/components/base'
+import { Input } from '@/components/form'
 import { SmileIcon } from '@/components/icons'
 
 const CommentInput = ({ onChange, value }) => {
