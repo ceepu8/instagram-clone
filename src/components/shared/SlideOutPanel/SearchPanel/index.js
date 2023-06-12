@@ -32,21 +32,39 @@ const SearchItem = () => {
   )
 }
 
+const SearchPanelHeader = () => {
+  return (
+    <div className="flex flex-col space-y-6">
+      <h1 className="font-bold text-2xl px-2 mb-3">Search</h1>
+      <SearchInput />
+      <LineBreak className="-mx-4" />
+    </div>
+  )
+}
+
+const SearchList = () => {
+  const onClear = () => {}
+  return (
+    <div className="mt-4 px-2">
+      <div className="flex justify-between">
+        <h2 className="font-bold">Recent</h2>
+        <Button variant="text-primary" size="small" onClick={onClear}>
+          Clear all
+        </Button>
+      </div>
+      <div className="flex flex-col space-y-4 mt-6">
+        <SearchItem />
+      </div>
+    </div>
+  )
+}
+
 const SearchPanel = () => {
   return (
-    <>
-      <div className="flex flex-col space-y-6">
-        <h1 className="font-bold text-2xl px-2 mb-3">Search</h1>
-        <SearchInput />
-        <LineBreak className="-mx-4" />
-      </div>
-      <div className="mt-4 px-2">
-        <h2 className="font-bold">Recent</h2>
-        <div className="flex flex-col space-y-4 mt-6">
-          <SearchItem />
-        </div>
-      </div>
-    </>
+    <div>
+      <SearchPanelHeader />
+      <SearchList />
+    </div>
   )
 }
 

@@ -15,7 +15,7 @@ const SlideOutPanelList = ({ navSelected }) => {
     },
   ]
   return (
-    <div>
+    <>
       {PANEL_LIST.map(({ key, component }) => {
         return (
           <SlideOutPanel key={key} isShow={key === navSelected}>
@@ -23,7 +23,7 @@ const SlideOutPanelList = ({ navSelected }) => {
           </SlideOutPanel>
         )
       })}
-    </div>
+    </>
   )
 }
 
