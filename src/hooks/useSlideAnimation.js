@@ -1,4 +1,4 @@
-const { useEffect, useState } = require('react')
+import { useEffect, useState } from 'react'
 
 export const useSlideAnimation = (isShow) => {
   const [animationClassNames, setAnimationClassnames] = useState('')
@@ -14,7 +14,7 @@ export const useSlideAnimation = (isShow) => {
     } else {
       setAnimationClassnames(animation.hidden)
     }
-  }, [isShow])
+  }, [isShow, animation])
 
   return animationClassNames
 }
