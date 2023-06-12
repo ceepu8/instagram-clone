@@ -17,6 +17,7 @@ const Input = forwardRef(
       placeholder,
       inputClassName,
       wrapperClassName,
+      ...props
     },
     ref
   ) => {
@@ -51,6 +52,7 @@ const Input = forwardRef(
           autoComplete="off"
           autoCorrect="off"
           maxLength={maxLength}
+          {...props}
         />
         {error && <span>{errorMessage}</span>}
       </div>

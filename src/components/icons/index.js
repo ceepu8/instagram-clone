@@ -22,6 +22,7 @@ import {
   Moon,
   MoreHorizontalIcon,
   InstagramIcon,
+  XCircleIcon,
 } from 'lucide-react'
 
 const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
@@ -87,6 +88,7 @@ export {
   Moon,
   MoreHorizontalIcon,
   InstagramIcon,
+  XCircleIcon,
 }
 
 export { InstagramLetterIcon, FacebookMessengerIcon }

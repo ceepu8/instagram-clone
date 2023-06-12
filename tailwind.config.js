@@ -18,8 +18,12 @@ module.exports = {
       white: 'var(--white)',
       transparent: 'transparent',
       gainsboro: 'var(--gainsboro)',
+      'chinese-silver': 'var(--chinese-silver)',
+      'bright-gray': 'var(--bright-gray)',
 
       base: 'var(--base)',
+      note: 'var(--note)',
+      'base-reverse': 'var(--base-reverse)',
       footer: 'var(--footer)',
       background: 'var(--background)',
       comment: 'var(--comment)',
@@ -39,6 +43,8 @@ module.exports = {
       'btn-text-primary-hover': 'var(--btn-text-primary-hover)',
       'btn-text-secondary': 'var(--btn-text-secondary)',
       'btn-text-secondary-hover': 'var(--btn-text-secondary-hover)',
+
+      'search-input': 'var(--search-input)',
 
       red: 'var(--red)',
       primary: 'var(--primary)',

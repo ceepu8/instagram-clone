@@ -8,6 +8,9 @@
     --gainsboro: #dbdbdb;
 
     --base: #000000;
+    --note: #737373;
+
+    --base-reverse: #ffffff;
     --background: #ffffff;
     --footer: #c7c7c7;
     --comment: #737373;
@@ -31,11 +34,15 @@
     --btn-text-secondary: #161616;
     --btn-text-secondary-hover: #7f7f7f;
 
+    --search-input: #efefef;
+
     --red: #ed4956;
     --primary: #0095f6;
     --crayola: #1a77f2;
     --philippine-gray: #8e8e8e;
     --anti-flash-gray: #f2f2f2;
+    --chinese-silver: #c7c7c7;
+    --bright-gray: #efefef;
 
     --nav-medium-width: 244px;
     --nav-narrow-width: 72px;
@@ -51,6 +58,9 @@
     --gainsboro: #dbdbdb;
 
     --base: #f5f5f5;
+    --note: #c7c7c7;
+
+    --base-reverse: #000000;
     --footer: #737373;
     --background: #000000;
     --comment: #a8a8a8;
@@ -74,11 +84,15 @@
     --btn-text-secondary: #f5f5f5;
     --btn-text-secondary-hover: #7b7b7b;
 
+    --search-input: #262626;
+
     --red: #ed4956;
     --primary: #0095f6;
     --crayola: #1a77f2;
     --philippine-gray: #8e8e8e;
     --anti-flash-gray: #f2f2f2;
+    --chinese-silver: #c7c7c7;
+    --bright-gray: #efefef;
 
     --nav-medium-width: 244px;
     --nav-narrow-width: 72px;
@@ -173,7 +187,7 @@ input:checked + span svg {
 
 @keyframes slide-out-right {
   from {
-    left: -120px;
+    left: -180px;
   }
   to {
     left: var(--nav-narrow-width);
@@ -185,6 +199,6 @@ input:checked + span svg {
     left: var(--nav-narrow-width);
   }
   to {
-    left: -120px;
+    left: -180px;
   }
 }
