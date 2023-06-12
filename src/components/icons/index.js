@@ -90,3 +90,8 @@ export {
 }
 
 export { InstagramLetterIcon, FacebookMessengerIcon }
+
+// export const Icon = {
+//   close: X,
+//   menu: Menu,
+// }

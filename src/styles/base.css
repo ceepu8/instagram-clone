@@ -170,3 +170,21 @@ input:checked + span {
 input:checked + span svg {
   @apply block;
 }
+
+@keyframes slide-out-right {
+  from {
+    left: -120px;
+  }
+  to {
+    left: var(--nav-narrow-width);
+  }
+}
+
+@keyframes slide-back-right {
+  from {
+    left: var(--nav-narrow-width);
+  }
+  to {
+    left: -120px;
+  }
+}
