@@ -33,12 +33,12 @@ model User {
   comments Comment[] @relation("CommentOwner")
 
   followings Follow[] @relation("Following")
-  follower   Follow[] @relation("Follower")
+  followers  Follow[] @relation("Follower")
 }
 
 model Follow {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  followingDate DateTime @default(now())
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  followDate DateTime @default(now())
 
   followingId String @db.ObjectId
   following   User   @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
