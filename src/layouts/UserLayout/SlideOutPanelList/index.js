@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { SlideOutPanel } from '@/components/shared'
 import NotificationPanel from '@/components/shared/SlideOutPanel/NotificationsPanel'
 import SearchPanel from '@/components/shared/SlideOutPanel/SearchPanel'
@@ -17,7 +15,7 @@ const SlideOutPanelList = ({ navSelected }) => {
     },
   ]
   return (
-    <div>
+    <>
       {PANEL_LIST.map(({ key, component }) => {
         return (
           <SlideOutPanel key={key} isShow={key === navSelected}>
@@ -25,7 +23,7 @@ const SlideOutPanelList = ({ navSelected }) => {
           </SlideOutPanel>
         )
       })}
-    </div>
+    </>
   )
 }
 

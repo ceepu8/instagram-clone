@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
+import { useClickOutside } from '@/hooks'
 import { cn } from '@/utils'
 
 import Navigation from '../Navigation'
@@ -7,10 +8,13 @@ import SlideOutPanelList from '../SlideOutPanelList'
 import SideBarLogo from './SideBarLogo'
 
 const AppSideBar = () => {
-  const [navSelected, setNavSelected] = useState('')
+  const [navSelected, setNavSelected] = useState(null)
+
+  const appSideBarRef = useRef()
+  useClickOutside(appSideBarRef, () => setNavSelected(null))
 
   return (
-    <>
+    <div ref={appSideBarRef}>
       <div
         className={cn(
           'p-3 flex flex-col h-full fixed z-50 bg-background',
@@ -23,7 +27,7 @@ const AppSideBar = () => {
         <Navigation navSelected={navSelected} setNavSelected={setNavSelected} />
       </div>
       <SlideOutPanelList navSelected={navSelected} />
-    </>
+    </div>
   )
 }
 
