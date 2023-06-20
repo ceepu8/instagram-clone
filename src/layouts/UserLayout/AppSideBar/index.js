@@ -10,11 +10,11 @@ import SideBarLogo from './SideBarLogo'
 const AppSideBar = () => {
   const [navSelected, setNavSelected] = useState(null)
 
-  const clickRef = useRef()
-  useClickOutside(clickRef, () => setNavSelected(null))
+  const appSideBarRef = useRef()
+  useClickOutside(appSideBarRef, () => setNavSelected(null))
 
   return (
-    <div ref={clickRef}>
+    <div ref={appSideBarRef}>
       <div
         className={cn(
           'p-3 flex flex-col h-full fixed z-50 bg-background',
