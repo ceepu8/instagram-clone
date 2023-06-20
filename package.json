@@ -11,7 +11,8 @@
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.2",
     "@hookform/resolvers": "^3.1.0",
-    "@prisma/client": "4.15.0",
+    "@next-auth/prisma-adapter": "^0.4.4-canary.81",
+    "@prisma/client": "^4.16.0",
     "@radix-ui/react-hover-card": "^1.0.6",
     "@radix-ui/react-popover": "^1.0.6",
     "@radix-ui/react-select": "^1.2.1",
