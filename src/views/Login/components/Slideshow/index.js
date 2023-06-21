@@ -54,7 +54,7 @@ const Slideshow = ({
   }
 
   return (
-    <div className={cn(`w-[${width}px]`, rootClass)}>
+    <div style={{ maxWidth: width }} className={cn('w-full', rootClass)}>
       <Show {...slideProps}>
         {items.map((fadeImage) => (
           <div key={fadeImage.url}>
