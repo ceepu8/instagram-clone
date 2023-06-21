@@ -1,6 +1,7 @@
 import ProgressBar from '@badrap/bar-of-progress'
 import { SessionProvider } from 'next-auth/react'
 import Router from 'next/router'
+import 'react-slideshow-image/dist/styles.css'
 
 import { AppProviders } from '@/contexts'
 import '@/styles/bar-of-progress.css'

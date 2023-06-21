@@ -20,6 +20,10 @@ module.exports = {
       gainsboro: 'var(--gainsboro)',
       'chinese-silver': 'var(--chinese-silver)',
       'bright-gray': 'var(--bright-gray)',
+      lotion: 'var(--lotion)',
+      nickel: 'var(--nickel)',
+      'metallic-blue': 'var(--metallic-blue)',
+      'very-light-azure': 'var(--very-light-azure)',
 
       base: 'var(--base)',
       note: 'var(--note)',

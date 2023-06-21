@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  likedPostIds String[] @db.ObjectId
+  likedPosts   Post[]   @relation("PostLiked", fields: [likedPostIds], references: [id])
+
+  savedPostIds String[] @db.ObjectId
+  savedPosts   Post[]   @relation("PostSaved", fields: [savedPostIds], references: [id])
+
+  taggedPostIds String[] @db.ObjectId
+  taggedPosts   Post[]   @relation("PostTagged", fields: [taggedPostIds], references: [id])
+
+  posts    Post[]    @relation("PostOwner")
+  comments Comment[] @relation("CommentOwner")
+
+  followings Follow[] @relation("Following")
+  followers  Follow[] @relation("Follower")
+}
+
+model Follow {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  followDate DateTime @default(now())
+
+  followingId String @db.ObjectId
+  following   User   @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  followedId String @db.ObjectId
+  followed   User   @relation("Follower", fields: [followedId], references: [id])
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  caption   String?
+  images    String[]
+  videos    String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ownerId String @db.ObjectId
+  owner   User   @relation("PostOwner", fields: [ownerId], references: [id])
+
+  likedIds String[] @db.ObjectId
+  liked    User[]   @relation("PostLiked", fields: [likedIds], references: [id])
+
+  savedIds String[] @db.ObjectId
+  saved    User[]   @relation("PostSaved", fields: [savedIds], references: [id])
+
+  taggedIds String[] @db.ObjectId
+  tagged    User[]   @relation("PostTagged", fields: [taggedIds], references: [id])
+
+  Comment Comment[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  postId String? @db.ObjectId
+  post   Post?   @relation(fields: [postId], references: [id])
+
+  ownerId String? @db.ObjectId
+  owner   User?   @relation("CommentOwner", fields: [ownerId], references: [id])
+}
