@@ -23,6 +23,7 @@ module.exports = {
       lotion: 'var(--lotion)',
       nickel: 'var(--nickel)',
       'metallic-blue': 'var(--metallic-blue)',
+      'very-light-azure': 'var(--very-light-azure)',
 
       base: 'var(--base)',
       note: 'var(--note)',

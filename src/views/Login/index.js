@@ -1,35 +1,120 @@
-import clsx from 'clsx'
+import { isEmpty } from 'lodash'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import { Fade } from 'react-slideshow-image'
 
 import { Button } from '@/components/base'
 import { FacebookIcon, InstagramLetterIcon } from '@/components/icons'
+import { cn } from '@/utils'
 
-const Input = ({ placeholder, label, ...props }) => {
+import Slideshow from './Slideshow'
+
+const Input = ({
+  placeholder,
+  value,
+  id,
+  label,
+  register,
+  required = true,
+  isHaveValue,
+  ...props
+}) => {
   return (
     <div className="relative">
-      {/* <label
-        className={clsx(`
-        absolute top-1/2 -translate-y-1/2 left-2
-        text-xs text-nickle
-      `)}
+      <label
+        htmlFor={id}
+        className={cn(
+          `
+            text-xs cursor-auto
+            absolute top-1/2 -translate-y-1/2 left-2
+            transition-all duration-150
+      `,
+          isHaveValue ? 'top-3 text-[8px]' : ''
+        )}
       >
         {label}
-      </label> */}
-      <input placeholder={placeholder} className="text-sm z-10" {...props} />
+      </label>
+      <input
+        id={id}
+        value={value}
+        placeholder={placeholder}
+        className={cn(
+          `
+            w-full p-2 rounded-sm
+            text-sm
+            border border-solid border-chinese-silver
+            focus:border-philippine-gray placeholder-nickle
+            focus:ring-offset-0
+      `,
+          isHaveValue ? 'pt-4 pb-1 text-xs' : ''
+        )}
+        {...register(id, { required })}
+        {...props}
+      />
     </div>
   )
 }
 
-const LoginView = () => {
+const PhoneScreenSlideShow = () => {
+  const fadeImages = [
+    {
+      url: '/slide-show-1.png',
+      caption: 'First Slide',
+    },
+    {
+      url: '/slide-show-2.png',
+      caption: 'Second Slide',
+    },
+    {
+      url: '/slide-show-3.png',
+      caption: 'Third Slide',
+    },
+    {
+      url: '/slide-show-4.png',
+      caption: 'Third Slide',
+    },
+  ]
   return (
-    <div className="h-screen flex items-center justify-center">
-      <div>
+    <Slideshow
+      items={fadeImages}
+      show={Fade}
+      duration={5000}
+      arrows={false}
+      rootClass="absolute top-6 right-[60px]"
+      width={260}
+    />
+  )
+}
+
+const LoginView = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { isValid },
+  } = useForm({
+    defaultValues: {
+      name: '',
+      password: '',
+    },
+  })
+
+  const watchName = watch('name', false)
+  const watchPassword = watch('password', false)
+
+  const onSubmit = (data) => {
+    console.log(data)
+  }
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="hidden md:block relative shrink-0">
         <Image width={480} height={640} src="/phones.png" alt="Phone" />
+        <PhoneScreenSlideShow />
       </div>
       <div>
         <div
-          className={clsx(`
+          className={cn(`
             w-[350px] flex flex-col items-center justify-center p-10
             border border-solid border-chinese-silver
         `)}
@@ -37,31 +122,24 @@ const LoginView = () => {
           <div className="mb-8">
             <InstagramLetterIcon width={180} height="auto" />
           </div>
-          <form className="w-full space-y-2">
+          <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
             <Input
-              placeholder="Phone number, username or email"
-              className={clsx(`
-                w-full p-2 rounded-sm
-                text-xs
-                border border-solid border-chinese-silver
-                focus:border-philippine-gray placeholder-nickle
-            `)}
+              id="name"
+              label="Phone number, username or email"
+              register={register}
+              isHaveValue={!isEmpty(watchName)}
             />
 
             <Input
-              placeholder="Password"
-              className={clsx(`
-                w-full p-2 rounded-sm
-                text-xs
-                border border-solid border-chinese-silver
-                bg-lotion
-                focus:border-philippine-gray placeholder-nickle
-            `)}
+              id="password"
+              label="Password"
               type="password"
+              register={register}
+              isHaveValue={!isEmpty(watchPassword)}
             />
 
             <div>
-              <Button size="small" fullWidth type="submit">
+              <Button size="small" fullWidth type="submit" disabled={!isValid}>
                 Login
               </Button>
             </div>
@@ -80,11 +158,13 @@ const LoginView = () => {
 
           <div>
             <button
-              className={clsx(`
-            text-metallic-blue font-bold text-sm
-            flex items-center gap-x-1
-            mt-8
-          `)}
+              className={cn(
+                `
+                    text-metallic-blue font-bold text-sm
+                    flex items-center gap-x-1
+                    mt-8
+                `
+              )}
               type="button"
             >
               <FacebookIcon width={22} height={22} />
@@ -100,7 +180,7 @@ const LoginView = () => {
         </div>
 
         <div
-          className={clsx(`
+          className={cn(`
             w-[350px] flex flex-col items-center justify-center p-4 mt-2
             border border-solid border-chinese-silver
         `)}
