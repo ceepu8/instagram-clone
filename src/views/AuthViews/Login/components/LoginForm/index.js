@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
+import { getEmailOrPhoneOrUsername } from '@/utils'
 import { FORM_LOGIN, loginInitialValues, loginSchema } from '@/validates/login.schema'
 import AuthInput from '@/views/AuthViews/components/AuthInput'
 
@@ -18,22 +19,25 @@ const LoginForm = () => {
     defaultValues: loginInitialValues,
   })
 
-  const watchName = watch(FORM_LOGIN.USERNAME, false)
+  const watchVerification = watch(FORM_LOGIN.VERIFICATION, false)
   const watchPassword = watch(FORM_LOGIN.PASSWORD, false)
 
   const onSubmit = (data) => {
-    console.log(data)
+    const clarifyVerification = getEmailOrPhoneOrUsername(data.verification)
+    const newData = { ...clarifyVerification, password: data.password }
+
+    console.log(newData)
   }
 
   return (
     <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <AuthInput
-        name={FORM_LOGIN.USERNAME}
-        id={FORM_LOGIN.USERNAME}
+        name={FORM_LOGIN.VERIFICATION}
+        id={FORM_LOGIN.VERIFICATION}
         label="Phone number, username or email"
         register={register}
         errors={errors}
-        isHaveValue={!isEmpty(watchName)}
+        isHaveValue={!isEmpty(watchVerification)}
       />
 
       <AuthInput
