@@ -1,13 +1,16 @@
+import { XCircle } from '@/components/icons'
 import { cn } from '@/utils'
 
 const AuthInput = ({
   placeholder,
+  id,
   value,
   name,
   label,
   register,
   required = true,
   isHaveValue,
+  errors,
   ...props
 }) => {
   return (
@@ -40,6 +43,12 @@ const AuthInput = ({
         {...register(name, { required })}
         {...props}
       />
+
+      {errors[id] && (
+        <div className="absolute right-2 top-2 text-red">
+          <XCircle />
+        </div>
+      )}
     </fieldset>
   )
 }

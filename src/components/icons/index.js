@@ -1,5 +1,6 @@
 import {
   X,
+  XCircle,
   Menu,
   AlertTriangle,
   BookmarkIcon,
@@ -83,6 +84,7 @@ const FacebookIcon = ({ width = 24, height = 24, ...props }) => {
 
 export {
   X,
+  XCircle,
   Menu,
   AlertTriangle,
   BookmarkIcon,

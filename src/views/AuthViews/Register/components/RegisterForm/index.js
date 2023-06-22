@@ -5,6 +5,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
+import { getEmailOrPhoneNumber } from '@/utils/function'
 import { FORM_REGISTER, registerInitialValues, registerSchema } from '@/validates/register.schema'
 import AuthInput from '@/views/AuthViews/components/AuthInput'
 
@@ -13,20 +14,23 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     watch,
-    formState: { isValid },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(registerSchema()),
     defaultValues: registerInitialValues,
   })
 
-  const watchEmail = watch('email', false)
+  const watchPhoneOrEmail = watch('phoneOrEmail', false)
   const watchFullName = watch('fullName', false)
   const watchUsername = watch('username', false)
   const watchPassword = watch('password', false)
 
   const onSubmit = (data) => {
-    console.log(data)
+    const clarifyData = getEmailOrPhoneNumber(data.phoneOrEmail)
+    const { phoneOrEmail, ...rest } = data
+    const newData = { ...clarifyData, ...rest }
+    console.log(newData)
   }
 
   const agreeToProvideInfo = (
@@ -56,27 +60,35 @@ const RegisterForm = () => {
   return (
     <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <AuthInput
-        name={FORM_REGISTER.EMAIL}
-        label="Email"
+        name={FORM_REGISTER.PHONE_OR_EMAIL}
+        id={FORM_REGISTER.PHONE_OR_EMAIL}
+        label="Mobile Phone or Email"
         register={register}
-        isHaveValue={!isEmpty(watchEmail)}
+        errors={errors}
+        isHaveValue={!isEmpty(watchPhoneOrEmail)}
       />
       <AuthInput
         name={FORM_REGISTER.FULLNAME}
+        id={FORM_REGISTER.FULLNAME}
         label="Full Name"
         register={register}
+        errors={errors}
         isHaveValue={!isEmpty(watchFullName)}
       />
       <AuthInput
         name={FORM_REGISTER.USERNAME}
+        id={FORM_REGISTER.USERNAME}
         label="Username"
         register={register}
+        errors={errors}
         isHaveValue={!isEmpty(watchUsername)}
       />
       <AuthInput
         name={FORM_REGISTER.PASSWORD}
+        id={FORM_REGISTER.PASSWORD}
         label="Password"
         register={register}
+        errors={errors}
         isHaveValue={!isEmpty(watchPassword)}
         type="password"
       />

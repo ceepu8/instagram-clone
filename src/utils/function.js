@@ -10,3 +10,13 @@ export const checkRouteActive = (router, route) => {
 export function cn(...inputs) {
   return twMerge(clsx(inputs))
 }
+
+export function getEmailOrPhoneNumber(value) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const isEmail = emailRegex.test(value)
+
+  if (isEmail) {
+    return { email: value, phoneNumber: '' }
+  }
+  return { email: '', phoneNumber: value }
+}
