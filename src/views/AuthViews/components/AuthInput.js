@@ -1,6 +1,6 @@
 import { cn } from '@/utils'
 
-const Input = ({
+const AuthInput = ({
   placeholder,
   value,
   name,
@@ -15,7 +15,7 @@ const Input = ({
       <label
         htmlFor={name}
         className={cn(
-          'text-xs cursor-auto',
+          'text-xs text-nickel cursor-auto',
           'absolute top-1/2 -translate-y-1/2 left-2',
           'transition-all duration-150',
           isHaveValue ? 'top-3 text-[8px]' : ''
@@ -34,6 +34,7 @@ const Input = ({
           'border border-solid border-chinese-silver',
           'focus:border-philippine-gray placeholder-nickel',
           'focus:ring-offset-0',
+          'bg-lotion',
           isHaveValue ? 'pt-4 pb-1 text-xs' : ''
         )}
         {...register(name, { required })}
@@ -43,4 +44,4 @@ const Input = ({
   )
 }
 
-export default Input
+export default AuthInput

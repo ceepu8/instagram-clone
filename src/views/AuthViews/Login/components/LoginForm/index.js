@@ -4,8 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
 import { FORM_LOGIN, loginInitialValues, loginSchema } from '@/validates/login.schema'
-
-import Input from '../LoginInput'
+import AuthInput from '@/views/AuthViews/components/AuthInput'
 
 const LoginForm = () => {
   const {
@@ -28,14 +27,14 @@ const LoginForm = () => {
 
   return (
     <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
-      <Input
+      <AuthInput
         name={FORM_LOGIN.USERNAME}
         label="Phone number, username or email"
         register={register}
         isHaveValue={!isEmpty(watchName)}
       />
 
-      <Input
+      <AuthInput
         name={FORM_LOGIN.PASSWORD}
         label="Password"
         type="password"
@@ -43,11 +42,9 @@ const LoginForm = () => {
         isHaveValue={!isEmpty(watchPassword)}
       />
 
-      <div>
-        <Button size="small" fullWidth type="submit" disabled={!isValid}>
-          Login
-        </Button>
-      </div>
+      <Button size="small" fullWidth type="submit" disabled={!isValid}>
+        Login
+      </Button>
     </form>
   )
 }
