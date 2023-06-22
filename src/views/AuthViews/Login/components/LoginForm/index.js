@@ -11,7 +11,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     watch,
-    formState: { isValid },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(loginSchema()),
@@ -29,16 +29,20 @@ const LoginForm = () => {
     <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <AuthInput
         name={FORM_LOGIN.USERNAME}
+        id={FORM_LOGIN.USERNAME}
         label="Phone number, username or email"
         register={register}
+        errors={errors}
         isHaveValue={!isEmpty(watchName)}
       />
 
       <AuthInput
         name={FORM_LOGIN.PASSWORD}
+        id={FORM_LOGIN.PASSWORD}
         label="Password"
         type="password"
         register={register}
+        errors={errors}
         isHaveValue={!isEmpty(watchPassword)}
       />
 

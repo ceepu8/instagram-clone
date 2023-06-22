@@ -9,6 +9,9 @@ import { getEmailOrPhoneNumber } from '@/utils/function'
 import { FORM_REGISTER, registerInitialValues, registerSchema } from '@/validates/register.schema'
 import AuthInput from '@/views/AuthViews/components/AuthInput'
 
+import InstagramDisclaimer from '../InstagramDisclaimer'
+import TermsAndPrivacyDisclaimer from '../TermsAndPrivacyDisclaimer'
+
 const RegisterForm = () => {
   const {
     register,
@@ -21,10 +24,10 @@ const RegisterForm = () => {
     defaultValues: registerInitialValues,
   })
 
-  const watchPhoneOrEmail = watch('phoneOrEmail', false)
-  const watchFullName = watch('fullName', false)
-  const watchUsername = watch('username', false)
-  const watchPassword = watch('password', false)
+  const watchPhoneOrEmail = watch(FORM_REGISTER.PHONE_OR_EMAIL, false)
+  const watchFullName = watch(FORM_REGISTER.FULLNAME, false)
+  const watchUsername = watch(FORM_REGISTER.USERNAME, false)
+  const watchPassword = watch(FORM_REGISTER.PASSWORD, false)
 
   const onSubmit = (data) => {
     const clarifyData = getEmailOrPhoneNumber(data.phoneOrEmail)
@@ -32,30 +35,6 @@ const RegisterForm = () => {
     const newData = { ...clarifyData, ...rest }
     console.log(newData)
   }
-
-  const agreeToProvideInfo = (
-    <div className="text-xs leading-4">
-      <span>
-        People who use our service may have uploaded your contact information to Instagram.{' '}
-      </span>
-      <Link href="/">
-        <span className="text-metallic-blue font-semibold">Learn More</span>
-      </Link>
-    </div>
-  )
-
-  const agreeWithPolicy = (
-    <div className="text-xs leading-4 mt-4">
-      By signing up, you agree to our and{' '}
-      <Link href="/">
-        <span className="text-metallic-blue font-semibold">Terms , Privacy Policy</span>
-      </Link>{' '}
-      and{' '}
-      <Link href="/">
-        <span className="text-metallic-blue font-semibold">Cookies Policy.</span>
-      </Link>
-    </div>
-  )
 
   return (
     <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
@@ -94,8 +73,8 @@ const RegisterForm = () => {
       />
 
       <div className="text-center">
-        {agreeToProvideInfo}
-        {agreeWithPolicy}
+        <InstagramDisclaimer />
+        <TermsAndPrivacyDisclaimer />
       </div>
 
       <Button size="small" fullWidth type="submit" disabled={!isValid}>
