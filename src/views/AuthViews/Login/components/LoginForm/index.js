@@ -22,11 +22,9 @@ const LoginForm = () => {
   const watchVerification = watch(FORM_LOGIN.VERIFICATION, false)
   const watchPassword = watch(FORM_LOGIN.PASSWORD, false)
 
-  const onSubmit = (data) => {
-    const clarifyVerification = getEmailOrPhoneOrUsername(data.verification)
-    const newData = { ...clarifyVerification, password: data.password }
-
-    console.log(newData)
+  const onSubmit = (values) => {
+    const clarifyVerification = getEmailOrPhoneOrUsername(values.verification)
+    const newData = { ...clarifyVerification, password: values.password }
   }
 
   return (

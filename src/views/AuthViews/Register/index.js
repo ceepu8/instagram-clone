@@ -8,7 +8,7 @@ const RegisterView = () => {
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       <RegisterBox />
-      <AuthNavigation variant="register" />
+      <AuthNavigation stage="register" />
       <AppDownloadNavigation />
     </div>
   )

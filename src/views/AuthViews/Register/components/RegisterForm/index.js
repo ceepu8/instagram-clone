@@ -28,11 +28,10 @@ const RegisterForm = () => {
   const watchUsername = watch(FORM_REGISTER.USERNAME, false)
   const watchPassword = watch(FORM_REGISTER.PASSWORD, false)
 
-  const onSubmit = (data) => {
-    const clarifyData = getEmailOrPhoneNumber(data.phoneOrEmail)
-    const { phoneOrEmail, ...rest } = data
+  const onSubmit = (values) => {
+    const clarifyData = getEmailOrPhoneNumber(values.phoneOrEmail)
+    const { phoneOrEmail, ...rest } = values
     const newData = { ...clarifyData, ...rest }
-    console.log(newData)
   }
 
   return (

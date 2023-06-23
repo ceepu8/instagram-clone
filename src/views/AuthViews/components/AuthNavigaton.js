@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Routes } from '@/constants'
 
-const AuthNavigation = ({ variant = 'login' }) => {
+const AuthNavigation = ({ stage = 'login' }) => {
   const auth = {
     login: {
       confirm: "Don't have an account?",
@@ -19,9 +19,9 @@ const AuthNavigation = ({ variant = 'login' }) => {
   return (
     <div className="w-[350px] flex flex-col items-center justify-center p-4 mt-2 border border-solid border-chinese-silver">
       <span className="text-sm">
-        {auth[variant].confirm}{' '}
-        <Link href={auth[variant].path}>
-          <span className="text-primary font-semibold">{auth[variant].label}</span>
+        {auth[stage].confirm}{' '}
+        <Link href={auth[stage].path}>
+          <span className="text-primary font-semibold">{auth[stage].label}</span>
         </Link>
       </span>
     </div>

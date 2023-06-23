@@ -14,25 +14,18 @@ export function cn(...inputs) {
 }
 
 export function getEmailOrPhoneNumber(value) {
-  const isEmail = EMAIL_REGEX.test(value)
-
-  if (isEmail) {
+  if (EMAIL_REGEX.test(value)) {
     return { email: value, phoneNumber: '' }
   }
   return { email: '', phoneNumber: value }
 }
 
 export function getEmailOrPhoneOrUsername(value) {
-  const isEmail = EMAIL_REGEX.test(value)
-  const isPhone = PHONE_REGEX.test(value)
-
-  if (isEmail) {
+  if (EMAIL_REGEX.test(value)) {
     return { email: value }
   }
-
-  if (isPhone) {
+  if (PHONE_REGEX.test(value)) {
     return { phoneNumber: value }
   }
-
   return { username: value }
 }
