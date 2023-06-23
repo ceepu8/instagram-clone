@@ -15,9 +15,9 @@ export function cn(...inputs) {
 
 export function getEmailOrPhoneNumber(value) {
   if (EMAIL_REGEX.test(value)) {
-    return { email: value, phoneNumber: '' }
+    return { email: value }
   }
-  return { email: '', phoneNumber: value }
+  return { phoneNumber: value }
 }
 
 export function getEmailOrPhoneOrUsername(value) {

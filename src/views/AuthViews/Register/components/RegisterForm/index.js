@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
 import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
@@ -13,6 +14,7 @@ import InstagramDisclaimer from '../InstagramDisclaimer'
 import TermsAndPrivacyDisclaimer from '../TermsAndPrivacyDisclaimer'
 
 const RegisterForm = () => {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -35,7 +37,8 @@ const RegisterForm = () => {
     const newData = { ...clarifyData, ...rest }
 
     axios.post('/api/register', newData).then(() => {
-      console.log('signin sucessfully')
+      signIn('credentials', newData)
+      router.push('/')
     })
   }
 

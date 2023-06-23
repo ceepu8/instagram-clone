@@ -1,5 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import isEmpty from 'lodash/isEmpty'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
@@ -8,6 +10,7 @@ import { FORM_LOGIN, loginInitialValues, loginSchema } from '@/validates/login.s
 import AuthInput from '@/views/AuthViews/components/AuthInput'
 
 const LoginForm = () => {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -25,6 +28,10 @@ const LoginForm = () => {
   const onSubmit = (values) => {
     const clarifyVerification = getEmailOrPhoneOrUsername(values.verification)
     const newData = { ...clarifyVerification, password: values.password }
+
+    signIn('credentials', { ...newData, redirect: false }).then(() => {
+      router.push('/')
+    })
   }
 
   return (

@@ -1,12 +1,26 @@
+import { useSession } from 'next-auth/react'
+import { useMemo } from 'react'
+
 import UserLayout from '@/layouts/UserLayout'
+import LoginView from '@/views/AuthViews/Login'
 import HomeView from '@/views/HomeView'
 
 const Home = () => {
-  return <HomeView />
-}
+  const session = useSession()
 
-Home.getLayout = function getLayout(children) {
-  return <UserLayout>{children}</UserLayout>
+  const isAuthenticated = useMemo(() => session?.status === 'authenticated', [session?.status])
+
+  return (
+    <>
+      {isAuthenticated ? (
+        <UserLayout>
+          <HomeView />
+        </UserLayout>
+      ) : (
+        <LoginView />
+      )}
+    </>
+  )
 }
 
 export default Home

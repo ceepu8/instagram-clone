@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react'
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 
@@ -47,6 +48,7 @@ export default function MainMenu({ setMenu }) {
     },
     {
       key: POPOVER_MENU_KEYS.LOG_OUT,
+      onPress: () => signOut(),
       label: 'Log out',
     },
   ]
