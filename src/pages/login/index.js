@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import LoginView from '@/views/Login'
+import LoginView from '@/views/AuthViews/Login'
 
 const LoginPage = () => {
   return (

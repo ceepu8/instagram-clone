@@ -3,51 +3,54 @@ import isEmpty from 'lodash/isEmpty'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
+import { getEmailOrPhoneOrUsername } from '@/utils'
 import { FORM_LOGIN, loginInitialValues, loginSchema } from '@/validates/login.schema'
-
-import Input from '../LoginInput'
+import AuthInput from '@/views/AuthViews/components/AuthInput'
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { isValid },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(loginSchema()),
     defaultValues: loginInitialValues,
   })
 
-  const watchName = watch(FORM_LOGIN.USERNAME, false)
+  const watchVerification = watch(FORM_LOGIN.VERIFICATION, false)
   const watchPassword = watch(FORM_LOGIN.PASSWORD, false)
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = (values) => {
+    const clarifyVerification = getEmailOrPhoneOrUsername(values.verification)
+    const newData = { ...clarifyVerification, password: values.password }
   }
 
   return (
     <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        name={FORM_LOGIN.USERNAME}
+      <AuthInput
+        name={FORM_LOGIN.VERIFICATION}
+        id={FORM_LOGIN.VERIFICATION}
         label="Phone number, username or email"
         register={register}
-        isHaveValue={!isEmpty(watchName)}
+        errors={errors}
+        isHaveValue={!isEmpty(watchVerification)}
       />
 
-      <Input
+      <AuthInput
         name={FORM_LOGIN.PASSWORD}
+        id={FORM_LOGIN.PASSWORD}
         label="Password"
         type="password"
         register={register}
+        errors={errors}
         isHaveValue={!isEmpty(watchPassword)}
       />
 
-      <div>
-        <Button size="small" fullWidth type="submit" disabled={!isValid}>
-          Login
-        </Button>
-      </div>
+      <Button size="small" fullWidth type="submit" disabled={!isValid}>
+        Login
+      </Button>
     </form>
   )
 }
