@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
-import React from 'react'
+import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
@@ -32,6 +33,10 @@ const RegisterForm = () => {
     const clarifyData = getEmailOrPhoneNumber(values.phoneOrEmail)
     const { phoneOrEmail, ...rest } = values
     const newData = { ...clarifyData, ...rest }
+
+    axios.post('/api/register', newData).then(() => {
+      console.log('signin sucessfully')
+    })
   }
 
   return (
