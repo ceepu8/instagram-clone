@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
+import { useRegister } from '@/hooks/query/auth'
 import { getEmailOrPhoneNumber } from '@/utils/function'
 import { FORM_REGISTER, registerInitialValues, registerSchema } from '@/validates/register.schema'
 import AuthInput from '@/views/AuthViews/components/AuthInput'
@@ -14,7 +15,7 @@ import InstagramDisclaimer from '../InstagramDisclaimer'
 import TermsAndPrivacyDisclaimer from '../TermsAndPrivacyDisclaimer'
 
 const RegisterForm = () => {
-  const router = useRouter()
+  const { doRegister, isLoading } = useRegister()
   const {
     register,
     handleSubmit,
@@ -35,14 +36,7 @@ const RegisterForm = () => {
     const clarifyData = getEmailOrPhoneNumber(values.phoneOrEmail)
     const { phoneOrEmail, ...rest } = values
     const newData = { ...clarifyData, ...rest }
-
-    axios.post('/api/register', newData).then(() => {
-      signIn('credentials', { ...newData, redirect: false }).then(async ({ error, ok }) => {
-        if (ok) {
-          router.replace('/', undefined, { scroll: true })
-        }
-      })
-    })
+    doRegister(newData)
   }
 
   return (
@@ -86,7 +80,7 @@ const RegisterForm = () => {
         <TermsAndPrivacyDisclaimer />
       </div>
 
-      <Button size="small" fullWidth type="submit" disabled={!isValid}>
+      <Button size="small" fullWidth type="submit" disabled={!isValid} loading={isLoading}>
         Sign up
       </Button>
     </form>

@@ -4,6 +4,7 @@ import Router from 'next/router'
 import 'react-slideshow-image/dist/styles.css'
 
 import { AppProviders } from '@/contexts'
+import { ToastProvider } from '@/contexts/ToastProvider'
 import '@/styles/bar-of-progress.css'
 
 import '../styles/globals.css'
@@ -28,7 +29,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   const getLayout = Component.getLayout || ((page) => page)
   return (
     <SessionProvider session={session}>
-      <AppProviders pageProps={pageProps}>{getLayout(<Component {...pageProps} />)}</AppProviders>
+      <AppProviders pageProps={pageProps}>
+        <ToastProvider>{getLayout(<Component {...pageProps} />)}</ToastProvider>
+      </AppProviders>
     </SessionProvider>
   )
 }

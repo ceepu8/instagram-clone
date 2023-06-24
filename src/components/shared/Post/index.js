@@ -10,7 +10,7 @@ import {
   MoreHorizontalIcon,
   Send,
 } from '@/components/icons'
-import { useInputState } from '@/hooks/useInputState'
+import { useInputState } from '@/hooks/shared'
 
 import CardProfilePreview from '../CardProfilePreview'
 import CommentInput from '../CommentInput'
