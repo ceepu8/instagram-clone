@@ -10,16 +10,14 @@ const Home = () => {
 
   const isAuthenticated = useMemo(() => session?.status === 'authenticated', [session?.status])
 
+  if (!isAuthenticated) {
+    return <LoginView />
+  }
+
   return (
-    <>
-      {isAuthenticated ? (
-        <UserLayout>
-          <HomeView />
-        </UserLayout>
-      ) : (
-        <LoginView />
-      )}
-    </>
+    <UserLayout>
+      <HomeView />
+    </UserLayout>
   )
 }
 

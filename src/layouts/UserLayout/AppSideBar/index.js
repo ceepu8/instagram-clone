@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-import { useClickOutside } from '@/hooks'
+import { useClickOutside } from '@/hooks/shared'
 import { cn } from '@/utils'
 
 import Navigation from '../Navigation'

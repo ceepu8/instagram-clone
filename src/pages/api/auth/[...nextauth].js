@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
+import { Routes } from '@/constants'
 import prisma from '@/libs/prismadb'
 
 export const authOptions = {
@@ -43,5 +44,8 @@ export const authOptions = {
     strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: Routes.HOME,
+  },
 }
 export default NextAuth(authOptions)

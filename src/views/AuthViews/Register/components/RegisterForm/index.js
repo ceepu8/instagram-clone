@@ -37,8 +37,11 @@ const RegisterForm = () => {
     const newData = { ...clarifyData, ...rest }
 
     axios.post('/api/register', newData).then(() => {
-      signIn('credentials', newData)
-      router.push('/')
+      signIn('credentials', { ...newData, redirect: false }).then(async ({ error, ok }) => {
+        if (ok) {
+          router.replace('/', undefined, { scroll: true })
+        }
+      })
     })
   }
 

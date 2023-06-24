@@ -1,4 +1,4 @@
-import { useSlideAnimation } from '@/hooks'
+import { useSlideAnimation } from '@/hooks/shared'
 import { cn } from '@/utils'
 
 const SlideOutPanel = ({ children, isShow }) => {
