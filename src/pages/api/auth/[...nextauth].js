@@ -13,16 +13,32 @@ export const authOptions = {
       name: 'credentials',
       credentials: {
         email: { label: 'email', type: 'text' },
+        phoneNumber: { label: 'phoneNumber', type: 'text' },
+        username: { label: 'username', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        if (!credentials?.password) {
           throw new Error('Invalid Credentials')
         }
 
-        const user = await prisma.user.findUnique({
+        if (!credentials?.email && !credentials?.phoneNumber && !credentials?.username) {
+          throw new Error('Invalid Credentials')
+        }
+
+        let verification = ''
+
+        if (credentials?.email) {
+          verification = 'email'
+        } else if (credentials?.phoneNumber) {
+          verification = 'phoneNumber'
+        } else {
+          verification = 'username'
+        }
+
+        const user = await prisma.user.findFirst({
           where: {
-            email: credentials.email,
+            [verification]: credentials?.email ?? credentials?.phoneNumber ?? credentials?.username,
           },
         })
 

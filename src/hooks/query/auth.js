@@ -1,18 +1,17 @@
 import axios from 'axios'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
-
-import { ToastContext } from '@/contexts/ToastProvider'
+import { useState } from 'react'
 
 import { useToast } from '../custom'
 
 export const useRegister = () => {
   const [isLoading, setLoading] = useState(false)
   const router = useRouter()
+  const toast = useToast()
 
-  const onError = (error) => {
-    console.log(error)
+  const onError = (err) => {
+    toast.error(err)
   }
 
   const doRegister = async (data) => {
