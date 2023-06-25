@@ -16,13 +16,11 @@ export function AppProviders({ children, locale, pageProps }) {
   return (
     <SSRProvider>
       <Provider store={store}>
-        {/* <PersistGateClient persistor={persistor}>
-          {() => ( */}
-        <ReactQueryProvider pageProps={pageProps}>
-          <ThemeProvider>{children}</ThemeProvider>
-        </ReactQueryProvider>
-        {/* )}
-        </PersistGateClient> */}
+        <PersistGateClient persistor={persistor}>
+          <ReactQueryProvider pageProps={pageProps}>
+            <ThemeProvider>{children}</ThemeProvider>
+          </ReactQueryProvider>
+        </PersistGateClient>
       </Provider>
     </SSRProvider>
   )
