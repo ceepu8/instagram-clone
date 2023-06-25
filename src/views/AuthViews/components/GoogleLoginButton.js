@@ -2,10 +2,11 @@ import { signIn } from 'next-auth/react'
 
 import { Button } from '@/components/base'
 import { GoogleIcon } from '@/components/icons'
+import { Routes } from '@/constants'
 
 const GoogleLoginButton = ({ variant = 'secondary' }) => {
   const onLogin = async () => {
-    signIn('google', { callbackUrl: '/' })
+    signIn('google', { callbackUrl: Routes.HOME })
   }
   return (
     <Button
