@@ -2,6 +2,7 @@
 import propTypes from 'prop-types'
 import { forwardRef } from 'react'
 
+import { AnimatedSpinnerIcon } from '@/components/icons'
 import { cn } from '@/utils'
 
 const Button = forwardRef((props, ref) => {
@@ -16,6 +17,7 @@ const Button = forwardRef((props, ref) => {
     rootClassName,
     iconClassName,
     disabled = false,
+    loading = false,
     ...rest
   } = props || {}
   const baseButtonClasses = cn(
@@ -91,11 +93,12 @@ const Button = forwardRef((props, ref) => {
       className={cn(btnSizeClasses, btnTextSizeClasses, buttonClasses, rootClassName)}
       onClick={onClick}
       type={type || 'button'}
-      disabled={disabled}
+      disabled={disabled || loading}
       {...rest}
     >
-      {Icon && <Icon className={cn(iconSize, iconClassName)} />}
-      {children}
+      {!loading && Icon && <Icon className={cn(iconSize, iconClassName)} />}
+      {loading && <AnimatedSpinnerIcon className={cn(iconSize, iconClassName)} />}
+      {!loading && children}
     </button>
   )
 })

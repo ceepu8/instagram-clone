@@ -1,9 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
-import React from 'react'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
+import { useRegister } from '@/hooks/query/auth'
 import { getEmailOrPhoneNumber } from '@/utils/function'
 import { FORM_REGISTER, registerInitialValues, registerSchema } from '@/validates/register.schema'
 import AuthInput from '@/views/AuthViews/components/AuthInput'
@@ -12,6 +15,7 @@ import InstagramDisclaimer from '../InstagramDisclaimer'
 import TermsAndPrivacyDisclaimer from '../TermsAndPrivacyDisclaimer'
 
 const RegisterForm = () => {
+  const { doRegister, isLoading } = useRegister()
   const {
     register,
     handleSubmit,
@@ -32,6 +36,7 @@ const RegisterForm = () => {
     const clarifyData = getEmailOrPhoneNumber(values.phoneOrEmail)
     const { phoneOrEmail, ...rest } = values
     const newData = { ...clarifyData, ...rest }
+    doRegister(newData)
   }
 
   return (
@@ -75,7 +80,7 @@ const RegisterForm = () => {
         <TermsAndPrivacyDisclaimer />
       </div>
 
-      <Button size="small" fullWidth type="submit" disabled={!isValid}>
+      <Button size="small" fullWidth type="submit" disabled={!isValid} loading={isLoading}>
         Sign up
       </Button>
     </form>

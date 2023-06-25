@@ -21,7 +21,7 @@ instance.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       signOut({
-        redirect: '/login',
+        redirect: '/',
       })
     }
     return Promise.reject(error)

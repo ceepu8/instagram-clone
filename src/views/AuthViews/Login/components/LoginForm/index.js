@@ -1,13 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import isEmpty from 'lodash/isEmpty'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
+import { useLogin } from '@/hooks/query/auth'
 import { getEmailOrPhoneOrUsername } from '@/utils'
 import { FORM_LOGIN, loginInitialValues, loginSchema } from '@/validates/login.schema'
 import AuthInput from '@/views/AuthViews/components/AuthInput'
 
 const LoginForm = () => {
+  const { doLogin, isLoading } = useLogin()
   const {
     register,
     handleSubmit,
@@ -25,6 +29,7 @@ const LoginForm = () => {
   const onSubmit = (values) => {
     const clarifyVerification = getEmailOrPhoneOrUsername(values.verification)
     const newData = { ...clarifyVerification, password: values.password }
+    doLogin(newData)
   }
 
   return (
@@ -48,7 +53,7 @@ const LoginForm = () => {
         isHaveValue={!isEmpty(watchPassword)}
       />
 
-      <Button size="small" fullWidth type="submit" disabled={!isValid}>
+      <Button size="small" fullWidth type="submit" disabled={!isValid} loading={isLoading}>
         Login
       </Button>
     </form>

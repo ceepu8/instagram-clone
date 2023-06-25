@@ -11,7 +11,7 @@ const AuthNavigation = ({ stage = 'login' }) => {
     },
     register: {
       confirm: 'Have an account?',
-      path: Routes.LOGIN,
+      path: Routes.HOME,
       label: 'Login',
     },
   }

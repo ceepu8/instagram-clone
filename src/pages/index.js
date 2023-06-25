@@ -1,12 +1,20 @@
+import { useAuth } from '@/hooks/query/auth'
 import UserLayout from '@/layouts/UserLayout'
+import LoginView from '@/views/AuthViews/Login'
 import HomeView from '@/views/HomeView'
 
 const Home = () => {
-  return <HomeView />
-}
+  const { isAuthenticated } = useAuth()
 
-Home.getLayout = function getLayout(children) {
-  return <UserLayout>{children}</UserLayout>
+  if (!isAuthenticated) {
+    return <LoginView />
+  }
+
+  return (
+    <UserLayout>
+      <HomeView />
+    </UserLayout>
+  )
 }
 
 export default Home
