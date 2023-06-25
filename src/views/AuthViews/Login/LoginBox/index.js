@@ -1,34 +1,11 @@
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-
 import { Link } from '@/components/base'
-import { GoogleIcon, InstagramLetterIcon } from '@/components/icons'
+import { InstagramLetterIcon } from '@/components/icons'
 import AppDownloadNavigation from '@/views/AuthViews/components/AppDownloadNavigation'
 
 import AuthNavigation from '../../components/AuthNavigaton'
+import GoogleLoginButton from '../../components/GoogleLoginButton'
 import Or from '../../components/Or'
 import LoginForm from '../components/LoginForm'
-
-const GoogleLoginButton = () => {
-  const router = useRouter()
-  const onLogin = () => {
-    signIn('google', { redirect: false }).then((callback) => {
-      if (callback?.ok && !callback?.error) {
-        router.push('/')
-      }
-    })
-  }
-  return (
-    <button
-      className="text-black font-bold text-sm flex items-center gap-x-1 mt-8"
-      type="button"
-      onClick={onLogin}
-    >
-      <GoogleIcon width={22} height={22} />
-      Log in with Google
-    </button>
-  )
-}
 
 const ForgotPasswordButton = () => (
   <Link href="/">
@@ -47,7 +24,7 @@ const LoginBox = () => {
         <InstagramLetterIcon width={180} height="auto" className="mb-8" />
         <LoginForm />
         <Or />
-        <GoogleLoginButton />
+        <GoogleLoginButton variant="text-secondary" />
         <ForgotPasswordButton />
       </div>
 
