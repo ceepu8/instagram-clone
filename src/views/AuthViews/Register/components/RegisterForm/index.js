@@ -1,8 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
-import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/base'
@@ -28,7 +25,7 @@ const RegisterForm = () => {
   })
 
   const watchPhoneOrEmail = watch(FORM_REGISTER.PHONE_OR_EMAIL, false)
-  const watchFullName = watch(FORM_REGISTER.FULLNAME, false)
+  const watchName = watch(FORM_REGISTER.NAME, false)
   const watchUsername = watch(FORM_REGISTER.USERNAME, false)
   const watchPassword = watch(FORM_REGISTER.PASSWORD, false)
 
@@ -50,12 +47,12 @@ const RegisterForm = () => {
         isHaveValue={!isEmpty(watchPhoneOrEmail)}
       />
       <AuthInput
-        name={FORM_REGISTER.FULLNAME}
-        id={FORM_REGISTER.FULLNAME}
+        name={FORM_REGISTER.NAME}
+        id={FORM_REGISTER.NAME}
         label="Full Name"
         register={register}
         errors={errors}
-        isHaveValue={!isEmpty(watchFullName)}
+        isHaveValue={!isEmpty(watchName)}
       />
       <AuthInput
         name={FORM_REGISTER.USERNAME}

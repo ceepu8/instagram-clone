@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
 import { useToast } from '../custom'

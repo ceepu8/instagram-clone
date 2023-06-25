@@ -1,5 +1,5 @@
 import { Pressable } from '@react-aria/interactions'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import PropTypes from 'prop-types'
 import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'

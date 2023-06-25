@@ -4,9 +4,9 @@ import prisma from '@/libs/prismadb'
 
 export default async function handler(req, res) {
   try {
-    const { email, username, password, fullName, phoneNumber } = req.body
+    const { email, username, password, name, phoneNumber } = req.body
 
-    if (!email || !username || !password || !fullName) {
+    if (!email || !username || !password || !name) {
       return res.status(400).json({ message: 'Missing info' })
     }
 
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       data: {
         email,
         username,
-        fullName,
+        name,
         phoneNumber,
         hashedPassword,
       },

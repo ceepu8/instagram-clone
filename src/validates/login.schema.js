@@ -20,7 +20,6 @@ const loginSchema = () =>
     [FORM_LOGIN.VERIFICATION]: Yup.string()
       .max(MAX_LEN_USERNAME, `Username should not exceed ${MAX_LEN_USERNAME} characters`)
       .test('is-email-or-phone-or-username', 'Invalid email, phone number', (value) => {
-        console.log(EMAIL_REGEX.test(value))
         return EMAIL_REGEX.test(value) || PHONE_REGEX.test(value) || value
       })
       .required('Required'),

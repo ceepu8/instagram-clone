@@ -7,14 +7,14 @@ const MAX_LEN_USERNAME = 25
 
 const FORM_REGISTER = {
   PHONE_OR_EMAIL: 'phoneOrEmail',
-  FULLNAME: 'fullName',
+  NAME: 'name',
   USERNAME: 'username',
   PASSWORD: 'password',
 }
 
 const registerInitialValues = {
   [FORM_REGISTER.PHONE_OR_EMAIL]: '',
-  [FORM_REGISTER.FULLNAME]: '',
+  [FORM_REGISTER.NAME]: '',
   [FORM_REGISTER.USERNAME]: '',
   [FORM_REGISTER.PASSWORD]: '',
 }
@@ -26,7 +26,7 @@ const registerSchema = () =>
       .test('is-email-or-phone', 'Invalid email or phone number', (value) => {
         return EMAIL_REGEX.test(value) || PHONE_REGEX.test(value)
       }),
-    [FORM_REGISTER.FULLNAME]: Yup.string()
+    [FORM_REGISTER.NAME]: Yup.string()
       .matches(CHARACTER_REGEX, 'Only alphabets are allowed for this field ')
       .required('Required'),
     [FORM_REGISTER.USERNAME]: Yup.string()

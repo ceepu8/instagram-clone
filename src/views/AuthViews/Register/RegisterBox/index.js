@@ -1,16 +1,8 @@
-import { Button } from '@/components/base'
-import { FacebookIcon, InstagramLetterIcon } from '@/components/icons'
+import { InstagramLetterIcon } from '@/components/icons'
 
+import GoogleLoginButton from '../../components/GoogleLoginButton'
 import Or from '../../components/Or'
 import RegisterForm from '../components/RegisterForm'
-
-const FacebookLoginButton = () => {
-  return (
-    <Button variant="primary" size="small" fullWidth icon={FacebookIcon} iconClassName="w-6 h-6">
-      Log in with Facebook
-    </Button>
-  )
-}
 
 const RegisterBox = () => {
   return (
@@ -21,7 +13,7 @@ const RegisterBox = () => {
         <p className="text-center font-bold text-nickel leading-4">
           Sign up to see photos and videos from your friends.
         </p>
-        <FacebookLoginButton />
+        <GoogleLoginButton />
         <Or />
         <RegisterForm />
       </div>
