@@ -1,14 +1,16 @@
-import { signOut } from 'next-auth/react'
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 
 import { LineBreak } from '@/components/base'
 import { AlertTriangle, BookmarkIcon, History, Settings, Sun } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
+import { useLogout } from '@/hooks/query/auth'
 
 import NavItem from '../NavItem'
 
 export default function MainMenu({ setMenu }) {
+  const handleLogout = useLogout()
+
   const POPOVER_ITEMS = [
     {
       key: POPOVER_MENU_KEYS.SETTINGS,
@@ -48,7 +50,7 @@ export default function MainMenu({ setMenu }) {
     },
     {
       key: POPOVER_MENU_KEYS.LOG_OUT,
-      onPress: () => signOut(),
+      onPress: () => handleLogout(),
       label: 'Log out',
     },
   ]

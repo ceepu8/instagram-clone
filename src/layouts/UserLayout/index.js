@@ -1,15 +1,14 @@
-import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import { useRouter } from 'next/navigation'
-import { useMemo } from 'react'
+
+import { useAuth } from '@/hooks/query/auth'
 
 import AppSideBar from './AppSideBar'
 
 const UserLayout = ({ children }) => {
-  const session = useSession()
   const router = useRouter()
 
-  const isAuthenticated = useMemo(() => session?.status === 'authenticated', [session?.status])
+  const isAuthenticated = useAuth()
 
   if (!isAuthenticated) {
     router.push('/')

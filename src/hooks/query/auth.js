@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { signIn } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useToast } from '../custom'
 
@@ -57,4 +57,28 @@ export const useLogin = () => {
   }
 
   return { doLogin, isLoading }
+}
+
+export const useLogout = () => {
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false })
+    localStorage.clear()
+    router.push('/')
+  }
+
+  return handleLogout
+}
+
+export const useAuth = () => {
+  const session = useSession()
+
+  const isAuthenticated = useMemo(
+    () => session?.status === 'authenticated',
+    [session?.status],
+    [session?.status]
+  )
+
+  return isAuthenticated
 }
