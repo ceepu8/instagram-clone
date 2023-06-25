@@ -74,11 +74,13 @@ export const useLogout = () => {
 export const useAuth = () => {
   const session = useSession()
 
-  const isAuthenticated = useMemo(
-    () => session?.status === 'authenticated',
-    [session?.status],
-    [session?.status]
+  const auth = useMemo(
+    () => ({
+      isAuthenticated: session?.status === 'authenticated',
+      user: session?.data?.user,
+    }),
+    [session]
   )
 
-  return isAuthenticated
+  return { ...auth }
 }

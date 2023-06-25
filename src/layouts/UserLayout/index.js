@@ -8,7 +8,7 @@ import AppSideBar from './AppSideBar'
 const UserLayout = ({ children }) => {
   const router = useRouter()
 
-  const isAuthenticated = useAuth()
+  const { isAuthenticated } = useAuth()
 
   if (!isAuthenticated) {
     router.push('/')

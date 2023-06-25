@@ -4,7 +4,7 @@ import LoginView from '@/views/AuthViews/Login'
 import HomeView from '@/views/HomeView'
 
 const Home = () => {
-  const isAuthenticated = useAuth()
+  const { isAuthenticated } = useAuth()
 
   if (!isAuthenticated) {
     return <LoginView />
