@@ -4,6 +4,7 @@ import Router from 'next/router'
 import 'react-slideshow-image/dist/styles.css'
 
 import { AppProviders } from '@/contexts'
+import DialogProvider from '@/contexts/DialogProvider'
 import { ToastProvider } from '@/contexts/ToastProvider'
 import '@/styles/bar-of-progress.css'
 
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   return (
     <SessionProvider session={session}>
       <AppProviders pageProps={pageProps}>
+        <DialogProvider />
         <ToastProvider>{getLayout(<Component {...pageProps} />)}</ToastProvider>
       </AppProviders>
     </SessionProvider>
