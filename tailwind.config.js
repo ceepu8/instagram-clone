@@ -10,6 +10,7 @@ module.exports = {
     './src/layouts/**/*.{js,ts,jsx,tsx,mdx}',
     './src/views/**/*.{js,ts,jsx,tsx,mdx}',
     './src/hooks/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/contexts/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
@@ -56,6 +57,7 @@ module.exports = {
       'philippine-gray': 'var(--philippine-gray)',
       'anti-flash-gray': 'var(--anti-flash-gray)',
     },
+    backgroundOpacity: ['active'],
     boxShadow: {
       55: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px',
     },

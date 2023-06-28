@@ -17,9 +17,11 @@ export function AppProviders({ children, locale, pageProps }) {
     <SSRProvider>
       <Provider store={store}>
         <PersistGateClient persistor={persistor}>
-          <ReactQueryProvider pageProps={pageProps}>
-            <ThemeProvider>{children}</ThemeProvider>
-          </ReactQueryProvider>
+          {() => (
+            <ReactQueryProvider pageProps={pageProps}>
+              <ThemeProvider>{children}</ThemeProvider>
+            </ReactQueryProvider>
+          )}
         </PersistGateClient>
       </Provider>
     </SSRProvider>
