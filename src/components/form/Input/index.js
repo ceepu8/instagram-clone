@@ -17,6 +17,7 @@ const Input = forwardRef(
       placeholder,
       inputClassName,
       wrapperClassName,
+      icon: Icon,
       ...props
     },
     ref
@@ -37,7 +38,7 @@ const Input = forwardRef(
       })
 
     return (
-      <div className={wrapperClassName}>
+      <div className={cn(Icon && 'relative', wrapperClassName)}>
         {label && <label>{label}</label>}
         <input
           ref={ref}
@@ -46,7 +47,7 @@ const Input = forwardRef(
           onBlur={handleInputBlur}
           onFocus={() => setIsFocused(true)}
           placeholder={placeholder}
-          className={cn(inputClasses, 'w-full bg-transparent', inputClassName)}
+          className={cn(Icon && 'pr-6', inputClasses, 'w-full bg-transparent', inputClassName)}
           autoCapitalize="off"
           spellCheck="false"
           autoComplete="off"
@@ -54,6 +55,7 @@ const Input = forwardRef(
           maxLength={maxLength}
           {...props}
         />
+        {Icon && <Icon size={20} className="absolute top-1/2 -translate-y-1/2 right-0" />}
         {error && <span>{errorMessage}</span>}
       </div>
     )

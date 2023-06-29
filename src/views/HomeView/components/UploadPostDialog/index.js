@@ -1,11 +1,19 @@
 import { Transition } from '@headlessui/react'
+import EmojiPicker from 'emoji-picker-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
 
-import { Button } from '@/components/base'
+import { Button, Popover } from '@/components/base'
 import Dialog, { DialogContent } from '@/components/base/Dialog'
-import { ArrowLeftIcon, UploadImageFileIcon, XIcon } from '@/components/icons'
+import { Input, TextArea } from '@/components/form'
+import {
+  ArrowLeftIcon,
+  MapPinIcon,
+  SmileIcon,
+  UploadImageFileIcon,
+  XIcon,
+} from '@/components/icons'
 import { useImageUpload } from '@/hooks/custom'
 import usePostDialog from '@/hooks/custom/usePostDialog'
 import { cn } from '@/utils'
@@ -13,10 +21,12 @@ import { cn } from '@/utils'
 const UploadPostDialog = () => {
   const { isOpen, onClose } = usePostDialog()
   const [isCaption, setIsCaption] = useState(false)
+  const [count, setCount] = useState(0)
   const { selectedImage, previewImage, handleImageChange, handleRemoveImage } = useImageUpload()
   const session = useSession()
 
-  const dialogTitle = previewImage ? 'Crop' : 'Create a post'
+  const dialogTitle = previewImage && !isCaption ? 'Crop' : 'Create new post'
+  const stepTitle = isCaption ? 'Share' : 'Next'
 
   const renderFormView = () => {
     return (
@@ -42,20 +52,20 @@ const UploadPostDialog = () => {
             variant="text-secondary"
             icon={ArrowLeftIcon}
             onClick={() => {
-              if (previewImage) {
+              if (previewImage && isCaption) {
                 setIsCaption(false)
-                return
+              } else if (previewImage && !isCaption) {
+                handleRemoveImage()
               }
-              handleRemoveImage()
             }}
           />
           <Button variant="text-primary" size="small" onClick={() => setIsCaption(true)}>
-            Next
+            {stepTitle}
           </Button>
         </div>
 
-        <div className="h-full flex items-center gap-x-4 transition duration-500">
-          <div className="w-[590px] h-[575px] relative z-50 shrink-0">
+        <div className="h-full w-full flex transition duration-500">
+          <div className="w-full max-w-[590px] h-[575px] relative z-50 shrink-0">
             <Image
               fill
               src={previewImage}
@@ -79,17 +89,17 @@ const UploadPostDialog = () => {
               <XIcon size={18} />
             </button>
           </div>
-          <div>
-            <Transition
-              show={isCaption}
-              as={Fragment}
-              enter="transition ease-in-out duration-500"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition ease-in-out duration-300"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
+          <Transition
+            show={isCaption}
+            as={Fragment}
+            enter="transition ease-in-out duration-500"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition ease-in-out duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="flex flex-1 flex-col gap-y-2 p-4">
               <div className="flex items-center gap-x-2">
                 <Image
                   width={25}
@@ -100,8 +110,39 @@ const UploadPostDialog = () => {
                 />
                 <p className="text-sm font-semibold">{session?.data?.user?.name}</p>
               </div>
-            </Transition>
-          </div>
+              <form className="flex flex-col gap-y-4">
+                <TextArea
+                  placeholder="Write a caption..."
+                  maxLength="2200"
+                  className="h-[200px] bg-popover"
+                  onChange={(e) => {
+                    setCount(e.target.value.length)
+                  }}
+                />
+                <div className="flex items-center justify-between">
+                  <Popover
+                    contentClassName="p-0"
+                    trigger={<Button variant="text-secondary" size="small" icon={SmileIcon} />}
+                  >
+                    <EmojiPicker onEmojiClick={() => {}} />
+                  </Popover>
+                  <p className="text-xs text-footer font-semibold">{count} / 2200</p>
+                </div>
+
+                <div className="divide-y divide-divide">
+                  <div className="py-2">
+                    <Input placeholder="Add location" icon={MapPinIcon} />
+                  </div>
+                  <div className="py-2">
+                    <p>Accessibility</p>
+                  </div>
+                  <div className="py-2">
+                    <p>Advanced Settings</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </Transition>
         </div>
       </div>
     )
@@ -112,7 +153,7 @@ const UploadPostDialog = () => {
       <DialogContent title={dialogTitle}>
         <div
           className={cn(
-            'h-[300px] sm:h-[475px] md:h-[575px]',
+            'h-[575px]',
             'flex items-center justify-center',
             'w-[590px] transition-all duration-500',
             isCaption && 'w-[930px]'
