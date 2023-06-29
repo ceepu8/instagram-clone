@@ -1,26 +1,20 @@
-import { useState } from 'react'
+import { create } from 'zustand'
 
-export const useImageUpload = () => {
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [previewImage, setPreviewImage] = useState(null)
-
-  // Function to handle file selection
-  const handleImageChange = (e) => {
+export const useImageUpload = create((set) => ({
+  selectedImage: null,
+  previewImage: null,
+  handleImageChange: (e) => {
     const file = e.target.files[0]
-    setSelectedImage(file)
+    set({ selectedImage: file })
 
     // Create a preview URL for the selected image
     const reader = new FileReader()
     reader.onloadend = () => {
-      setPreviewImage(reader.result)
+      set({ previewImage: reader.result })
     }
     reader.readAsDataURL(file)
-  }
-
-  const handleRemoveImage = () => {
-    setPreviewImage(null)
-    setSelectedImage(null)
-  }
-
-  return { selectedImage, previewImage, handleImageChange, handleRemoveImage }
-}
+  },
+  handleRemoveImage: () => {
+    set({ selectedImage: null, previewImage: null })
+  },
+}))
