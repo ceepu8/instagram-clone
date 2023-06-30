@@ -9,7 +9,7 @@ import { Button, Popover } from '@/components/base'
 import { Input, TextArea } from '@/components/form'
 import { ArrowLeftIcon, MapPinIcon, SmileIcon, XIcon } from '@/components/icons'
 import { EmojiPicker } from '@/components/shared'
-import { useImageUpload } from '@/hooks/custom'
+import { useImageUpload, usePostDialog, useToast } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 const UserInfo = () => {
@@ -90,6 +90,8 @@ const EditPostForm = ({ step, setStep }) => {
   const [characterCount, setCharacterCount] = useState(0)
   const { previewImage, handleRemoveImage } = useImageUpload()
   const session = useSession()
+  const { onClose } = usePostDialog()
+  const { success, error } = useToast()
 
   const handleResetPost = () => {
     handleRemoveImage()
@@ -105,22 +107,32 @@ const EditPostForm = ({ step, setStep }) => {
   })
 
   const onSubmit = async (data) => {
-    // const formData = new FormData()
-    // formData.append('file', previewImage)
-    // formData.append('upload_preset', 'zw2rml5a')
+    const formData = new FormData()
+    formData.append('file', previewImage)
+    formData.append('upload_preset', 'zw2rml5a')
 
-    // const response = await axios.post(
-    //   `https://api.cloudinary.com/v1_1/dr4xirffu/image/upload`,
-    //   formData
-    // )
+    setStep(4)
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/dr4xirffu/image/upload`,
+      formData
+    )
 
-    await axios.post('/api/post', {
-      ...data,
-      userEmail: session.data.user?.email,
-      images: [
-        'https://res.cloudinary.com/dr4xirffu/image/upload/v1688058391/wuxzea60tliiaybxosyb.jpg',
-      ],
-    })
+    if (response?.data?.url) {
+      try {
+        await axios.post('/api/post', {
+          ...data,
+          userEmail: session.data.user?.email,
+          images: [response.data.url],
+        })
+        success('Upload!')
+      } catch (err) {
+        console.log(err)
+        error('Something went wrong!')
+      }
+    }
+
+    setStep(1)
+    onClose()
   }
 
   return (

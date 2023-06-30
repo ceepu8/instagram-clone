@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 import Dialog, { DialogContent } from '@/components/base/Dialog'
-import { useImageUpload } from '@/hooks/custom'
-import usePostDialog from '@/hooks/custom/usePostDialog'
+import { useImageUpload, usePostDialog } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 import EditPostForm from '../EditPostForm'
+import LoadingView from '../LoadingView'
 import UploadPostForm from '../UploadPostForm'
 
 const UploadPostDialog = () => {
@@ -24,9 +24,7 @@ const UploadPostDialog = () => {
             step === 3 && 'w-[930px]'
           )}
         >
-          {step !== 1 ? (
-            <EditPostForm step={step} setStep={setStep} />
-          ) : (
+          {step === 1 && (
             <UploadPostForm
               handleImageChange={(e) => {
                 handleImageChange(e)
@@ -34,6 +32,8 @@ const UploadPostDialog = () => {
               }}
             />
           )}
+          {(step === 2 || step === 3) && <EditPostForm step={step} setStep={setStep} />}
+          {step === 4 && <LoadingView />}
         </div>
       </DialogContent>
     </Dialog>
