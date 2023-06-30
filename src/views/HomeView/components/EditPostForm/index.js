@@ -31,7 +31,13 @@ const UserInfo = () => {
 
 const PreviewImageBox = ({ previewImage, step, handleRemoveImage }) => {
   return (
-    <div className="w-full max-w-[590px] h-[575px] relative z-50 shrink-0">
+    <div
+      className={cn(
+        'relative z-50 shrink-0',
+        'w-[50vw] min-w-[348px] max-w-[590px] md:w-[80vw]',
+        step === 3 && 'md:w-[50vw] md:max-w-[648px]'
+      )}
+    >
       <Image
         fill
         src={previewImage || '/guinea-pig-2.jpeg'}
@@ -159,7 +165,7 @@ const EditPostForm = ({ step, setStep }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="flex flex-1 flex-col gap-y-2 p-4">
+          <div className="flex flex-1 flex-col gap-y-2 p-4 h-full overflow-auto">
             <UserInfo />
             <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>

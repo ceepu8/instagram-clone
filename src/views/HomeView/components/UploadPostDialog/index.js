@@ -18,10 +18,12 @@ const UploadPostDialog = () => {
       <DialogContent title="Create new post">
         <div
           className={cn(
-            'h-[575px]',
+            'h-[40vh] md:h-[70vh]',
+            'min-w-[348px] w-[50vw] max-w-[590px] md:w-[80vw] ',
             'flex items-center justify-center',
-            'w-[590px] transition-all duration-500',
-            step === 3 && 'w-[930px]'
+            'transition-all duration-500',
+            step === 3 &&
+              'min-w-[688px] w-[95vw] h-[40vh] md:w-[95vw] md:max-w-[1038px] md:h-[70vh]'
           )}
         >
           {step === 1 && (
