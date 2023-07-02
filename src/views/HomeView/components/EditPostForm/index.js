@@ -1,5 +1,4 @@
 import { Transition } from '@headlessui/react'
-import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
@@ -10,7 +9,8 @@ import { Button, Popover } from '@/components/base'
 import { Input, TextArea } from '@/components/form'
 import { ArrowLeftIcon, MapPinIcon, SmileIcon, XIcon } from '@/components/icons'
 import { EmojiPicker } from '@/components/shared'
-import { API, CLOUDINARY_STORAGE_URL } from '@/constants'
+import { CLOUDINARY_UPLOAD_PRESET, POST_MAX_CHARACTERS } from '@/constants'
+import Assets from '@/constants/Assets'
 import { useImageUpload, usePostDialog, useToast } from '@/hooks/custom'
 import { cn } from '@/utils'
 
@@ -22,7 +22,7 @@ const UserInfo = () => {
       <Image
         width={25}
         height={25}
-        src={session?.data?.user?.image || '/placeholder.jpg'}
+        src={session?.data?.user?.image || Assets.COMMON.PLACEHOLDER}
         alt="Profile Image"
         className="rounded-full"
       />
@@ -43,7 +43,7 @@ const PreviewImageBox = ({ previewImage, step, handleRemoveImage }) => {
     >
       <Image
         fill
-        src={previewImage || '/guinea-pig-2.jpeg'}
+        src={previewImage || Assets.COMMON.PLACEHOLDER}
         alt="Preview image"
         className={cn(
           'object-cover transition-all duration-500',
@@ -95,10 +95,25 @@ const StepSetting = ({ step, setStep, handleResetPost, onSubmit }) => {
   )
 }
 
+const PostSetting = () => {
+  return (
+    <div className="divide-y divide-divide">
+      <div className="py-2">
+        <Input placeholder="Add location" icon={MapPinIcon} />
+      </div>
+      <div className="py-2">
+        <p>Accessibility</p>
+      </div>
+      <div className="py-2">
+        <p>Advanced Settings</p>
+      </div>
+    </div>
+  )
+}
+
 const EditPostForm = ({ step, setStep }) => {
   const [characterCount, setCharacterCount] = useState(0)
   const { previewImage, handleRemoveImage } = useImageUpload()
-  const session = useSession()
   const { onClose } = usePostDialog()
   const { success, error } = useToast()
 
@@ -109,7 +124,7 @@ const EditPostForm = ({ step, setStep }) => {
     setStep(1)
   }
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: {
       caption: '',
       images: [],
@@ -117,11 +132,13 @@ const EditPostForm = ({ step, setStep }) => {
     },
   })
 
+  const captionValue = watch('caption')
+
   const onSubmit = async (data) => {
     setStep(4)
     const formData = new FormData()
     formData.append('file', previewImage)
-    formData.append('upload_preset', 'zw2rml5a')
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
 
     try {
       const response = await uploadImage(formData)
@@ -177,23 +194,20 @@ const EditPostForm = ({ step, setStep }) => {
                     contentClassName="p-0"
                     trigger={<Button variant="text-secondary" size="small" icon={SmileIcon} />}
                   >
-                    <EmojiPicker onEmojiClick={() => {}} />
+                    <EmojiPicker
+                      onEmojiClick={(e) => {
+                        const newCaptionValue = captionValue + e.emoji
+                        setValue('caption', newCaptionValue)
+                      }}
+                    />
                   </Popover>
-                  <p className="text-xs text-footer font-semibold">{characterCount} / 2200</p>
+                  <p className="text-xs text-footer font-semibold">
+                    {characterCount} / {POST_MAX_CHARACTERS}
+                  </p>
                 </div>
               </div>
 
-              <div className="divide-y divide-divide">
-                <div className="py-2">
-                  <Input placeholder="Add location" icon={MapPinIcon} />
-                </div>
-                <div className="py-2">
-                  <p>Accessibility</p>
-                </div>
-                <div className="py-2">
-                  <p>Advanced Settings</p>
-                </div>
-              </div>
+              <PostSetting />
             </form>
           </div>
         </Transition>
