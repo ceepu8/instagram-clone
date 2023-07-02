@@ -1,33 +1,31 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from 'axios'
-import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
-const useUploadImage = () => {
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [result, setResult] = useState(null)
+import { API } from '@/constants'
 
-  const doUploadImage = async (data) => {
-    setLoading(true)
+const useUploadPost = () => {
+  const session = useSession()
 
-    const response = await axios.post(
-      `https://api.cloudinary.com/v1_1/dr4xirffu/image/upload`,
-      data
-    )
-
-    if (response.status === 200) {
-      setSuccess(true)
-      setError(null)
-      setResult(response.data)
-    } else {
-      setError(response?.content)
-      setSuccess(false)
-    }
-    setLoading(false)
+  const uploadPost = async (data) => {
+    const response = await axios.post(API.POST.UPLOAD, data, {
+      headers: {
+        Authorization: `Bearer ${session.data.accessToken}`,
+      },
+    })
+    return response
   }
 
-  return { doUploadImage, loading, result, error, success, setError }
+  const uploadImage = async (data) => {
+    const response = await axios({
+      method: 'post',
+      url: 'https://api.cloudinary.com/v1_1/dr4xirffu/image/upload',
+      data,
+    })
+    return response
+  }
+
+  return { uploadImage, uploadPost }
 }
 
-export { useUploadImage }
+export { useUploadPost }

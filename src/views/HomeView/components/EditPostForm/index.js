@@ -5,10 +5,12 @@ import Image from 'next/image'
 import { Fragment, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useUploadPost } from '@/api'
 import { Button, Popover } from '@/components/base'
 import { Input, TextArea } from '@/components/form'
 import { ArrowLeftIcon, MapPinIcon, SmileIcon, XIcon } from '@/components/icons'
 import { EmojiPicker } from '@/components/shared'
+import { API, CLOUDINARY_STORAGE_URL } from '@/constants'
 import { useImageUpload, usePostDialog, useToast } from '@/hooks/custom'
 import { cn } from '@/utils'
 
@@ -20,7 +22,7 @@ const UserInfo = () => {
       <Image
         width={25}
         height={25}
-        src={session?.data?.user?.image}
+        src={session?.data?.user?.image || '/placeholder.jpg'}
         alt="Profile Image"
         className="rounded-full"
       />
@@ -35,6 +37,7 @@ const PreviewImageBox = ({ previewImage, step, handleRemoveImage }) => {
       className={cn(
         'relative z-50 shrink-0',
         'w-[50vw] min-w-[348px] max-w-[590px] md:w-[80vw]',
+        'transition-all duration-500',
         step === 3 && 'md:w-[50vw] md:max-w-[648px]'
       )}
     >
@@ -99,6 +102,8 @@ const EditPostForm = ({ step, setStep }) => {
   const { onClose } = usePostDialog()
   const { success, error } = useToast()
 
+  const { uploadImage, uploadPost } = useUploadPost()
+
   const handleResetPost = () => {
     handleRemoveImage()
     setStep(1)
@@ -113,32 +118,21 @@ const EditPostForm = ({ step, setStep }) => {
   })
 
   const onSubmit = async (data) => {
+    setStep(4)
     const formData = new FormData()
     formData.append('file', previewImage)
     formData.append('upload_preset', 'zw2rml5a')
 
-    setStep(4)
-    const response = await axios.post(
-      `https://api.cloudinary.com/v1_1/dr4xirffu/image/upload`,
-      formData
-    )
-
-    if (response?.data?.url) {
-      try {
-        await axios.post('/api/post', {
-          ...data,
-          userEmail: session.data.user?.email,
-          images: [response.data.url],
-        })
-        success('Upload!')
-      } catch (err) {
-        console.log(err)
-        error('Something went wrong!')
-      }
+    try {
+      const response = await uploadImage(formData)
+      await uploadPost({ ...data, images: [response.data.url] })
+      success('Upload!')
+    } catch (err) {
+      error(err.message)
+    } finally {
+      setStep(1)
+      onClose()
     }
-
-    setStep(1)
-    onClose()
   }
 
   return (

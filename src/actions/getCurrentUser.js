@@ -1,10 +1,10 @@
 import prisma from '@/libs/prismadb'
 
-const getCurrentUser = async (email) => {
+const getCurrentUser = async (id) => {
   try {
     const currentUser = await prisma.user.findUnique({
       where: {
-        email,
+        id,
       },
     })
 

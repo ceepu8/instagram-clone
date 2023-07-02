@@ -1,15 +1,21 @@
+import jwt from 'jsonwebtoken'
+
 import getCurrentUser from '@/actions/getCurrentUser'
 import prisma from '@/libs/prismadb'
 
-export default async function handler(req, res) {
+import authMiddleware from './middlewares/authMiddleware'
+
+async function handler(req, res) {
   const requestMethod = req.method
+
   switch (requestMethod) {
     case 'POST':
       try {
-        const { caption, images, videos, userEmail } = req.body
-        const currentUser = await getCurrentUser(userEmail)
+        const { caption, images, videos } = req.body
+        const { userId } = req.user
+        const currentUser = await getCurrentUser(userId)
 
-        if (!currentUser?.email) {
+        if (!currentUser) {
           return res.status(401).json({ message: 'Unauthorized' })
         }
 
@@ -38,3 +44,5 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: 'Welcome to API Routes!' })
   }
 }
+
+export default authMiddleware(handler)
