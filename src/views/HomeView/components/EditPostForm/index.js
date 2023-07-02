@@ -8,7 +8,7 @@ import { useUploadPost } from '@/api'
 import { Button, Popover } from '@/components/base'
 import { Input, TextArea } from '@/components/form'
 import { ArrowLeftIcon, MapPinIcon, SmileIcon, XIcon } from '@/components/icons'
-import { EmojiPicker } from '@/components/shared'
+import { EmojiPicker, MiniEmojiPicker } from '@/components/shared'
 import { CLOUDINARY_UPLOAD_PRESET, POST_MAX_CHARACTERS } from '@/constants'
 import Assets from '@/constants/Assets'
 import { useImageUpload, usePostDialog, useToast } from '@/hooks/custom'
@@ -178,12 +178,12 @@ const EditPostForm = ({ step, setStep }) => {
         >
           <div className="flex flex-1 flex-col gap-y-2 p-4 h-full overflow-auto">
             <UserInfo />
-            <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col gap-y-2 md:gap-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <TextArea
                   placeholder="Write a caption..."
-                  maxLength="2200"
-                  className="h-[200px] bg-popover"
+                  maxLength={POST_MAX_CHARACTERS}
+                  className="h-[100px] md:h-[200px] bg-popover"
                   onChange={(e) => {
                     setCharacterCount(e.target.value.length)
                   }}
@@ -191,12 +191,13 @@ const EditPostForm = ({ step, setStep }) => {
                 />
                 <div className="flex items-center justify-between">
                   <Popover
-                    contentClassName="p-0"
+                    contentClassName="p-4 rounded-md"
                     trigger={<Button variant="text-secondary" size="small" icon={SmileIcon} />}
+                    hasArrow
                   >
-                    <EmojiPicker
-                      onEmojiClick={(e) => {
-                        const newCaptionValue = captionValue + e.emoji
+                    <MiniEmojiPicker
+                      onEmojiClick={(emoji) => {
+                        const newCaptionValue = captionValue + emoji
                         setValue('caption', newCaptionValue)
                       }}
                     />
