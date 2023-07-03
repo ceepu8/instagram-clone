@@ -76,8 +76,9 @@ const EditPostForm = ({ step, onSubmit, register, watch, setValue }) => {
           </div>
           <LineBreak className="-mx-4" />
 
-          <div>
-            <Input placeholder="Add location" icon={MapPinIcon} />
+          <div className="flex items-center justify-between">
+            <Input placeholder="Add location" />
+            <MapPinIcon size={20} />
           </div>
           <LineBreak className="-mx-4" />
 
