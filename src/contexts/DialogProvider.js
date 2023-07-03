@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import UploadPostDialog from '@/views/HomeView/components/UploadPostDialog'
+import UploadPostDialog from '@/components/post/UploadPostDialog'
 
 const DialogProvider = () => {
   const [isMounted, setIsMounted] = useState(false)

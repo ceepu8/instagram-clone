@@ -4,9 +4,9 @@ import Dialog, { DialogContent } from '@/components/base/Dialog'
 import { useImageUpload, useUploadPostDialog } from '@/hooks/custom'
 import { cn } from '@/utils'
 
-import EditPostView from '../EditPostView'
-import LoadingView from '../LoadingView'
-import UploadImageView from '../UploadImageView'
+import EditPostView from './EditPostView'
+import LoadingView from './LoadingView'
+import UploadImageView from './UploadImageView'
 
 const UploadPostDialog = () => {
   const { isOpen, onClose } = useUploadPostDialog()

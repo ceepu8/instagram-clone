@@ -38,14 +38,15 @@ const EditPostView = ({ step, setStep }) => {
   const { previewImage, handleRemoveImage } = useImageUpload()
   const { uploadImage, uploadPost } = useUploadPost()
   const { onClose } = useUploadPostDialog()
-  const { success, error } = useToast()
+  const toast = useToast()
 
   const handleResetPost = () => {
     handleRemoveImage()
     setStep(1)
   }
 
-  const { register, handleSubmit, setValue, watch } = useForm({
+  const methods = useForm({
+    mode: 'onChange',
     defaultValues: postInitialValues,
   })
 
@@ -55,10 +56,10 @@ const EditPostView = ({ step, setStep }) => {
     try {
       const response = await uploadImage(previewImage)
       await uploadPost({ ...data, images: [response.data.url] })
-      success('Upload!')
+      toast.success('Upload!')
     } catch (err) {
       console.log(err)
-      error(err.message)
+      toast.error(err.message)
     } finally {
       setStep(1)
       onClose()
@@ -72,20 +73,14 @@ const EditPostView = ({ step, setStep }) => {
           step={step}
           setStep={setStep}
           handleResetPost={handleResetPost}
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={methods.handleSubmit(onSubmit)}
         />
         <PreviewImageView
           step={step}
           previewImage={previewImage}
           handleRemoveImage={handleResetPost}
         />
-        <EditPostForm
-          step={step}
-          onSubmit={handleSubmit(onSubmit)}
-          register={register}
-          watch={watch}
-          setValue={setValue}
-        />
+        <EditPostForm step={step} onSubmit={methods.handleSubmit(onSubmit)} methods={methods} />
       </div>
     </div>
   )

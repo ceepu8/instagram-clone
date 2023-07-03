@@ -1,7 +1,8 @@
 import { Transition } from '@headlessui/react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { Fragment, useMemo, useState } from 'react'
+import { Fragment, useState } from 'react'
+import { FormProvider, useFormContext } from 'react-hook-form'
 
 import { Button, LineBreak, Popover } from '@/components/base'
 import { Input, TextArea } from '@/components/form'
@@ -28,24 +29,23 @@ const UserInfo = () => {
   )
 }
 
-const CaptionTextarea = ({ register, value, onSetValue }) => {
-  const [characterCount, setCharacterCount] = useState(0)
+const MiniEmojiPickerPopover = ({ onEmojiClick }) => {
+  return (
+    <Popover
+      contentClassName="px-4 pt-4 rounded-md"
+      trigger={<Button variant="text-secondary" size="small" icon={SmileIcon} />}
+      hasArrow
+    >
+      <MiniEmojiPicker onEmojiClick={onEmojiClick} />
+    </Popover>
+  )
+}
 
-  const renderMiniEmojiPicker = () => {
-    return (
-      <Popover
-        contentClassName="px-4 pt-4 rounded-md"
-        trigger={<Button variant="text-secondary" size="small" icon={SmileIcon} />}
-        hasArrow
-      >
-        <MiniEmojiPicker
-          onEmojiClick={(emoji) => {
-            onSetValue(value + emoji)
-          }}
-        />
-      </Popover>
-    )
-  }
+const CaptionTextarea = () => {
+  const [characterCount, setCharacterCount] = useState(0)
+  const { register, watch, setValue } = useFormContext()
+
+  const value = watch(FORM_POST.CAPTION)
 
   return (
     <div>
@@ -56,11 +56,14 @@ const CaptionTextarea = ({ register, value, onSetValue }) => {
         onChange={(e) => {
           setCharacterCount(e.target.value.length)
         }}
-        {...register('caption')}
+        {...register(FORM_POST.CAPTION)}
       />
       <div className="flex items-center justify-between">
-        {renderMiniEmojiPicker()}
-
+        <MiniEmojiPickerPopover
+          onEmojiClick={(emoji) => {
+            setValue(FORM_POST.CAPTION, value + emoji)
+          }}
+        />
         <p className="text-xs text-footer font-semibold">
           {characterCount} / {MAX_POST_CAPTION_LENGTH}
         </p>
@@ -78,9 +81,7 @@ const LocationInput = () => {
   )
 }
 
-const EditPostForm = ({ step, onSubmit, register, watch, setValue }) => {
-  const captionValue = watch(FORM_POST.CAPTION)
-
+const EditPostForm = ({ step, onSubmit, methods }) => {
   return (
     <Transition
       show={step === 3}
@@ -94,23 +95,21 @@ const EditPostForm = ({ step, onSubmit, register, watch, setValue }) => {
     >
       <div className="flex flex-1 flex-col gap-y-2 p-4 h-full overflow-auto">
         <UserInfo />
-        <form className="flex flex-col" onSubmit={onSubmit}>
-          <CaptionTextarea
-            register={register}
-            value={captionValue}
-            onSetValue={(value) => setValue(FORM_POST.CAPTION, value)}
-          />
-          <LineBreak className="-mx-4" />
+        <FormProvider {...methods}>
+          <form className="flex flex-col" onSubmit={onSubmit}>
+            <CaptionTextarea />
+            <LineBreak className="-mx-4" />
 
-          <LocationInput />
-          <LineBreak className="-mx-4" />
+            <LocationInput />
+            <LineBreak className="-mx-4" />
 
-          <p>Accessibility</p>
-          <LineBreak className="-mx-4" />
+            <p>Accessibility</p>
+            <LineBreak className="-mx-4" />
 
-          <p>Advanced Settings</p>
-          <LineBreak className="-mx-4" />
-        </form>
+            <p>Advanced Settings</p>
+            <LineBreak className="-mx-4" />
+          </form>
+        </FormProvider>
       </div>
     </Transition>
   )
