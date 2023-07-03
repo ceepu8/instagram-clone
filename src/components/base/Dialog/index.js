@@ -18,9 +18,12 @@ export const DialogContent = forwardRef(({ title, description, children, classNa
         className
       )}
     >
-      <DialogPrimitive.Title className="text-base text-center font-semibold border-b border-popover-divide p-2">
-        {title}
-      </DialogPrimitive.Title>
+      {title && (
+        <DialogPrimitive.Title className="text-base text-center font-semibold border-b border-popover-divide p-2">
+          {title}
+        </DialogPrimitive.Title>
+      )}
+
       {description && (
         <DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
           {description}

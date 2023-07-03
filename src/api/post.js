@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 
-import { API, CLOUDINARY_NAME } from '@/constants'
+import { API, CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET } from '@/constants'
 
 const useUploadPost = () => {
   const session = useSession()
@@ -16,11 +16,15 @@ const useUploadPost = () => {
     return response
   }
 
-  const uploadImage = async (data) => {
+  const uploadImage = async (image) => {
+    const formData = new FormData()
+    formData.append('file', image)
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+
     const response = await axios({
       method: 'post',
       url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`,
-      data,
+      data: formData,
     })
     return response
   }

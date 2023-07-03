@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form'
 import { useUploadPost } from '@/api'
 import { Button } from '@/components/base'
 import { ArrowLeftIcon } from '@/components/icons'
-import { CLOUDINARY_UPLOAD_PRESET } from '@/constants'
-import { useImageUpload, usePostDialog, useToast } from '@/hooks/custom'
+import { useImageUpload, useToast, useUploadPostDialog } from '@/hooks/custom'
+import { postInitialValues } from '@/validates/post.schema'
 
 import PreviewImageView from '../PreviewImageView'
 import EditPostForm from './EditPostForm'
@@ -37,7 +37,7 @@ const StepSetting = ({ step, setStep, handleResetPost, onSubmit }) => {
 const EditPostView = ({ step, setStep }) => {
   const { previewImage, handleRemoveImage } = useImageUpload()
   const { uploadImage, uploadPost } = useUploadPost()
-  const { onClose } = usePostDialog()
+  const { onClose } = useUploadPostDialog()
   const { success, error } = useToast()
 
   const handleResetPost = () => {
@@ -46,25 +46,18 @@ const EditPostView = ({ step, setStep }) => {
   }
 
   const { register, handleSubmit, setValue, watch } = useForm({
-    defaultValues: {
-      caption: '',
-      images: [],
-      videos: [],
-    },
+    defaultValues: postInitialValues,
   })
 
   const onSubmit = async (data) => {
     setStep(4)
 
-    const formData = new FormData()
-    formData.append('file', previewImage)
-    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-
     try {
-      const response = await uploadImage(formData)
+      const response = await uploadImage(previewImage)
       await uploadPost({ ...data, images: [response.data.url] })
       success('Upload!')
     } catch (err) {
+      console.log(err)
       error(err.message)
     } finally {
       setStep(1)

@@ -11,7 +11,7 @@ import {
 } from '@/components/icons'
 import { Routes } from '@/constants'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
-import { usePostDialog } from '@/hooks/custom'
+import { useUploadPostDialog } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 import MenuPopover from '../MenuPopover'
@@ -19,7 +19,7 @@ import NavItem from '../NavItem'
 
 const Navigation = ({ navSelected, setNavSelected }) => {
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
-  const { onOpen } = usePostDialog()
+  const { onOpen } = useUploadPostDialog()
   const NAV_ITEMS = [
     {
       key: SIDEBAR_MENU_KEYS.HOME,

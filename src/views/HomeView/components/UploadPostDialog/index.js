@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 
 import Dialog, { DialogContent } from '@/components/base/Dialog'
-import { useImageUpload, usePostDialog } from '@/hooks/custom'
+import { useImageUpload, useUploadPostDialog } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 import EditPostView from '../EditPostView'
@@ -9,7 +9,7 @@ import LoadingView from '../LoadingView'
 import UploadImageView from '../UploadImageView'
 
 const UploadPostDialog = () => {
-  const { isOpen, onClose } = usePostDialog()
+  const { isOpen, onClose } = useUploadPostDialog()
   const [step, setStep] = useState(1)
   const { handleImageChange } = useImageUpload()
 
