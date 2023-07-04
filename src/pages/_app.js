@@ -31,8 +31,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   return (
     <SessionProvider session={session}>
       <AppProviders pageProps={pageProps}>
-        <DialogProvider />
-        <ToastProvider>{getLayout(<Component {...pageProps} />)}</ToastProvider>
+        <ToastProvider>
+          <DialogProvider />
+          {getLayout(<Component {...pageProps} />)}
+        </ToastProvider>
       </AppProviders>
     </SessionProvider>
   )

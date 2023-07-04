@@ -1,11 +1,14 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
 import { Routes } from '@/constants'
 import prisma from '@/libs/prismadb'
+
+import { generateAccessToken } from '../utils/jwt'
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
@@ -61,6 +64,21 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.accessToken = generateAccessToken(user)
+      }
+
+      return token
+    },
+    async session({ session, token, user }) {
+      session.user.id = token.id
+      session.accessToken = token.accessToken
+      return session
+    },
+  },
   session: {
     strategy: 'jwt',
   },

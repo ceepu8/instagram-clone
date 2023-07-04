@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { forwardRef, useState } from 'react'
+import { forwardRef, memo, useState } from 'react'
 
 import { cn } from '@/utils'
 
@@ -73,4 +73,4 @@ Input.propTypes = {
   wrapperClassName: PropTypes.string,
 }
 
-export default Input
+export default memo(Input)

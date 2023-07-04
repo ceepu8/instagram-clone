@@ -75,7 +75,7 @@ model Post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   caption   String?
   images    String[]
-  videos    String[]
+  videos    String[] @default([])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

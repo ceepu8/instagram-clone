@@ -11,16 +11,19 @@ export const DialogContent = forwardRef(({ title, description, children, classNa
       forceMount
       className={cn(
         'fixed z-50',
-        'w-[95vw] max-w-[590px] min-w-[348px] rounded-xl p-4 md:w-full',
+        'max-w-fit min-w-[348px] rounded-xl md:w-full',
         'top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]',
         'bg-popover',
         'focus:outline-none',
         className
       )}
     >
-      <DialogPrimitive.Title className="text-base text-center font-semibold border-b border-popover-divide pb-2 -mx-4">
-        {title}
-      </DialogPrimitive.Title>
+      {title && (
+        <DialogPrimitive.Title className="text-base text-center font-semibold border-b border-popover-divide p-2">
+          {title}
+        </DialogPrimitive.Title>
+      )}
+
       {description && (
         <DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
           {description}

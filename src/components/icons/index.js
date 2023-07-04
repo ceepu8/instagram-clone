@@ -25,7 +25,8 @@ import {
   MoreHorizontalIcon,
   InstagramIcon,
   XCircleIcon,
-  CrossIcon,
+  ArrowLeftIcon,
+  MapPinIcon,
 } from 'lucide-react'
 
 const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
@@ -323,7 +324,8 @@ export {
   MoreHorizontalIcon,
   InstagramIcon,
   XCircleIcon,
-  CrossIcon,
+  ArrowLeftIcon,
+  MapPinIcon,
 }
 
 export {

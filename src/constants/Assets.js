@@ -1,5 +1,7 @@
 export default {
-  COMMON: {},
+  COMMON: {
+    PLACEHOLDER: '/placeholder.jpg',
+  },
   ICONS: {},
   IMAGE: {},
 }
