@@ -95,6 +95,7 @@ const Navigation = ({ navSelected, setNavSelected }) => {
               {item?.content}
               <span
                 className={cn(
+                  'hidden lg:block',
                   'duration-[100ms] delay-[50ms] transition-all',
                   navSelected ? 'invisible opacity-0' : 'visible opacity-100'
                 )}
