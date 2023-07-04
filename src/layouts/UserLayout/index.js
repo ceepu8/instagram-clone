@@ -10,9 +10,9 @@ const UserLayout = ({ children }) => {
 
   const { isAuthenticated } = useAuth()
 
-  if (!isAuthenticated) {
-    router.push('/')
-  }
+  // if (!isAuthenticated) {
+  //   router.push('/')
+  // }
   return (
     <>
       <Head>

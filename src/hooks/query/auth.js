@@ -78,6 +78,7 @@ export const useAuth = () => {
     () => ({
       isAuthenticated: session?.status === 'authenticated',
       user: session?.data?.user,
+      accessToken: session?.data?.accessToken,
     }),
     [session]
   )
