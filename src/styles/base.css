@@ -207,6 +207,7 @@ input:checked + span svg {
     left: var(--nav-narrow-width);
   }
   to {
-    left: -180px;
+    /* left: -180px; */
+    left: -259px;
   }
 }

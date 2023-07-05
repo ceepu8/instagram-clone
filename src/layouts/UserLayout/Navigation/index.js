@@ -10,16 +10,20 @@ import {
   Search,
 } from '@/components/icons'
 import { Routes } from '@/constants'
+import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
+import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
 import MenuPopover from '../MenuPopover'
 import NavItem from '../NavItem'
 
 const Navigation = ({ navSelected, setNavSelected }) => {
+  const { user } = useAuth()
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
   const { onOpen } = useUploadPostDialog()
+
   const NAV_ITEMS = [
     {
       key: SIDEBAR_MENU_KEYS.HOME,
@@ -69,14 +73,14 @@ const Navigation = ({ navSelected, setNavSelected }) => {
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: `${Routes.PROFILE}/123`,
+      route: `${Routes.PROFILE}/${user?.id}?tab=posts`,
       label: 'Profile',
       content: (
         <div className="shrink-0">
           <Image
             width={24}
             height={24}
-            src="/profile.jpeg"
+            src={user?.image || Assets.COMMON.PLACEHOLDER}
             alt="profile-image"
             className="rounded-full"
           />

@@ -21,6 +21,7 @@ export const useGetProfile = () => {
     {
       keepPreviousData: true,
       staleTime: Infinity,
+      enabled: !!accessToken,
     }
   )
 }
