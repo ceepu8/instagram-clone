@@ -1,84 +1,58 @@
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
 
-import { useGetPostsByUser } from '@/api'
-import { Image, LineBreak } from '@/components/base'
-import { CopyIcon, GridIcon, TagIcon } from '@/components/icons'
+import { LineBreak } from '@/components/base'
+import { GridIcon, TagIcon } from '@/components/icons'
+import { PROFILE_TAB_KEYS } from '@/constants/Keys'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
-const PostCard = ({ image, isMultipleImages }) => {
-  return (
-    <div key={image} className="relative">
-      <Image width={310} height={310} src={image} alt="post image" />
-      <CopyIcon
-        size={24}
-        className={cn('text-white absolute right-2 top-2', isMultipleImages ? 'block' : 'hidden')}
-      />
-    </div>
-  )
-}
-
-const PostList = () => {
-  const router = useRouter()
-  const { data: posts } = useGetPostsByUser(router.query?.id)
-
-  if (!posts?.length) {
-    return null
-  }
-  return (
-    <div className="grid grid-cols-3 justify-start gap-1">
-      {posts.map((post) => {
-        const { images } = post
-        return (
-          <>
-            {images.map((image) => (
-              <PostCard key={image} image={image} isMultipleImages={images.length > 1} />
-            ))}
-          </>
-        )
-      })}
-    </div>
-  )
-}
+import PostList from './PostList'
 
 const ProfileTabs = () => {
   const router = useRouter()
   const { user } = useAuth()
 
+  const tabList = [
+    {
+      key: PROFILE_TAB_KEYS.posts,
+      href: `/profile/${user?.id}?tab=${PROFILE_TAB_KEYS.posts}`,
+      active: !router.query?.tab || router.query?.tab === PROFILE_TAB_KEYS.posts,
+      icon: GridIcon,
+      label: PROFILE_TAB_KEYS.posts,
+    },
+    {
+      key: PROFILE_TAB_KEYS.tagged,
+      href: `/profile/${user?.id}?tab=${PROFILE_TAB_KEYS.tagged}`,
+      active: router.query?.tab === PROFILE_TAB_KEYS.tagged,
+      icon: TagIcon,
+      label: PROFILE_TAB_KEYS.tagged,
+    },
+  ]
+
   return (
-    <div className="border-t border-divide">
-      <div className="flex justify-center space-x-16 ">
-        <button
-          type="button"
-          onClick={() =>
-            router.replace(`/profile/${user.id}?tab=posts`, undefined, { scroll: false })
-          }
-          className={cn(
-            'flex items-center space-x-1 py-6',
-            'text-xs text-comment tracking-wide font-bold',
-            'border-t border-transparent',
-            (!router.query?.tab || router.query?.tab === 'posts') && 'border-base'
-          )}
-        >
-          <GridIcon size={12} />
-          <span>POSTS</span>
-        </button>
-        <button
-          type="button"
-          onClick={() =>
-            router.replace(`/profile/${user.id}?tab=tagged`, undefined, { scroll: false })
-          }
-          className={cn(
-            'flex items-center space-x-1 py-6',
-            'text-xs text-comment tracking-wide font-bold',
-            'border-t border-transparent',
-            router.query?.tab === 'tagged' && 'border-base'
-          )}
-        >
-          <TagIcon size={12} />
-          <span>TAGGED</span>
-        </button>
+    <div className="relative h-[41px] sm:h-[49px]">
+      <LineBreak className="my-0" />
+      <div className="flex justify-center sm:space-x-16 absolute inset-0">
+        {tabList.map((tab) => {
+          const { key, href, active, icon: Icon, label } = tab
+          return (
+            <button
+              key={key}
+              type="button"
+              onClick={() => router.replace(href, undefined, { scroll: false })}
+              className={cn(
+                'flex items-center justify-center space-x-1 py-2 sm:py-6',
+                'text-xs text-comment tracking-wide font-bold',
+                'border-t border-transparent',
+                'flex-1 sm:flex-initial',
+                active && 'border-base'
+              )}
+            >
+              <Icon className={cn('sm:w-4 sm:h-4', active && 'text-primary sm:text-base')} />
+              <span className="uppercase hidden sm:block">{label}</span>
+            </button>
+          )
+        })}
       </div>
     </div>
   )
@@ -86,9 +60,11 @@ const ProfileTabs = () => {
 
 const ProfileBody = () => {
   return (
-    <div className="sm:px-4">
+    <div className="sm:px-4 flex flex-col h-full">
       <ProfileTabs />
-      <PostList />
+      <div className="flex-1">
+        <PostList />
+      </div>
     </div>
   )
 }

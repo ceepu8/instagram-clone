@@ -3,25 +3,23 @@ import axios from 'axios'
 
 import { useAuth } from '@/hooks/query/auth'
 
-export const useGetProfile = () => {
-  const { accessToken } = useAuth()
-
-  return useQuery(
-    ['get-profile'],
-    async () => {
-      const response = await axios({
-        method: 'get',
-        url: '/api/profile',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      return response.data
+export const getProfile = async (accessToken) => {
+  const response = await axios({
+    method: 'get',
+    url: '/api/profile',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
     },
-    {
-      keepPreviousData: true,
-      staleTime: Infinity,
-      enabled: !!accessToken,
-    }
-  )
+  })
+  return response.data
+}
+
+export const useGetProfile = () => {
+  const { user, accessToken } = useAuth()
+
+  return useQuery(['get-profile', user.email], () => getProfile(accessToken), {
+    keepPreviousData: true,
+    staleTime: Infinity,
+    enabled: !!accessToken && !!user,
+  })
 }

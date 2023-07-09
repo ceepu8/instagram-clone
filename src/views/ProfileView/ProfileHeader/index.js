@@ -51,9 +51,9 @@ const ProfileHeader = () => {
       <div className="px-5 py-8">
         <div className="flex sm:justify-center sm:mx-8">
           <div className="sm:flex-grow-[1] mr-8 sm:mr-0">
-            <div className="w-[70px] h-[70px] sm:w-[150px] sm:h-[150px] relative">
+            <div className="w-[70px] h-[70px] sm:w-[150px] sm:h-[150px] relative mx-auto">
               <Image
-                className="rounded-full border border-chinese-silver mx-auto"
+                className="rounded-full border border-chinese-silver"
                 fill
                 src={user?.image || Assets.COMMON.PLACEHOLDER}
                 alt="Profile Image"

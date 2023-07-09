@@ -46,6 +46,7 @@ const useGetPostsByUser = (id) => {
     {
       keepPreviousData: true,
       staleTime: Infinity,
+      enabled: !!id,
     }
   )
 }
