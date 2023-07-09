@@ -10,9 +10,9 @@ const UserLayout = ({ children }) => {
 
   const { isAuthenticated } = useAuth()
 
-  if (!isAuthenticated) {
-    router.push('/')
-  }
+  // if (!isAuthenticated) {
+  //   router.push('/')
+  // }
   return (
     <>
       <Head>
@@ -21,7 +21,9 @@ const UserLayout = ({ children }) => {
       </Head>
       <div className="w-screen h-screen">
         <AppSideBar />
-        <div className="pl-[var(--nav-medium-width)]">{children}</div>
+        <div className="md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
+          {children}
+        </div>
       </div>
     </>
   )

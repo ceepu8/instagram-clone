@@ -1,9 +1,8 @@
-import jwt from 'jsonwebtoken'
-
 import getCurrentUser from '@/actions/getCurrentUser'
+import getPostsByUser from '@/actions/getPostByUser'
 import prisma from '@/libs/prismadb'
 
-import authMiddleware from './middlewares/authMiddleware'
+import authMiddleware from '../middlewares/authMiddleware'
 
 async function handler(req, res) {
   const requestMethod = req.method
@@ -13,6 +12,7 @@ async function handler(req, res) {
       try {
         const { caption, images, videos } = req.body
         const { userId } = req.user
+
         const currentUser = await getCurrentUser(userId)
 
         if (!currentUser) {
@@ -37,6 +37,15 @@ async function handler(req, res) {
         return res.status(200).json({ message: 'Success', data: post })
       } catch (error) {
         console.log(error, 'REGISTRATION_ERROR')
+        return res.status(500).json({ message: 'Internal Error' })
+      }
+
+    case 'GET':
+      try {
+        const id = req.params
+        const posts = await getPostsByUser(id)
+        return res.status(200).json({ message: 'Success', data: posts })
+      } catch (error) {
         return res.status(500).json({ message: 'Internal Error' })
       }
 

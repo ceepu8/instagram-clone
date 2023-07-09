@@ -77,7 +77,8 @@ export const useAuth = () => {
   const auth = useMemo(
     () => ({
       isAuthenticated: session?.status === 'authenticated',
-      user: session?.data?.user,
+      user: session?.data?.user || {},
+      accessToken: session?.data?.accessToken,
     }),
     [session]
   )

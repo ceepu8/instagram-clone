@@ -20,7 +20,10 @@ const AppSideBar = () => {
           'p-3 flex flex-col h-full fixed z-50 bg-background',
           'border-solid border-r border-divide',
           'transition-all duration-300',
-          navSelected ? 'w-[--nav-narrow-width]' : 'w-[var(--nav-medium-width)]'
+          'hidden md:block w-0',
+          navSelected
+            ? 'w-[--nav-narrow-width]'
+            : 'w-[var(--nav-medium-width)] md:w-[--nav-narrow-width] lg:w-[var(--nav-medium-width)]'
         )}
       >
         <SideBarLogo navSelected={navSelected} />

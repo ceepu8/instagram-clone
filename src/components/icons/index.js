@@ -6,7 +6,7 @@ import {
   BookmarkIcon,
   Bookmark,
   History,
-  Settings,
+  SettingsIcon,
   Sun,
   ChevronLeft,
   ChevronRight,
@@ -27,6 +27,9 @@ import {
   XCircleIcon,
   ArrowLeftIcon,
   MapPinIcon,
+  CopyIcon,
+  GridIcon,
+  TagIcon,
 } from 'lucide-react'
 
 const FacebookMessengerIcon = ({ width = 24, height = 24, ...props }) => {
@@ -305,7 +308,7 @@ export {
   BookmarkIcon,
   Bookmark,
   History,
-  Settings,
+  SettingsIcon,
   Sun,
   ChevronLeft,
   ChevronRight,
@@ -326,6 +329,9 @@ export {
   XCircleIcon,
   ArrowLeftIcon,
   MapPinIcon,
+  CopyIcon,
+  GridIcon,
+  TagIcon,
 }
 
 export {

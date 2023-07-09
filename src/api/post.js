@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 
@@ -32,4 +33,22 @@ const useUploadPost = () => {
   return { uploadImage, uploadPost }
 }
 
-export { useUploadPost }
+const useGetPostsByUser = (id) => {
+  return useQuery(
+    ['get-posts', id],
+    async () => {
+      const response = await axios({
+        method: 'get',
+        url: `/api/post/${id}`,
+      })
+      return response.data
+    },
+    {
+      keepPreviousData: true,
+      staleTime: Infinity,
+      enabled: !!id,
+    }
+  )
+}
+
+export { useUploadPost, useGetPostsByUser }

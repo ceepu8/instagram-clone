@@ -19,3 +19,8 @@ export const SIDEBAR_MENU_KEYS = {
   CREATE: 'create',
   PROFILE: 'profile',
 }
+
+export const PROFILE_TAB_KEYS = {
+  posts: 'posts',
+  tagged: 'tagged',
+}
