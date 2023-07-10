@@ -91,7 +91,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
 
   const renderNavItems = () => {
     return (
-      <div className="flex-1 space-y-2">
+      <div className="space-y-2">
         {NAV_ITEMS.map((item) => {
           const isNavSelected = item.key === navSelected
           return (
@@ -113,7 +113,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     )
   }
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex justify-between flex-1 flex-col">
       {renderNavItems()}
       <MenuPopover navSelected={navSelected} />
     </div>

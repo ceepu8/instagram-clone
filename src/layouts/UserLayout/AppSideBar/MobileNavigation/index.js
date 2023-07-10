@@ -58,7 +58,7 @@ const MobileNavigation = () => {
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: `${Routes.PROFILE}/${user?.id}?tab=posts`,
+      route: `${Routes.PROFILE}/${user?.id}`,
       label: 'Profile',
       content: ProfileImage,
     },

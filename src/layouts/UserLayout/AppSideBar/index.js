@@ -18,10 +18,11 @@ const AppSideBar = () => {
     <div ref={appSideBarRef}>
       <div
         className={cn(
-          'p-3 flex flex-col h-full fixed z-50 bg-background',
+          'max-h-screen h-full',
+          'p-3 flex-col fixed z-50 bg-background',
           'border-solid border-r border-divide',
           'transition-all duration-300',
-          'hidden md:block w-0',
+          'hidden md:flex w-0',
           navSelected
             ? 'w-[--nav-narrow-width]'
             : 'w-[var(--nav-medium-width)] md:w-[--nav-narrow-width] lg:w-[var(--nav-medium-width)]'
