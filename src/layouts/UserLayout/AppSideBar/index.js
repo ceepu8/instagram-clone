@@ -3,9 +3,10 @@ import { useRef, useState } from 'react'
 import { useClickOutside } from '@/hooks/shared'
 import { cn } from '@/utils'
 
-import Navigation from '../Navigation'
-import SlideOutPanelList from '../SlideOutPanelList'
-import SideBarLogo from './SideBarLogo'
+import DesktopNavigation from './DesktopNavigation'
+import MobileNavigation from './MobileNavigation'
+import SideBarLogo from './SidebarLogo'
+import SlideOutPanelList from './SlideOutPanelList'
 
 const AppSideBar = () => {
   const [navSelected, setNavSelected] = useState(null)
@@ -27,9 +28,10 @@ const AppSideBar = () => {
         )}
       >
         <SideBarLogo navSelected={navSelected} />
-        <Navigation navSelected={navSelected} setNavSelected={setNavSelected} />
+        <DesktopNavigation navSelected={navSelected} setNavSelected={setNavSelected} />
       </div>
       <SlideOutPanelList navSelected={navSelected} />
+      <MobileNavigation />
     </div>
   )
 }

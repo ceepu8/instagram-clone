@@ -18,6 +18,7 @@ const SlideOutPanel = ({ children, isShow }) => {
         'bg-background',
         'border-r border-divide border-solid rounded-2xl'
       )}
+      style={{ boxShadow: '4px 0 24px rgba(0,0,0,.15)' }}
     >
       {children}
     </Transition>

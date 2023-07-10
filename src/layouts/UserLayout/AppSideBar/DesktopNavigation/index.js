@@ -16,10 +16,10 @@ import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
-import MenuPopover from '../MenuPopover'
-import NavItem from '../NavItem'
+import MenuPopover from './MenuPopover'
+import NavItem from './NavItem'
 
-const Navigation = ({ navSelected, setNavSelected }) => {
+const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   const { user } = useAuth()
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
   const { onOpen } = useUploadPostDialog()
@@ -120,4 +120,4 @@ const Navigation = ({ navSelected, setNavSelected }) => {
   )
 }
 
-export default Navigation
+export default DesktopNavigation
