@@ -61,16 +61,22 @@ const ProfileHeader = () => {
             </div>
           </div>
           <div className="flex flex-col sm:flex-grow-[2]">
-            <div className="flex items-center gap-x-4 mb-3 sm:mb-6">
-              <h1 className="text-xl">{user?.name}</h1>
-              <Button variant="secondary" size="small" rootClassName="hidden sm:block">
+            <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
+              <h1 className="text-xl order-1">{user?.name}</h1>
+              <Button
+                variant="secondary"
+                size="small"
+                rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
+              >
                 Edit profile
               </Button>
-              <Button icon={SettingsIcon} variant="text-secondary" />
+              <Button
+                icon={SettingsIcon}
+                variant="text-secondary"
+                rootClassName="order-3 md:order-last"
+              />
             </div>
-            <Button variant="secondary" size="small" rootClassName="block sm:hidden w-[250px]">
-              Edit profile
-            </Button>
+
             <MobileUserActivities user={user} />
             <p className="text-sm font-semibold hidden sm:block">Description</p>
           </div>

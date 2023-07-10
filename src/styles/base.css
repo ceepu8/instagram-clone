@@ -53,6 +53,7 @@
     --feed-width-story: 630px;
     --feed-width-post: 470px;
     --feed-sidebar-width: 319px;
+    --slide-panel-width: 397px;
   }
 
   [data-theme='dark'] {
@@ -107,6 +108,7 @@
     --feed-width-story: 630px;
     --feed-width-post: 470px;
     --feed-sidebar-width: 319px;
+    --slide-panel-width: 397px;
   }
 
   body {
