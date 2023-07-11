@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import {
-  Compass,
+  CompassIcon,
   FacebookMessengerIcon,
   Film,
   Heart,
@@ -42,7 +42,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     {
       key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
-      icon: Compass,
+      icon: CompassIcon,
       label: 'Explore',
     },
     {

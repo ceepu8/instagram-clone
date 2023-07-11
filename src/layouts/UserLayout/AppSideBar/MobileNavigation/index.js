@@ -2,10 +2,11 @@ import { Pressable } from '@react-aria/interactions'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { FacebookMessengerIcon, Film, Home, Search } from '@/components/icons'
+import { CompassIcon, FacebookMessengerIcon, Film, Home, PlusSquare } from '@/components/icons'
 import { Routes } from '@/constants'
 import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
+import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
 import { checkRouteActive, cn } from '@/utils'
 
@@ -27,6 +28,7 @@ const ProfileImage = ({ size = 24, className, active }) => {
 
 const MobileNavigation = () => {
   const { user } = useAuth()
+  const { onOpen } = useUploadPostDialog()
   const router = useRouter()
 
   const NAV_ITEMS = [
@@ -37,11 +39,12 @@ const MobileNavigation = () => {
       label: 'Home',
     },
     {
-      key: SIDEBAR_MENU_KEYS.SEARCH,
+      key: SIDEBAR_MENU_KEYS.EXPLORE,
+      route: Routes.EXPLORE,
       onPress: () => {
         // doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
       },
-      icon: Search,
+      icon: CompassIcon,
       label: 'Search',
     },
     {
@@ -49,6 +52,12 @@ const MobileNavigation = () => {
       route: `${Routes.REELS}/123`,
       icon: Film,
       label: 'Reels',
+    },
+    {
+      key: SIDEBAR_MENU_KEYS.CREATE,
+      onPress: () => onOpen(),
+      icon: PlusSquare,
+      label: 'Create',
     },
     {
       key: SIDEBAR_MENU_KEYS.MESSAGES,
