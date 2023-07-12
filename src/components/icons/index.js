@@ -30,6 +30,7 @@ import {
   CopyIcon,
   GridIcon,
   TagIcon,
+  CheckIcon,
 } from 'lucide-react'
 
 const FacebookMessengerIcon = ({ size = 24, ...props }) => {
@@ -332,6 +333,7 @@ export {
   CopyIcon,
   GridIcon,
   TagIcon,
+  CheckIcon,
 }
 
 export {
