@@ -36,12 +36,12 @@ const PostCard = (props) => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-110"
       >
-        <DialogContent className="max-w-[calc(100vw-64px-64px)] w-fit md:w-fit">
-          <div className="flex flex-col sm:flex-row justify-between max-h-[calc(100vh-40px)]">
-            <div className="max-w-full w-[768px]">
+        <DialogContent className="max-w-[calc(100vw-64px-64px)] max-h-[calc(100vh-40px)] md:h-full w-fit md:w-fit">
+          <div className="flex flex-col md:flex-row md:h-full justify-between">
+            <div className="max-w-full w-[768px] hidden md:block">
               <PostImageSlider images={images} />
             </div>
-            <div className="min-w-[405px] max-w-[500px] px-4">
+            <div className="min-w-[405px] max-w-full md:max-w-[500px] md:h-full">
               <PostDialogContent {...props} />
             </div>
           </div>

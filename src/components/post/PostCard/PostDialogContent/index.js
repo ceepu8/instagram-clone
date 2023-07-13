@@ -14,9 +14,13 @@ import Assets from '@/constants/Assets'
 import { useInputState } from '@/hooks/shared'
 import { cn, getTimeFromNow } from '@/utils'
 
+import PostImageSlider from '../PostImageSlider'
+
 const PostComment = ({ value, onChange }) => {
   return (
-    <CommentInput value={value} onChange={onChange} className="placeholder-comment font-medium" />
+    <div className="px-4">
+      <CommentInput value={value} onChange={onChange} className="placeholder-comment font-medium" />
+    </div>
   )
 }
 
@@ -56,7 +60,7 @@ const PostActions = () => {
     },
   ]
   return (
-    <div className="flex gap-x-3">
+    <div className="flex gap-x-3 px-4">
       {ActionList.map(({ key, onPress, icon }, index) => {
         const isLast = index === ActionList.length - 1
         return (
@@ -90,7 +94,7 @@ const PreviewProfileHoverCard = ({ triggerContent }) => {
 
 const PostHeader = ({ owner }) => {
   return (
-    <div className="flex items-center space-x-4 border-b border-divide -mx-4 px-4">
+    <div className="flex items-center space-x-4 border-b border-divide px-4 pb-3">
       <div className="shrink-0">
         <PreviewProfileHoverCard triggerContent={<ProfileImage image={owner?.image} />} />
       </div>
@@ -105,7 +109,7 @@ const PostHeader = ({ owner }) => {
 
 const PostLike = ({ liked = [], createdAt }) => {
   return (
-    <div>
+    <div className="px-4">
       <p className="text-sm">
         Liked by <b>{liked?.length}</b> people
       </p>
@@ -116,7 +120,7 @@ const PostLike = ({ liked = [], createdAt }) => {
 
 const PostCaption = ({ owner, caption = '', createdAt }) => {
   return (
-    <div className="flex space-x-4">
+    <div className="space-x-4 px-4 hidden md:flex">
       <PreviewProfileHoverCard triggerContent={<ProfileImage image={owner?.image} />} />
       <div className="flex flex-col space-y-1">
         <div className="flex">
@@ -139,13 +143,13 @@ const PostCaption = ({ owner, caption = '', createdAt }) => {
 
 const PostDialogContent = (props) => {
   const [comment, getCommentInputOnChange] = useInputState('')
-  const { owner, caption, createdAt, liked } = props
+  const { owner, caption, createdAt, liked, images } = props
 
   return (
-    <div className="flex flex-col justify-between space-y-4 py-4 max-h-full relative">
+    <div className="flex flex-col justify-between md:space-y-4 py-4 h-full relative">
       <PostHeader owner={owner} />
       <PostCaption owner={owner} caption={caption} createdAt={createdAt} />
-      <div className="flex-1 overflow-auto no-scrollbar relative hidden md:block">
+      <div className="flex-1 px-4 overflow-auto no-scrollbar relative hidden md:block">
         Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
         Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown
         printer took a galley of type and scrambled it to make a type specimen book. It has survived
@@ -174,11 +178,14 @@ const PostDialogContent = (props) => {
         passages, and more recently with desktop publishing software like Aldus PageMaker including
         versions of Lorem Ipsum.
       </div>
-      <div className="sm:absolute bottom-4 left-0 w-full flex flex-col space-y-3 bg-background">
-        <LineBreak className="-mx-4 bg-popover-divide" />
+      <div className="block md:hidden">
+        <PostImageSlider images={images} />
+      </div>
+      <div className="md:absolute bottom-4 left-0 w-full flex flex-col space-y-3 bg-background">
+        <LineBreak className="bg-popover-divide my-0" />
         <PostActions />
         <PostLike liked={liked} createdAt={createdAt} />
-        <LineBreak className="-mx-4 bg-popover-divide" />
+        <LineBreak className="bg-popover-divide my-0" />
         <PostComment value={comment} onChange={getCommentInputOnChange} />
       </div>
     </div>
