@@ -150,39 +150,13 @@ const PostDialogContent = (props) => {
       <PostHeader owner={owner} />
       <PostCaption owner={owner} caption={caption} createdAt={createdAt} />
       <div className="flex-1 px-4 overflow-auto no-scrollbar relative hidden md:block">
-        Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-        Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown
-        printer took a galley of type and scrambled it to make a type specimen book. It has survived
-        not only five centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-        containing Lorem Ipsum passages, and more recently with desktop publishing software like
-        Aldus PageMaker including versions of Lorem Ipsum. Ipsum has been the industry&apos;s
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five centuries, but also
-        the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
-        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-        recently with desktop publishing software like Aldus PageMaker including versions of Lorem
-        Ipsum. Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an
-        unknown printer took a galley of type and scrambled it to make a type specimen book. It has
-        survived not only five centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-        containing Lorem Ipsum passages, and more recently with desktop publishing software like
-        Aldus PageMaker including versions of Lorem Ipsum. the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of
-        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-        software like Aldus PageMaker including versions of Lorem Ipsum. Ipsum has been the
-        industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a
-        galley of type and scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-        passages, and more recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum.
+        Comments
       </div>
       <div className="block md:hidden">
         <PostImageSlider images={images} />
       </div>
       <div className="md:absolute bottom-4 left-0 w-full flex flex-col space-y-3 bg-background">
-        <LineBreak className="bg-popover-divide my-0" />
+        <LineBreak className="bg-popover-divide mt-2 mb-0" />
         <PostActions />
         <PostLike liked={liked} createdAt={createdAt} />
         <LineBreak className="bg-popover-divide my-0" />
