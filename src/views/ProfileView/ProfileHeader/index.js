@@ -43,6 +43,44 @@ const DesktopUserActivities = (props) => {
   )
 }
 
+const ProfileImage = ({ image }) => {
+  return (
+    <div className="sm:flex-grow-[1] mr-8 sm:mr-0">
+      <div className="w-[70px] h-[70px] sm:w-[150px] sm:h-[150px] relative mx-auto">
+        <Image
+          className="rounded-full border border-chinese-silver"
+          fill
+          src={image || Assets.COMMON.PLACEHOLDER}
+          alt="Profile Image"
+        />
+      </div>
+    </div>
+  )
+}
+
+const ProfileInfo = ({ user }) => {
+  return (
+    <div className="flex flex-col sm:flex-grow-[2]">
+      <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
+        <h1 className="text-xl order-1">{user?.name}</h1>
+        <Button
+          variant="secondary"
+          size="small"
+          rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
+        >
+          Edit profile
+        </Button>
+        <Button
+          icon={SettingsIcon}
+          variant="text-secondary"
+          rootClassName="order-3 md:order-last"
+        />
+      </div>
+      <MobileUserActivities user={user} />
+      <p className="text-sm font-semibold hidden sm:block">Description</p>
+    </div>
+  )
+}
 const ProfileHeader = () => {
   const { data: user } = useGetProfile()
 
@@ -50,38 +88,10 @@ const ProfileHeader = () => {
     <div>
       <div className="px-5 py-8">
         <div className="flex sm:justify-center sm:mx-8">
-          <div className="sm:flex-grow-[1] mr-8 sm:mr-0">
-            <div className="w-[70px] h-[70px] sm:w-[150px] sm:h-[150px] relative mx-auto">
-              <Image
-                className="rounded-full border border-chinese-silver"
-                fill
-                src={user?.image || Assets.COMMON.PLACEHOLDER}
-                alt="Profile Image"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col sm:flex-grow-[2]">
-            <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
-              <h1 className="text-xl order-1">{user?.name}</h1>
-              <Button
-                variant="secondary"
-                size="small"
-                rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
-              >
-                Edit profile
-              </Button>
-              <Button
-                icon={SettingsIcon}
-                variant="text-secondary"
-                rootClassName="order-3 md:order-last"
-              />
-            </div>
-
-            <MobileUserActivities user={user} />
-            <p className="text-sm font-semibold hidden sm:block">Description</p>
-          </div>
+          <ProfileImage image={user?.image} />
+          <ProfileInfo user={user} />
         </div>
-        <p className="text-sm font-semibold mt-6 block sm:hidden">Description</p>
+        <p className="text-sm font-semibold mt-6 sm:hidden">Description</p>
       </div>
       <DesktopUserActivities user={user} />
     </div>

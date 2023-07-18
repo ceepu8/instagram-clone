@@ -73,7 +73,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: `${Routes.PROFILE}/${user?.id}?tab=posts`,
+      route: Routes.PROFILE.replace('[id]', user?.id),
       label: 'Profile',
       content: (
         <div className="shrink-0">
