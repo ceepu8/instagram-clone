@@ -1,27 +1,18 @@
 import NextImage from 'next/image'
 
 import { Button, HoverCard, LineBreak } from '@/components/base'
-import {
-  BookmarkIcon,
-  CheckIcon,
-  HeartIcon,
-  MessageCircle,
-  MoreHorizontalIcon,
-  Send,
-} from '@/components/icons'
-import { CardProfilePreview, CommentInput } from '@/components/shared'
+import { CheckIcon, MoreHorizontalIcon } from '@/components/icons'
+import { CardProfilePreview } from '@/components/shared'
 import Assets from '@/constants/Assets'
 import { useInputState } from '@/hooks/shared'
-import { cn, getTimeFromNow } from '@/utils'
+import { getTimeFromNow } from '@/utils'
 
 import PostImageSlider from '../PostImageSlider'
+import PostActions from './PostActions'
+import PostComment from './PostComment'
 
-const PostComment = ({ value, onChange }) => {
-  return (
-    <div className="px-4">
-      <CommentInput value={value} onChange={onChange} className="placeholder-comment font-medium" />
-    </div>
-  )
+const PostCommentList = () => {
+  return <div>Comment</div>
 }
 
 const ProfileImage = ({ image }) => {
@@ -33,49 +24,6 @@ const ProfileImage = ({ image }) => {
       className="rounded-full border border-divide"
       alt="Profile image"
     />
-  )
-}
-
-const PostActions = () => {
-  const ActionList = [
-    {
-      key: 'like',
-      onPress: () => {},
-      icon: HeartIcon,
-    },
-    {
-      key: 'post-open',
-      onPress: () => {},
-      icon: MessageCircle,
-    },
-    {
-      key: 'message',
-      onPress: () => {},
-      icon: Send,
-    },
-    {
-      key: 'save',
-      onPress: () => {},
-      icon: BookmarkIcon,
-    },
-  ]
-  return (
-    <div className="flex gap-x-3 px-4">
-      {ActionList.map(({ key, onPress, icon }, index) => {
-        const isLast = index === ActionList.length - 1
-        return (
-          <Button
-            key={key}
-            variant="text-secondary"
-            icon={icon}
-            onClick={onPress}
-            rootClassName={cn({
-              'ml-auto': isLast,
-            })}
-          />
-        )
-      })}
-    </div>
   )
 }
 
@@ -118,24 +66,30 @@ const PostLike = ({ liked = [], createdAt }) => {
   )
 }
 
+const BlueTick = () => {
+  return (
+    <div className="inline-block ml-1 w-3 h-3 rounded-full bg-primary relative">
+      <CheckIcon
+        size={8}
+        className="text-base-reverse inline absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      />
+    </div>
+  )
+}
+
 const PostCaption = ({ owner, caption = '', createdAt }) => {
+  const postCreatedTime = <p className="text-comment text-xs">{getTimeFromNow(createdAt)}</p>
+
   return (
     <div className="space-x-4 px-4 hidden md:flex">
       <PreviewProfileHoverCard triggerContent={<ProfileImage image={owner?.image} />} />
       <div className="flex flex-col space-y-1">
-        <div className="flex">
-          <div className="text-left">
-            <PreviewProfileHoverCard triggerContent={owner?.name} />
-            <div className="inline-block ml-1 w-3 h-3 rounded-full bg-primary relative">
-              <CheckIcon
-                size={8}
-                className="text-base-reverse inline absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              />
-            </div>
-            <span className="text-sm ml-1">{caption} lorem upsim mini game</span>
-          </div>
+        <div className="text-left">
+          <PreviewProfileHoverCard triggerContent={owner?.name} />
+          <BlueTick />
+          <span className="text-sm ml-1">{caption}</span>
         </div>
-        <p className="text-comment text-xs">{getTimeFromNow(createdAt)}</p>
+        {postCreatedTime}
       </div>
     </div>
   )
@@ -150,7 +104,7 @@ const PostDialogContent = (props) => {
       <PostHeader owner={owner} />
       <PostCaption owner={owner} caption={caption} createdAt={createdAt} />
       <div className="flex-1 px-4 overflow-auto no-scrollbar relative hidden md:block">
-        Comments
+        <PostCommentList />
       </div>
       <div className="block md:hidden">
         <PostImageSlider images={images} />

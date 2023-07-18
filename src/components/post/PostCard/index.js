@@ -41,7 +41,7 @@ const PostCard = (props) => {
             <div className="h-full hidden md:block">
               <PostImageSlider images={images} />
             </div>
-            <div className="min-w-[300px] max-w-full md:max-w-[500px] md:h-full">
+            <div className="shrink-0 min-w-[300px] max-w-full md:max-w-[500px] md:h-full">
               <PostDialogContent {...props} />
             </div>
           </div>
