@@ -1,6 +1,5 @@
 import { Button } from '@/components/base'
 import { BookmarkIcon, HeartIcon, MessageCircle, Send } from '@/components/icons'
-import { cn } from '@/utils'
 
 const PostActions = () => {
   const actionList = [
@@ -27,7 +26,7 @@ const PostActions = () => {
   ]
   return (
     <div className="flex gap-x-3 px-4">
-      {actionList.map(({ key, onPress, icon }, index) => {
+      {actionList.map(({ key, onPress, icon }) => {
         return (
           <Button
             key={key}

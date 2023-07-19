@@ -58,6 +58,7 @@ const EditPostView = ({ step, setStep }) => {
       await uploadPost({ ...data, images: [response.data.url] })
       toast.success('Upload!')
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log(err)
       toast.error(err.message)
     } finally {

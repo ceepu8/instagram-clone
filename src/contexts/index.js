@@ -9,6 +9,7 @@ import { useStore } from '@/store'
 
 import ThemeProvider from './themeProvider'
 
+// eslint-disable-next-line no-unused-vars
 export function AppProviders({ children, locale, pageProps }) {
   const store = useStore(pageProps.initialReduxState)
   const persistor = persistStore(store, {}, () => persistor.persist())

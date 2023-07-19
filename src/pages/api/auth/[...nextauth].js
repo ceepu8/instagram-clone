@@ -1,6 +1,5 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
@@ -73,7 +72,7 @@ export const authOptions = {
 
       return token
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       session.user.id = token.id
       session.accessToken = token.accessToken
       return session

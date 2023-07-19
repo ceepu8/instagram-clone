@@ -19,7 +19,7 @@ export const useRegister = () => {
     axios
       .post('/api/register', data)
       .then(() => {
-        signIn('credentials', { ...data, redirect: false }).then(async ({ error, ok }) => {
+        signIn('credentials', { ...data, redirect: false }).then(async ({ error }) => {
           setLoading(false)
           if (error) {
             onError(error)
@@ -46,7 +46,7 @@ export const useLogin = () => {
   const doLogin = async (data) => {
     setLoading(true)
 
-    signIn('credentials', { ...data, redirect: false }).then(async ({ error, ok }) => {
+    signIn('credentials', { ...data, redirect: false }).then(async ({ error }) => {
       setLoading(false)
       if (error) {
         onError(error)
