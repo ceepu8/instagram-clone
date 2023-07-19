@@ -20,4 +20,4 @@ UI libraries
 - MongoDB - Prisma - NodeJS
 
 
-many thanks to tist, who helps me alot with the project!
+many thanks to tist, who helps me alot with the project❤!
