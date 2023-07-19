@@ -12,11 +12,7 @@ const DialogProvider = () => {
   if (!isMounted) {
     return null
   }
-  return (
-    <>
-      <UploadPostDialog />
-    </>
-  )
+  return <UploadPostDialog />
 }
 
 export default DialogProvider

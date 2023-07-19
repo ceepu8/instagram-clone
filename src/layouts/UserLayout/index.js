@@ -1,14 +1,11 @@
 import Head from 'next/head'
-import { useRouter } from 'next/navigation'
-
-import { useAuth } from '@/hooks/query/auth'
 
 import AppSideBar from './AppSideBar'
 
 const UserLayout = ({ children }) => {
-  const router = useRouter()
+  // const router = useRouter()
 
-  const { isAuthenticated } = useAuth()
+  // const { isAuthenticated } = useAuth()
 
   // if (!isAuthenticated) {
   //   router.push('/')

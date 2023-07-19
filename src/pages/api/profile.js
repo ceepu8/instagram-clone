@@ -32,6 +32,7 @@ async function handler(req, res) {
 
         return res.status(200).json(user)
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error, 'REGISTRATION_ERROR')
         return res.status(500).json({ message: 'Internal Error' })
       }

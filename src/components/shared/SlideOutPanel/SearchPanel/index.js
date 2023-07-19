@@ -6,11 +6,12 @@ import { useGetUserByName } from '@/api'
 import { Button, LineBreak } from '@/components/base'
 import { AnimatedBarSpinnerIcon, XIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
+import { cn } from '@/utils'
 
 import SearchInput from '../../SearchInput'
 
 const SearchItem = (props) => {
-  const { name, username, image } = props || {}
+  const { username, image } = props || {}
 
   const onClick = () => {}
 
@@ -49,20 +50,36 @@ const SearchPanelHeader = ({ onSearch, clearSearch, searchValue }) => {
   )
 }
 
-const SearchList = ({ userList, isLoading = false }) => {
+const SearchList = ({ value }) => {
   const onClear = () => {}
 
+  const { isLoading, data } = useGetUserByName({
+    username: value,
+  })
+
   return (
-    <div className="mt-4 px-2">
+    <div className="flex-1 flex flex-col mt-4 px-2">
       <div className="flex justify-between">
         <h2 className="font-bold">Recent</h2>
         <Button variant="text-primary" size="small" onClick={onClear}>
           Clear all
         </Button>
       </div>
-      <div className="flex flex-col items-center space-y-4 mt-6">
+      <div
+        className={cn(
+          'flex-1 flex flex-col items-center space-y-4 mt-6',
+          !data?.users?.length && 'justify-center'
+        )}
+      >
         {isLoading && <AnimatedBarSpinnerIcon size={20} />}
-        {!isLoading && (userList || []).map((user) => <SearchItem key={user.username} {...user} />)}
+        {!isLoading &&
+          (data?.users || []).map((user) => <SearchItem key={user.username} {...user} />)}
+        {!isLoading && !data?.users?.length && value && (
+          <p className="text-comment text-sm font-semibold">No results found</p>
+        )}
+        {!isLoading && !value && (
+          <p className="text-comment text-sm font-semibold">No recent searches</p>
+        )}
       </div>
     </div>
   )
@@ -73,11 +90,6 @@ const SearchPanel = () => {
 
   const [value] = useDebounce(searchValue, 1000)
 
-  const { isLoading, data } = useGetUserByName({
-    username: value,
-  })
-  console.log(data)
-
   const onSearch = useCallback((e) => {
     setSearchValue(e.target.value)
   }, [])
@@ -85,9 +97,9 @@ const SearchPanel = () => {
   const clearSearch = useCallback(() => setSearchValue(''), [])
 
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <SearchPanelHeader onSearch={onSearch} clearSearch={clearSearch} searchValue={searchValue} />
-      <SearchList isLoading={isLoading} userList={data?.data} />
+      <SearchList value={value} />
     </div>
   )
 }

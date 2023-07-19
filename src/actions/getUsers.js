@@ -14,7 +14,6 @@ const getUsers = async (query) => {
         image: true,
       },
     })
-    console.log(users)
 
     if (!users.length) {
       return []

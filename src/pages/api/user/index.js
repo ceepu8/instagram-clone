@@ -8,7 +8,7 @@ async function handler(req, res) {
       try {
         const { query } = req
         const users = await getUsers(query)
-        return res.status(200).json({ message: 'Success', data: users })
+        return res.status(200).json({ message: 'Success', users })
       } catch (error) {
         return res.status(500).json({ message: 'Internal Error' })
       }
