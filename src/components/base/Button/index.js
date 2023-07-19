@@ -49,7 +49,8 @@ const Button = forwardRef((props, ref) => {
     case 'text-primary':
       buttonClasses = cn(
         baseButtonClasses,
-        'text-btn-text-primary hover:text-btn-text-primary-hover font-bold'
+        'text-btn-text-primary hover:text-btn-text-primary-hover font-bold',
+        'disabled:cursor-default disabled:text-btn-text-primary-hover'
       )
       break
 

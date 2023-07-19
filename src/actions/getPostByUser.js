@@ -9,6 +9,15 @@ const getPostsByUser = async (id) => {
       where: {
         ownerId: id,
       },
+      select: {
+        createdAt: true,
+        owner: true,
+        caption: true,
+        images: true,
+        videos: true,
+        liked: true,
+        comment: true,
+      },
     })
 
     if (!posts.length) {

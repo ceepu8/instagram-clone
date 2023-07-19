@@ -91,7 +91,7 @@ model Post {
   taggedIds String[] @db.ObjectId
   tagged    User[]   @relation("PostTagged", fields: [taggedIds], references: [id])
 
-  Comment Comment[]
+  comment Comment[]
 }
 
 model Comment {

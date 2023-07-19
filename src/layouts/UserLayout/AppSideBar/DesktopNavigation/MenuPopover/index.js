@@ -33,7 +33,7 @@ const MenuPopover = ({ navSelected }) => {
       <span
         className={cn(
           'duration-[100ms] delay-[50ms] transition-all',
-          navSelected ? 'invisible opacity-0' : 'visible opacity-100'
+          navSelected ? 'invisible opacity-0' : 'invisible opacity-0 lg:visible lg:opacity-100'
         )}
       >
         More

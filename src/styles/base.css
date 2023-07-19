@@ -46,6 +46,7 @@
     --lotion: #fafafa;
     --nickel: #737373;
     --metallic-blue: #385185;
+    --dark-electric-blue: #5a6e81;
     --very-light-azure: #67b5fa;
 
     --nav-medium-width: 244px;
@@ -53,6 +54,7 @@
     --feed-width-story: 630px;
     --feed-width-post: 470px;
     --feed-sidebar-width: 319px;
+    --slide-panel-width: 397px;
   }
 
   [data-theme='dark'] {
@@ -100,6 +102,7 @@
     --lotion: #fafafa;
     --nickel: #737373;
     --metallic-blue: #385185;
+    --dark-electric-blue: #5a6e81;
     --very-light-azure: #67b5fa;
 
     --nav-medium-width: 244px;
@@ -107,6 +110,7 @@
     --feed-width-story: 630px;
     --feed-width-post: 470px;
     --feed-sidebar-width: 319px;
+    --slide-panel-width: 397px;
   }
 
   body {

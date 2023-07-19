@@ -35,9 +35,10 @@ export const DialogContent = forwardRef(({ title, description, children, classNa
   )
 })
 
-const Dialog = ({ children, isOpen, onClose, ...props }) => {
+const Dialog = ({ children, isOpen, onClose, trigger, ...props }) => {
   return (
     <DialogPrimitive.Root open={isOpen} onOpenChange={onClose} {...props}>
+      {trigger}
       <DialogPrimitive.Portal forceMount>
         <Transition.Root show={isOpen}>
           <Transition.Child
@@ -49,22 +50,10 @@ const Dialog = ({ children, isOpen, onClose, ...props }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <DialogPrimitive.Overlay
-              forceMount
-              className="fixed inset-0 z-50 bg-black opacity-60 transition"
-            />
+            <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black opacity-60 transition" />
           </Transition.Child>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
-          >
-            {children}
-          </Transition.Child>
+
+          {children}
         </Transition.Root>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>

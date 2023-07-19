@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import Image from 'next/image'
 
 import Button from '@/components/base/Button'
@@ -11,6 +10,7 @@ import {
   Send,
 } from '@/components/icons'
 import { useInputState } from '@/hooks/shared'
+import { cn } from '@/utils'
 
 import CardProfilePreview from '../CardProfilePreview'
 import CommentInput from '../CommentInput'
@@ -94,7 +94,7 @@ const PostActions = () => {
             variant="text-secondary"
             icon={icon}
             onClick={onPress}
-            rootClassName={clsx({
+            rootClassName={cn({
               'ml-auto': isLast,
             })}
           />
@@ -109,7 +109,15 @@ const PostContent = () => {
     <div className="text-left">
       <PreviewProfileHoverCard triggerContent="mirea_03" />
       <span>&nbsp;</span>
-      <span>{/* ...post content */}</span>
+      <span className="text-sm tracking-tight">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+        been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer
+        took a galley of type and scrambled it to make a type specimen book. It has survived not
+        only five centuries, but also the leap into electronic typesetting, remaining essentially
+        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+        PageMaker including versions of Lorem Ipsum.
+      </span>
 
       <Button variant="text-secondary" size="small" rootClassName="text-comment p-0 font-medium">
         more
@@ -124,7 +132,12 @@ const PostComment = ({ value, onChange }) => {
       <Button variant="text-secondary" rootClassName="text-comment text-sm h-fit p-0 font-medium">
         View all comments
       </Button>
-      <CommentInput value={value} onChange={onChange} className="placeholder-comment font-medium" />
+      <CommentInput
+        variant="secondary"
+        value={value}
+        onChange={onChange}
+        className="placeholder-comment font-medium"
+      />
     </>
   )
 }

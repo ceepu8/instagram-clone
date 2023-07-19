@@ -28,7 +28,8 @@ const Popover = ({
   const contentStyle = cn(
     'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
     'z-50 rounded-2xl p-2 shadow-55',
-    'bg-popover'
+    'bg-popover',
+    'focus-visible:outline-none'
   )
 
   return (

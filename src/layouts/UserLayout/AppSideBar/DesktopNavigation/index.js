@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import {
-  Compass,
+  CompassIcon,
   FacebookMessengerIcon,
   Film,
   Heart,
@@ -16,10 +16,10 @@ import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
-import MenuPopover from '../MenuPopover'
-import NavItem from '../NavItem'
+import MenuPopover from './MenuPopover'
+import NavItem from './NavItem'
 
-const Navigation = ({ navSelected, setNavSelected }) => {
+const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   const { user } = useAuth()
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
   const { onOpen } = useUploadPostDialog()
@@ -42,7 +42,7 @@ const Navigation = ({ navSelected, setNavSelected }) => {
     {
       key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
-      icon: Compass,
+      icon: CompassIcon,
       label: 'Explore',
     },
     {
@@ -73,7 +73,7 @@ const Navigation = ({ navSelected, setNavSelected }) => {
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: `${Routes.PROFILE}/${user?.id}?tab=posts`,
+      route: Routes.PROFILE.replace('[id]', user?.id),
       label: 'Profile',
       content: (
         <div className="shrink-0">
@@ -91,7 +91,7 @@ const Navigation = ({ navSelected, setNavSelected }) => {
 
   const renderNavItems = () => {
     return (
-      <div className="flex-1 space-y-2">
+      <div className="space-y-2">
         {NAV_ITEMS.map((item) => {
           const isNavSelected = item.key === navSelected
           return (
@@ -113,11 +113,11 @@ const Navigation = ({ navSelected, setNavSelected }) => {
     )
   }
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex justify-between flex-1 flex-col">
       {renderNavItems()}
       <MenuPopover navSelected={navSelected} />
     </div>
   )
 }
 
-export default Navigation
+export default DesktopNavigation
