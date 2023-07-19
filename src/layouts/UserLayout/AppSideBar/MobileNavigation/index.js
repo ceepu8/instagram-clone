@@ -26,10 +26,32 @@ const ProfileImage = ({ size = 24, className, active }) => {
   )
 }
 
+const NavItem = (props) => {
+  const router = useRouter()
+
+  const { icon: Icon, content: Content, route, onPress } = props || {}
+  const active = checkRouteActive(router, route)
+
+  return (
+    <Pressable onPress={() => (route ? router.push(route) : onPress?.())}>
+      <div className="flex-1 flex items-center justify-center w-[26px] h-[26px]">
+        {Icon && (
+          <Icon
+            size={active ? 26 : 24}
+            className={cn(
+              active && Icon !== FacebookMessengerIcon && 'fill-black stroke-white stroke-[1px]'
+            )}
+          />
+        )}
+        {Content && <Content active={active} />}
+      </div>
+    </Pressable>
+  )
+}
+
 const MobileNavigation = () => {
   const { user } = useAuth()
   const { onOpen } = useUploadPostDialog()
-  const router = useRouter()
 
   const NAV_ITEMS = [
     {
@@ -42,7 +64,7 @@ const MobileNavigation = () => {
       key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       onPress: () => {
-        // doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
+        // TODO: navigate to search page
       },
       icon: CompassIcon,
       label: 'Search',
@@ -67,7 +89,7 @@ const MobileNavigation = () => {
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: `${Routes.PROFILE}/${user?.id}`,
+      route: Routes.PROFILE.replace('[id]', user?.id),
       label: 'Profile',
       content: ProfileImage,
     },
@@ -84,25 +106,7 @@ const MobileNavigation = () => {
       )}
     >
       {NAV_ITEMS.map((item) => {
-        const { icon: Icon, key, content: Content, route, onPress } = item || {}
-        const active = checkRouteActive(router, route)
-        return (
-          <Pressable key={key} onPress={() => (route ? router.push(route) : onPress?.())}>
-            <div className="flex-1 flex items-center justify-center w-[26px] h-[26px]">
-              {Icon && (
-                <Icon
-                  size={active ? 26 : 24}
-                  className={cn(
-                    active &&
-                      Icon !== FacebookMessengerIcon &&
-                      'fill-black stroke-white stroke-[1px]'
-                  )}
-                />
-              )}
-              {Content && <Content active={active} />}
-            </div>
-          </Pressable>
-        )
+        return <NavItem key={item.key} {...item} />
       })}
     </div>
   )

@@ -78,7 +78,7 @@ const BlueTick = () => {
 }
 
 const PostCaption = ({ owner, caption = '', createdAt }) => {
-  const postCreatedTime = <p className="text-comment text-xs">{getTimeFromNow(createdAt)}</p>
+  const postCreatedTime = getTimeFromNow(createdAt)
 
   return (
     <div className="space-x-4 px-4 hidden md:flex">
@@ -89,7 +89,7 @@ const PostCaption = ({ owner, caption = '', createdAt }) => {
           <BlueTick />
           <span className="text-sm ml-1">{caption}</span>
         </div>
-        {postCreatedTime}
+        <p className="text-comment text-xs"> {postCreatedTime}</p>
       </div>
     </div>
   )

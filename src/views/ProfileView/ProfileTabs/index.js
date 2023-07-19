@@ -26,6 +26,18 @@ const ProfileTabs = () => {
     },
   ]
 
+  const changeTab = (tabQuery) =>
+    router.replace(
+      {
+        pathname: Routes.PROFILE.replace('[id]', user?.id),
+        query: {
+          tab: tabQuery,
+        },
+      },
+      undefined,
+      { scroll: false }
+    )
+
   return (
     <div className="relative sm:px-4 h-[41px] sm:h-[49px]">
       <LineBreak className="my-0" />
@@ -33,23 +45,11 @@ const ProfileTabs = () => {
         {tabList.map((tab) => {
           const { key, active, icon: Icon, label } = tab
 
-          const changeTab = () =>
-            router.replace(
-              {
-                pathname: Routes.PROFILE.replace('[id]', user?.id),
-                query: {
-                  tab: key,
-                },
-              },
-              undefined,
-              { scroll: false }
-            )
-
           return (
             <button
               key={key}
               type="button"
-              onClick={changeTab}
+              onClick={() => changeTab(key)}
               className={cn(
                 'flex items-center justify-center space-x-1 py-2 sm:py-6',
                 'text-xs text-comment tracking-wide font-bold',

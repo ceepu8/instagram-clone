@@ -26,6 +26,20 @@ const UploadPostDialog = () => {
 
   const dialogTitle = useMemo(() => dialogTitleByStep[step], [step])
 
+  const views = {
+    1: (
+      <UploadImageView
+        handleImageChange={(e) => {
+          handleImageChange(e)
+          setStep((prev) => prev + 1)
+        }}
+      />
+    ),
+    2: <EditPostView step={step} setStep={setStep} />,
+    3: <EditPostView step={step} setStep={setStep} />,
+    4: <LoadingView />,
+  }
+
   return (
     <Dialog
       isOpen={isOpen}
@@ -54,16 +68,7 @@ const UploadPostDialog = () => {
                 'min-w-[688px] w-[95vw] h-[40vh] md:w-[95vw] md:max-w-[1038px] md:h-[70vh]'
             )}
           >
-            {step === 1 && (
-              <UploadImageView
-                handleImageChange={(e) => {
-                  handleImageChange(e)
-                  setStep((prev) => prev + 1)
-                }}
-              />
-            )}
-            {(step === 2 || step === 3) && <EditPostView step={step} setStep={setStep} />}
-            {step === 4 && <LoadingView />}
+            {views[step]}
           </div>
         </DialogContent>
       </Transition.Child>

@@ -5,8 +5,9 @@ export const MAX_POST_CAPTION_LENGTH = 2200
 export const DATE_MINUS = 'YYYY-MM-DD'
 
 export const SCREENS = {
-  SMALL: 640,
-  MEDIUM: 768,
-  LARGE: 1160,
-  EXTRA_LARGE: 1264,
+  EXTRA_SMALL: 480, // Extra Small
+  SMALL: 768, // Small
+  MEDIUM: 992, // Medium
+  LARGE: 1200, // Large
+  EXTRA_LARGE: 1440, // Extra Large
 }

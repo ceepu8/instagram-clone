@@ -28,16 +28,13 @@ const PostActions = () => {
   return (
     <div className="flex gap-x-3 px-4">
       {actionList.map(({ key, onPress, icon }, index) => {
-        const isLast = index === actionList.length - 1
         return (
           <Button
             key={key}
             variant="text-secondary"
             icon={icon}
             onClick={onPress}
-            rootClassName={cn({
-              'ml-auto': isLast,
-            })}
+            rootClassName="last:ml-auto"
           />
         )
       })}

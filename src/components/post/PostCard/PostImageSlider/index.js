@@ -1,4 +1,3 @@
-// import Image from 'next/image'
 import NextImage from 'next/image'
 
 const PostImageSlider = ({ images = [] }) => {
