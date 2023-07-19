@@ -1,8 +1,5 @@
-import axios from 'axios'
-import { useCallback, useEffect, useState, useTransition } from 'react'
-import { useDebounce } from 'use-debounce'
+import { useCallback, useState } from 'react'
 
-import { useGetUserByName } from '@/api'
 import { Button } from '@/components/base'
 import { Input } from '@/components/form'
 import { Search, XIcon } from '@/components/icons'
@@ -20,18 +17,9 @@ const EraseInputButton = ({ onClick }) => {
   )
 }
 
-const SearchInput = () => {
-  const [searchValue, setSearchValue] = useState('')
+const SearchInput = ({ onSearch, clearSearch, searchValue }) => {
   const [isFocused, setIsFocused] = useState(false)
 
-  const [query] = useDebounce(searchValue, 1000)
-
-  const { isLoading, data } = useGetUserByName(query)
-
-  const onSearch = useCallback((e) => {
-    setSearchValue(e.target.value)
-  }, [])
-  const clearSearch = useCallback(() => setSearchValue(''), [])
   const onBlur = useCallback(() => setIsFocused(false), [])
   const onFocus = useCallback(() => setIsFocused(true), [])
 

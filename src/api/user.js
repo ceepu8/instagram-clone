@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-const useGetUserByName = (query) => {
-  return useQuery(['get-users', query], async () => {
+const useGetUserByName = (queries) => {
+  return useQuery(['get-users', queries], async () => {
     const response = await axios({
       method: 'get',
-      url: `/api/users`,
+      url: `/api/user`,
       params: {
-        query,
+        ...queries,
       },
     })
     return response.data
