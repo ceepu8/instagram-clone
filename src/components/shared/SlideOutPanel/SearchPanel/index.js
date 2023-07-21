@@ -1,10 +1,13 @@
+import { Pressable } from '@react-aria/interactions'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import { useGetUserByName } from '@/api'
 import { Button, LineBreak } from '@/components/base'
 import { AnimatedBarSpinnerIcon, XIcon } from '@/components/icons'
+import { Routes } from '@/constants'
 import Assets from '@/constants/Assets'
 import { cn } from '@/utils'
 
@@ -12,31 +15,33 @@ import SearchInput from '../../SearchInput'
 
 const SearchItem = (props) => {
   const { username, image } = props || {}
-
+  const router = useRouter()
   const onClick = () => {}
 
   return (
-    <div className="flex items-center space-x-4 w-full">
-      <Image
-        width={40}
-        height={40}
-        src={image || Assets.COMMON.PLACEHOLDER}
-        alt="search-image"
-        className="rounded-full"
-      />
-      <div className="flex-1">
-        <h1 className="text-base font-bold text-sm leading-4">{username}</h1>
-        <p className="text-note text-sm leading-4">description</p>
-      </div>
-      <div>
-        <Button
-          variant="text-secondary"
-          icon={XIcon}
-          iconClassName="w-6 h-6 stroke-3 text-note"
-          onClick={onClick}
+    <Pressable onPress={() => router.push(Routes.PROFILE.replace('[id]', username))}>
+      <div className="flex items-center space-x-4 w-full cursor-pointer">
+        <Image
+          width={40}
+          height={40}
+          src={image || Assets.COMMON.PLACEHOLDER}
+          alt="search-image"
+          className="rounded-full"
         />
+        <div className="flex-1">
+          <h1 className="text-base font-bold text-sm leading-4">{username}</h1>
+          <p className="text-note text-sm leading-4">description</p>
+        </div>
+        <div>
+          <Button
+            variant="text-secondary"
+            icon={XIcon}
+            iconClassName="w-6 h-6 stroke-3 text-note"
+            onClick={onClick}
+          />
+        </div>
       </div>
-    </div>
+    </Pressable>
   )
 }
 

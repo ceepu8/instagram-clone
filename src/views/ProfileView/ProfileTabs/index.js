@@ -29,7 +29,7 @@ const ProfileTabs = () => {
   const changeTab = (tabQuery) =>
     router.replace(
       {
-        pathname: Routes.PROFILE.replace('[id]', user?.id),
+        pathname: Routes.PROFILE.replace('[id]', user?.username),
         query: {
           tab: tabQuery,
         },

@@ -64,6 +64,14 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log(user, account, profile, email, credentials)
+      const isAllowedToSignIn = true
+      if (isAllowedToSignIn) {
+        return true
+      }
+      return false
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
@@ -73,7 +81,21 @@ export const authOptions = {
       return token
     },
     async session({ session, token }) {
-      session.user.id = token.id
+      const user = await prisma.user.findFirst({
+        where: {
+          id: token.id,
+        },
+        select: {
+          id: true,
+          name: true,
+          username: true,
+          image: true,
+          email: true,
+          phoneNumber: true,
+        },
+      })
+
+      session.user = user
       session.accessToken = token.accessToken
       return session
     },

@@ -6,8 +6,8 @@ async function handler(req, res) {
   switch (requestMethod) {
     case 'GET':
       try {
-        const { id } = req.query
-        const posts = await getPostsByUser(id)
+        const { username } = req.query
+        const posts = await getPostsByUser(username)
         return res.status(200).json(posts)
       } catch (error) {
         return res.status(500).json({ message: 'Internal Error' })

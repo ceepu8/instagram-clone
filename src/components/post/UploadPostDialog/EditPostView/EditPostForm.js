@@ -24,7 +24,7 @@ const UserInfo = () => {
         alt="Profile Image"
         className="rounded-full"
       />
-      <p className="text-sm font-semibold">{session?.data?.user?.name}</p>
+      <p className="text-sm font-semibold">{session?.data?.user?.username}</p>
     </div>
   )
 }

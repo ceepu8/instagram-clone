@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import { useGetProfile } from '@/api'
 import { Button } from '@/components/base'
@@ -62,7 +63,7 @@ const ProfileInfo = ({ user }) => {
   return (
     <div className="flex flex-col sm:flex-grow-[2]">
       <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
-        <h1 className="text-xl order-1">{user?.name}</h1>
+        <h1 className="text-xl order-1">{user?.username}</h1>
         <Button
           variant="secondary"
           size="small"
@@ -82,7 +83,8 @@ const ProfileInfo = ({ user }) => {
   )
 }
 const ProfileHeader = () => {
-  const { data: user } = useGetProfile()
+  const router = useRouter()
+  const { data: user } = useGetProfile(router.query.id)
 
   return (
     <div>
