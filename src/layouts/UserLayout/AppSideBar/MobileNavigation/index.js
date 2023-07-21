@@ -89,7 +89,7 @@ const MobileNavigation = () => {
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: Routes.PROFILE.replace('[id]', user?.id),
+      route: Routes.PROFILE.replace('[id]', user?.username),
       label: 'Profile',
       content: ProfileImage,
     },

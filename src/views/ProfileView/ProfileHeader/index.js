@@ -86,10 +86,10 @@ const UserProfileSettings = () => {
   return (
     <>
       <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
-        <Button variant="primary" size="small" rootClassName="">
+        <Button variant="primary" size="small">
           Follow
         </Button>
-        <Button variant="secondary" size="small" rootClassName="">
+        <Button variant="secondary" size="small">
           Message
         </Button>
         <Button variant="secondary" icon={UserPlusIcon} size="small" rootClassName="w-8 h-8" />
