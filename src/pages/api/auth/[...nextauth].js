@@ -83,6 +83,7 @@ export const authOptions = {
         name: user.name,
         phoneNumber: user.phoneNumber,
         image: user.image,
+        token: token.accessToken,
       }
       session.accessToken = token.accessToken
       return session
