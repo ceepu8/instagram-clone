@@ -7,6 +7,7 @@ import { Button } from '@/components/base'
 import { MoreHorizontalIcon, SettingsIcon, UserPlusIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
 import { useAuth } from '@/hooks/query/auth'
+import { cn } from '@/utils'
 
 const MobileUserActivities = (props) => {
   const { user } = props || {}
@@ -61,6 +62,47 @@ const ProfileImage = ({ image }) => {
   )
 }
 
+const MyProfileSettings = () => {
+  return (
+    <>
+      <Button
+        variant="secondary"
+        size="small"
+        rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
+      >
+        Edit profile
+      </Button>
+      <Button
+        icon={SettingsIcon}
+        variant="text-secondary"
+        size="small"
+        rootClassName="order-3 md:order-last"
+      />
+    </>
+  )
+}
+
+const UserProfileSettings = () => {
+  return (
+    <>
+      <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
+        <Button variant="primary" size="small" rootClassName="">
+          Follow
+        </Button>
+        <Button variant="secondary" size="small" rootClassName="">
+          Message
+        </Button>
+        <Button variant="secondary" icon={UserPlusIcon} size="small" rootClassName="w-8 h-8" />
+      </div>
+      <Button
+        icon={MoreHorizontalIcon}
+        variant="text-secondary"
+        rootClassName="order-1 md:order-2"
+      />
+    </>
+  )
+}
+
 const ProfileInfo = ({ user }) => {
   const router = useRouter()
 
@@ -72,53 +114,9 @@ const ProfileInfo = ({ user }) => {
   return (
     <div className="flex flex-col sm:flex-grow-[2]">
       <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
-        <h1 className="text-xl order-1">{user?.username}</h1>
-        {isMe && (
-          <>
-            <Button
-              variant="secondary"
-              size="small"
-              rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
-            >
-              Edit profile
-            </Button>
-            <Button
-              icon={SettingsIcon}
-              variant="text-secondary"
-              size="small"
-              rootClassName="order-3 md:order-last"
-            />
-          </>
-        )}
-        {!isMe && (
-          <>
-            <Button
-              variant="primary"
-              size="small"
-              rootClassName="order-last md:order-2 mt-4 md:mt-0"
-            >
-              Follow
-            </Button>
-            <Button
-              variant="secondary"
-              size="small"
-              rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
-            >
-              Message
-            </Button>
-            <Button
-              variant="secondary"
-              icon={UserPlusIcon}
-              size="small"
-              rootClassName="order-last md:order-2 w-8 h-8"
-            />
-            <Button
-              icon={MoreHorizontalIcon}
-              variant="text-secondary"
-              rootClassName="order-3 md:order-last"
-            />
-          </>
-        )}
+        <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username}</h1>
+        {isMe && <MyProfileSettings />}
+        {!isMe && <UserProfileSettings />}
       </div>
       <MobileUserActivities user={user} />
       <p className="text-sm font-semibold hidden sm:block">Description</p>
