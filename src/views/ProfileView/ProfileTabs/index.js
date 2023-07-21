@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router'
 
+import { useGetProfile } from '@/api'
 import { LineBreak } from '@/components/base'
 import { GridIcon, TagIcon } from '@/components/icons'
 import { Routes } from '@/constants'
 import { PROFILE_TAB_KEYS } from '@/constants/Keys'
-import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
 const ProfileTabs = () => {
   const router = useRouter()
-  const { user } = useAuth()
+  const { data: user } = useGetProfile(router.query.id)
 
   const tabList = [
     {
@@ -29,7 +29,7 @@ const ProfileTabs = () => {
   const changeTab = (tabQuery) =>
     router.replace(
       {
-        pathname: Routes.PROFILE.replace('[id]', user?.id),
+        pathname: Routes.PROFILE.replace('[id]', user?.username),
         query: {
           tab: tabQuery,
         },

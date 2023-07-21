@@ -1,23 +1,27 @@
 import prisma from '@/libs/prismadb'
 
-import authMiddleware from './middlewares/authMiddleware'
-
 async function handler(req, res) {
   const requestMethod = req.method
 
   switch (requestMethod) {
     case 'GET':
       try {
-        const { userId } = req.user
-        const currentUser = await prisma.user.findUnique({
+        const { username } = req.query
+
+        if (!username) {
+          return res.status(400).json({ message: 'Missing info' })
+        }
+
+        const currentUser = await prisma.user.findFirst({
           where: {
-            id: userId,
+            username,
           },
           select: {
             posts: true,
             email: true,
             phoneNumber: true,
             name: true,
+            username: true,
             image: true,
             followers: true,
             followings: true,
@@ -28,9 +32,7 @@ async function handler(req, res) {
           return res.status(401).json({ message: 'Unauthorized' })
         }
 
-        const { hashedPassword, ...user } = currentUser
-
-        return res.status(200).json(user)
+        return res.status(200).json(currentUser)
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error, 'REGISTRATION_ERROR')
@@ -42,4 +44,4 @@ async function handler(req, res) {
   }
 }
 
-export default authMiddleware(handler)
+export default handler

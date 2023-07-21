@@ -1,25 +1,21 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-import { useAuth } from '@/hooks/query/auth'
-
-export const getProfile = async (accessToken) => {
+export const getProfile = async (username) => {
   const response = await axios({
     method: 'get',
     url: '/api/profile',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
+    params: {
+      username,
     },
   })
   return response.data
 }
 
-export const useGetProfile = () => {
-  const { user, accessToken } = useAuth()
-
-  return useQuery(['get-profile', user.email], () => getProfile(accessToken), {
+export const useGetProfile = (username) => {
+  return useQuery(['get-profile', username], () => getProfile(username), {
     keepPreviousData: true,
     staleTime: Infinity,
-    enabled: !!accessToken && !!user,
+    enabled: !!username,
   })
 }

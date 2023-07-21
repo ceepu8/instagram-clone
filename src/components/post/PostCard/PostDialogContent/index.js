@@ -48,7 +48,7 @@ const PostHeader = ({ owner }) => {
       </div>
 
       <div className="flex-1">
-        <PreviewProfileHoverCard triggerContent={owner?.name} />
+        <PreviewProfileHoverCard triggerContent={owner?.username} />
       </div>
       <Button variant="text-secondary" icon={MoreHorizontalIcon} />
     </div>
@@ -85,7 +85,7 @@ const PostCaption = ({ owner, caption = '', createdAt }) => {
       <PreviewProfileHoverCard triggerContent={<ProfileImage image={owner?.image} />} />
       <div className="flex flex-col space-y-1">
         <div className="text-left">
-          <PreviewProfileHoverCard triggerContent={owner?.name} />
+          <PreviewProfileHoverCard triggerContent={owner?.username} />
           <BlueTick />
           <span className="text-sm ml-1">{caption}</span>
         </div>

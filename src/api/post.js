@@ -33,20 +33,20 @@ const useUploadPost = () => {
   return { uploadImage, uploadPost }
 }
 
-const useGetPostsByUser = (id) => {
+const useGetPostsByUser = (username) => {
   return useQuery(
-    ['get-posts', id],
+    ['get-posts', username],
     async () => {
       const response = await axios({
         method: 'get',
-        url: `/api/post/${id}`,
+        url: `/api/post/${username}`,
       })
       return response.data
     },
     {
       keepPreviousData: true,
       staleTime: Infinity,
-      enabled: !!id,
+      enabled: !!username,
     }
   )
 }

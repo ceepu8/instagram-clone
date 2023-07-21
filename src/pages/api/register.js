@@ -4,9 +4,9 @@ import prisma from '@/libs/prismadb'
 
 export default async function handler(req, res) {
   try {
-    const { email, username, password, name, phoneNumber } = req.body
+    const { username, password, name, phoneNumber } = req.body
 
-    if (!email || !username || !password || !name) {
+    if (!username || !password || !name) {
       return res.status(400).json({ message: 'Missing info' })
     }
 
@@ -14,7 +14,6 @@ export default async function handler(req, res) {
 
     const user = await prisma.user.create({
       data: {
-        email,
         username,
         name,
         phoneNumber,

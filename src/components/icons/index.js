@@ -31,6 +31,7 @@ import {
   GridIcon,
   TagIcon,
   CheckIcon,
+  UserPlusIcon,
 } from 'lucide-react'
 
 const FacebookMessengerIcon = ({ size = 24, ...props }) => {
@@ -365,6 +366,7 @@ export {
   GridIcon,
   TagIcon,
   CheckIcon,
+  UserPlusIcon,
 }
 
 export {
