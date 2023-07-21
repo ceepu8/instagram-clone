@@ -19,7 +19,10 @@ const SearchItem = (props) => {
   const onClick = () => {}
 
   return (
-    <Pressable onPress={() => router.push(Routes.PROFILE.replace('[id]', username))}>
+    <Pressable
+      onPress={() => router.push({ pathname: Routes.PROFILE, query: { id: username } })}
+      isDisabled={!username}
+    >
       <div className="flex items-center space-x-4 w-full cursor-pointer">
         <Image
           width={40}
