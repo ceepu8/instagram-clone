@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 
 import { useGetProfile } from '@/api'
 import { Button } from '@/components/base'
-import { SettingsIcon } from '@/components/icons'
+import { MoreHorizontalIcon, SettingsIcon, UserPlusIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
+import { useAuth } from '@/hooks/query/auth'
 
 const MobileUserActivities = (props) => {
   const { user } = props || {}
@@ -60,22 +62,63 @@ const ProfileImage = ({ image }) => {
 }
 
 const ProfileInfo = ({ user }) => {
+  const router = useRouter()
+
+  const { user: authUser } = useAuth()
+  const { id } = router.query
+
+  const isMe = useMemo(() => authUser?.username === id, [authUser, id])
+
   return (
     <div className="flex flex-col sm:flex-grow-[2]">
       <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
         <h1 className="text-xl order-1">{user?.username}</h1>
-        <Button
-          variant="secondary"
-          size="small"
-          rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
-        >
-          Edit profile
-        </Button>
-        <Button
-          icon={SettingsIcon}
-          variant="text-secondary"
-          rootClassName="order-3 md:order-last"
-        />
+        {isMe && (
+          <>
+            <Button
+              variant="secondary"
+              size="small"
+              rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
+            >
+              Edit profile
+            </Button>
+            <Button
+              icon={SettingsIcon}
+              variant="text-secondary"
+              size="small"
+              rootClassName="order-3 md:order-last"
+            />
+          </>
+        )}
+        {!isMe && (
+          <>
+            <Button
+              variant="primary"
+              size="small"
+              rootClassName="order-last md:order-2 mt-4 md:mt-0"
+            >
+              Follow
+            </Button>
+            <Button
+              variant="secondary"
+              size="small"
+              rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
+            >
+              Message
+            </Button>
+            <Button
+              variant="secondary"
+              icon={UserPlusIcon}
+              size="small"
+              rootClassName="order-last md:order-2 w-8 h-8"
+            />
+            <Button
+              icon={MoreHorizontalIcon}
+              variant="text-secondary"
+              rootClassName="order-3 md:order-last"
+            />
+          </>
+        )}
       </div>
       <MobileUserActivities user={user} />
       <p className="text-sm font-semibold hidden sm:block">Description</p>
