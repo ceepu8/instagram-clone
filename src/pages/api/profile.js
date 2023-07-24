@@ -18,13 +18,11 @@ async function handler(req, res) {
           },
           select: {
             posts: true,
-            email: true,
-            phoneNumber: true,
-            name: true,
             username: true,
             image: true,
             followers: true,
             followings: true,
+            id: true,
           },
         })
 

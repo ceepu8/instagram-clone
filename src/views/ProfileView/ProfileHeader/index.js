@@ -3,8 +3,14 @@ import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 import { useGetProfile } from '@/api'
+import { useFollow } from '@/api/follow'
 import { Button } from '@/components/base'
-import { MoreHorizontalIcon, SettingsIcon, UserPlusIcon } from '@/components/icons'
+import {
+  AnimatedBarSpinnerIcon,
+  MoreHorizontalIcon,
+  SettingsIcon,
+  UserPlusIcon,
+} from '@/components/icons'
 import Assets from '@/constants/Assets'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
@@ -82,12 +88,19 @@ const MyProfileSettings = () => {
   )
 }
 
-const UserProfileSettings = () => {
+const UserProfileSettings = ({ user }) => {
+  const { doFollow, isLoading } = useFollow()
+
+  const handleFollow = () => {
+    if (!user?.id) return
+    doFollow({ id: user.id })
+  }
+
   return (
     <>
       <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
-        <Button variant="primary" size="small">
-          Follow
+        <Button variant="primary" size="small" onClick={handleFollow}>
+          {isLoading ? <AnimatedBarSpinnerIcon size={20} /> : 'Follow'}
         </Button>
         <Button variant="secondary" size="small">
           Message
@@ -116,7 +129,7 @@ const ProfileInfo = ({ user }) => {
       <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
         <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username}</h1>
         {isMe && <MyProfileSettings />}
-        {!isMe && <UserProfileSettings />}
+        {!isMe && <UserProfileSettings user={user} />}
       </div>
       <MobileUserActivities user={user} />
       <p className="text-sm font-semibold hidden sm:block">Description</p>
