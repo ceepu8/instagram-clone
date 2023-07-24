@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 import { useGetProfile } from '@/api'
-import { useFollow } from '@/api/follow'
+import { useFollow, useIsFollow } from '@/api/follow'
 import { Button } from '@/components/base'
 import {
   AnimatedBarSpinnerIcon,
+  ChevronDown,
   MoreHorizontalIcon,
   SettingsIcon,
   UserPlusIcon,
@@ -74,7 +75,7 @@ const MyProfileSettings = () => {
       <Button
         variant="secondary"
         size="small"
-        rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
+        rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-auto"
       >
         Edit profile
       </Button>
@@ -89,19 +90,41 @@ const MyProfileSettings = () => {
 }
 
 const UserProfileSettings = ({ user }) => {
-  const { doFollow, isLoading } = useFollow()
+  const { doFollow, isLoading: isDoFollowLoading } = useFollow()
+  const { data, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
 
   const handleFollow = () => {
-    if (!user?.id) return
+    if (!user?.id || data?.isFollowed) return
     doFollow({ id: user.id })
   }
+
+  const followButton = useMemo(() => {
+    if (data?.isFollowed) {
+      return (
+        <Button variant="secondary" size="small" onClick={handleFollow} icon={ChevronDown}>
+          Following
+        </Button>
+      )
+    }
+    if (isDoFollowLoading) {
+      return <Button variant="primary" size="small" icon={AnimatedBarSpinnerIcon} />
+    }
+
+    if (isGetFollowLoading) {
+      return <Button variant="secondary" size="small" icon={AnimatedBarSpinnerIcon} />
+    }
+
+    return (
+      <Button variant="primary" size="small" onClick={handleFollow}>
+        Follow
+      </Button>
+    )
+  }, [data?.isFollowed, isDoFollowLoading, isGetFollowLoading])
 
   return (
     <>
       <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
-        <Button variant="primary" size="small" onClick={handleFollow}>
-          {isLoading ? <AnimatedBarSpinnerIcon size={20} /> : 'Follow'}
-        </Button>
+        {followButton}
         <Button variant="secondary" size="small">
           Message
         </Button>

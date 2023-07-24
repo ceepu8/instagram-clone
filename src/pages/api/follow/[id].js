@@ -42,6 +42,27 @@ async function handler(req, res) {
         return res.status(500).json({ message: 'Internal Error' })
       }
 
+    case 'GET':
+      try {
+        const { userId } = req.user
+        const { id } = req.query
+
+        const existedFollow = await prisma.follow.findFirst({
+          where: {
+            followedId: id,
+            followingId: userId,
+          },
+        })
+
+        if (!existedFollow) {
+          return res.status(200).json({ message: 'Not follow yet', isFollowed: false })
+        }
+
+        return res.status(200).json({ message: 'Already followed', isFollowed: true })
+      } catch (error) {
+        return res.status(500).json({ message: 'Internal Error' })
+      }
+
     default:
       return res.status(200).json({ message: 'Welcome to API Routes!' })
   }

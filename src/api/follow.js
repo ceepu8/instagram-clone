@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -30,4 +30,27 @@ export const useFollow = (onSuccess, onError) => {
   const doFollow = useDebouncedCallback((req, options) => follow(req, options), 250)
 
   return { doFollow, isLoading, isSuccess }
+}
+
+export const useIsFollow = (id) => {
+  const { user } = useAuth()
+
+  return useQuery(
+    ['is-follow', id],
+    async () => {
+      const response = await axios({
+        method: 'GET',
+        url: `/api/follow/${id}`,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      return response.data
+    },
+    {
+      keepPreviousData: true,
+      staleTime: Infinity,
+      enabled: !!id,
+    }
+  )
 }
