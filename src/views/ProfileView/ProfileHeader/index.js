@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { useGetProfile } from '@/api'
 import { useFollow, useIsFollow } from '@/api/follow'
@@ -56,7 +56,7 @@ const DesktopUserActivities = (props) => {
 
 const ProfileImage = ({ image }) => {
   return (
-    <div className="sm:flex-grow-[1] mr-8 sm:mr-0">
+    <div className="sm:flex-grow-[1] sm:basis-0 shrink-0 mr-8 sm:mr-0">
       <div className="w-[70px] h-[70px] sm:w-[150px] sm:h-[150px] relative mx-auto">
         <Image
           className="rounded-full border border-chinese-silver"
@@ -90,34 +90,48 @@ const MyProfileSettings = () => {
 }
 
 const UserProfileSettings = ({ user }) => {
-  const { doFollow, isLoading: isDoFollowLoading } = useFollow()
-  const { data, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
+  const { doFollow, isSuccess, isLoading: isDoFollowLoading } = useFollow()
+  const { data, refetch: refetchIsFollow, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
 
   const handleFollow = () => {
     if (!user?.id || data?.isFollowed) return
     doFollow({ id: user.id })
   }
 
+  useEffect(() => {
+    if (isSuccess) {
+      refetchIsFollow()
+    }
+  }, [isSuccess])
+
   const followButton = useMemo(() => {
     if (data?.isFollowed) {
       return (
-        <Button variant="secondary" size="small" onClick={handleFollow} icon={ChevronDown}>
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={handleFollow}
+          icon={ChevronDown}
+          loading={isDoFollowLoading || isGetFollowLoading}
+        >
           Following
         </Button>
       )
     }
-    if (isDoFollowLoading) {
-      return <Button variant="primary" size="small" icon={AnimatedBarSpinnerIcon} />
-    }
-
-    if (isGetFollowLoading) {
-      return <Button variant="secondary" size="small" icon={AnimatedBarSpinnerIcon} />
-    }
 
     return (
-      <Button variant="primary" size="small" onClick={handleFollow}>
-        Follow
-      </Button>
+      <div className="w-[77px] h-[32px]">
+        <Button
+          variant="primary"
+          size="small"
+          onClick={handleFollow}
+          fullWidth
+          loading={isDoFollowLoading || isGetFollowLoading}
+          rootClassName="h-full"
+        >
+          Follow
+        </Button>
+      </div>
     )
   }, [data?.isFollowed, isDoFollowLoading, isGetFollowLoading])
 
@@ -148,7 +162,7 @@ const ProfileInfo = ({ user }) => {
   const isMe = useMemo(() => authUser?.username === id, [authUser, id])
 
   return (
-    <div className="flex flex-col sm:flex-grow-[2]">
+    <div className="flex flex-col sm:flex-grow-[2] sm:basis-[30px]">
       <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
         <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username}</h1>
         {isMe && <MyProfileSettings />}
@@ -166,7 +180,7 @@ const ProfileHeader = () => {
   return (
     <div>
       <div className="px-5 py-8">
-        <div className="flex sm:justify-center sm:mx-8">
+        <div className="flex">
           <ProfileImage image={user?.image} />
           <ProfileInfo user={user} />
         </div>

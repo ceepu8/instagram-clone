@@ -70,9 +70,9 @@ const Button = forwardRef((props, ref) => {
     variant !== 'text-secondary' &&
     variant !== 'text-primary' &&
     cn({
-      'w-[100px] h-[32px]': size === 'small',
-      'w-[150px] h-[40px]': size === 'medium',
-      'w-[200px] h-[52px]': size === 'large',
+      'px-4 py-1.5': size === 'small',
+      'px-6 py-2': size === 'medium',
+      'px-8 py-3': size === 'large',
     })
 
   const btnTextSizeClasses = cn({
@@ -97,9 +97,9 @@ const Button = forwardRef((props, ref) => {
       disabled={disabled || loading}
       {...rest}
     >
-      {!loading && Icon && <Icon className={cn(iconSize, iconClassName)} />}
       {loading && <AnimatedSpinnerIcon className={cn(iconSize, iconClassName)} />}
       {!loading && children}
+      {!loading && Icon && <Icon className={cn(iconSize, iconClassName)} />}
     </button>
   )
 })
