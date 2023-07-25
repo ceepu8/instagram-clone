@@ -1,16 +1,18 @@
+import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 
 import { useGetProfile } from '@/api'
 import { useFollow, useIsFollow } from '@/api/follow'
-import { Button } from '@/components/base'
+import { Button, LineBreak } from '@/components/base'
+import Dialog, { DialogTrigger, DialogContent, DialogClose } from '@/components/base/Dialog'
 import {
-  AnimatedBarSpinnerIcon,
   ChevronDown,
   MoreHorizontalIcon,
   SettingsIcon,
   UserPlusIcon,
+  XIcon,
 } from '@/components/icons'
 import Assets from '@/constants/Assets'
 import { useAuth } from '@/hooks/query/auth'
@@ -21,13 +23,13 @@ const MobileUserActivities = (props) => {
   return (
     <ul className="items-center space-x-10 mb-4 hidden sm:flex">
       <li>
-        <b>{user?.posts?.length}</b> posts
+        <b>{user?.posts?.length || 0}</b> posts
       </li>
       <li>
-        <b>{user?.followers?.length}</b> followers
+        <b>{user?.followers?.length || 0}</b> followers
       </li>
       <li>
-        <b>{user?.followings?.length}</b> followings
+        <b>{user?.followings?.length || 0}</b> followings
       </li>
     </ul>
   )
@@ -39,15 +41,15 @@ const DesktopUserActivities = (props) => {
   return (
     <ul className="flex items-center text-center border-t border-b border-divide py-2 sm:hidden">
       <li className="flex-1">
-        <b>{user?.posts?.length}</b>
+        <b>{user?.posts?.length || 0}</b>
         <p className="text-comment">posts</p>
       </li>
       <li className="flex-1">
-        <b>{user?.followers?.length}</b>
+        <b>{user?.followers?.length || 0}</b>
         <p className="text-comment">followers</p>
       </li>
       <li className="flex-1">
-        <b>{user?.followings?.length}</b>
+        <b>{user?.followings?.length || 0}</b>
         <p className="text-comment">followings</p>
       </li>
     </ul>
@@ -89,6 +91,66 @@ const MyProfileSettings = () => {
   )
 }
 
+const FollowingButton = ({ loading = false }) => {
+  return (
+    <DialogTrigger>
+      <div className="w-[122px] h-[32px]">
+        <Button variant="secondary" size="small" icon={ChevronDown} loading={loading}>
+          Following
+        </Button>
+      </div>
+    </DialogTrigger>
+  )
+}
+
+const FollowingDialog = ({ user, loading }) => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Dialog isOpen={open} onClose={setOpen} trigger={<FollowingButton loading={loading} />}>
+      <Transition.Child
+        as={Fragment}
+        enter="ease-out duration-100"
+        enterFrom="opacity-0 scale-110"
+        enterTo="opacity-100 scale-100"
+        leave="ease-in duration-100"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-110"
+      >
+        <DialogContent className="min-w-[420px]">
+          <DialogClose className="absolute right-2 top-2">
+            <Button variant="text-secondary" icon={XIcon} />
+          </DialogClose>
+          <div className="py-4">
+            <div className="text-center">
+              <Image
+                className="rounded-full border border-chinese-silver mx-auto"
+                width={60}
+                height={60}
+                src={user?.image || Assets.COMMON.PLACEHOLDER}
+                alt="Profile Image"
+              />
+              <p className="text-sm font-bold">{user?.username || 'username'}</p>
+            </div>
+            <LineBreak />
+
+            <div>
+              <Button
+                variant="text-secondary"
+                fullWidth
+                size="small"
+                rootClassName="justify-start font-medium px-4 py-3"
+              >
+                Unfollow
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Transition.Child>
+    </Dialog>
+  )
+}
+
 const UserProfileSettings = ({ user }) => {
   const { doFollow, isSuccess, isLoading: isDoFollowLoading } = useFollow()
   const { data, refetch: refetchIsFollow, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
@@ -106,17 +168,7 @@ const UserProfileSettings = ({ user }) => {
 
   const followButton = useMemo(() => {
     if (data?.isFollowed) {
-      return (
-        <Button
-          variant="secondary"
-          size="small"
-          onClick={handleFollow}
-          icon={ChevronDown}
-          loading={isDoFollowLoading || isGetFollowLoading}
-        >
-          Following
-        </Button>
-      )
+      return <FollowingDialog user={user} loading={isDoFollowLoading || isGetFollowLoading} />
     }
 
     return (
@@ -164,7 +216,7 @@ const ProfileInfo = ({ user }) => {
   return (
     <div className="flex flex-col sm:flex-grow-[2] sm:basis-[30px]">
       <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
-        <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username}</h1>
+        <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username || 'username'}</h1>
         {isMe && <MyProfileSettings />}
         {!isMe && <UserProfileSettings user={user} />}
       </div>
