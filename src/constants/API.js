@@ -24,6 +24,7 @@ export const API = {
     UPLOAD_CLOUDINARY: '/image/upload',
   },
   FOLLOW: {
-    DO_FOLLOW: '/api/follow/:id',
+    CREATE: '/api/follow/create/:id',
+    DESTROY: '/api/follow/destroy/:id',
   },
 }

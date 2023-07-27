@@ -21,8 +21,8 @@ const Button = forwardRef((props, ref) => {
     ...rest
   } = props || {}
   const baseButtonClasses = cn(
-    'focus:outline-none flex items-center justify-center gap-x-2',
-    fullWidth ? 'w-full' : ''
+    'focus:outline-none flex items-center justify-center gap-x-2 font-bold',
+    fullWidth && 'w-full'
   )
 
   let buttonClasses = ''
@@ -32,7 +32,7 @@ const Button = forwardRef((props, ref) => {
     case 'primary':
       buttonClasses = cn(
         baseButtonClasses,
-        'rounded-lg text-white font-bold',
+        'rounded-lg text-white',
         'bg-btn-primary hover:bg-btn-primary-hover',
         'disabled:cursor-default disabled:bg-very-light-azure'
       )
@@ -41,7 +41,7 @@ const Button = forwardRef((props, ref) => {
     case 'secondary':
       buttonClasses = cn(
         baseButtonClasses,
-        'rounded-lg text-black font-bold',
+        'rounded-lg text-black',
         'bg-btn-secondary hover:bg-btn-secondary-hover'
       )
       break
@@ -49,7 +49,7 @@ const Button = forwardRef((props, ref) => {
     case 'text-primary':
       buttonClasses = cn(
         baseButtonClasses,
-        'text-btn-text-primary hover:text-btn-text-primary-hover font-bold',
+        'text-btn-text-primary hover:text-btn-text-primary-hover',
         'disabled:cursor-default disabled:text-btn-text-primary-hover'
       )
       break
@@ -57,7 +57,7 @@ const Button = forwardRef((props, ref) => {
     case 'text-secondary':
       buttonClasses = cn(
         baseButtonClasses,
-        'text-btn-text-secondary hover:text-btn-text-secondary-hover font-bold'
+        'text-btn-text-secondary hover:text-btn-text-secondary-hover'
       )
       break
 
@@ -70,9 +70,9 @@ const Button = forwardRef((props, ref) => {
     variant !== 'text-secondary' &&
     variant !== 'text-primary' &&
     cn({
-      'px-4 py-1.5': size === 'small',
-      'px-6 py-2': size === 'medium',
-      'px-8 py-3': size === 'large',
+      'px-4 h-8': size === 'small',
+      'px-6 h-9': size === 'medium',
+      'px-8 h-10': size === 'large',
     })
 
   const btnTextSizeClasses = cn({

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Fragment, useEffect, useMemo, useState } from 'react'
 
 import { useGetProfile } from '@/api'
-import { useFollow, useIsFollow } from '@/api/follow'
+import { useFollow, useIsFollow, useUnfollow } from '@/api/follow'
 import { Button, LineBreak } from '@/components/base'
 import Dialog, { DialogTrigger, DialogContent, DialogClose } from '@/components/base/Dialog'
 import {
@@ -105,6 +105,12 @@ const FollowingButton = ({ loading = false }) => {
 
 const FollowingDialog = ({ user, loading }) => {
   const [open, setOpen] = useState(false)
+  const { doUnfollow, isSuccess, isLoading: isDoFollowLoading } = useUnfollow()
+
+  const handleUnfollow = () => {
+    if (!user?.id) return
+    doUnfollow({ id: user.id })
+  }
 
   return (
     <Dialog isOpen={open} onClose={setOpen} trigger={<FollowingButton loading={loading} />}>
@@ -140,6 +146,7 @@ const FollowingDialog = ({ user, loading }) => {
                 fullWidth
                 size="small"
                 rootClassName="justify-start font-medium px-4 py-3"
+                onClick={handleUnfollow}
               >
                 Unfollow
               </Button>
@@ -153,21 +160,15 @@ const FollowingDialog = ({ user, loading }) => {
 
 const UserProfileSettings = ({ user }) => {
   const { doFollow, isSuccess, isLoading: isDoFollowLoading } = useFollow()
-  const { data, refetch: refetchIsFollow, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
+  const { data, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
 
   const handleFollow = () => {
-    if (!user?.id || data?.isFollowed) return
+    if (!user?.id || data?.is_following) return
     doFollow({ id: user.id })
   }
 
-  useEffect(() => {
-    if (isSuccess) {
-      refetchIsFollow()
-    }
-  }, [isSuccess])
-
   const followButton = useMemo(() => {
-    if (data?.isFollowed) {
+    if (data?.is_following) {
       return <FollowingDialog user={user} loading={isDoFollowLoading || isGetFollowLoading} />
     }
 
@@ -185,7 +186,7 @@ const UserProfileSettings = ({ user }) => {
         </Button>
       </div>
     )
-  }, [data?.isFollowed, isDoFollowLoading, isGetFollowLoading])
+  }, [data?.is_following, isDoFollowLoading, isGetFollowLoading])
 
   return (
     <>

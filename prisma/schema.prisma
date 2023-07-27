@@ -61,14 +61,16 @@ model Account {
 }
 
 model Follow {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  followDate DateTime @default(now())
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  follow_date DateTime @default(now())
 
-  followingId String @db.ObjectId
-  following   User   @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+  is_following Boolean @default(true)
 
-  followedId String @db.ObjectId
-  followed   User   @relation("Follower", fields: [followedId], references: [id])
+  following_id String @db.ObjectId
+  following    User   @relation("Following", fields: [following_id], references: [id], onDelete: Cascade)
+
+  followed_id String @db.ObjectId
+  followed    User   @relation("Follower", fields: [followed_id], references: [id])
 }
 
 model Post {
