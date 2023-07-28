@@ -95,7 +95,7 @@ const FollowingButton = ({ loading = false }) => {
   return (
     <DialogTrigger>
       <div className="w-[122px] h-[32px]">
-        <Button variant="secondary" size="small" icon={ChevronDown} loading={loading}>
+        <Button variant="secondary" size="small" fullWidth icon={ChevronDown} loading={loading}>
           Following
         </Button>
       </div>
@@ -103,12 +103,12 @@ const FollowingButton = ({ loading = false }) => {
   )
 }
 
-const FollowingDialog = ({ user, loading }) => {
+const FollowingDialog = ({ user, loading, doUnfollow }) => {
   const [open, setOpen] = useState(false)
-  const { doUnfollow, isSuccess, isLoading: isDoFollowLoading } = useUnfollow()
 
   const handleUnfollow = () => {
     if (!user?.id) return
+    setOpen(false)
     doUnfollow({ id: user.id })
   }
 
@@ -159,8 +159,9 @@ const FollowingDialog = ({ user, loading }) => {
 }
 
 const UserProfileSettings = ({ user }) => {
-  const { doFollow, isSuccess, isLoading: isDoFollowLoading } = useFollow()
-  const { data, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
+  const { doFollow, isSuccess: isFollowSuccess, isLoading: isDoFollowLoading } = useFollow()
+  const { doUnfollow, isSuccess: isUnfollowSuccess, isLoading: isUnfollowLoading } = useUnfollow()
+  const { data, refetch, isLoading: isGetFollowLoading } = useIsFollow(user?.id)
 
   const handleFollow = () => {
     if (!user?.id || data?.is_following) return
@@ -168,25 +169,29 @@ const UserProfileSettings = ({ user }) => {
   }
 
   const followButton = useMemo(() => {
-    if (data?.is_following) {
-      return <FollowingDialog user={user} loading={isDoFollowLoading || isGetFollowLoading} />
+    if (!data?.is_following || isDoFollowLoading) {
+      return (
+        <div className="w-[77px] h-[32px]">
+          <Button
+            variant="primary"
+            size="small"
+            onClick={handleFollow}
+            fullWidth
+            loading={isDoFollowLoading}
+            rootClassName="h-full"
+          >
+            Follow
+          </Button>
+        </div>
+      )
     }
 
-    return (
-      <div className="w-[77px] h-[32px]">
-        <Button
-          variant="primary"
-          size="small"
-          onClick={handleFollow}
-          fullWidth
-          loading={isDoFollowLoading || isGetFollowLoading}
-          rootClassName="h-full"
-        >
-          Follow
-        </Button>
-      </div>
-    )
-  }, [data?.is_following, isDoFollowLoading, isGetFollowLoading])
+    return <FollowingDialog user={user} loading={isUnfollowLoading} doUnfollow={doUnfollow} />
+  }, [data?.is_following, isDoFollowLoading, isUnfollowLoading])
+
+  useEffect(() => {
+    refetch()
+  }, [isFollowSuccess, isUnfollowSuccess])
 
   return (
     <>

@@ -22,6 +22,19 @@ async function handler(req, res) {
           return res.status(400).json({ message: 'Already followed' })
         }
 
+        if (!existedFollow?.is_following) {
+          const follow = await prisma.follow.updateMany({
+            where: {
+              followed_id: id,
+              following_id: userId,
+            },
+            data: {
+              is_following: true,
+            },
+          })
+          return res.status(200).json(follow)
+        }
+
         const follow = await prisma.follow.create({
           data: {
             following: {
