@@ -1,58 +1,64 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { API } from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
 
-export const useFollow = (onSuccess, onError) => {
-  const { user } = useAuth()
+export const useFollow = (user) => {
+  const { user: authUser } = useAuth()
+  const queryClient = useQueryClient()
   const {
     mutate: follow,
     isLoading,
     isSuccess,
-  } = useMutation(
-    async (params) => {
-      const URL = API.FOLLOW.CREATE.replace(':id', params.id)
+  } = useMutation({
+    mutationFn: async () => {
+      const URL = API.FOLLOW.CREATE.replace(':id', user.id)
       const response = await axios({
         method: 'POST',
         url: URL,
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${authUser.token}`,
         },
       })
       return response.data
     },
-    onSuccess,
-    onError
-  )
+    onSuccess: () => {
+      queryClient.invalidateQueries(['get-profile', user.username])
+    },
+    onError: () => {},
+  })
 
   const doFollow = useDebouncedCallback((req, options) => follow(req, options), 250)
 
   return { doFollow, isLoading, isSuccess }
 }
 
-export const useUnfollow = (onSuccess, onError) => {
-  const { user } = useAuth()
+export const useUnfollow = (user) => {
+  const queryClient = useQueryClient()
+  const { user: authUser } = useAuth()
   const {
     mutate: unfollow,
     isLoading,
     isSuccess,
-  } = useMutation(
-    async (params) => {
-      const URL = API.FOLLOW.DESTROY.replace(':id', params.id)
+  } = useMutation({
+    mutationFn: async () => {
+      const URL = API.FOLLOW.DESTROY.replace(':id', user.id)
       const response = await axios({
         method: 'POST',
         url: URL,
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${authUser.token}`,
         },
       })
       return response.data
     },
-    onSuccess,
-    onError
-  )
+    onSuccess: () => {
+      queryClient.invalidateQueries(['get-profile', user.username])
+    },
+    onError: () => {},
+  })
 
   const doUnfollow = useDebouncedCallback((req, options) => unfollow(req, options), 250)
 

@@ -20,7 +20,11 @@ async function handler(req, res) {
             posts: true,
             username: true,
             image: true,
-            followers: true,
+            followers: {
+              where: {
+                is_following: true,
+              },
+            },
             followings: true,
             id: true,
           },
