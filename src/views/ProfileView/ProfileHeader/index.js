@@ -9,7 +9,7 @@ import Assets from '@/constants/Assets'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
-import UserProfileSettings from './components/UserProfileSettings'
+import UserProfileSettings from './UserProfileSettings'
 
 const MobileUserActivities = (props) => {
   const { user } = props || {}
@@ -28,9 +28,7 @@ const MobileUserActivities = (props) => {
   )
 }
 
-const DesktopUserActivities = (props) => {
-  const { user } = props || {}
-
+const DesktopUserActivities = ({ user }) => {
   return (
     <ul className="flex items-center text-center border-t border-b border-divide py-2 sm:hidden">
       <li className="flex-1">

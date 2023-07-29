@@ -20,6 +20,23 @@ const FollowingButton = ({ loading = false }) => {
   )
 }
 
+const FollowButton = ({ loading, onClick }) => {
+  return (
+    <div className="w-[77px] h-[32px]">
+      <Button
+        variant="primary"
+        size="small"
+        onClick={onClick}
+        fullWidth
+        loading={loading}
+        rootClassName="h-full"
+      >
+        Follow
+      </Button>
+    </div>
+  )
+}
+
 const FollowingDialog = ({ user, loading, doUnfollow }) => {
   const [open, setOpen] = useState(false)
 
@@ -56,18 +73,15 @@ const FollowingDialog = ({ user, loading, doUnfollow }) => {
               <p className="text-sm font-bold">{user?.username || 'username'}</p>
             </div>
             <LineBreak />
-
-            <div>
-              <Button
-                variant="text-secondary"
-                fullWidth
-                size="small"
-                rootClassName="justify-start font-medium px-4 py-3"
-                onClick={handleUnfollow}
-              >
-                Unfollow
-              </Button>
-            </div>
+            <Button
+              variant="text-secondary"
+              fullWidth
+              size="small"
+              rootClassName="justify-start font-medium px-4 py-3"
+              onClick={handleUnfollow}
+            >
+              Unfollow
+            </Button>
           </div>
         </DialogContent>
       </Transition.Child>
@@ -93,20 +107,7 @@ const UserProfileSettings = ({ user }) => {
 
   const followButton = useMemo(() => {
     if (!data?.is_following) {
-      return (
-        <div className="w-[77px] h-[32px]">
-          <Button
-            variant="primary"
-            size="small"
-            onClick={handleFollow}
-            fullWidth
-            loading={isDoFollowLoading}
-            rootClassName="h-full"
-          >
-            Follow
-          </Button>
-        </div>
-      )
+      return <FollowButton loading={isDoFollowLoading} onClick={handleFollow} />
     }
 
     return <FollowingDialog user={user} loading={isUnfollowLoading} doUnfollow={doUnfollow} />

@@ -19,7 +19,7 @@ async function handler(req, res) {
         })
 
         if (!follow) {
-          return res.status(200).json({ message: 'Not follow yet', is_followed: false })
+          return res.status(200).json({ message: 'Not follow yet', is_following: false })
         }
 
         return res.status(200).json(follow)
