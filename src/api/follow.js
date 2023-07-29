@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { API } from '@/constants'
+import { API, IS_FOLLOW_KEY, PROFILE_DETAIL_KEY } from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
 
 export const useFollow = (user) => {
@@ -25,7 +25,7 @@ export const useFollow = (user) => {
       return response.data
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['get-profile', user.username])
+      queryClient.invalidateQueries([PROFILE_DETAIL_KEY, user.username])
     },
     onError: () => {},
   })
@@ -55,7 +55,7 @@ export const useUnfollow = (user) => {
       return response.data
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['get-profile', user.username])
+      queryClient.invalidateQueries([PROFILE_DETAIL_KEY, user.username])
     },
     onError: () => {},
   })
@@ -69,7 +69,7 @@ export const useIsFollow = (id) => {
   const { user } = useAuth()
 
   return useQuery(
-    ['is-follow', id],
+    [IS_FOLLOW_KEY, id],
     async () => {
       const response = await axios({
         method: 'GET',

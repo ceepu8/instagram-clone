@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
+import { PROFILE_DETAIL_KEY } from '@/constants'
+
 export const getProfile = async (username) => {
   const response = await axios({
     method: 'get',
@@ -13,7 +15,7 @@ export const getProfile = async (username) => {
 }
 
 export const useGetProfile = (username) => {
-  return useQuery(['get-profile', username], () => getProfile(username), {
+  return useQuery([PROFILE_DETAIL_KEY, username], () => getProfile(username), {
     keepPreviousData: true,
     staleTime: Infinity,
     enabled: !!username,

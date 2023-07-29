@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 
-import { API, CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET } from '@/constants'
+import { API, CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, USER_POST_LIST_KEY } from '@/constants'
 
 const useUploadPost = () => {
   const session = useSession()
@@ -35,7 +35,7 @@ const useUploadPost = () => {
 
 const useGetPostsByUser = (username) => {
   return useQuery(
-    ['get-posts', username],
+    [USER_POST_LIST_KEY, username],
     async () => {
       const response = await axios({
         method: 'get',
