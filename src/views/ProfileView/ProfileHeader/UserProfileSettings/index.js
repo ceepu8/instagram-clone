@@ -2,7 +2,7 @@ import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
 
-import { useFollow, useIsFollow, useUnfollow } from '@/api/follow'
+import { useFollow, useUnfollow } from '@/api/follow'
 import { Button, LineBreak } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { ChevronDown, MoreHorizontalIcon, UserPlusIcon, XIcon } from '@/components/icons'
