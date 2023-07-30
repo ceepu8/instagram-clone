@@ -13,23 +13,23 @@ async function handler(req, res) {
 
         const existedFollow = await prisma.follow.findFirst({
           where: {
-            followed_id: id,
-            following_id: userId,
+            followedId: id,
+            followingId: userId,
           },
         })
 
-        if (existedFollow?.is_following) {
+        if (existedFollow?.isFollowing) {
           return res.status(400).json({ message: 'Already followed' })
         }
 
-        if (existedFollow && !existedFollow?.is_following) {
+        if (existedFollow && !existedFollow?.isFollowing) {
           const follow = await prisma.follow.updateMany({
             where: {
-              followed_id: id,
-              following_id: userId,
+              followedId: id,
+              followingId: userId,
             },
             data: {
-              is_following: true,
+              isFollowing: true,
             },
           })
           return res.status(200).json(follow)

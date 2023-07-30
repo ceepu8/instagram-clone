@@ -1,24 +1,12 @@
 import { Transition } from '@headlessui/react'
 import Image from 'next/image'
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useState } from 'react'
 
 import { useFollow, useIsFollow, useUnfollow } from '@/api/follow'
 import { Button, LineBreak } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { ChevronDown, MoreHorizontalIcon, UserPlusIcon, XIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
-
-const FollowingButton = ({ loading = false }) => {
-  return (
-    <DialogTrigger>
-      <div className="w-[122px] h-[32px]">
-        <Button variant="secondary" size="small" fullWidth loading={loading}>
-          Following <ChevronDown className="w-4 h-4 shrink-0" />
-        </Button>
-      </div>
-    </DialogTrigger>
-  )
-}
 
 const FollowButton = ({ loading, onClick }) => {
   return (
@@ -37,7 +25,7 @@ const FollowButton = ({ loading, onClick }) => {
   )
 }
 
-const FollowingDialog = ({ user, loading, doUnfollow }) => {
+const FollowingButton = ({ user, loading, doUnfollow }) => {
   const [open, setOpen] = useState(false)
 
   const handleUnfollow = () => {
@@ -46,8 +34,18 @@ const FollowingDialog = ({ user, loading, doUnfollow }) => {
     doUnfollow({ id: user.id })
   }
 
+  const trigger = (
+    <DialogTrigger>
+      <div className="w-[122px] h-[32px]">
+        <Button variant="secondary" size="small" fullWidth loading={loading}>
+          Following <ChevronDown className="w-4 h-4 shrink-0" />
+        </Button>
+      </div>
+    </DialogTrigger>
+  )
+
   return (
-    <Dialog isOpen={open} onClose={setOpen} trigger={<FollowingButton loading={loading} />}>
+    <Dialog isOpen={open} onClose={setOpen} trigger={trigger}>
       <Transition.Child
         as={Fragment}
         enter="ease-out duration-100"
@@ -89,38 +87,41 @@ const FollowingDialog = ({ user, loading, doUnfollow }) => {
   )
 }
 
-const UserProfileSettings = ({ user }) => {
-  const { doFollow, isSuccess: isFollowSuccess, isLoading: isDoFollowLoading } = useFollow(user)
-
-  const {
-    doUnfollow,
-    isSuccess: isUnfollowSuccess,
-    isLoading: isUnfollowLoading,
-  } = useUnfollow(user)
-
-  const { data, refetch } = useIsFollow(user?.id)
-
-  const handleFollow = () => {
-    if (!user?.id || data?.isFollowing) return
-    doFollow()
+const ToggleFollow = ({
+  user,
+  isUnfollowLoading,
+  doUnfollow,
+  isFollowing,
+  isDoFollowLoading,
+  handleFollow,
+}) => {
+  if (!isFollowing) {
+    return <FollowButton loading={isDoFollowLoading} onClick={handleFollow} />
   }
 
-  const followButton = useMemo(() => {
-    if (!data?.isFollowing) {
-      return <FollowButton loading={isDoFollowLoading} onClick={handleFollow} />
-    }
+  return <FollowingButton user={user} loading={isUnfollowLoading} doUnfollow={doUnfollow} />
+}
 
-    return <FollowingDialog user={user} loading={isUnfollowLoading} doUnfollow={doUnfollow} />
-  }, [data?.isFollowing, isDoFollowLoading, isUnfollowLoading])
+const UserProfileSettings = ({ user }) => {
+  const { doFollow, isLoading: isDoFollowLoading } = useFollow(user)
+  const { doUnfollow, isLoading: isUnfollowLoading } = useUnfollow(user)
 
-  useEffect(() => {
-    refetch()
-  }, [isFollowSuccess, isUnfollowSuccess])
+  const handleFollow = () => {
+    if (!user?.id || user?.follow_by_viewer) return
+    doFollow()
+  }
 
   return (
     <>
       <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
-        {followButton}
+        <ToggleFollow
+          user={user}
+          isFollowing={user?.follow_by_viewer}
+          doUnfollow={doUnfollow}
+          isUnfollowLoading={isUnfollowLoading}
+          handleFollow={handleFollow}
+          isDoFollowLoading={isDoFollowLoading}
+        />
         <Button variant="secondary" size="small">
           Message
         </Button>

@@ -13,13 +13,13 @@ async function handler(req, res) {
 
         const follow = await prisma.follow.findFirst({
           where: {
-            followed_id: id,
-            following_id: userId,
+            followedId: id,
+            followingId: userId,
           },
         })
 
         if (!follow) {
-          return res.status(200).json({ message: 'Not follow yet', is_following: false })
+          return res.status(200).json({ message: 'Not follow yet', isFollowing: false })
         }
 
         return res.status(200).json(follow)

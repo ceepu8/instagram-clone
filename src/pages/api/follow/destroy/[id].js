@@ -13,8 +13,8 @@ async function handler(req, res) {
 
         const existedFollow = await prisma.follow.findFirst({
           where: {
-            followed_id: id,
-            following_id: userId,
+            followedId: id,
+            followingId: userId,
           },
         })
 
@@ -24,11 +24,11 @@ async function handler(req, res) {
 
         const follow = await prisma.follow.updateMany({
           where: {
-            followed_id: id,
-            following_id: userId,
+            followedId: id,
+            followingId: userId,
           },
           data: {
-            is_following: false,
+            isFollowing: false,
           },
         })
 
