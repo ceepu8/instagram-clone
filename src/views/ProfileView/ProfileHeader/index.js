@@ -11,38 +11,31 @@ import { cn } from '@/utils'
 
 import UserProfileSettings from './UserProfileSettings'
 
-const MobileUserActivities = (props) => {
-  const { user } = props || {}
+const MobileUserActivities = ({ user }) => {
+  const activityItems = ['posts', 'followers', 'followings']
+
   return (
     <ul className="items-center space-x-10 mb-4 hidden sm:flex">
-      <li>
-        <b>{user?.posts?.length || 0}</b> posts
-      </li>
-      <li>
-        <b>{user?.followers?.length || 0}</b> followers
-      </li>
-      <li>
-        <b>{user?.followings?.length || 0}</b> followings
-      </li>
+      {activityItems.map((item) => (
+        <li key={item}>
+          <b>{user?.[item]?.length || 0}</b> {item}
+        </li>
+      ))}
     </ul>
   )
 }
 
 const DesktopUserActivities = ({ user }) => {
+  const activityItems = ['posts', 'followers', 'followings']
+
   return (
     <ul className="flex items-center text-center border-t border-b border-divide py-2 sm:hidden">
-      <li className="flex-1">
-        <b>{user?.posts?.length || 0}</b>
-        <p className="text-comment">posts</p>
-      </li>
-      <li className="flex-1">
-        <b>{user?.followers?.length || 0}</b>
-        <p className="text-comment">followers</p>
-      </li>
-      <li className="flex-1">
-        <b>{user?.followings?.length || 0}</b>
-        <p className="text-comment">followings</p>
-      </li>
+      {activityItems.map((item) => (
+        <li key={item} className="flex-1">
+          <b>{user?.[item]?.length || 0}</b>
+          <p className="text-comment">{item}</p>
+        </li>
+      ))}
     </ul>
   )
 }
