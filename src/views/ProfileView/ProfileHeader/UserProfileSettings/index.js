@@ -12,8 +12,8 @@ const FollowingButton = ({ loading = false }) => {
   return (
     <DialogTrigger>
       <div className="w-[122px] h-[32px]">
-        <Button variant="secondary" size="small" fullWidth icon={ChevronDown} loading={loading}>
-          Following
+        <Button variant="secondary" size="small" fullWidth loading={loading}>
+          Following <ChevronDown className="w-4 h-4 shrink-0" />
         </Button>
       </div>
     </DialogTrigger>
@@ -101,17 +101,17 @@ const UserProfileSettings = ({ user }) => {
   const { data, refetch } = useIsFollow(user?.id)
 
   const handleFollow = () => {
-    if (!user?.id || data?.is_following) return
+    if (!user?.id || data?.isFollowing) return
     doFollow()
   }
 
   const followButton = useMemo(() => {
-    if (!data?.is_following) {
+    if (!data?.isFollowing) {
       return <FollowButton loading={isDoFollowLoading} onClick={handleFollow} />
     }
 
     return <FollowingDialog user={user} loading={isUnfollowLoading} doUnfollow={doUnfollow} />
-  }, [data?.is_following, isDoFollowLoading, isUnfollowLoading])
+  }, [data?.isFollowing, isDoFollowLoading, isUnfollowLoading])
 
   useEffect(() => {
     refetch()

@@ -97,9 +97,9 @@ const Button = forwardRef((props, ref) => {
       disabled={disabled || loading}
       {...rest}
     >
+      {!loading && Icon && <Icon className={cn(iconSize, iconClassName)} />}
       {loading && <AnimatedSpinnerIcon className={cn(iconSize, iconClassName)} />}
       {!loading && children}
-      {!loading && Icon && <Icon className={cn(iconSize, iconClassName)} />}
     </button>
   )
 })
