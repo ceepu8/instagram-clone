@@ -4,52 +4,45 @@ import { useMemo } from 'react'
 
 import { useGetProfile } from '@/api'
 import { Button } from '@/components/base'
-import { MoreHorizontalIcon, SettingsIcon, UserPlusIcon } from '@/components/icons'
+import { SettingsIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
-const MobileUserActivities = (props) => {
-  const { user } = props || {}
+import UserProfileSettings from './UserProfileSettings'
+
+const MobileUserActivities = ({ user }) => {
+  const activityItems = ['posts', 'followers', 'followings']
+
   return (
     <ul className="items-center space-x-10 mb-4 hidden sm:flex">
-      <li>
-        <b>{user?.posts?.length}</b> posts
-      </li>
-      <li>
-        <b>{user?.followers?.length}</b> followers
-      </li>
-      <li>
-        <b>{user?.followings?.length}</b> followings
-      </li>
+      {activityItems.map((item) => (
+        <li key={item}>
+          <b>{user?.[item]?.length || 0}</b> {item}
+        </li>
+      ))}
     </ul>
   )
 }
 
-const DesktopUserActivities = (props) => {
-  const { user } = props || {}
+const DesktopUserActivities = ({ user }) => {
+  const activityItems = ['posts', 'followers', 'followings']
 
   return (
     <ul className="flex items-center text-center border-t border-b border-divide py-2 sm:hidden">
-      <li className="flex-1">
-        <b>{user?.posts?.length}</b>
-        <p className="text-comment">posts</p>
-      </li>
-      <li className="flex-1">
-        <b>{user?.followers?.length}</b>
-        <p className="text-comment">followers</p>
-      </li>
-      <li className="flex-1">
-        <b>{user?.followings?.length}</b>
-        <p className="text-comment">followings</p>
-      </li>
+      {activityItems.map((item) => (
+        <li key={item} className="flex-1">
+          <b>{user?.[item]?.length || 0}</b>
+          <p className="text-comment">{item}</p>
+        </li>
+      ))}
     </ul>
   )
 }
 
 const ProfileImage = ({ image }) => {
   return (
-    <div className="sm:flex-grow-[1] mr-8 sm:mr-0">
+    <div className="sm:flex-grow-[1] sm:basis-0 shrink-0 mr-8 sm:mr-0">
       <div className="w-[70px] h-[70px] sm:w-[150px] sm:h-[150px] relative mx-auto">
         <Image
           className="rounded-full border border-chinese-silver"
@@ -68,7 +61,7 @@ const MyProfileSettings = () => {
       <Button
         variant="secondary"
         size="small"
-        rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-[100px]"
+        rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-auto"
       >
         Edit profile
       </Button>
@@ -77,27 +70,6 @@ const MyProfileSettings = () => {
         variant="text-secondary"
         size="small"
         rootClassName="order-3 md:order-last"
-      />
-    </>
-  )
-}
-
-const UserProfileSettings = () => {
-  return (
-    <>
-      <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
-        <Button variant="primary" size="small">
-          Follow
-        </Button>
-        <Button variant="secondary" size="small">
-          Message
-        </Button>
-        <Button variant="secondary" icon={UserPlusIcon} size="small" rootClassName="w-8 h-8" />
-      </div>
-      <Button
-        icon={MoreHorizontalIcon}
-        variant="text-secondary"
-        rootClassName="order-1 md:order-2"
       />
     </>
   )
@@ -112,17 +84,18 @@ const ProfileInfo = ({ user }) => {
   const isMe = useMemo(() => authUser?.username === id, [authUser, id])
 
   return (
-    <div className="flex flex-col sm:flex-grow-[2]">
+    <div className="flex flex-col sm:flex-grow-[2] sm:basis-[30px]">
       <div className="flex items-center gap-x-4 mb-3 sm:mb-6 flex-wrap md:flex-nowrap">
-        <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username}</h1>
+        <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username || 'username'}</h1>
         {isMe && <MyProfileSettings />}
-        {!isMe && <UserProfileSettings />}
+        {!isMe && <UserProfileSettings user={user} />}
       </div>
       <MobileUserActivities user={user} />
       <p className="text-sm font-semibold hidden sm:block">Description</p>
     </div>
   )
 }
+
 const ProfileHeader = () => {
   const router = useRouter()
   const { data: user } = useGetProfile(router.query.id)
@@ -130,7 +103,7 @@ const ProfileHeader = () => {
   return (
     <div>
       <div className="px-5 py-8">
-        <div className="flex sm:justify-center sm:mx-8">
+        <div className="flex">
           <ProfileImage image={user?.image} />
           <ProfileInfo user={user} />
         </div>

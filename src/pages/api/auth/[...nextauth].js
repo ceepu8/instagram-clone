@@ -71,6 +71,8 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.user = user
+        const accessToken = generateAccessToken(user)
+        token.accessToken = accessToken
       }
       return token
     },
