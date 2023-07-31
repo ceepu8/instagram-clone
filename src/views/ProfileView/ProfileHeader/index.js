@@ -9,21 +9,8 @@ import Assets from '@/constants/Assets'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
+import MobileUserActivities from './MobileUserActivities/index'
 import UserProfileSettings from './UserProfileSettings'
-
-const MobileUserActivities = ({ user }) => {
-  const activityItems = ['posts', 'followers', 'followings']
-
-  return (
-    <ul className="items-center space-x-10 mb-4 hidden sm:flex">
-      {activityItems.map((item) => (
-        <li key={item}>
-          <b>{user?.[item]?.length || 0}</b> {item}
-        </li>
-      ))}
-    </ul>
-  )
-}
 
 const DesktopUserActivities = ({ user }) => {
   const activityItems = ['posts', 'followers', 'followings']
