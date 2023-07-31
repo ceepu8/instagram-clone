@@ -8,14 +8,14 @@ const MobileUserActivities = ({ user }) => {
       </li>
 
       <li>
-        <FollowDialog variant="followers">
+        <FollowDialog variant="followers" userId={user?.id}>
           <b className="cursor-pointer">{user?.followers?.length || 0}</b>
         </FollowDialog>{' '}
         followers
       </li>
 
       <li>
-        <FollowDialog variant="followings">
+        <FollowDialog variant="followings" userId={user?.id}>
           <b className="cursor-pointer">{user?.followings?.length || 0}</b>
         </FollowDialog>{' '}
         followings

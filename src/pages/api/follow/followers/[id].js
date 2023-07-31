@@ -19,7 +19,7 @@ async function handler(req, res) {
           select: {
             id: true,
             createdAt: true,
-            followed: {
+            following: {
               select: {
                 id: true,
                 username: true,

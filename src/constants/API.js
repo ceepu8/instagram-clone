@@ -26,5 +26,7 @@ export const API = {
   FOLLOW: {
     CREATE: '/api/follow/create/:id',
     DESTROY: '/api/follow/destroy/:id',
+    FOLLOWINGS: '/api/follow/followings/:id',
+    FOLLOWERS: '/api/follow/followers/:id',
   },
 }

@@ -2,7 +2,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { API, IS_FOLLOW_KEY, USER_PROFILE_DETAIL_KEY } from '@/constants'
+import {
+  API,
+  GET_FOLLOWERS_KEY,
+  GET_FOLLOWINGS_KEY,
+  IS_FOLLOW_KEY,
+  USER_PROFILE_DETAIL_KEY,
+} from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
 
 export const useFollow = (user) => {
@@ -65,18 +71,35 @@ export const useUnfollow = (user) => {
   return { doUnfollow, isLoading, isSuccess }
 }
 
-export const useIsFollow = (id) => {
-  const { user } = useAuth()
-
+export const useGetFollowers = (id, params) => {
   return useQuery(
-    [IS_FOLLOW_KEY, id],
+    [GET_FOLLOWERS_KEY, id],
     async () => {
+      const URL = API.FOLLOW.FOLLOWERS.replace(':id', id)
       const response = await axios({
         method: 'GET',
-        url: `/api/follow/${id}`,
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
+        url: URL,
+        params,
+      })
+      return response.data
+    },
+    {
+      keepPreviousData: true,
+      staleTime: Infinity,
+      enabled: !!id,
+    }
+  )
+}
+
+export const useGetFollowings = (id, params) => {
+  return useQuery(
+    [GET_FOLLOWINGS_KEY, id],
+    async () => {
+      const URL = API.FOLLOW.FOLLOWINGS.replace(':id', id)
+      const response = await axios({
+        method: 'GET',
+        url: URL,
+        params,
       })
       return response.data
     },
