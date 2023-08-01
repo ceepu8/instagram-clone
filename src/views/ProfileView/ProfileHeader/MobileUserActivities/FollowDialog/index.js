@@ -2,13 +2,13 @@ import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
 
-import { useGetFollowers, useGetFollowings } from '@/api/follow'
+import { useGetFollowers, useGetFollowings, useGetFollows } from '@/api/follow'
 import { Button } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { XIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
 
-const FollowCardItem = ({ user }) => {
+const FollowCardItem = ({ user, isFollowing = false }) => {
   const { image, username } = user || {}
   return (
     <div className="flex items-center space-x-2">
@@ -19,9 +19,15 @@ const FollowCardItem = ({ user }) => {
         <h2 className="font-bold text-sm">{username || 'username'}</h2>
         <p className="text-sm text-comment">{username || 'description'}</p>
       </div>
-      <Button variant="primary" size="small">
-        Follow
-      </Button>
+      {!isFollowing ? (
+        <Button variant="primary" size="small">
+          Follow
+        </Button>
+      ) : (
+        <Button variant="secondary" size="small">
+          Following
+        </Button>
+      )}
     </div>
   )
 }
@@ -39,6 +45,10 @@ const FollowCardItemSkeleton = () => {
 }
 
 const FollowCardList = ({ isLoading, data }) => {
+  const ids = data?.map((e) => e.id)
+
+  const { data: followsData, isLoading: isGetFollowsLoading } = useGetFollows(ids)
+
   const cardSkeletonList = Array(6)
     .fill('')
     .map((index) => <FollowCardItemSkeleton key={index} />)
@@ -46,10 +56,14 @@ const FollowCardList = ({ isLoading, data }) => {
   return (
     <div className="px-4 py-2 min-h-[340px]">
       <div className="flex flex-col space-y-4">
-        {isLoading && cardSkeletonList}
+        {(isLoading || isGetFollowsLoading) && cardSkeletonList}
         {!isLoading &&
+          !isGetFollowsLoading &&
           data?.length > 0 &&
-          data?.map((user) => <FollowCardItem key={user?.id} user={user} />)}
+          data?.map((user) => {
+            const isFollowing = followsData?.[user?.id]?.isFollowing
+            return <FollowCardItem key={user?.id} user={user} isFollowing={isFollowing} />
+          })}
         {!isLoading && !data?.length && (
           <p className="text-center text-sm text-comment">No followers found</p>
         )}

@@ -110,3 +110,29 @@ export const useGetFollowings = (id, params) => {
     }
   )
 }
+
+export const useGetFollows = (ids) => {
+  const { user: authUser } = useAuth()
+
+  return useQuery(
+    [GET_FOLLOWINGS_KEY, ids],
+    async () => {
+      const response = await axios({
+        method: 'POST',
+        url: API.FOLLOW.GET,
+        headers: {
+          Authorization: `Bearer ${authUser.token}`,
+        },
+        data: {
+          userIds: ids,
+        },
+      })
+      return response.data
+    },
+    {
+      keepPreviousData: true,
+      staleTime: Infinity,
+      enabled: !!ids && !!ids.length,
+    }
+  )
+}
