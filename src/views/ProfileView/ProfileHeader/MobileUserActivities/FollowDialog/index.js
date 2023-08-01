@@ -9,18 +9,15 @@ import { XIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
 
 const FollowCardItem = ({ user }) => {
+  const { image, username } = user || {}
   return (
     <div className="flex items-center space-x-2">
       <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-[0.5px]">
-        <Image
-          fill
-          src={user?.followed?.imageUrl || Assets.COMMON.PLACEHOLDER}
-          alt="profile image"
-        />
+        <Image fill src={image || Assets.COMMON.PLACEHOLDER} alt="profile image" />
       </div>
       <div className="flex flex-col flex-1">
-        <h2 className="font-bold text-sm">{user?.followed?.username || 'username'}</h2>
-        <p className="text-sm text-comment">{user?.followed?.description || 'description'}</p>
+        <h2 className="font-bold text-sm">{username || 'username'}</h2>
+        <p className="text-sm text-comment">{username || 'description'}</p>
       </div>
       <Button variant="primary" size="small">
         Follow
@@ -40,9 +37,8 @@ const FollowCardItemSkeleton = () => {
     </div>
   )
 }
-const FollowingsDialogContent = ({ userId }) => {
-  const { data, isLoading } = useGetFollowings(userId)
 
+const FollowCardList = ({ isLoading, data }) => {
   const cardSkeletonList = Array(6)
     .fill('')
     .map((index) => <FollowCardItemSkeleton key={index} />)
@@ -52,36 +48,26 @@ const FollowingsDialogContent = ({ userId }) => {
       <div className="flex flex-col space-y-4">
         {isLoading && cardSkeletonList}
         {!isLoading &&
-          data?.data.length > 0 &&
-          data?.data.map((user) => <FollowCardItem key={user?.id} user={user} />)}
-        {!isLoading && !data?.data.length && (
-          <p className="text-center text-sm text-comment">No followings found</p>
+          data?.length > 0 &&
+          data?.map((user) => <FollowCardItem key={user?.id} user={user} />)}
+        {!isLoading && !data?.length && (
+          <p className="text-center text-sm text-comment">No followers found</p>
         )}
       </div>
     </div>
   )
 }
 
+const FollowingsDialogContent = ({ userId }) => {
+  const { data, isLoading } = useGetFollowings(userId)
+
+  return <FollowCardList isLoading={isLoading} data={data?.data} />
+}
+
 const FollowersDialogContent = ({ userId }) => {
   const { data, isLoading } = useGetFollowers(userId)
 
-  const cardSkeletonList = Array(6)
-    .fill('')
-    .map((index) => <FollowCardItemSkeleton key={index} />)
-
-  return (
-    <div className="px-4 py-2 min-h-[340px]">
-      <div className="flex flex-col space-y-4">
-        {isLoading && cardSkeletonList}
-        {!isLoading &&
-          data?.data.length > 0 &&
-          data?.data.map((user) => <FollowCardItem key={user?.id} user={user} />)}
-        {!isLoading && !data?.data.length && (
-          <p className="text-center text-sm text-comment">No followers found</p>
-        )}
-      </div>
-    </div>
-  )
+  return <FollowCardList isLoading={isLoading} data={data?.data} />
 }
 
 export const FollowDialog = ({ variant = 'followings', userId, children }) => {

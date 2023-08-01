@@ -17,8 +17,6 @@ async function handler(req, res) {
             isFollowing: true,
           },
           select: {
-            id: true,
-            createdAt: true,
             followed: {
               select: {
                 id: true,
@@ -33,11 +31,13 @@ async function handler(req, res) {
 
         const totalCount = await prisma.follow.count()
 
+        const data = follow.map((item) => item.followed)
+
         return res.status(200).json({
           total: totalCount,
           page: +page,
           limit: +limit,
-          data: follow,
+          data,
         })
       } catch (error) {
         console.log('[FOLLOW_FOLLOWINGS]', error)
