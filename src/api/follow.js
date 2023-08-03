@@ -2,13 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { useDebouncedCallback } from 'use-debounce'
 
-import {
-  API,
-  GET_FOLLOWERS_KEY,
-  GET_FOLLOWINGS_KEY,
-  IS_FOLLOW_KEY,
-  USER_PROFILE_DETAIL_KEY,
-} from '@/constants'
+import { API, GET_FOLLOWERS_KEY, GET_FOLLOWINGS_KEY, USER_PROFILE_DETAIL_KEY } from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
 
 export const useFollow = (user) => {

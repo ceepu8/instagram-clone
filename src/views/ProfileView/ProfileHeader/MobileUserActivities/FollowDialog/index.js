@@ -2,14 +2,17 @@ import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
 
-import { useGetFollowers, useGetFollowings, useGetFollows } from '@/api/follow'
+import { useFollow, useGetFollowers, useGetFollowings, useGetFollows } from '@/api/follow'
 import { Button } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { XIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
 
-const FollowCardItem = ({ user, isFollowing = false }) => {
+const FollowCardItem = ({ user, isFollowing }) => {
+  const { doFollow, isLoading: isDoFollowLoading, isSuccess } = useFollow(user)
+
   const { image, username } = user || {}
+
   return (
     <div className="flex items-center space-x-2">
       <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-[0.5px]">
@@ -19,13 +22,13 @@ const FollowCardItem = ({ user, isFollowing = false }) => {
         <h2 className="font-bold text-sm">{username || 'username'}</h2>
         <p className="text-sm text-comment">{username || 'description'}</p>
       </div>
-      {!isFollowing ? (
-        <Button variant="primary" size="small">
-          Follow
-        </Button>
-      ) : (
+      {isFollowing || isSuccess ? (
         <Button variant="secondary" size="small">
           Following
+        </Button>
+      ) : (
+        <Button variant="primary" size="small" onClick={doFollow} loading={isDoFollowLoading}>
+          Follow
         </Button>
       )}
     </div>
