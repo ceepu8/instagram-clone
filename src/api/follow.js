@@ -2,10 +2,16 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { API, GET_FOLLOWERS_KEY, GET_FOLLOWINGS_KEY, USER_PROFILE_DETAIL_KEY } from '@/constants'
+import {
+  API,
+  GET_FOLLOWERS_KEY,
+  GET_FOLLOWINGS_KEY,
+  GET_FOLLOWS_KEY,
+  USER_PROFILE_DETAIL_KEY,
+} from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
 
-export const useFollow = (user) => {
+export const useFollow = (user, onSuccess) => {
   const { user: authUser } = useAuth()
   const queryClient = useQueryClient()
   const {
@@ -26,6 +32,7 @@ export const useFollow = (user) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, user.username])
+      onSuccess()
     },
     onError: () => {},
   })
@@ -35,7 +42,7 @@ export const useFollow = (user) => {
   return { doFollow, isLoading, isSuccess }
 }
 
-export const useUnfollow = (user) => {
+export const useUnfollow = (user, onSuccess) => {
   const queryClient = useQueryClient()
   const { user: authUser } = useAuth()
   const {
@@ -56,6 +63,7 @@ export const useUnfollow = (user) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, user.username])
+      onSuccess()
     },
     onError: () => {},
   })
@@ -79,7 +87,7 @@ export const useGetFollowers = (id, params) => {
     },
     {
       keepPreviousData: true,
-      staleTime: Infinity,
+      staleTime: 0,
       enabled: !!id,
     }
   )
@@ -99,7 +107,7 @@ export const useGetFollowings = (id, params) => {
     },
     {
       keepPreviousData: true,
-      staleTime: Infinity,
+      staleTime: 0,
       enabled: !!id,
     }
   )
@@ -109,7 +117,13 @@ export const useGetFollows = (ids) => {
   const { user: authUser } = useAuth()
 
   return useQuery(
-    [GET_FOLLOWINGS_KEY, ids],
+    [
+      GET_FOLLOWS_KEY,
+      {
+        authUser,
+        user_ids: ids,
+      },
+    ],
     async () => {
       const response = await axios({
         method: 'POST',
@@ -125,8 +139,8 @@ export const useGetFollows = (ids) => {
     },
     {
       keepPreviousData: true,
-      staleTime: Infinity,
-      enabled: !!ids && !!ids.length,
+      staleTime: 0,
+      enabled: !!ids,
     }
   )
 }

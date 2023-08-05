@@ -1,15 +1,36 @@
 import { Transition } from '@headlessui/react'
 import Image from 'next/image'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
-import { useFollow, useGetFollowers, useGetFollowings, useGetFollows } from '@/api/follow'
+import {
+  useFollow,
+  useGetFollowers,
+  useGetFollowings,
+  useGetFollows,
+  useUnfollow,
+} from '@/api/follow'
 import { Button } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { XIcon } from '@/components/icons'
 import Assets from '@/constants/Assets'
 
 const FollowCardItem = ({ user, isFollowing }) => {
-  const { doFollow, isLoading: isDoFollowLoading, isSuccess } = useFollow(user)
+  const [followStatus, setFollowStatus] = useState(false)
+
+  useEffect(() => {
+    setFollowStatus(isFollowing)
+  }, [isFollowing])
+
+  const onFollowSuccess = () => {
+    setFollowStatus(true)
+  }
+
+  const onUnfollowSuccess = () => {
+    setFollowStatus(false)
+  }
+
+  const { doFollow, isLoading: isDoFollowLoading } = useFollow(user, onFollowSuccess)
+  const { doUnfollow, isLoading: isDoUnfollowLoading } = useUnfollow(user, onUnfollowSuccess)
 
   const { image, username } = user || {}
 
@@ -22,14 +43,30 @@ const FollowCardItem = ({ user, isFollowing }) => {
         <h2 className="font-bold text-sm">{username || 'username'}</h2>
         <p className="text-sm text-comment">{username || 'description'}</p>
       </div>
-      {isFollowing || isSuccess ? (
-        <Button variant="secondary" size="small">
-          Following
-        </Button>
+      {followStatus ? (
+        <div className="w-[122px] h-[32px]">
+          <Button
+            variant="secondary"
+            size="small"
+            onClick={doUnfollow}
+            loading={isDoUnfollowLoading}
+            fullWidth
+          >
+            Following
+          </Button>
+        </div>
       ) : (
-        <Button variant="primary" size="small" onClick={doFollow} loading={isDoFollowLoading}>
-          Follow
-        </Button>
+        <div className="w-[77px] h-[32px]">
+          <Button
+            variant="primary"
+            size="small"
+            onClick={doFollow}
+            loading={isDoFollowLoading}
+            fullWidth
+          >
+            Follow
+          </Button>
+        </div>
       )}
     </div>
   )
@@ -67,7 +104,7 @@ const FollowCardList = ({ isLoading, data }) => {
             const isFollowing = followsData?.[user?.id]?.isFollowing
             return <FollowCardItem key={user?.id} user={user} isFollowing={isFollowing} />
           })}
-        {!isLoading && !data?.length && (
+        {!isLoading && !isGetFollowsLoading && !data?.length && (
           <p className="text-center text-sm text-comment">No followers found</p>
         )}
       </div>
