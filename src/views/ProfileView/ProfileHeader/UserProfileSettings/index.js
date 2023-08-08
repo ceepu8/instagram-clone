@@ -103,8 +103,8 @@ const ToggleFollow = ({
 }
 
 const UserProfileSettings = ({ user }) => {
-  const { doFollow, isLoading: isDoFollowLoading } = useFollow(user)
-  const { doUnfollow, isLoading: isUnfollowLoading } = useUnfollow(user)
+  const { doFollow, isLoading: isDoFollowLoading } = useFollow(user, () => {}, 'friend_profile')
+  const { doUnfollow, isLoading: isUnfollowLoading } = useUnfollow(user, () => {}, 'friend_profile')
 
   const handleFollow = () => {
     if (!user?.id || user?.follow_by_viewer) return

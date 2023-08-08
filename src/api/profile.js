@@ -26,10 +26,9 @@ export const useGetProfile = (username) => {
     () => {
       return getProfile(username, me.token)
     },
-
     {
-      keepPreviousData: true,
-      staleTime: Infinity,
+      staleTime: 0,
+      refetchOnWindowFocus: true,
       enabled: !!username && !!me?.token,
     }
   )

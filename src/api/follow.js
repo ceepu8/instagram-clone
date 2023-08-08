@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
+import { useId } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import {
@@ -11,7 +12,8 @@ import {
 } from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
 
-export const useFollow = (user, onSuccess) => {
+export const useFollow = (user, onSuccess, variant = 'my_profile') => {
+  const id = useId()
   const { user: authUser } = useAuth()
   const queryClient = useQueryClient()
   const {
@@ -31,8 +33,35 @@ export const useFollow = (user, onSuccess) => {
       return response.data
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, user.username])
       onSuccess()
+
+      const userKeyByVariant = {
+        friend_profile: {
+          username: user.username,
+          type: 'followers',
+        },
+        my_profile: {
+          username: authUser.username,
+          type: 'followings',
+        },
+      }
+
+      const { username, type } = userKeyByVariant[variant]
+
+      const newFollowObj = {
+        followedId: user.id,
+        followingId: authUser.id,
+        id,
+        isFollowing: true,
+      }
+
+      queryClient.setQueryData([USER_PROFILE_DETAIL_KEY, username], (prev) => {
+        return {
+          ...prev,
+          follow_by_viewer: true,
+          [type]: [...prev[type], newFollowObj],
+        }
+      })
     },
     onError: () => {},
   })
@@ -42,7 +71,7 @@ export const useFollow = (user, onSuccess) => {
   return { doFollow, isLoading, isSuccess }
 }
 
-export const useUnfollow = (user, onSuccess) => {
+export const useUnfollow = (user, onSuccess, variant = 'my_profile') => {
   const queryClient = useQueryClient()
   const { user: authUser } = useAuth()
   const {
@@ -62,8 +91,26 @@ export const useUnfollow = (user, onSuccess) => {
       return response.data
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, user.username])
       onSuccess()
+      const userKeyByVariant = {
+        friend_profile: {
+          username: user.username,
+          type: 'followers',
+        },
+        my_profile: {
+          username: authUser.username,
+          type: 'followings',
+        },
+      }
+      const { username, type } = userKeyByVariant[variant]
+
+      queryClient.setQueryData([USER_PROFILE_DETAIL_KEY, username], (prev) => {
+        return {
+          ...prev,
+          follow_by_viewer: false,
+          [type]: prev[type].filter((follower) => follower.followingId !== authUser.id),
+        }
+      })
     },
     onError: () => {},
   })
@@ -120,7 +167,6 @@ export const useGetFollows = (ids) => {
     [
       GET_FOLLOWS_KEY,
       {
-        authUser,
         user_ids: ids,
       },
     ],

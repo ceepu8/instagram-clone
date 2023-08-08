@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
+import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 
 import {
   useFollow,
@@ -12,25 +13,38 @@ import {
 import { Button } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { XIcon } from '@/components/icons'
+import { GET_FOLLOWS_KEY } from '@/constants'
 import Assets from '@/constants/Assets'
 
-const FollowCardItem = ({ user, isFollowing }) => {
-  const [followStatus, setFollowStatus] = useState(false)
+const FollowCardItem = ({ user }) => {
+  const queryClient = useQueryClient()
 
-  useEffect(() => {
-    setFollowStatus(isFollowing)
-  }, [isFollowing])
+  const { data: followData, isLoading: isGetFollowsLoading } = useGetFollows([user.id])
+  const isFollowing = followData?.[user?.id]?.isFollowing
 
-  const onFollowSuccess = () => {
-    setFollowStatus(true)
+  const updateFollowQueryData = (oldData, isFollowingUpdated) => {
+    if (oldData) {
+      return {
+        ...oldData,
+        [user.id]: {
+          isFollowing: isFollowingUpdated,
+        },
+      }
+    }
+    return oldData
   }
 
-  const onUnfollowSuccess = () => {
-    setFollowStatus(false)
-  }
+  const { doFollow, isLoading: isDoFollowLoading } = useFollow(user, () => {
+    queryClient.setQueryData([GET_FOLLOWS_KEY, { user_ids: [user.id] }], (oldData) =>
+      updateFollowQueryData(oldData, true)
+    )
+  })
 
-  const { doFollow, isLoading: isDoFollowLoading } = useFollow(user, onFollowSuccess)
-  const { doUnfollow, isLoading: isDoUnfollowLoading } = useUnfollow(user, onUnfollowSuccess)
+  const { doUnfollow, isLoading: isDoUnfollowLoading } = useUnfollow(user, () => {
+    queryClient.setQueryData([GET_FOLLOWS_KEY, { user_ids: [user.id] }], (oldData) =>
+      updateFollowQueryData(oldData, false)
+    )
+  })
 
   const { image, username } = user || {}
 
@@ -43,13 +57,13 @@ const FollowCardItem = ({ user, isFollowing }) => {
         <h2 className="font-bold text-sm">{username || 'username'}</h2>
         <p className="text-sm text-comment">{username || 'description'}</p>
       </div>
-      {followStatus ? (
+      {isFollowing ? (
         <div className="w-[122px] h-[32px]">
           <Button
             variant="secondary"
             size="small"
             onClick={doUnfollow}
-            loading={isDoUnfollowLoading}
+            loading={isDoUnfollowLoading || isGetFollowsLoading}
             fullWidth
           >
             Following
@@ -61,7 +75,7 @@ const FollowCardItem = ({ user, isFollowing }) => {
             variant="primary"
             size="small"
             onClick={doFollow}
-            loading={isDoFollowLoading}
+            loading={isDoFollowLoading || isGetFollowsLoading}
             fullWidth
           >
             Follow
@@ -85,10 +99,6 @@ const FollowCardItemSkeleton = () => {
 }
 
 const FollowCardList = ({ isLoading, data }) => {
-  const ids = data?.map((e) => e.id)
-
-  const { data: followsData, isLoading: isGetFollowsLoading } = useGetFollows(ids)
-
   const cardSkeletonList = Array(6)
     .fill('')
     .map((index) => <FollowCardItemSkeleton key={index} />)
@@ -96,15 +106,13 @@ const FollowCardList = ({ isLoading, data }) => {
   return (
     <div className="px-4 py-2 min-h-[340px]">
       <div className="flex flex-col space-y-4">
-        {(isLoading || isGetFollowsLoading) && cardSkeletonList}
+        {isLoading && cardSkeletonList}
         {!isLoading &&
-          !isGetFollowsLoading &&
           data?.length > 0 &&
           data?.map((user) => {
-            const isFollowing = followsData?.[user?.id]?.isFollowing
-            return <FollowCardItem key={user?.id} user={user} isFollowing={isFollowing} />
+            return <FollowCardItem key={user?.id} user={user} />
           })}
-        {!isLoading && !isGetFollowsLoading && !data?.length && (
+        {!isLoading && !data?.length && (
           <p className="text-center text-sm text-comment">No followers found</p>
         )}
       </div>
