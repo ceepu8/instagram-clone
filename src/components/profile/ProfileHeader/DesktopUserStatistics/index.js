@@ -1,6 +1,6 @@
 import { FollowDialog } from './FollowDialog/index'
 
-const DesktopUserActivities = ({ user }) => {
+const DesktopUserStatistics = ({ user }) => {
   return (
     <ul className="items-center space-x-10 mb-4 hidden sm:flex">
       <li>
@@ -28,4 +28,4 @@ const DesktopUserActivities = ({ user }) => {
   )
 }
 
-export default DesktopUserActivities
+export default DesktopUserStatistics

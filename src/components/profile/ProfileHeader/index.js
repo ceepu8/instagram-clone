@@ -6,8 +6,8 @@ import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
 import ProfileImage from '../ProfileImage'
-import DesktopUserActivities from './DesktopUserActivities'
-import MobileUserActivities from './MobileUserActivities'
+import DesktopUserStatistics from './DesktopUserStatistics'
+import MobileUserStatistics from './MobileUserStatistics'
 import MyProfileSettings from './MyProfileSettings'
 import UserProfileSettings from './UserProfileSettings'
 
@@ -24,7 +24,7 @@ const ProfileInfo = ({ user }) => {
         {isMe && <MyProfileSettings />}
         {!isMe && <UserProfileSettings user={user} />}
       </div>
-      <DesktopUserActivities user={user} />
+      <DesktopUserStatistics user={user} />
       <p className="text-sm font-semibold hidden sm:block">Description</p>
     </div>
   )
@@ -43,7 +43,7 @@ const ProfileHeader = () => {
         </div>
         <p className="text-sm font-semibold mt-6 sm:hidden">Description</p>
       </div>
-      <MobileUserActivities user={user} />
+      <MobileUserStatistics user={user} />
     </div>
   )
 }
