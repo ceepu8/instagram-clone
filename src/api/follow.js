@@ -96,19 +96,23 @@ export const useUnfollow = (user, onSuccess, variant = 'my_profile') => {
         friend_profile: {
           username: user.username,
           type: 'followers',
+          filterData: (prevData) =>
+            prevData.filter((follower) => follower.followingId !== authUser.id),
         },
         my_profile: {
           username: authUser.username,
           type: 'followings',
+          filterData: (prevData) =>
+            prevData.filter((following) => following.followedId !== user.id),
         },
       }
-      const { username, type } = userKeyByVariant[variant]
+      const { username, type, filterData } = userKeyByVariant[variant]
 
       queryClient.setQueryData([USER_PROFILE_DETAIL_KEY, username], (prev) => {
         return {
           ...prev,
           follow_by_viewer: false,
-          [type]: prev[type].filter((follower) => follower.followingId !== authUser.id),
+          [type]: filterData(prev[type]),
         }
       })
     },

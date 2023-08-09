@@ -1,6 +1,4 @@
-import ProfileBody from './ProfileBody'
-import ProfileHeader from './ProfileHeader'
-import ProfileTabs from './ProfileTabs'
+import { ProfileBody, ProfileHeader, ProfileTabs } from '@/components/profile'
 
 const ProfileView = () => {
   return (
