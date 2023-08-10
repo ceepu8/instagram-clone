@@ -16,8 +16,17 @@ UI libraries
 - react-hot-toast
 - react-slideshow-image
 
+#page:
+- auth:  + login
+         + register
+- home
+- profile
+- reels
+- explore
+- direct
+
 2. Backend
 - MongoDB - Prisma - NodeJS
 
 
-many thanks to tist, who helps me alot with the project❤!
+many thanks to [tcdtist](https://github.com/tcdtist/), who helps me alot with the project❤!
