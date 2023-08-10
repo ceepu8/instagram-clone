@@ -24,7 +24,10 @@ export const API = {
     UPLOAD_CLOUDINARY: '/image/upload',
   },
   FOLLOW: {
+    GET: '/api/follow',
     CREATE: '/api/follow/create/:id',
     DESTROY: '/api/follow/destroy/:id',
+    FOLLOWINGS: '/api/follow/followings/:id',
+    FOLLOWERS: '/api/follow/followers/:id',
   },
 }
