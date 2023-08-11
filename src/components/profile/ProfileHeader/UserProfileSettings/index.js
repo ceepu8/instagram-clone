@@ -1,6 +1,7 @@
 import { useFollow, useUnfollow } from '@/api/follow'
 import { Button } from '@/components/base'
 import { ChevronDown, MoreHorizontalIcon, UserPlusIcon } from '@/components/icons'
+import { useDevelopingMessage } from '@/hooks/custom'
 
 import FollowingSettingDialog from './FollowingSettingDialog'
 
@@ -54,19 +55,27 @@ const ToggleFollow = ({ user }) => {
 }
 
 const UserProfileSettings = ({ user }) => {
+  const displayMessage = useDevelopingMessage()
   return (
     <>
       <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
         <ToggleFollow user={user} />
-        <Button variant="secondary" size="small">
+        <Button variant="secondary" size="small" onClick={displayMessage}>
           Message
         </Button>
-        <Button variant="secondary" icon={UserPlusIcon} size="small" rootClassName="w-8 h-8" />
+        <Button
+          variant="secondary"
+          icon={UserPlusIcon}
+          size="small"
+          rootClassName="w-8 h-8"
+          onClick={displayMessage}
+        />
       </div>
       <Button
         icon={MoreHorizontalIcon}
         variant="text-secondary"
         rootClassName="order-1 md:order-2"
+        onClick={displayMessage}
       />
     </>
   )

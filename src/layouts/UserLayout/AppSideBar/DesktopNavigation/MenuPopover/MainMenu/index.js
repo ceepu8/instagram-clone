@@ -4,29 +4,31 @@ import { Fragment } from 'react'
 import { LineBreak } from '@/components/base'
 import { AlertTriangle, BookmarkIcon, History, SettingsIcon, Sun } from '@/components/icons'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
+import { useDevelopingMessage } from '@/hooks/custom'
 import { useLogout } from '@/hooks/query/auth'
 
 import NavItem from '../../NavItem'
 
 export default function MainMenu({ setMenu }) {
+  const displayMessage = useDevelopingMessage()
   const handleLogout = useLogout()
 
   const POPOVER_ITEMS = [
     {
       key: POPOVER_MENU_KEYS.SETTINGS,
-      onPress: () => {},
+      onPress: displayMessage,
       icon: SettingsIcon,
       label: 'Settings',
     },
     {
       key: POPOVER_MENU_KEYS.YOUR_ACTIVITY,
-      onPress: () => {},
+      onPress: displayMessage,
       icon: History,
       label: 'Your Activity',
     },
     {
       key: POPOVER_MENU_KEYS.SAVED,
-      onPress: () => {},
+      onPress: displayMessage,
       icon: BookmarkIcon,
       label: 'Saved',
     },
@@ -40,12 +42,13 @@ export default function MainMenu({ setMenu }) {
     },
     {
       key: POPOVER_MENU_KEYS.REPORT_PROBLEM,
-      onPress: () => {},
+      onPress: displayMessage,
       icon: AlertTriangle,
       label: 'Report a problem',
     },
     {
       key: POPOVER_MENU_KEYS.SWITCH_ACCOUNT,
+      onPress: displayMessage,
       label: 'Switch account',
     },
     {

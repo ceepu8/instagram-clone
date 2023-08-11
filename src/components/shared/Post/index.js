@@ -9,6 +9,7 @@ import {
   MoreHorizontalIcon,
   Send,
 } from '@/components/icons'
+import { useDevelopingMessage } from '@/hooks/custom'
 import { useInputState } from '@/hooks/shared'
 import { cn } from '@/utils'
 
@@ -29,6 +30,8 @@ const PreviewProfileHoverCard = ({ triggerContent }) => {
 }
 
 const PostHeader = () => {
+  const displayMessage = useDevelopingMessage()
+
   const profileImage = (
     <Image
       width={24}
@@ -42,7 +45,12 @@ const PostHeader = () => {
     <div className="flex items-center gap-x-3">
       <PreviewProfileHoverCard triggerContent={profileImage} />
       <PreviewProfileHoverCard triggerContent="mirea_03" />
-      <Button variant="text-secondary" icon={MoreHorizontalIcon} rootClassName="ml-auto" />
+      <Button
+        variant="text-secondary"
+        icon={MoreHorizontalIcon}
+        rootClassName="ml-auto"
+        onClick={displayMessage}
+      />
     </div>
   )
 }
@@ -62,25 +70,27 @@ const PostImage = () => {
 }
 
 const PostActions = () => {
+  const displayMessage = useDevelopingMessage()
+
   const ActionList = [
     {
       key: 'like',
-      onPress: () => {},
+      onPress: displayMessage,
       icon: HeartIcon,
     },
     {
       key: 'post-open',
-      onPress: () => {},
+      onPress: displayMessage,
       icon: MessageCircle,
     },
     {
       key: 'message',
-      onPress: () => {},
+      onPress: displayMessage,
       icon: Send,
     },
     {
       key: 'save',
-      onPress: () => {},
+      onPress: displayMessage,
       icon: BookmarkIcon,
     },
   ]
@@ -105,21 +115,22 @@ const PostActions = () => {
 }
 
 const PostContent = () => {
+  const displayMessage = useDevelopingMessage()
+
   return (
     <div className="text-left">
       <PreviewProfileHoverCard triggerContent="mirea_03" />
       <span>&nbsp;</span>
       <span className="text-sm tracking-tight">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-        been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer
-        took a galley of type and scrambled it to make a type specimen book. It has survived not
-        only five centuries, but also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-        PageMaker including versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       </span>
 
-      <Button variant="text-secondary" size="small" rootClassName="text-comment p-0 font-medium">
+      <Button
+        variant="text-secondary"
+        size="small"
+        rootClassName="text-comment font-medium"
+        onClick={displayMessage}
+      >
         more
       </Button>
     </div>
@@ -127,9 +138,16 @@ const PostContent = () => {
 }
 
 const PostComment = ({ value, onChange }) => {
+  const displayMessage = useDevelopingMessage()
+
   return (
     <>
-      <Button variant="text-secondary" rootClassName="text-comment text-sm h-fit p-0 font-medium">
+      <Button
+        variant="text-secondary"
+        size="small"
+        rootClassName="text-comment font-medium"
+        onClick={displayMessage}
+      >
         View all comments
       </Button>
       <CommentInput

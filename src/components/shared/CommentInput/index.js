@@ -3,9 +3,12 @@ import EmojiPicker from 'emoji-picker-react'
 import { Button, Popover } from '@/components/base'
 import { Input } from '@/components/form'
 import { SmileIcon } from '@/components/icons'
+import { useDevelopingMessage } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 const CommentInput = ({ variant = 'main', onChange, value }) => {
+  const displayMessage = useDevelopingMessage()
+
   const handleInputEmoji = (e) => {
     onChange((prev) => prev + e.emoji)
   }
@@ -42,6 +45,7 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
           variant === 'secondary' && value ? 'block' : 'hidden',
           variant === 'main' && 'block'
         )}
+        onClick={displayMessage}
       >
         Post
       </Button>
