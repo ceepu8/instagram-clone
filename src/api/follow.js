@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import axios from 'axios'
 import { useId } from 'react'
-import { useDebouncedCallback } from 'use-debounce'
 
+import { Axios } from '@/configs'
 import {
   API,
   GET_FOLLOWERS_KEY,
@@ -11,29 +10,20 @@ import {
   USER_PROFILE_DETAIL_KEY,
 } from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
+import { useDebouncedCallback } from '@/hooks/shared'
 
 export const useFollow = (user, onSuccess, variant = 'my_profile') => {
   const id = useId()
   const { user: authUser } = useAuth()
   const queryClient = useQueryClient()
-  const {
-    mutate: follow,
-    isLoading,
-    isSuccess,
-  } = useMutation({
-    mutationFn: async () => {
-      const URL = API.FOLLOW.CREATE.replace(':id', user.id)
-      const response = await axios({
-        method: 'POST',
-        url: URL,
-        headers: {
-          Authorization: `Bearer ${authUser.token}`,
-        },
-      })
+
+  const { mutate, isLoading, isSuccess } = useMutation({
+    mutationFn: async (dataRequest) => {
+      const response = await Axios.post(API.FOLLOW.CREATE.replace(':id', user.id), dataRequest)
       return response.data
     },
     onSuccess: () => {
-      onSuccess()
+      onSuccess?.()
 
       const userKeyByVariant = {
         friend_profile: {
@@ -66,7 +56,7 @@ export const useFollow = (user, onSuccess, variant = 'my_profile') => {
     onError: () => {},
   })
 
-  const doFollow = useDebouncedCallback((req, options) => follow(req, options), 250)
+  const doFollow = useDebouncedCallback(mutate)
 
   return { doFollow, isLoading, isSuccess }
 }
@@ -74,24 +64,14 @@ export const useFollow = (user, onSuccess, variant = 'my_profile') => {
 export const useUnfollow = (user, onSuccess, variant = 'my_profile') => {
   const queryClient = useQueryClient()
   const { user: authUser } = useAuth()
-  const {
-    mutate: unfollow,
-    isLoading,
-    isSuccess,
-  } = useMutation({
-    mutationFn: async () => {
-      const URL = API.FOLLOW.DESTROY.replace(':id', user.id)
-      const response = await axios({
-        method: 'POST',
-        url: URL,
-        headers: {
-          Authorization: `Bearer ${authUser.token}`,
-        },
-      })
+
+  const { mutate, isLoading, isSuccess } = useMutation({
+    mutationFn: async (dataRequest) => {
+      const response = await Axios.post(API.FOLLOW.DESTROY.replace(':id', user.id), dataRequest)
       return response.data
     },
     onSuccess: () => {
-      onSuccess()
+      onSuccess?.()
       const userKeyByVariant = {
         friend_profile: {
           username: user.username,
@@ -119,7 +99,7 @@ export const useUnfollow = (user, onSuccess, variant = 'my_profile') => {
     onError: () => {},
   })
 
-  const doUnfollow = useDebouncedCallback((req, options) => unfollow(req, options), 250)
+  const doUnfollow = useDebouncedCallback(mutate)
 
   return { doUnfollow, isLoading, isSuccess }
 }
@@ -128,12 +108,7 @@ export const useGetFollowers = (id, params) => {
   return useQuery(
     [GET_FOLLOWERS_KEY, id],
     async () => {
-      const URL = API.FOLLOW.FOLLOWERS.replace(':id', id)
-      const response = await axios({
-        method: 'GET',
-        url: URL,
-        params,
-      })
+      const response = await Axios.get(API.FOLLOW.FOLLOWERS.replace(':id', id), { params })
       return response.data
     },
     {
@@ -148,12 +123,7 @@ export const useGetFollowings = (id, params) => {
   return useQuery(
     [GET_FOLLOWINGS_KEY, id],
     async () => {
-      const URL = API.FOLLOW.FOLLOWINGS.replace(':id', id)
-      const response = await axios({
-        method: 'GET',
-        url: URL,
-        params,
-      })
+      const response = await Axios.get(API.FOLLOW.FOLLOWINGS.replace(':id', id), { params })
       return response.data
     },
     {
@@ -165,8 +135,6 @@ export const useGetFollowings = (id, params) => {
 }
 
 export const useGetFollows = (ids) => {
-  const { user: authUser } = useAuth()
-
   return useQuery(
     [
       GET_FOLLOWS_KEY,
@@ -175,16 +143,7 @@ export const useGetFollows = (ids) => {
       },
     ],
     async () => {
-      const response = await axios({
-        method: 'POST',
-        url: API.FOLLOW.GET,
-        headers: {
-          Authorization: `Bearer ${authUser.token}`,
-        },
-        data: {
-          userIds: ids,
-        },
-      })
+      const response = await Axios.post(API.FOLLOW.GET, { userIds: ids })
       return response.data
     },
     {

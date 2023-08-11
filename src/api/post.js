@@ -1,19 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
-import { useSession } from 'next-auth/react'
 
+import { Axios } from '@/configs'
 import { API, CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, USER_POST_LIST_KEY } from '@/constants'
 
-const useUploadPost = () => {
-  const session = useSession()
-
-  const uploadPost = async (data) => {
-    const response = await axios.post(API.POST.UPLOAD, data, {
-      headers: {
-        Authorization: `Bearer ${session.data.accessToken}`,
-      },
-    })
+export const useUploadPost = () => {
+  const uploadPost = async (dataRequest) => {
+    const response = await Axios.post(API.POST.UPLOAD, dataRequest)
     return response
   }
 
@@ -22,25 +15,20 @@ const useUploadPost = () => {
     formData.append('file', image)
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
 
-    const response = await axios({
-      method: 'post',
-      url: `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`,
-      data: formData,
-    })
+    const URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`
+
+    const response = await Axios.post(URL, formData)
     return response
   }
 
   return { uploadImage, uploadPost }
 }
 
-const useGetPostsByUser = (username) => {
+export const useGetPostsByUser = (username) => {
   return useQuery(
     [USER_POST_LIST_KEY, username],
     async () => {
-      const response = await axios({
-        method: 'get',
-        url: `/api/post/${username}`,
-      })
+      const response = await Axios.get(`/api/post/${username}`)
       return response.data
     },
     {
@@ -50,5 +38,3 @@ const useGetPostsByUser = (username) => {
     }
   )
 }
-
-export { useUploadPost, useGetPostsByUser }
