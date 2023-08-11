@@ -1,35 +1,23 @@
 import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 
+import { Axios } from '@/configs'
 import { USER_PROFILE_DETAIL_KEY } from '@/constants'
-import { useAuth } from '@/hooks/query/auth'
 
-export const getProfile = async (username, token) => {
-  const response = await axios({
-    method: 'get',
-    url: '/api/profile',
-    params: {
-      username,
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+export const getProfile = async (username) => {
+  const response = await Axios.get('/api/profile', { params: { username } })
   return response.data
 }
 
 export const useGetProfile = (username) => {
-  const { user: me } = useAuth()
-
   return useQuery(
     [USER_PROFILE_DETAIL_KEY, username],
     () => {
-      return getProfile(username, me.token)
+      return getProfile(username)
     },
     {
       staleTime: 0,
       refetchOnWindowFocus: true,
-      enabled: !!username && !!me?.token,
+      enabled: !!username,
     }
   )
 }
