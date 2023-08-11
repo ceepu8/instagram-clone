@@ -3,9 +3,12 @@ import propTypes from 'prop-types'
 import { forwardRef } from 'react'
 
 import { AnimatedSpinnerIcon } from '@/components/icons'
+import { useDevelopingMessage } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 const Button = forwardRef((props, ref) => {
+  const showMessage = useDevelopingMessage()
+
   const {
     children,
     icon: Icon,
@@ -14,7 +17,7 @@ const Button = forwardRef((props, ref) => {
     size = 'medium',
     type = 'button',
     fullWidth = false,
-    rootClassName,
+    className,
     iconClassName,
     disabled = false,
     loading = false,
@@ -25,13 +28,12 @@ const Button = forwardRef((props, ref) => {
     fullWidth && 'w-full'
   )
 
-  let buttonClasses = ''
+  let btnStyleClasses = ''
   let btnSizeClasses = ''
 
   switch (variant) {
     case 'primary':
-      buttonClasses = cn(
-        baseButtonClasses,
+      btnStyleClasses = cn(
         'rounded-lg text-white',
         'bg-btn-primary hover:bg-btn-primary-hover',
         'disabled:cursor-default disabled:bg-very-light-azure'
@@ -39,30 +41,22 @@ const Button = forwardRef((props, ref) => {
       break
 
     case 'secondary':
-      buttonClasses = cn(
-        baseButtonClasses,
-        'rounded-lg text-black',
-        'bg-btn-secondary hover:bg-btn-secondary-hover'
-      )
+      btnStyleClasses = cn('rounded-lg text-black', 'bg-btn-secondary hover:bg-btn-secondary-hover')
       break
 
     case 'text-primary':
-      buttonClasses = cn(
-        baseButtonClasses,
+      btnStyleClasses = cn(
         'text-btn-text-primary hover:text-btn-text-primary-hover',
         'disabled:cursor-default disabled:text-btn-text-primary-hover'
       )
       break
 
     case 'text-secondary':
-      buttonClasses = cn(
-        baseButtonClasses,
-        'text-btn-text-secondary hover:text-btn-text-secondary-hover'
-      )
+      btnStyleClasses = cn('text-btn-text-secondary hover:text-btn-text-secondary-hover')
       break
 
     default:
-      buttonClasses = cn(baseButtonClasses)
+      btnStyleClasses = ''
   }
 
   btnSizeClasses =
@@ -88,17 +82,35 @@ const Button = forwardRef((props, ref) => {
     'w-8 h-8 leading-8': size === 'large',
   })
 
+  const getType = (_type) => {
+    if (['submit', 'button'].includes(_type)) return _type
+    return 'button'
+  }
+
+  const rootClassName = cn(
+    baseButtonClasses,
+    btnSizeClasses,
+    btnStyleClasses,
+    btnTextSizeClasses,
+    className
+  )
+
+  const onClickDefault = () => {
+    if (type === 'submit' || type === 'trigger') return
+    showMessage()
+  }
+
   return (
     <button
       ref={ref}
-      className={cn(btnSizeClasses, btnTextSizeClasses, buttonClasses, rootClassName)}
-      onClick={onClick}
-      type={type || 'button'}
+      className={rootClassName}
+      onClick={onClick || onClickDefault}
+      type={getType(type)}
       disabled={disabled || loading}
       {...rest}
     >
-      {!loading && Icon && <Icon className={cn(iconSize, iconClassName)} />}
       {loading && <AnimatedSpinnerIcon className={cn(iconSize, iconClassName)} />}
+      {!loading && Icon && <Icon className={cn(iconSize, iconClassName)} />}
       {!loading && children}
     </button>
   )
@@ -109,10 +121,10 @@ Button.propTypes = {
   onClick: propTypes.func,
   variant: propTypes.oneOf(['primary', 'secondary', 'text-primary', 'text-secondary']),
   size: propTypes.oneOf(['small', 'medium', 'large']),
-  type: propTypes.oneOf(['button', 'submit', 'reset']),
+  type: propTypes.oneOf(['button', 'submit', 'reset', 'trigger']),
   iconOnly: propTypes.bool,
   fullWidth: propTypes.bool,
-  rootClassName: propTypes.string,
+  className: propTypes.string,
   iconClassName: propTypes.string,
 }
 

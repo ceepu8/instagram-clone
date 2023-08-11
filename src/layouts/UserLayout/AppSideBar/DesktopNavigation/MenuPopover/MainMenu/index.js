@@ -46,6 +46,7 @@ export default function MainMenu({ setMenu }) {
     },
     {
       key: POPOVER_MENU_KEYS.SWITCH_ACCOUNT,
+      onPress: () => {},
       label: 'Switch account',
     },
     {

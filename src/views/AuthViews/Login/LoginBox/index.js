@@ -1,4 +1,4 @@
-import { Link } from '@/components/base'
+import { Button } from '@/components/base'
 import { InstagramLetterIcon } from '@/components/icons'
 import AppDownloadNavigation from '@/views/AuthViews/components/AppDownloadNavigation'
 
@@ -7,11 +7,13 @@ import GoogleLoginButton from '../../components/GoogleLoginButton'
 import Or from '../../components/Or'
 import LoginForm from '../components/LoginForm'
 
-const ForgotPasswordButton = () => (
-  <Link href="/">
-    <p className="text-black text-xs text-center mt-6 font-semibold">Forgot password?</p>
-  </Link>
-)
+const ForgotPasswordButton = () => {
+  return (
+    <Button variant="secondary-text" className="mt-6 text-xs h-fit">
+      <p>Forgot password?</p>
+    </Button>
+  )
+}
 
 const LoginBox = () => {
   return (

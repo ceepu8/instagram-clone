@@ -47,7 +47,7 @@ const FollowingSettingDialog = ({ user, doUnfollow, trigger }) => {
               variant="text-secondary"
               fullWidth
               size="small"
-              rootClassName="justify-start font-medium px-4 py-3"
+              className="justify-start font-medium px-4 py-3"
               onClick={handleUnfollow}
             >
               Unfollow

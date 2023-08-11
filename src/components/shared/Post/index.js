@@ -17,7 +17,7 @@ import CommentInput from '../CommentInput'
 
 const PreviewProfileHoverCard = ({ triggerContent }) => {
   const triggerBtn = (
-    <Button variant="text-secondary" size="small" rootClassName="p-0 inline">
+    <Button variant="text-secondary" type="trigger" size="small" className="p-0 inline">
       {triggerContent}
     </Button>
   )
@@ -42,7 +42,7 @@ const PostHeader = () => {
     <div className="flex items-center gap-x-3">
       <PreviewProfileHoverCard triggerContent={profileImage} />
       <PreviewProfileHoverCard triggerContent="mirea_03" />
-      <Button variant="text-secondary" icon={MoreHorizontalIcon} rootClassName="ml-auto" />
+      <Button variant="text-secondary" icon={MoreHorizontalIcon} className="ml-auto" />
     </div>
   )
 }
@@ -65,36 +65,31 @@ const PostActions = () => {
   const ActionList = [
     {
       key: 'like',
-      onPress: () => {},
       icon: HeartIcon,
     },
     {
       key: 'post-open',
-      onPress: () => {},
       icon: MessageCircle,
     },
     {
       key: 'message',
-      onPress: () => {},
       icon: Send,
     },
     {
       key: 'save',
-      onPress: () => {},
       icon: BookmarkIcon,
     },
   ]
   return (
     <div className="flex gap-x-3">
-      {ActionList.map(({ key, onPress, icon }, index) => {
+      {ActionList.map(({ key, icon }, index) => {
         const isLast = index === ActionList.length - 1
         return (
           <Button
             key={key}
             variant="text-secondary"
             icon={icon}
-            onClick={onPress}
-            rootClassName={cn({
+            className={cn({
               'ml-auto': isLast,
             })}
           />
@@ -110,16 +105,10 @@ const PostContent = () => {
       <PreviewProfileHoverCard triggerContent="mirea_03" />
       <span>&nbsp;</span>
       <span className="text-sm tracking-tight">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-        been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer
-        took a galley of type and scrambled it to make a type specimen book. It has survived not
-        only five centuries, but also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-        PageMaker including versions of Lorem Ipsum.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       </span>
 
-      <Button variant="text-secondary" size="small" rootClassName="text-comment p-0 font-medium">
+      <Button variant="text-secondary" size="small" className="text-comment font-medium">
         more
       </Button>
     </div>
@@ -129,7 +118,7 @@ const PostContent = () => {
 const PostComment = ({ value, onChange }) => {
   return (
     <>
-      <Button variant="text-secondary" rootClassName="text-comment text-sm h-fit p-0 font-medium">
+      <Button variant="text-secondary" size="small" className="text-comment font-medium">
         View all comments
       </Button>
       <CommentInput

@@ -13,7 +13,7 @@ const FollowButton = ({ loading, onClick }) => {
         fullWidth
         onClick={onClick}
         loading={loading}
-        rootClassName="h-full"
+        className="h-full"
       >
         Follow
       </Button>
@@ -24,7 +24,7 @@ const FollowButton = ({ loading, onClick }) => {
 const FollowingButton = ({ loading }) => {
   return (
     <div className="w-[122px] h-[32px]">
-      <Button variant="secondary" size="small" fullWidth loading={loading}>
+      <Button type="trigger" variant="secondary" size="small" fullWidth loading={loading}>
         Following <ChevronDown className="w-4 h-4 shrink-0" />
       </Button>
     </div>
@@ -61,13 +61,9 @@ const UserProfileSettings = ({ user }) => {
         <Button variant="secondary" size="small">
           Message
         </Button>
-        <Button variant="secondary" icon={UserPlusIcon} size="small" rootClassName="w-8 h-8" />
+        <Button variant="secondary" icon={UserPlusIcon} size="small" className="w-8 h-8" />
       </div>
-      <Button
-        icon={MoreHorizontalIcon}
-        variant="text-secondary"
-        rootClassName="order-1 md:order-2"
-      />
+      <Button icon={MoreHorizontalIcon} variant="text-secondary" className="order-1 md:order-2" />
     </>
   )
 }
