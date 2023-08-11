@@ -1,5 +1,6 @@
-import { Link } from '@/components/base'
+import { Button } from '@/components/base'
 import { InstagramLetterIcon } from '@/components/icons'
+import { useDevelopingMessage } from '@/hooks/custom'
 import AppDownloadNavigation from '@/views/AuthViews/components/AppDownloadNavigation'
 
 import AuthNavigation from '../../components/AuthNavigaton'
@@ -7,11 +8,14 @@ import GoogleLoginButton from '../../components/GoogleLoginButton'
 import Or from '../../components/Or'
 import LoginForm from '../components/LoginForm'
 
-const ForgotPasswordButton = () => (
-  <Link href="/">
-    <p className="text-black text-xs text-center mt-6 font-semibold">Forgot password?</p>
-  </Link>
-)
+const ForgotPasswordButton = () => {
+  const displayMessage = useDevelopingMessage()
+  return (
+    <Button variant="secondary-text" onClick={displayMessage} rootClassName="mt-6 text-xs h-fit">
+      <p>Forgot password?</p>
+    </Button>
+  )
+}
 
 const LoginBox = () => {
   return (

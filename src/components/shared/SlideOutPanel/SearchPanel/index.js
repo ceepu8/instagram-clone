@@ -9,42 +9,44 @@ import { Button, LineBreak } from '@/components/base'
 import { AnimatedBarSpinnerIcon, XIcon } from '@/components/icons'
 import { Routes } from '@/constants'
 import Assets from '@/constants/Assets'
+import { useDevelopingMessage } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 import SearchInput from '../../SearchInput'
 
 const SearchItem = (props) => {
+  const displayMessage = useDevelopingMessage()
+
   const { username, image } = props || {}
   const router = useRouter()
-  const onClick = () => {}
 
   return (
-    <Pressable
-      onPress={() => router.push({ pathname: Routes.PROFILE, query: { id: username } })}
-      isDisabled={!username}
-    >
-      <div className="flex items-center space-x-4 w-full cursor-pointer">
-        <Image
-          width={40}
-          height={40}
-          src={image || Assets.COMMON.PLACEHOLDER}
-          alt="search-image"
-          className="rounded-full"
-        />
-        <div className="flex-1">
-          <h1 className="text-base font-bold text-sm leading-4">{username}</h1>
-          <p className="text-note text-sm leading-4">description</p>
-        </div>
-        <div>
-          <Button
-            variant="text-secondary"
-            icon={XIcon}
-            iconClassName="w-6 h-6 stroke-3 text-note"
-            onClick={onClick}
+    <div className="flex items-center w-full cursor-pointer">
+      <Pressable
+        onPress={() => router.push({ pathname: Routes.PROFILE, query: { id: username } })}
+        isDisabled={!username}
+      >
+        <div className="flex items-center space-x-4 w-full cursor-pointer">
+          <Image
+            width={40}
+            height={40}
+            src={image || Assets.COMMON.PLACEHOLDER}
+            alt="search-image"
+            className="rounded-full"
           />
+          <div className="flex-1">
+            <h1 className="text-base font-bold text-sm leading-4">{username}</h1>
+            <p className="text-note text-sm leading-4">description</p>
+          </div>
         </div>
-      </div>
-    </Pressable>
+      </Pressable>
+      <Button
+        variant="text-secondary"
+        icon={XIcon}
+        iconClassName="w-6 h-6 stroke-3 text-note"
+        onClick={displayMessage}
+      />
+    </div>
   )
 }
 
@@ -59,7 +61,10 @@ const SearchPanelHeader = ({ onSearch, clearSearch, searchValue }) => {
 }
 
 const SearchList = ({ value }) => {
+  // TODO:
   const onClear = () => {}
+
+  const displayMessage = useDevelopingMessage()
 
   const { isLoading, data } = useGetUserByName({
     username: value,
@@ -69,7 +74,7 @@ const SearchList = ({ value }) => {
     <div className="flex-1 flex flex-col mt-4 px-2">
       <div className="flex justify-between">
         <h2 className="font-bold">Recent</h2>
-        <Button variant="text-primary" size="small" onClick={onClear}>
+        <Button variant="text-primary" size="small" onClick={displayMessage}>
           Clear all
         </Button>
       </div>

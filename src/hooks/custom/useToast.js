@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { AlertCircle } from '@/components/icons'
 import { ToastContext } from '@/contexts/ToastProvider'
 
 export const useToastContext = () => {
@@ -17,8 +18,12 @@ export const useToast = () => {
     default: (message) => toast(message),
     success: (message) => toast.success(message),
     error: (message) => toast.error(message),
-    // style: (message) => toast(message, styleOptions),
     loading: (message) => toast.loading(message),
     custom: (custom) => toast.custom(() => custom),
+    warning: (message) =>
+      toast(message, {
+        icon: <AlertCircle fill="var(--warning)" color="var(--white)" />,
+        duration: 1000,
+      }),
   }
 }
