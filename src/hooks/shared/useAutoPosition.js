@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 
-const useAutoPosition = () => {
+export const useAutoPosition = () => {
   const [popoverPosition, setPopoverPosition] = useState({ top: 0, left: 0 })
   const popoverRef = useRef(null)
 
@@ -35,5 +35,3 @@ const useAutoPosition = () => {
 
   return { popoverPosition, popoverRef }
 }
-
-export default useAutoPosition
