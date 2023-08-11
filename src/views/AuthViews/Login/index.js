@@ -3,7 +3,7 @@ import LoginBox from './LoginBox'
 
 const LoginView = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="max-h-screen h-full flex items-center justify-center">
       <LoginBanner />
       <LoginBox />
     </div>
