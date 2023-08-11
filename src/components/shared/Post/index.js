@@ -9,7 +9,6 @@ import {
   MoreHorizontalIcon,
   Send,
 } from '@/components/icons'
-import { useDevelopingMessage } from '@/hooks/custom'
 import { useInputState } from '@/hooks/shared'
 import { cn } from '@/utils'
 
@@ -18,7 +17,7 @@ import CommentInput from '../CommentInput'
 
 const PreviewProfileHoverCard = ({ triggerContent }) => {
   const triggerBtn = (
-    <Button variant="text-secondary" size="small" rootClassName="p-0 inline">
+    <Button variant="text-secondary" type="trigger" size="small" className="p-0 inline">
       {triggerContent}
     </Button>
   )
@@ -30,8 +29,6 @@ const PreviewProfileHoverCard = ({ triggerContent }) => {
 }
 
 const PostHeader = () => {
-  const displayMessage = useDevelopingMessage()
-
   const profileImage = (
     <Image
       width={24}
@@ -45,12 +42,7 @@ const PostHeader = () => {
     <div className="flex items-center gap-x-3">
       <PreviewProfileHoverCard triggerContent={profileImage} />
       <PreviewProfileHoverCard triggerContent="mirea_03" />
-      <Button
-        variant="text-secondary"
-        icon={MoreHorizontalIcon}
-        rootClassName="ml-auto"
-        onClick={displayMessage}
-      />
+      <Button variant="text-secondary" icon={MoreHorizontalIcon} className="ml-auto" />
     </div>
   )
 }
@@ -70,41 +62,34 @@ const PostImage = () => {
 }
 
 const PostActions = () => {
-  const displayMessage = useDevelopingMessage()
-
   const ActionList = [
     {
       key: 'like',
-      onPress: displayMessage,
       icon: HeartIcon,
     },
     {
       key: 'post-open',
-      onPress: displayMessage,
       icon: MessageCircle,
     },
     {
       key: 'message',
-      onPress: displayMessage,
       icon: Send,
     },
     {
       key: 'save',
-      onPress: displayMessage,
       icon: BookmarkIcon,
     },
   ]
   return (
     <div className="flex gap-x-3">
-      {ActionList.map(({ key, onPress, icon }, index) => {
+      {ActionList.map(({ key, icon }, index) => {
         const isLast = index === ActionList.length - 1
         return (
           <Button
             key={key}
             variant="text-secondary"
             icon={icon}
-            onClick={onPress}
-            rootClassName={cn({
+            className={cn({
               'ml-auto': isLast,
             })}
           />
@@ -115,8 +100,6 @@ const PostActions = () => {
 }
 
 const PostContent = () => {
-  const displayMessage = useDevelopingMessage()
-
   return (
     <div className="text-left">
       <PreviewProfileHoverCard triggerContent="mirea_03" />
@@ -125,12 +108,7 @@ const PostContent = () => {
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       </span>
 
-      <Button
-        variant="text-secondary"
-        size="small"
-        rootClassName="text-comment font-medium"
-        onClick={displayMessage}
-      >
+      <Button variant="text-secondary" size="small" className="text-comment font-medium">
         more
       </Button>
     </div>
@@ -138,16 +116,9 @@ const PostContent = () => {
 }
 
 const PostComment = ({ value, onChange }) => {
-  const displayMessage = useDevelopingMessage()
-
   return (
     <>
-      <Button
-        variant="text-secondary"
-        size="small"
-        rootClassName="text-comment font-medium"
-        onClick={displayMessage}
-      >
+      <Button variant="text-secondary" size="small" className="text-comment font-medium">
         View all comments
       </Button>
       <CommentInput

@@ -33,7 +33,7 @@ const PostActions = () => {
             variant="text-secondary"
             icon={icon}
             onClick={onPress}
-            rootClassName="last:ml-auto"
+            className="last:ml-auto"
           />
         )
       })}

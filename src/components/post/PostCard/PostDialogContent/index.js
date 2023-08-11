@@ -29,7 +29,7 @@ const ProfileImage = ({ image }) => {
 
 const PreviewProfileHoverCard = ({ triggerContent }) => {
   const triggerBtn = (
-    <Button variant="text-secondary" rootClassName="shrink-0 p-0 inline w-fit h-[30px]">
+    <Button variant="text-secondary" className="shrink-0 p-0 inline w-fit h-[30px]">
       {triggerContent}
     </Button>
   )

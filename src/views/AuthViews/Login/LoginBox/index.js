@@ -1,6 +1,5 @@
 import { Button } from '@/components/base'
 import { InstagramLetterIcon } from '@/components/icons'
-import { useDevelopingMessage } from '@/hooks/custom'
 import AppDownloadNavigation from '@/views/AuthViews/components/AppDownloadNavigation'
 
 import AuthNavigation from '../../components/AuthNavigaton'
@@ -9,9 +8,8 @@ import Or from '../../components/Or'
 import LoginForm from '../components/LoginForm'
 
 const ForgotPasswordButton = () => {
-  const displayMessage = useDevelopingMessage()
   return (
-    <Button variant="secondary-text" onClick={displayMessage} rootClassName="mt-6 text-xs h-fit">
+    <Button variant="secondary-text" className="mt-6 text-xs h-fit">
       <p>Forgot password?</p>
     </Button>
   )

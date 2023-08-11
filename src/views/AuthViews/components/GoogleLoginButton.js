@@ -16,7 +16,7 @@ const GoogleLoginButton = ({ variant = 'secondary' }) => {
       fullWidth
       onClick={onLogin}
       icon={GoogleIcon}
-      rootClassName="mt-6"
+      className="mt-6"
     >
       Log in with Google
     </Button>

@@ -9,14 +9,11 @@ import { Button, LineBreak } from '@/components/base'
 import { AnimatedBarSpinnerIcon, XIcon } from '@/components/icons'
 import { Routes } from '@/constants'
 import Assets from '@/constants/Assets'
-import { useDevelopingMessage } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 import SearchInput from '../../SearchInput'
 
 const SearchItem = (props) => {
-  const displayMessage = useDevelopingMessage()
-
   const { username, image } = props || {}
   const router = useRouter()
 
@@ -40,12 +37,7 @@ const SearchItem = (props) => {
           </div>
         </div>
       </Pressable>
-      <Button
-        variant="text-secondary"
-        icon={XIcon}
-        iconClassName="w-6 h-6 stroke-3 text-note"
-        onClick={displayMessage}
-      />
+      <Button variant="text-secondary" icon={XIcon} iconClassName="w-6 h-6 stroke-3 text-note" />
     </div>
   )
 }
@@ -61,11 +53,6 @@ const SearchPanelHeader = ({ onSearch, clearSearch, searchValue }) => {
 }
 
 const SearchList = ({ value }) => {
-  // TODO:
-  const onClear = () => {}
-
-  const displayMessage = useDevelopingMessage()
-
   const { isLoading, data } = useGetUserByName({
     username: value,
   })
@@ -74,7 +61,7 @@ const SearchList = ({ value }) => {
     <div className="flex-1 flex flex-col mt-4 px-2">
       <div className="flex justify-between">
         <h2 className="font-bold">Recent</h2>
-        <Button variant="text-primary" size="small" onClick={displayMessage}>
+        <Button variant="text-primary" size="small">
           Clear all
         </Button>
       </div>

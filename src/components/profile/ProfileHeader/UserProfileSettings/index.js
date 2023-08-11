@@ -1,7 +1,6 @@
 import { useFollow, useUnfollow } from '@/api/follow'
 import { Button } from '@/components/base'
 import { ChevronDown, MoreHorizontalIcon, UserPlusIcon } from '@/components/icons'
-import { useDevelopingMessage } from '@/hooks/custom'
 
 import FollowingSettingDialog from './FollowingSettingDialog'
 
@@ -14,7 +13,7 @@ const FollowButton = ({ loading, onClick }) => {
         fullWidth
         onClick={onClick}
         loading={loading}
-        rootClassName="h-full"
+        className="h-full"
       >
         Follow
       </Button>
@@ -25,7 +24,7 @@ const FollowButton = ({ loading, onClick }) => {
 const FollowingButton = ({ loading }) => {
   return (
     <div className="w-[122px] h-[32px]">
-      <Button variant="secondary" size="small" fullWidth loading={loading}>
+      <Button type="trigger" variant="secondary" size="small" fullWidth loading={loading}>
         Following <ChevronDown className="w-4 h-4 shrink-0" />
       </Button>
     </div>
@@ -55,28 +54,16 @@ const ToggleFollow = ({ user }) => {
 }
 
 const UserProfileSettings = ({ user }) => {
-  const displayMessage = useDevelopingMessage()
   return (
     <>
       <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
         <ToggleFollow user={user} />
-        <Button variant="secondary" size="small" onClick={displayMessage}>
+        <Button variant="secondary" size="small">
           Message
         </Button>
-        <Button
-          variant="secondary"
-          icon={UserPlusIcon}
-          size="small"
-          rootClassName="w-8 h-8"
-          onClick={displayMessage}
-        />
+        <Button variant="secondary" icon={UserPlusIcon} size="small" className="w-8 h-8" />
       </div>
-      <Button
-        icon={MoreHorizontalIcon}
-        variant="text-secondary"
-        rootClassName="order-1 md:order-2"
-        onClick={displayMessage}
-      />
+      <Button icon={MoreHorizontalIcon} variant="text-secondary" className="order-1 md:order-2" />
     </>
   )
 }

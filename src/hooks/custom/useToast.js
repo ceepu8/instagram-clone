@@ -14,16 +14,17 @@ export const useToastContext = () => {
 export const useToast = () => {
   const { toast } = useToastContext()
 
+  const warningOptions = {
+    icon: <AlertCircle fill="var(--warning)" color="var(--white)" />,
+    duration: 1000,
+  }
+
   return {
     default: (message) => toast(message),
     success: (message) => toast.success(message),
     error: (message) => toast.error(message),
     loading: (message) => toast.loading(message),
     custom: (custom) => toast.custom(() => custom),
-    warning: (message) =>
-      toast(message, {
-        icon: <AlertCircle fill="var(--warning)" color="var(--white)" />,
-        duration: 1000,
-      }),
+    warning: (message) => toast(message, warningOptions),
   }
 }

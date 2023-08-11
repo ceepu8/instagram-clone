@@ -3,9 +3,9 @@ import { useToast } from './useToast'
 export const useDevelopingMessage = () => {
   const { warning } = useToast()
 
-  const displayMessage = () => {
-    warning('Developing function')
+  const showMessage = (message = 'Developing function') => {
+    warning(message)
   }
 
-  return displayMessage
+  return showMessage
 }
