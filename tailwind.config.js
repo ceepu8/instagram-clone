@@ -69,5 +69,12 @@ module.exports = {
     },
     container: {},
   },
-  plugins: [require('tailwindcss-radix')],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant('mac', '.mac &')
+      addVariant('windows', '.windows &')
+      addVariant('ios', '.ios &')
+    }),
+    require('tailwindcss-radix'),
+  ],
 }
