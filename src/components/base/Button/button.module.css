@@ -1,0 +1,28 @@
+.root {
+  @apply inline-flex cursor-pointer select-none appearance-none items-center
+      justify-center gap-x-2 transition-colors duration-150 ease-linear focus:outline-none;
+}
+
+.primary {
+  @apply rounded-lg !bg-btn-primary text-white hover:bg-btn-primary-hover disabled:cursor-default disabled:bg-very-light-azure;
+}
+
+.secondary {
+  @apply rounded-lg !bg-btn-secondary text-black hover:bg-btn-secondary-hover;
+}
+
+.text-primary {
+  @apply text-btn-text-primary hover:text-btn-text-primary-hover disabled:cursor-default disabled:text-btn-text-primary-hover;
+}
+
+.text-secondary {
+  @apply text-btn-text-secondary hover:text-btn-text-secondary-hover;
+}
+
+.root:disabled {
+  @apply pointer-events-none cursor-not-allowed select-none drop-shadow-none;
+}
+
+/* .root:hover:not(:focus) {
+  
+} */

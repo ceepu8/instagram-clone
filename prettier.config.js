@@ -14,4 +14,5 @@ module.exports = {
   endOfLine: 'auto',
   importOrder: ['^@(server|trpc)/(.*)$', '^@/(.*)$', '^[./]'],
   importOrderSeparation: true,
+  plugins: ['@trivago/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
 }

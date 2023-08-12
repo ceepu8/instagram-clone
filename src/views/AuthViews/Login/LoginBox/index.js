@@ -9,7 +9,7 @@ import LoginForm from '../components/LoginForm'
 
 const ForgotPasswordButton = () => {
   return (
-    <Button variant="secondary-text" className="mt-6 text-xs h-fit">
+    <Button variant="text-secondary" className="mt-6 h-fit text-xs">
       <p>Forgot password?</p>
     </Button>
   )
@@ -20,8 +20,8 @@ const LoginBox = () => {
     <div>
       <div
         className="
-        w-[350px] flex flex-col items-center justify-center p-10
-        border border-solid border-chinese-silver"
+        flex w-[350px] flex-col items-center justify-center border
+        border-solid border-chinese-silver p-10"
       >
         <InstagramLetterIcon width={180} height="auto" className="mb-8" />
         <LoginForm />
