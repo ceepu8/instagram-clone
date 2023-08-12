@@ -56,6 +56,8 @@ module.exports = {
       crayola: 'var(--crayola)',
       'philippine-gray': 'var(--philippine-gray)',
       'anti-flash-gray': 'var(--anti-flash-gray)',
+
+      gradient: 'var(--gradient)',
     },
     backgroundOpacity: ['active'],
     boxShadow: {

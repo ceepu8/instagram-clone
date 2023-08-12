@@ -1,5 +1,3 @@
-import Head from 'next/head'
-
 import AppSideBar from './AppSideBar'
 
 const UserLayout = ({ children }) => {
@@ -10,19 +8,14 @@ const UserLayout = ({ children }) => {
   // if (!isAuthenticated) {
   //   router.push('/')
   // }
+
   return (
-    <>
-      <Head>
-        <title>Instagram</title>
-        <meta name="description" content="Smoky-Instagram" />
-      </Head>
-      <div className="w-screen h-screen">
-        <AppSideBar />
-        <div className="md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
-          {children}
-        </div>
+    <main className="h-screen w-screen">
+      <AppSideBar />
+      <div className="md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
+        {children}
       </div>
-    </>
+    </main>
   )
 }
 

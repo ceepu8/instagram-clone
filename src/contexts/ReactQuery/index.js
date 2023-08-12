@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useState } from 'react'
 
@@ -9,7 +9,7 @@ const RQ_DEFAULT_QUERIES_OPTIONS = {
   staleTime: 5000,
 }
 
-const ReactQueryProvider = ({ children }) => {
+export const ReactQueryProvider = ({ children, pageProps = {} }) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -21,10 +21,8 @@ const ReactQueryProvider = ({ children }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <>{children}</>
+      <Hydrate state={pageProps.dehydratedState}>{children}</Hydrate>
       {DEBUG && <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />}
     </QueryClientProvider>
   )
 }
-
-export { RQ_DEFAULT_QUERIES_OPTIONS, ReactQueryProvider }
