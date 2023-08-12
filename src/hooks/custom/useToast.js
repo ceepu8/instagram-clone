@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { AlertCircle } from '@/components/icons'
-import { ToastContext } from '@/contexts/ToastProvider'
+import { ToastContext } from '@/contexts/Toast'
 
 export const useToastContext = () => {
   const context = useContext(ToastContext)

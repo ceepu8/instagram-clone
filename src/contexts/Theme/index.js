@@ -5,9 +5,9 @@ import { DARK_THEME, LIGHT_THEME } from '@/constants'
 const ThemeProvider = ({ children }) => {
   return (
     <NextThemeProvider
+      themes={[LIGHT_THEME, DARK_THEME]}
       attribute="data-theme"
       enableSystem={false}
-      themes={[LIGHT_THEME, DARK_THEME]}
     >
       {children}
     </NextThemeProvider>

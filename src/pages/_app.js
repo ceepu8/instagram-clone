@@ -1,42 +1,38 @@
-import ProgressBar from '@badrap/bar-of-progress'
-import { SessionProvider } from 'next-auth/react'
-import Router from 'next/router'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
 import 'react-slideshow-image/dist/styles.css'
 
+import { Routes } from '@/constants'
 import { AppProviders } from '@/contexts'
-import DialogProvider from '@/contexts/DialogProvider'
-import { ToastProvider } from '@/contexts/ToastProvider'
-import '@/styles/bar-of-progress.css'
+import NextNProgress from '@/layouts/Progressbar'
+import UserLayout from '@/layouts/UserLayout'
+import '@/styles/globals.css'
 
-import '../styles/globals.css'
+export default function App({ Component, pageProps }) {
+  const router = useRouter()
 
-const progress = new ProgressBar({
-  size: 2,
-  color: 'var(--text)',
-  className: 'bar-of-progress',
-  delay: 100,
-})
+  const [safeHydration, setSafeHydration] = useState(false)
 
-if (typeof window !== 'undefined') {
-  progress.start()
-  progress.finish()
-}
+  const isAuthPage = router.pathname === Routes.HOME // TODO: add some pages without sidebar
 
-Router.events.on('routeChangeStart', () => progress.start())
-Router.events.on('routeChangeComplete', () => progress.finish())
-Router.events.on('routeChangeError', () => progress.finish())
+  const getLayout = useCallback(
+    (children) => (isAuthPage ? children : <UserLayout>{children}</UserLayout>),
+    [isAuthPage]
+  )
 
-export default function App({ Component, pageProps: { session, ...pageProps } }) {
-  const getLayout = Component.getLayout || ((page) => page)
+  useEffect(() => setSafeHydration(true), [])
 
   return (
-    <SessionProvider session={session}>
-      <AppProviders pageProps={pageProps}>
-        <ToastProvider>
-          <DialogProvider />
-          {getLayout(<Component {...pageProps} />)}
-        </ToastProvider>
+    <>
+      <Head>
+        <title>Instagram</title>
+        <meta name="description" content="Smoky-Instagram" />
+      </Head>
+      <AppProviders locale={router.locale || 'en'} pageProps={pageProps}>
+        <NextNProgress />
+        {safeHydration && getLayout(<Component {...pageProps} />)}
       </AppProviders>
-    </SessionProvider>
+    </>
   )
 }
