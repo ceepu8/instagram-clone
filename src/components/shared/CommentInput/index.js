@@ -18,7 +18,7 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
           <Button
             variant="text-secondary"
             size={variant === 'main' ? 'medium' : 'extra-small'}
-            rootClassName={cn(variant === 'secondary' && 'order-3')}
+            className={cn(variant === 'secondary' && 'order-3')}
             icon={SmileIcon}
           />
         }
@@ -38,7 +38,7 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
         variant="text-primary"
         size="small"
         disabled={!value}
-        rootClassName={cn(
+        className={cn(
           variant === 'secondary' && value ? 'block' : 'hidden',
           variant === 'main' && 'block'
         )}

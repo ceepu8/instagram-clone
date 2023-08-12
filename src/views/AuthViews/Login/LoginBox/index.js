@@ -3,9 +3,9 @@ import { InstagramLetterIcon } from '@/components/icons'
 import { Or } from '@/components/shared'
 import { Routes } from '@/constants'
 import AppDownloadNavigation from '@/views/AuthViews/components/AppDownloadNavigation'
+import AuthNavigation from '@/views/AuthViews/components/AuthNavigaton'
+import GoogleLoginButton from '@/views/AuthViews/components/GoogleLoginButton'
 
-import AuthNavigation from '../../components/AuthNavigaton'
-import GoogleLoginButton from '../../components/GoogleLoginButton'
 import LoginForm from '../components/LoginForm'
 
 const ForgotPasswordButton = () => (
@@ -17,11 +17,7 @@ const ForgotPasswordButton = () => (
 const LoginBox = () => {
   return (
     <div>
-      <div
-        className="
-        w-[350px] flex flex-col items-center justify-center p-10
-        border border-solid border-chinese-silver"
-      >
+      <div className="w-[350px] flex flex-col items-center justify-center p-10 border border-solid border-chinese-silver">
         <InstagramLetterIcon width={180} height="auto" className="mb-8" />
         <LoginForm />
         <Or />

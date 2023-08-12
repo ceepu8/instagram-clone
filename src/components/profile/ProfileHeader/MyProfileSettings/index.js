@@ -8,7 +8,7 @@ const MyProfileSettings = () => {
       <Button
         variant="secondary"
         size="small"
-        rootClassName="order-last md:order-2 mt-4 md:mt-0 w-full md:w-auto"
+        className="order-last md:order-2 mt-4 md:mt-0 w-full md:w-auto"
       >
         Edit profile
       </Button>
@@ -16,7 +16,7 @@ const MyProfileSettings = () => {
         icon={SettingsIcon}
         variant="text-secondary"
         size="small"
-        rootClassName="order-3 md:order-last"
+        className="order-3 md:order-last"
       />
     </>
   )

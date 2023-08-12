@@ -29,5 +29,6 @@ export const API = {
     DESTROY: '/api/follow/destroy/:id',
     FOLLOWINGS: '/api/follow/followings/:id',
     FOLLOWERS: '/api/follow/followers/:id',
+    DETAIL: '/api/follow/:id',
   },
 }
