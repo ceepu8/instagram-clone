@@ -5,6 +5,7 @@ export const Routes = {
   DIRECT_INBOX: '/direct/inbox',
   DIRECT_DETAIL: 'direct/[id]',
   PROFILE: '/profile/[id]',
+  RESET_PASSWORD: '/accounts/password/reset',
 
   LOGIN: '/login',
   REGISTER: '/register',

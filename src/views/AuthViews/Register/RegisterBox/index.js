@@ -1,7 +1,7 @@
 import { InstagramLetterIcon } from '@/components/icons'
+import { Or } from '@/components/shared'
 
 import GoogleLoginButton from '../../components/GoogleLoginButton'
-import Or from '../../components/Or'
 import RegisterForm from '../components/RegisterForm'
 
 const RegisterBox = () => {
