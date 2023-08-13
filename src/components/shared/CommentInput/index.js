@@ -11,12 +11,12 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
   }
 
   return (
-    <div className={cn('flex items-center w-full relative gap-x-2')}>
+    <div className={cn('relative flex w-full items-center gap-x-2')}>
       <Popover
         contentClassName="p-0"
         trigger={
           <Button
-            variant="text-secondary"
+            variant="ghost"
             size={variant === 'main' ? 'medium' : 'extra-small'}
             className={cn(variant === 'secondary' && 'order-3')}
             icon={SmileIcon}
@@ -35,8 +35,7 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
       />
 
       <Button
-        variant="text-primary"
-        size="small"
+        variant="link"
         disabled={!value}
         className={cn(
           variant === 'secondary' && value ? 'block' : 'hidden',

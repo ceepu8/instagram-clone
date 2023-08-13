@@ -18,12 +18,12 @@ const SearchItem = (props) => {
   const router = useRouter()
 
   return (
-    <div className="flex items-center w-full cursor-pointer">
+    <div className="flex w-full cursor-pointer items-center">
       <Pressable
         onPress={() => router.push({ pathname: Routes.PROFILE, query: { id: username } })}
         isDisabled={!username}
       >
-        <div className="flex items-center space-x-4 w-full cursor-pointer">
+        <div className="flex w-full cursor-pointer items-center space-x-4">
           <Image
             width={40}
             height={40}
@@ -32,12 +32,12 @@ const SearchItem = (props) => {
             className="rounded-full"
           />
           <div className="flex-1">
-            <h1 className="text-base font-bold text-sm leading-4">{username}</h1>
-            <p className="text-note text-sm leading-4">description</p>
+            <h1 className="text-sm font-bold leading-4 text-base">{username}</h1>
+            <p className="text-sm leading-4 text-note">description</p>
           </div>
         </div>
       </Pressable>
-      <Button variant="text-secondary" icon={XIcon} iconClassName="w-6 h-6 stroke-3 text-note" />
+      <Button variant="ghost" icon={XIcon} iconClassName="stroke-3 text-note" />
     </div>
   )
 }
@@ -45,7 +45,7 @@ const SearchItem = (props) => {
 const SearchPanelHeader = ({ onSearch, clearSearch, searchValue }) => {
   return (
     <div className="flex flex-col space-y-6">
-      <h1 className="font-bold text-2xl px-2 mb-3">Search</h1>
+      <h1 className="mb-3 px-2 text-2xl font-bold">Search</h1>
       <SearchInput onSearch={onSearch} clearSearch={clearSearch} searchValue={searchValue} />
       <LineBreak className="-mx-4" />
     </div>
@@ -58,16 +58,16 @@ const SearchList = ({ value }) => {
   })
 
   return (
-    <div className="flex-1 flex flex-col mt-4 px-2">
+    <div className="mt-4 flex flex-1 flex-col px-2">
       <div className="flex justify-between">
         <h2 className="font-bold">Recent</h2>
-        <Button variant="text-primary" size="small">
+        <Button variant="link" size="small">
           Clear all
         </Button>
       </div>
       <div
         className={cn(
-          'flex-1 flex flex-col items-center space-y-4 mt-6',
+          'mt-6 flex flex-1 flex-col items-center space-y-4',
           !data?.users?.length && 'justify-center'
         )}
       >
@@ -75,10 +75,10 @@ const SearchList = ({ value }) => {
         {!isLoading &&
           (data?.users || []).map((user) => <SearchItem key={user.username} {...user} />)}
         {!isLoading && !data?.users?.length && value && (
-          <p className="text-comment text-sm font-semibold">No results found</p>
+          <p className="text-sm font-semibold text-comment">No results found</p>
         )}
         {!isLoading && !value && (
-          <p className="text-comment text-sm font-semibold">No recent searches</p>
+          <p className="text-sm font-semibold text-comment">No recent searches</p>
         )}
       </div>
     </div>
@@ -97,7 +97,7 @@ const SearchPanel = () => {
   const clearSearch = useCallback(() => setSearchValue(''), [])
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       <SearchPanelHeader onSearch={onSearch} clearSearch={clearSearch} searchValue={searchValue} />
       <SearchList value={value} />
     </div>

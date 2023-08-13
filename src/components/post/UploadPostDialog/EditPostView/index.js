@@ -25,9 +25,9 @@ const StepSetting = ({ step, setStep, handleResetPost, onSubmit }) => {
   }
 
   return (
-    <div className="absolute -top-8 right-0 px-3 flex justify-between items-center w-full">
-      <Button variant="text-secondary" icon={ArrowLeftIcon} onClick={onPrev} />
-      <Button variant="text-primary" size="small" onClick={onNext}>
+    <div className="absolute -top-8 right-0 flex w-full items-center justify-between px-3">
+      <Button variant="ghost" icon={ArrowLeftIcon} onClick={onPrev} />
+      <Button variant="link" size="small" onClick={onNext}>
         {step === 3 ? 'Share' : 'Next'}
       </Button>
     </div>
@@ -68,8 +68,8 @@ const EditPostView = ({ step, setStep }) => {
   }
 
   return (
-    <div className="relative w-full h-full flex items-center">
-      <div className="h-full w-full flex transition duration-500">
+    <div className="relative flex h-full w-full items-center">
+      <div className="flex h-full w-full transition duration-500">
         <StepSetting
           step={step}
           setStep={setStep}

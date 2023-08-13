@@ -18,8 +18,8 @@ export const useFollow = (user, onSuccess, variant = 'my_profile') => {
   const queryClient = useQueryClient()
 
   const { mutate, isLoading, isSuccess } = useMutation({
-    mutationFn: async (dataRequest) => {
-      const response = await Axios.post(API.FOLLOW.CREATE.replace(':id', user.id), dataRequest)
+    mutationFn: async () => {
+      const response = await Axios.post(API.FOLLOW.CREATE.replace(':id', user.id))
       return response.data
     },
     onSuccess: () => {
@@ -66,8 +66,8 @@ export const useUnfollow = (user, onSuccess, variant = 'my_profile') => {
   const { user: authUser } = useAuth()
 
   const { mutate, isLoading, isSuccess } = useMutation({
-    mutationFn: async (dataRequest) => {
-      const response = await Axios.post(API.FOLLOW.DESTROY.replace(':id', user.id), dataRequest)
+    mutationFn: async () => {
+      const response = await Axios.post(API.FOLLOW.DESTROY.replace(':id', user.id))
       return response.data
     },
     onSuccess: () => {

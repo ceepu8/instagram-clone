@@ -29,7 +29,7 @@ const ProfileImage = ({ image }) => {
 
 const PreviewProfileHoverCard = ({ triggerContent }) => {
   const triggerBtn = (
-    <Button variant="text-secondary" className="shrink-0 p-0 inline w-fit h-[30px]">
+    <Button variant="ghost" className="inline h-[30px] w-fit shrink-0 p-0">
       {triggerContent}
     </Button>
   )
@@ -50,7 +50,7 @@ const PostHeader = ({ owner }) => {
       <div className="flex-1">
         <PreviewProfileHoverCard triggerContent={owner?.username} />
       </div>
-      <Button variant="text-secondary" icon={MoreHorizontalIcon} />
+      <Button variant="ghost" icon={MoreHorizontalIcon} />
     </div>
   )
 }
@@ -61,17 +61,17 @@ const PostLike = ({ liked = [], createdAt }) => {
       <p className="text-sm">
         Liked by <b>{liked?.length}</b> people
       </p>
-      <p className="text-comment text-[10px] uppercase">{getTimeFromNow(createdAt)}</p>
+      <p className="text-[10px] uppercase text-comment">{getTimeFromNow(createdAt)}</p>
     </div>
   )
 }
 
 const BlueTick = () => {
   return (
-    <div className="inline-block ml-1 w-3 h-3 rounded-full bg-primary relative">
+    <div className="relative ml-1 inline-block h-3 w-3 rounded-full bg-primary">
       <CheckIcon
         size={8}
-        className="text-base-reverse inline absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 text-base-reverse"
       />
     </div>
   )
@@ -81,15 +81,15 @@ const PostCaption = ({ owner, caption = '', createdAt }) => {
   const postCreatedTime = getTimeFromNow(createdAt)
 
   return (
-    <div className="space-x-4 px-4 hidden md:flex">
+    <div className="hidden space-x-4 px-4 md:flex">
       <PreviewProfileHoverCard triggerContent={<ProfileImage image={owner?.image} />} />
       <div className="flex flex-col space-y-1">
         <div className="text-left">
           <PreviewProfileHoverCard triggerContent={owner?.username} />
           <BlueTick />
-          <span className="text-sm ml-1">{caption}</span>
+          <span className="ml-1 text-sm">{caption}</span>
         </div>
-        <p className="text-comment text-xs"> {postCreatedTime}</p>
+        <p className="text-xs text-comment"> {postCreatedTime}</p>
       </div>
     </div>
   )
@@ -100,20 +100,20 @@ const PostDialogContent = (props) => {
   const { owner, caption, createdAt, liked, images } = props
 
   return (
-    <div className="flex flex-col justify-between md:space-y-4 py-4 h-full relative">
+    <div className="relative flex h-full flex-col justify-between py-4 md:space-y-4">
       <PostHeader owner={owner} />
       <PostCaption owner={owner} caption={caption} createdAt={createdAt} />
-      <div className="flex-1 px-4 overflow-auto no-scrollbar relative hidden md:block">
+      <div className="no-scrollbar relative hidden flex-1 overflow-auto px-4 md:block">
         <PostCommentList />
       </div>
       <div className="block md:hidden">
         <PostImageSlider images={images} />
       </div>
-      <div className="md:absolute bottom-4 left-0 w-full flex flex-col space-y-3 bg-background">
-        <LineBreak className="bg-popover-divide mt-2 mb-0" />
+      <div className="bottom-4 left-0 flex w-full flex-col space-y-3 bg-background md:absolute">
+        <LineBreak className="mb-0 mt-2 bg-popover-divide" />
         <PostActions />
         <PostLike liked={liked} createdAt={createdAt} />
-        <LineBreak className="bg-popover-divide my-0" />
+        <LineBreak className="my-0 bg-popover-divide" />
         <PostComment value={comment} onChange={getCommentInputOnChange} />
       </div>
     </div>

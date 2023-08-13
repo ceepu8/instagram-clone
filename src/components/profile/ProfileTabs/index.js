@@ -39,9 +39,9 @@ const ProfileTabs = () => {
     )
 
   return (
-    <div className="relative sm:px-4 h-[41px] sm:h-[49px]">
+    <div className="relative h-[41px] sm:h-[49px] sm:px-4">
       <LineBreak className="my-0" />
-      <div className="flex justify-center sm:space-x-16 absolute inset-0">
+      <div className="absolute inset-0 flex justify-center sm:space-x-16">
         {tabList.map((tab) => {
           const { key, active, icon: Icon, label } = tab
 
@@ -52,14 +52,14 @@ const ProfileTabs = () => {
               onClick={() => changeTab(key)}
               className={cn(
                 'flex items-center justify-center space-x-1 py-2 sm:py-6',
-                'text-xs text-comment tracking-wide font-bold',
+                'text-xs font-bold tracking-wide text-comment',
                 'border-t border-transparent',
                 'flex-1 sm:flex-initial',
                 active && 'border-base'
               )}
             >
-              <Icon className={cn('sm:w-4 sm:h-4', active && 'text-primary sm:text-base')} />
-              <span className="uppercase hidden sm:block">{label}</span>
+              <Icon className={cn('sm:h-4 sm:w-4', active && 'text-primary sm:text-base')} />
+              <span className="hidden uppercase sm:block">{label}</span>
             </button>
           )
         })}

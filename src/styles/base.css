@@ -30,10 +30,10 @@
     --btn-primary-hover: #1a77f2;
     --btn-secondary: #efefef;
     --btn-secondary-hover: #dbdbdb;
-    --btn-text-primary: #0095f6;
-    --btn-text-primary-hover: #00376b;
-    --btn-text-secondary: #161616;
-    --btn-text-secondary-hover: #7f7f7f;
+    --btn-link: #0095f6;
+    --btn-link-hover: #00376b;
+    --btn-ghost: #161616;
+    --btn-ghost-hover: #7f7f7f;
 
     --search-input: #efefef;
 
@@ -96,10 +96,10 @@
     --btn-primary-hover: #1a77f2;
     --btn-secondary: #efefef;
     --btn-secondary-hover: #dbdbdb;
-    --btn-text-primary: #0095f6;
-    --btn-text-primary-hover: #e0f1ff;
-    --btn-text-secondary: #f5f5f5;
-    --btn-text-secondary-hover: #7b7b7b;
+    --btn-link: #0095f6;
+    --btn-link-hover: #e0f1ff;
+    --btn-ghost: #f5f5f5;
+    --btn-ghost-hover: #7b7b7b;
 
     --search-input: #262626;
 

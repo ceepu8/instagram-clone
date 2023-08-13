@@ -33,7 +33,7 @@ const MiniEmojiPickerPopover = ({ onEmojiClick }) => {
   return (
     <Popover
       contentClassName="px-4 pt-4 rounded-md"
-      trigger={<Button variant="text-secondary" size="small" icon={SmileIcon} />}
+      trigger={<Button variant="ghost" size="small" icon={SmileIcon} />}
       hasArrow
     >
       <MiniEmojiPicker onEmojiClick={onEmojiClick} />
@@ -52,7 +52,7 @@ const CaptionTextarea = () => {
       <TextArea
         placeholder="Write a caption..."
         maxLength={MAX_POST_CAPTION_LENGTH}
-        className="h-[100px] md:h-[200px] bg-popover"
+        className="h-[100px] bg-popover md:h-[200px]"
         onChange={(e) => {
           setCharacterCount(e.target.value.length)
         }}
@@ -64,7 +64,7 @@ const CaptionTextarea = () => {
             setValue(FORM_POST.CAPTION, value + emoji)
           }}
         />
-        <p className="text-xs text-footer font-semibold">
+        <p className="text-xs font-semibold text-footer">
           {characterCount} / {MAX_POST_CAPTION_LENGTH}
         </p>
       </div>
@@ -93,7 +93,7 @@ const EditPostForm = ({ step, onSubmit, methods }) => {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="flex flex-1 flex-col gap-y-2 p-4 h-full overflow-auto">
+      <div className="flex h-full flex-1 flex-col gap-y-2 overflow-auto p-4">
         <UserInfo />
         <FormProvider {...methods}>
           <form className="flex flex-col" onSubmit={onSubmit}>

@@ -14,14 +14,16 @@ export const buttonVariants = cva(s.root, {
     variant: {
       primary: s.primary,
       secondary: s.secondary,
-      'text-primary': s['text-primary'],
-      'text-secondary': s['text-secondary'],
+      link: s.link,
+      ghost: s.ghost,
       // link: 'underline-offset-4 hover:underline text-primary',
     },
     size: {
       small: 'h-8 px-4 text-sm',
       medium: 'h-9 px-6 text-base',
       large: 'h-10 px-8 text-lg',
+      icon: 'h-auto w-fit',
+      text: 'h-auto w-fit text-sm',
     },
   },
   defaultVariants: {
@@ -51,11 +53,24 @@ const Button = forwardRef(
   ) => {
     const showMessage = useDevelopingMessage()
 
+    const getSize = () => {
+      if (Icon && children) {
+        return 'medium'
+      }
+      if (Icon && !children) {
+        return 'icon'
+      }
+      if (children && (variant === 'ghost' || variant === 'link')) {
+        return 'text'
+      }
+      return size
+    }
+
     const rootClassName = cn(
-      buttonVariants({ variant, size }),
+      className,
+      buttonVariants({ variant, size: getSize() }),
       fullWidth && 'w-full',
-      bold && 'font-bold',
-      className
+      bold && 'font-bold'
     )
 
     const rootIconClassName = cn(
@@ -93,7 +108,7 @@ const Button = forwardRef(
 
 Button.propTypes = {
   type: propTypes.oneOf(['button', 'submit', 'reset', 'trigger']),
-  variant: propTypes.oneOf(['primary', 'secondary', 'text-primary', 'text-secondary']),
+  variant: propTypes.oneOf(['primary', 'secondary', 'link', 'ghost', 'icon']),
   onClick: propTypes.func,
   icon: propTypes.elementType,
   iconClassName: propTypes.string,

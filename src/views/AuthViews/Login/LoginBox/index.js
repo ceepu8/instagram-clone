@@ -10,18 +10,18 @@ import LoginForm from '../components/LoginForm'
 
 const ForgotPasswordButton = () => (
   <Link href={Routes.RESET_PASSWORD}>
-    <p className="text-black text-xs text-center mt-6 font-semibold">Forgot password?</p>
+    <p className="mt-6 text-center text-xs font-semibold text-black">Forgot password?</p>
   </Link>
 )
 
 const LoginBox = () => {
   return (
     <div>
-      <div className="w-[350px] flex flex-col items-center justify-center p-10 border border-solid border-chinese-silver">
+      <div className="flex w-[350px] flex-col items-center justify-center border border-solid border-chinese-silver p-10">
         <InstagramLetterIcon width={180} height="auto" className="mb-8" />
         <LoginForm />
         <Or />
-        <GoogleLoginButton variant="text-secondary" />
+        <GoogleLoginButton variant="ghost" />
         <ForgotPasswordButton />
       </div>
 

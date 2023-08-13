@@ -17,7 +17,7 @@ import CommentInput from '../CommentInput'
 
 const PreviewProfileHoverCard = ({ triggerContent }) => {
   const triggerBtn = (
-    <Button variant="text-secondary" type="trigger" size="small" className="p-0 inline">
+    <Button variant="ghost" type="trigger" size="small" className="inline p-0">
       {triggerContent}
     </Button>
   )
@@ -42,14 +42,14 @@ const PostHeader = () => {
     <div className="flex items-center gap-x-3">
       <PreviewProfileHoverCard triggerContent={profileImage} />
       <PreviewProfileHoverCard triggerContent="mirea_03" />
-      <Button variant="text-secondary" icon={MoreHorizontalIcon} className="ml-auto" />
+      <Button variant="ghost" icon={MoreHorizontalIcon} className="ml-auto" />
     </div>
   )
 }
 
 const PostImage = () => {
   return (
-    <div className="border-solid border-divide border rounded">
+    <div className="rounded border border-solid border-divide">
       <Image
         width={1200}
         height={1200}
@@ -87,7 +87,8 @@ const PostActions = () => {
         return (
           <Button
             key={key}
-            variant="text-secondary"
+            variant="ghost"
+            size="icon"
             icon={icon}
             className={cn({
               'ml-auto': isLast,
@@ -101,16 +102,12 @@ const PostActions = () => {
 
 const PostContent = () => {
   return (
-    <div className="text-left">
+    <div className="h-fit text-left">
       <PreviewProfileHoverCard triggerContent="mirea_03" />
       <span>&nbsp;</span>
       <span className="text-sm tracking-tight">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       </span>
-
-      <Button variant="text-secondary" size="small" className="text-comment font-medium">
-        more
-      </Button>
     </div>
   )
 }
@@ -118,14 +115,17 @@ const PostContent = () => {
 const PostComment = ({ value, onChange }) => {
   return (
     <>
-      <Button variant="text-secondary" size="small" className="text-comment font-medium">
+      <Button variant="ghost" bold={false} size="small" className="font-medium text-comment">
+        more
+      </Button>
+      <Button variant="ghost" bold={false} size="small" className="font-medium text-comment">
         View all comments
       </Button>
       <CommentInput
         variant="secondary"
         value={value}
         onChange={onChange}
-        className="placeholder-comment font-medium"
+        className="font-medium placeholder-comment"
       />
     </>
   )
@@ -137,9 +137,11 @@ const Post = () => {
     <div className="space-y-2 py-4">
       <PostHeader />
       <PostImage />
-      <PostActions />
-      <PostContent />
-      <PostComment value={comment} onChange={getCommentInputOnChange} />
+      <div className="flex flex-col">
+        <PostActions />
+        <PostContent />
+        <PostComment value={comment} onChange={getCommentInputOnChange} />
+      </div>
     </div>
   )
 }

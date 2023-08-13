@@ -11,12 +11,12 @@
   @apply rounded-lg !bg-btn-secondary text-black hover:bg-btn-secondary-hover;
 }
 
-.text-primary {
-  @apply text-btn-text-primary hover:text-btn-text-primary-hover disabled:cursor-default disabled:text-btn-text-primary-hover;
+.link {
+  @apply text-btn-link hover:text-btn-link-hover disabled:cursor-default disabled:text-btn-link-hover;
 }
 
-.text-secondary {
-  @apply text-btn-text-secondary hover:text-btn-text-secondary-hover;
+.ghost {
+  @apply text-btn-ghost hover:text-btn-ghost-hover;
 }
 
 .root:disabled {
