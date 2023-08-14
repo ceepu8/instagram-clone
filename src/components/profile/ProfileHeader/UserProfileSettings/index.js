@@ -6,15 +6,8 @@ import FollowingSettingDialog from './FollowingSettingDialog'
 
 const FollowButton = ({ loading, onClick }) => {
   return (
-    <div className="w-[77px] h-[32px]">
-      <Button
-        variant="primary"
-        size="small"
-        fullWidth
-        onClick={onClick}
-        loading={loading}
-        className="h-full"
-      >
+    <div className="h-[32px] w-[77px]">
+      <Button variant="primary" size="small" fullWidth onClick={onClick} loading={loading}>
         Follow
       </Button>
     </div>
@@ -23,9 +16,9 @@ const FollowButton = ({ loading, onClick }) => {
 
 const FollowingButton = ({ loading }) => {
   return (
-    <div className="w-[122px] h-[32px]">
+    <div className="h-[32px] w-[122px]">
       <Button type="trigger" variant="secondary" size="small" fullWidth loading={loading}>
-        Following <ChevronDown className="w-4 h-4 shrink-0" />
+        Following <ChevronDown className="h-4 w-4 shrink-0" />
       </Button>
     </div>
   )
@@ -56,14 +49,14 @@ const ToggleFollow = ({ user }) => {
 const UserProfileSettings = ({ user }) => {
   return (
     <>
-      <div className="flex items-center space-x-2 md:space-x-4 basis-full md:basis-auto md:mt-0 mt-4 order-3 md:order-2">
+      <div className="order-3 mt-4 flex basis-full items-center space-x-2 md:order-2 md:mt-0 md:basis-auto md:space-x-4">
         <ToggleFollow user={user} />
         <Button variant="secondary" size="small">
           Message
         </Button>
-        <Button variant="secondary" icon={UserPlusIcon} size="small" className="w-8 h-8" />
+        <Button variant="secondary" icon={UserPlusIcon} size="small" className="h-8 w-8" />
       </div>
-      <Button icon={MoreHorizontalIcon} variant="text-secondary" className="order-1 md:order-2" />
+      <Button icon={MoreHorizontalIcon} variant="ghost" className="order-1 md:order-2" />
     </>
   )
 }

@@ -1,6 +1,4 @@
-import { Pressable } from '@react-aria/interactions'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
 import { CompassIcon, FacebookMessengerIcon, Film, Home, PlusSquare } from '@/components/icons'
 import { Routes } from '@/constants'
@@ -8,7 +6,9 @@ import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
-import { checkRouteActive, cn } from '@/utils'
+import { cn } from '@/utils'
+
+import NavItem from './NavItem'
 
 const ProfileImage = ({ size = 24, className, active }) => {
   const { user } = useAuth()
@@ -23,29 +23,6 @@ const ProfileImage = ({ size = 24, className, active }) => {
         className={cn('rounded-full border-2', active ? 'border-base' : 'border-transparent')}
       />
     </div>
-  )
-}
-
-const NavItem = (props) => {
-  const router = useRouter()
-
-  const { icon: Icon, content: Content, route, onPress } = props || {}
-  const active = checkRouteActive(router, route)
-
-  return (
-    <Pressable onPress={() => (route ? router.push(route) : onPress?.())}>
-      <div className="flex-1 flex items-center justify-center w-[26px] h-[26px]">
-        {Icon && (
-          <Icon
-            size={active ? 26 : 24}
-            className={cn(
-              active && Icon !== FacebookMessengerIcon && 'fill-black stroke-white stroke-[1px]'
-            )}
-          />
-        )}
-        {Content && <Content active={active} />}
-      </div>
-    </Pressable>
   )
 }
 
@@ -98,8 +75,8 @@ const MobileNavigation = () => {
   return (
     <div
       className={cn(
-        'w-full bg-background py-3 px-6',
-        'z-50 fixed bottom-0 left-0',
+        'w-full bg-background px-6 py-3',
+        'fixed bottom-0 left-0 z-50',
         'flex items-center justify-between',
         'border-t border-divide',
         'md:hidden'

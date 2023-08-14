@@ -39,7 +39,7 @@ export const FollowDialog = ({ variant = 'followings', userId, trigger }) => {
       >
         <DialogContent className="min-w-[420px]" title={<h1 className="capitalize">{variant}</h1>}>
           <DialogClose className="absolute right-2 top-2">
-            <Button variant="text-secondary" icon={XIcon} />
+            <Button variant="ghost" icon={XIcon} />
           </DialogClose>
           {content[variant]}
         </DialogContent>

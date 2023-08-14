@@ -18,8 +18,8 @@ const AuthInput = ({
       <label
         htmlFor={name}
         className={cn(
-          'text-xs text-nickel cursor-auto',
-          'absolute top-1/2 -translate-y-1/2 left-2',
+          'cursor-auto text-xs text-nickel',
+          'absolute left-2 top-1/2 -translate-y-1/2',
           'transition-all duration-150',
           isHaveValue ? 'top-3 text-[8px]' : ''
         )}
@@ -32,13 +32,13 @@ const AuthInput = ({
         value={value}
         placeholder={placeholder}
         className={cn(
-          'w-full p-2 rounded-sm',
+          'w-full rounded-sm p-2',
           'text-sm',
           'border border-solid border-chinese-silver',
-          'focus:border-philippine-gray placeholder-nickel',
+          'placeholder-nickel focus:border-philippine-gray',
           'focus:ring-offset-0',
           'bg-lotion',
-          isHaveValue ? 'pt-4 pb-1 text-xs' : ''
+          isHaveValue ? 'pb-1 pt-4 text-xs' : ''
         )}
         {...register(name, { required })}
         {...props}

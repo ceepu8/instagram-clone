@@ -9,9 +9,9 @@ const UploadImageView = ({ handleImageChange }) => {
       <label
         htmlFor="file"
         className={cn(
-          'h-[32px] w-fit flex items-center justify-center px-3 gap-x-2',
-          'text-sm text-white font-bold',
-          'bg-btn-primary hover:bg-btn-primary-hover rounded-lg',
+          'flex h-[32px] w-fit items-center justify-center gap-x-2 px-3',
+          'text-sm font-bold text-white',
+          'rounded-lg bg-btn-primary hover:bg-btn-primary-hover',
           'cursor-pointer focus:outline-none disabled:cursor-default disabled:bg-very-light-azure'
         )}
       >

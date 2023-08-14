@@ -6,17 +6,17 @@ const EmojiPicker = ({ onEmojiClick }) => {
   }
 
   return (
-    <div className="bg-popover max-w-[265px] max-h-[156px] overflow-auto flex flex-col space-y-2">
+    <div className="flex max-h-[156px] max-w-[265px] flex-col space-y-2 overflow-auto bg-popover">
       {emojiSections.map(({ category, emojis }) => {
         return (
           <div key={category}>
-            <div className="text-comment font-semibold text-sm mb-4">{category}</div>
+            <div className="mb-4 text-sm font-semibold text-comment">{category}</div>
             <div className="flex flex-wrap gap-4">
               {emojis.map((emoji) => (
                 <button
                   type="button"
                   key={emoji}
-                  className="w-6 h-6 text-lg flex items-center justify-center"
+                  className="flex h-6 w-6 items-center justify-center text-lg"
                   onClick={() => handleEmojiSelection(emoji)}
                 >
                   {emoji}

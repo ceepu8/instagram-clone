@@ -13,7 +13,7 @@ const ProfileBody = () => {
   }
 
   return (
-    <div className="sm:px-4 flex-1">
+    <div className="flex-1 sm:px-4">
       {isLoading && <AnimatedSpinnerIcon className="text-primary" />}
       <div className="grid grid-cols-3 justify-start gap-1">
         {posts.map((post) => {

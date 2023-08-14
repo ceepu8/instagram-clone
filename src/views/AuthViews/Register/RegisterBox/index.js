@@ -6,11 +6,11 @@ import RegisterForm from '../components/RegisterForm'
 
 const RegisterBox = () => {
   return (
-    <div className="w-[350px] flex flex-col items-center justify-center p-10 border border-solid border-chinese-silver">
+    <div className="flex w-[350px] flex-col items-center justify-center border border-solid border-chinese-silver p-10">
       <InstagramLetterIcon width={180} height="auto" className="mb-6" />
 
       <div className="flex flex-col space-y-4">
-        <p className="text-center font-bold text-nickel leading-4">
+        <p className="text-center font-bold leading-4 text-nickel">
           Sign up to see photos and videos from your friends.
         </p>
         <GoogleLoginButton />

@@ -44,10 +44,10 @@ module.exports = {
       'btn-primary-hover': 'var(--btn-primary-hover)',
       'btn-secondary': 'var(--btn-secondary)',
       'btn-secondary-hover': 'var(--btn-secondary-hover)',
-      'btn-text-primary': 'var(--btn-text-primary)',
-      'btn-text-primary-hover': 'var(--btn-text-primary-hover)',
-      'btn-text-secondary': 'var(--btn-text-secondary)',
-      'btn-text-secondary-hover': 'var(--btn-text-secondary-hover)',
+      'btn-link': 'var(--btn-link)',
+      'btn-link-hover': 'var(--btn-link-hover)',
+      'btn-ghost': 'var(--btn-ghost)',
+      'btn-ghost-hover': 'var(--btn-ghost-hover)',
 
       'search-input': 'var(--search-input)',
 

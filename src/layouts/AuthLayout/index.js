@@ -10,9 +10,9 @@ const AuthLayout = ({ children, isHeader = true }) => {
         <title>Authentication</title>
         <meta name="description" content="Smoky-Instagram" />
       </Head>
-      <main className="min-h-screen flex flex-col">
+      <main className="flex min-h-screen flex-col">
         {isHeader && <Header />}
-        <div className="flex-1 flex flex-col justify-center">{children}</div>
+        <div className="flex flex-1 flex-col justify-center">{children}</div>
         <Footer />
       </main>
     </>

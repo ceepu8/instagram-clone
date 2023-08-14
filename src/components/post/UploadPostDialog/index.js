@@ -61,11 +61,11 @@ const UploadPostDialog = () => {
           <div
             className={cn(
               'h-[40vh] md:h-[70vh]',
-              'min-w-[348px] w-[50vw] max-w-[590px] md:w-[80vw]',
+              'w-[50vw] min-w-[348px] max-w-[590px] md:w-[80vw]',
               'flex items-center justify-center',
               'transition-all duration-500',
               step === 3 &&
-                'min-w-[688px] w-[95vw] h-[40vh] md:w-[95vw] md:max-w-[1038px] md:h-[70vh]'
+                'h-[40vh] w-[95vw] min-w-[688px] md:h-[70vh] md:w-[95vw] md:max-w-[1038px]'
             )}
           >
             {views[step]}

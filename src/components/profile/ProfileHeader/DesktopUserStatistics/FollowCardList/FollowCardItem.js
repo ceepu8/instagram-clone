@@ -40,15 +40,15 @@ const FollowCardItem = ({ user }) => {
 
   return (
     <div className="flex items-center space-x-2">
-      <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border-[0.5px]">
+      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border-[0.5px]">
         <Image fill src={image || Assets.COMMON.PLACEHOLDER} alt="profile image" />
       </div>
-      <div className="flex flex-col flex-1">
-        <h2 className="font-bold text-sm">{username || 'username'}</h2>
+      <div className="flex flex-1 flex-col">
+        <h2 className="text-sm font-bold">{username || 'username'}</h2>
         <p className="text-sm text-comment">{username || 'description'}</p>
       </div>
       {isFollowing ? (
-        <div className="w-[122px] h-[32px]">
+        <div className="h-[32px] w-[122px]">
           <Button
             variant="secondary"
             size="small"
@@ -60,7 +60,7 @@ const FollowCardItem = ({ user }) => {
           </Button>
         </div>
       ) : (
-        <div className="w-[77px] h-[32px]">
+        <div className="h-[32px] w-[77px]">
           <Button
             variant="primary"
             size="small"

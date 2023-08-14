@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const AppDownloadNavigation = () => {
   return (
-    <div className="flex flex-col items-center mt-4 space-y-4">
+    <div className="mt-4 flex flex-col items-center space-y-4">
       <p className="text-sm">Get the app.</p>
       <div className="flex gap-x-2">
         <Image width={140} height={80} src="/app-store.png" alt="Download App Store" />

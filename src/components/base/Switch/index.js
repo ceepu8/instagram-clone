@@ -30,7 +30,7 @@ const Switch = forwardRef(
         <div className="flex items-center">
           {label && (
             <label htmlFor={id}>
-              <span className={twMerge('text-sm pr-4', labelStyle)}>{label}</span>
+              <span className={twMerge('pr-4 text-sm', labelStyle)}>{label}</span>
             </label>
           )}
           <SwitchPrimitive.Root

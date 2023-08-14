@@ -100,7 +100,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
               <span
                 className={cn(
                   'hidden lg:block',
-                  'duration-[100ms] delay-[50ms] transition-all',
+                  'transition-all delay-[50ms] duration-[100ms]',
                   navSelected ? 'invisible opacity-0' : 'visible opacity-100'
                 )}
               >
@@ -113,7 +113,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     )
   }
   return (
-    <div className="flex justify-between flex-1 flex-col">
+    <div className="flex flex-1 flex-col justify-between">
       {renderNavItems()}
       <MenuPopover navSelected={navSelected} />
     </div>

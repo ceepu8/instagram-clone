@@ -26,12 +26,13 @@ const ResetPasswordForm = () => {
   const watchVerification = watch(FORM_RESET_PASSWORD.VERIFICATION, false)
 
   const onSubmit = (values) => {
+    // eslint-disable-next-line no-unused-vars
     const clarifyVerification = getEmailOrPhoneOrUsername(values.verification)
-    console.log(clarifyVerification)
+    // console.log(clarifyVerification)
   }
 
   return (
-    <div className="w-full mt-4">
+    <div className="mt-4 w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <AuthInput
           name={FORM_RESET_PASSWORD.VERIFICATION}

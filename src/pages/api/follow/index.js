@@ -31,7 +31,7 @@ async function handler(req, res) {
 
         return res.status(200).json(data)
       } catch (error) {
-        console.log('[FOLLOW_GET]', error)
+        // console.log('[FOLLOW_GET]', error)
         return res.status(500).json({ message: 'Internal Error' })
       }
 

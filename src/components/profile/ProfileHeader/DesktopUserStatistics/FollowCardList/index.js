@@ -7,7 +7,7 @@ const FollowCardList = ({ isLoading, data }) => {
     .map((index) => <FollowCardItemSkeleton key={index} />)
 
   return (
-    <div className="px-4 py-2 min-h-[340px]">
+    <div className="min-h-[340px] px-4 py-2">
       <div className="flex flex-col space-y-4">
         {isLoading && cardSkeletonList}
         {!isLoading &&

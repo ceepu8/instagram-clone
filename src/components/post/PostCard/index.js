@@ -19,7 +19,7 @@ const PostCard = (props) => {
         <Image width={310} height={310} src={images[0]} alt="post image" />
         <CopyIcon
           size={24}
-          className={cn('text-white absolute right-2 top-2', isMultipleImages ? 'block' : 'hidden')}
+          className={cn('absolute right-2 top-2 text-white', isMultipleImages ? 'block' : 'hidden')}
         />
       </div>
     </DialogTrigger>
@@ -36,12 +36,12 @@ const PostCard = (props) => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-110"
       >
-        <DialogContent className="max-w-[calc(100vw-64px-64px)] md:w-max max-h-[calc(100vh-40px)] rounded-lg sm:rounded-none md:h-full">
-          <div className="flex flex-col md:flex-row md:h-full">
-            <div className="h-full hidden md:block">
+        <DialogContent className="max-h-[calc(100vh-40px)] max-w-[calc(100vw-64px-64px)] rounded-lg sm:rounded-none md:h-full md:w-max">
+          <div className="flex flex-col md:h-full md:flex-row">
+            <div className="hidden h-full md:block">
               <PostImageSlider images={images} />
             </div>
-            <div className="shrink-0 min-w-[300px] max-w-full md:max-w-[500px] md:h-full">
+            <div className="min-w-[300px] max-w-full shrink-0 md:h-full md:max-w-[500px]">
               <PostDialogContent {...props} />
             </div>
           </div>

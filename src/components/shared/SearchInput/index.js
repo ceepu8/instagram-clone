@@ -27,7 +27,7 @@ const SearchInput = ({ onSearch, clearSearch, searchValue }) => {
     <div
       className={cn(
         'flex items-center justify-center space-x-2',
-        'bg-search-input px-3 py-2 rounded-lg'
+        'rounded-lg bg-search-input px-3 py-2'
       )}
     >
       {!isFocused && <Search width={17} height={17} strokeWidth={1} />}

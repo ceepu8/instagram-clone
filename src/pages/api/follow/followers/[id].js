@@ -40,7 +40,7 @@ async function handler(req, res) {
           data,
         })
       } catch (error) {
-        console.log('[FOLLOW_FOLLOWERS]', error)
+        // console.log('[FOLLOW_FOLLOWERS]', error)
         return res.status(500).json({ message: 'Internal Error' })
       }
 

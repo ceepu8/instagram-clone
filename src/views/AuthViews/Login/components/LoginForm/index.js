@@ -51,7 +51,14 @@ const LoginForm = () => {
         isHaveValue={!isEmpty(watchPassword)}
       />
 
-      <Button size="small" fullWidth type="submit" disabled={!isValid} loading={isLoading}>
+      <Button
+        variant="primary"
+        size="small"
+        fullWidth
+        type="submit"
+        disabled={!isValid}
+        loading={isLoading}
+      >
         Login
       </Button>
     </form>

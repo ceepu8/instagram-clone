@@ -29,12 +29,12 @@ const FollowingSettingDialog = ({ user, doUnfollow, trigger }) => {
       >
         <DialogContent className="min-w-[420px]">
           <DialogClose className="absolute right-2 top-2">
-            <Button variant="text-secondary" icon={XIcon} />
+            <Button variant="ghost" icon={XIcon} />
           </DialogClose>
           <div className="py-4">
             <div className="text-center">
               <Image
-                className="rounded-full border border-chinese-silver mx-auto"
+                className="mx-auto rounded-full border border-chinese-silver"
                 width={60}
                 height={60}
                 src={user?.image || Assets.COMMON.PLACEHOLDER}
@@ -44,10 +44,11 @@ const FollowingSettingDialog = ({ user, doUnfollow, trigger }) => {
             </div>
             <LineBreak />
             <Button
-              variant="text-secondary"
-              fullWidth
+              variant="ghost"
               size="small"
-              className="justify-start font-medium px-4 py-3"
+              fullWidth
+              className="justify-start px-4 py-2"
+              bold={false}
               onClick={handleUnfollow}
             >
               Unfollow

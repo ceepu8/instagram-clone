@@ -17,11 +17,11 @@ const AuthNavigation = ({ stage = 'login' }) => {
   }
 
   return (
-    <div className="w-[350px] flex flex-col items-center justify-center p-4 mt-2 border border-solid border-chinese-silver">
+    <div className="mt-2 flex w-[350px] flex-col items-center justify-center border border-solid border-chinese-silver p-4">
       <span className="text-sm">
         {auth[stage].confirm}{' '}
         <Link href={auth[stage].path}>
-          <span className="text-primary font-semibold">{auth[stage].label}</span>
+          <span className="link font-semibold">{auth[stage].label}</span>
         </Link>
       </span>
     </div>

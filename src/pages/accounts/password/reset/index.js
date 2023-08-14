@@ -10,7 +10,7 @@ const ResetPasswordPage = () => {
       <Head>
         <title>Reset Password &#x2022; Instagram</title>
       </Head>
-      <div className="max-h-screen h-full flex items-center justify-center">
+      <div className="flex h-full max-h-screen items-center justify-center">
         <ResetPasswordView />
       </div>
     </>
