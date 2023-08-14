@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
-import Footer from './Footer'
+import { Footer } from '@/components/shared'
+
 import Header from './Header'
 
 const AuthLayout = ({ children, isHeader = true }) => {
@@ -10,7 +11,7 @@ const AuthLayout = ({ children, isHeader = true }) => {
         <title>Authentication</title>
         <meta name="description" content="Smoky-Instagram" />
       </Head>
-      <main className="flex min-h-screen flex-col">
+      <main className="flex h-screen flex-col justify-between gap-y-4 py-8">
         {isHeader && <Header />}
         <div className="flex flex-1 flex-col justify-center">{children}</div>
         <Footer />

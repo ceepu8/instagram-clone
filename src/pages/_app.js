@@ -5,6 +5,7 @@ import 'react-slideshow-image/dist/styles.css'
 
 import { Routes } from '@/constants'
 import { AppProviders } from '@/contexts'
+import AuthLayout from '@/layouts/AuthLayout'
 import NextNProgress from '@/layouts/Progressbar'
 import UserLayout from '@/layouts/UserLayout'
 import '@/styles/globals.css'
@@ -14,11 +15,48 @@ export default function App({ Component, pageProps }) {
 
   const [safeHydration, setSafeHydration] = useState(false)
 
-  const isAuthPage = router.pathname === Routes.HOME // TODO: add some pages without sidebar
+  const ROUTES_BY_LAYOUT = {
+    [Routes.HOME]: {
+      layout: null,
+    },
+    [Routes.REGISTER]: {
+      layout: null,
+    },
+    [Routes.RESET_PASSWORD]: {
+      layout: AuthLayout,
+      isHeader: true,
+    },
+    [Routes.EXPLORE]: {
+      layout: UserLayout,
+      isFooter: true,
+    },
+    [Routes.REELS]: {
+      layout: UserLayout,
+      isFooter: false,
+    },
+    [Routes.PROFILE]: {
+      layout: UserLayout,
+      isFooter: true,
+    },
+    [Routes.DIRECT_INBOX]: {
+      layout: UserLayout,
+      isFooter: false,
+    },
+    [Routes.DIRECT_DETAIL]: {
+      layout: UserLayout,
+      isFooter: false,
+    },
+  }
 
   const getLayout = useCallback(
-    (children) => (isAuthPage ? children : <UserLayout>{children}</UserLayout>),
-    [isAuthPage]
+    (children) => {
+      const { layout: Layout, ...props } = ROUTES_BY_LAYOUT[router.pathname]
+      if (!Layout) {
+        return children
+      }
+      return <Layout {...props}>{children}</Layout>
+    },
+    [router.pathname]
   )
 
   useEffect(() => setSafeHydration(true), [])
