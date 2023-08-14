@@ -3,22 +3,29 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import 'react-slideshow-image/dist/styles.css'
 
-import { Routes } from '@/constants'
 import { AppProviders } from '@/contexts'
+import AuthLayout from '@/layouts/AuthLayout'
 import NextNProgress from '@/layouts/Progressbar'
 import UserLayout from '@/layouts/UserLayout'
 import '@/styles/globals.css'
+import { AUTH_LAYOUT_ROUTES, USER_LAYOUT_ROUTES } from '@/utils/routers'
 
 export default function App({ Component, pageProps }) {
   const router = useRouter()
 
   const [safeHydration, setSafeHydration] = useState(false)
 
-  const isAuthPage = router.pathname === Routes.HOME // TODO: add some pages without sidebar
-
   const getLayout = useCallback(
-    (children) => (isAuthPage ? children : <UserLayout>{children}</UserLayout>),
-    [isAuthPage]
+    (children) => {
+      if (AUTH_LAYOUT_ROUTES.includes(router.pathname)) {
+        return <AuthLayout>{children}</AuthLayout>
+      }
+      if (USER_LAYOUT_ROUTES.includes(router.pathname)) {
+        return <UserLayout>{children}</UserLayout>
+      }
+      return children
+    },
+    [router.pathname]
   )
 
   useEffect(() => setSafeHydration(true), [])

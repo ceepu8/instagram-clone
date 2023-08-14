@@ -26,6 +26,7 @@ export const getToday = () => dayjs().toDate()
 
 export const getDayOfMonth = (date) => dayjs(date).date()
 
+export const getCurrentYear = () => dayjs().year()
 // ---
 
 export const getTimeFromNow = (date) => configDayjs(date).fromNow()
