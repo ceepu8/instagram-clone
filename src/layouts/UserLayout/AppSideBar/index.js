@@ -15,7 +15,7 @@ const AppSideBar = () => {
   useClickOutside(appSideBarRef, () => setNavSelected(null))
 
   return (
-    <div ref={appSideBarRef}>
+    <aside ref={appSideBarRef}>
       <div
         className={cn(
           'h-full max-h-screen',
@@ -33,7 +33,7 @@ const AppSideBar = () => {
       </div>
       <SlideOutPanelList navSelected={navSelected} />
       <MobileNavigation />
-    </div>
+    </aside>
   )
 }
 

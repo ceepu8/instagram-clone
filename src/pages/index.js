@@ -11,7 +11,7 @@ const Home = () => {
 
   if (!isAuthenticated) {
     return (
-      <AuthLayout isHeader={false}>
+      <AuthLayout showHeader={false}>
         <Head>
           <title>Login</title>
         </Head>
@@ -22,6 +22,9 @@ const Home = () => {
 
   return (
     <UserLayout>
+      <Head>
+        <title>Instagram</title>
+      </Head>
       <HomeView />
     </UserLayout>
   )
