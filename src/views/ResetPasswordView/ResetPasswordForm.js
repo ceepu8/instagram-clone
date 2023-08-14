@@ -31,7 +31,7 @@ const ResetPasswordForm = () => {
   }
 
   return (
-    <div className="w-full mt-4">
+    <div className="mt-4 w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
         <AuthInput
           name={FORM_RESET_PASSWORD.VERIFICATION}

@@ -2,7 +2,7 @@ import { FollowDialog } from './FollowDialog/index'
 
 const DesktopUserStatistics = ({ user }) => {
   return (
-    <ul className="items-center space-x-10 mb-4 hidden sm:flex">
+    <ul className="mb-4 hidden items-center space-x-10 sm:flex">
       <li>
         <b>{user?.posts?.length || 0}</b> posts
       </li>

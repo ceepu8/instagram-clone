@@ -5,7 +5,7 @@ const Or = () => (
         <div className="w-full border-t border-solid border-gainsboro" />
       </div>
       <div className="relative flex justify-center text-sm">
-        <span className="bg-white px-3 text-nickel font-semibold">OR</span>
+        <span className="bg-white px-3 font-semibold text-nickel">OR</span>
       </div>
     </div>
   </div>
