@@ -1,7 +1,5 @@
 import Head from 'next/head'
-import React from 'react'
 
-import AuthLayout from '@/layouts/AuthLayout'
 import ResetPasswordView from '@/views/ResetPasswordView'
 
 const ResetPasswordPage = () => {
@@ -15,10 +13,6 @@ const ResetPasswordPage = () => {
       </div>
     </>
   )
-}
-
-ResetPasswordPage.getLayout = function getLayout(children) {
-  return <AuthLayout>{children}</AuthLayout>
 }
 
 export default ResetPasswordPage

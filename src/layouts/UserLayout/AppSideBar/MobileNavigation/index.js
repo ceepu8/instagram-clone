@@ -48,7 +48,7 @@ const MobileNavigation = () => {
     },
     {
       key: SIDEBAR_MENU_KEYS.REELS,
-      route: `${Routes.REELS}/123`,
+      route: Routes.REELS.replace('[id]', 123),
       icon: Film,
       label: 'Reels',
     },

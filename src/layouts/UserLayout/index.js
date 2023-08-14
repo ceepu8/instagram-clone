@@ -1,6 +1,8 @@
+import { Footer } from '@/components/shared'
+
 import AppSideBar from './AppSideBar'
 
-const UserLayout = ({ children }) => {
+const UserLayout = ({ children, isFooter = true }) => {
   // const router = useRouter()
 
   // const { isAuthenticated } = useAuth()
@@ -12,8 +14,9 @@ const UserLayout = ({ children }) => {
   return (
     <main className="h-screen w-screen">
       <AppSideBar />
-      <div className="md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
-        {children}
+      <div className="flex min-h-screen flex-col pb-16 md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
+        <div className="flex-1">{children}</div>
+        {isFooter && <Footer />}
       </div>
     </main>
   )

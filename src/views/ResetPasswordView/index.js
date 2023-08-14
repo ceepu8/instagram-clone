@@ -33,7 +33,7 @@ const ResetPasswordView = () => {
         </Link>
       </div>
       <Link
-        href={Routes.LOGIN}
+        href={Routes.HOME}
         className="group flex h-[44px] w-full items-center justify-center rounded-none border border-gainsboro bg-lotion"
       >
         <span className="text-sm font-bold text-black group-hover:opacity-50">Back to login</span>
