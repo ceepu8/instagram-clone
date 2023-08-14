@@ -14,19 +14,19 @@ export default function MainMenu({ setMenu }) {
   const POPOVER_ITEMS = [
     {
       key: POPOVER_MENU_KEYS.SETTINGS,
-      onPress: () => {},
+      onPress: null,
       icon: SettingsIcon,
       label: 'Settings',
     },
     {
       key: POPOVER_MENU_KEYS.YOUR_ACTIVITY,
-      onPress: () => {},
+      onPress: null,
       icon: History,
       label: 'Your Activity',
     },
     {
       key: POPOVER_MENU_KEYS.SAVED,
-      onPress: () => {},
+      onPress: null,
       icon: BookmarkIcon,
       label: 'Saved',
     },
@@ -40,7 +40,7 @@ export default function MainMenu({ setMenu }) {
     },
     {
       key: POPOVER_MENU_KEYS.REPORT_PROBLEM,
-      onPress: () => {},
+      onPress: null,
       icon: AlertTriangle,
       label: 'Report a problem',
     },
@@ -71,8 +71,8 @@ export default function MainMenu({ setMenu }) {
               {item.label}
             </NavItem>
           )}
-          {index === 4 && <LineBreak className="bg-popover-divide h-[6px] -mx-2" />}
-          {index === 5 && <LineBreak className="bg-popover-divide -mx-2" />}
+          {index === 4 && <LineBreak className="-mx-2 h-[6px] bg-popover-divide" />}
+          {index === 5 && <LineBreak className="-mx-2 bg-popover-divide" />}
         </Fragment>
       ))}
     </div>

@@ -29,7 +29,7 @@ const NavItem = ({
         className={twMerge(
           cn(
             'flex items-center gap-x-4 p-3',
-            'hover:bg-nav-hover font-medium rounded-lg',
+            'rounded-lg font-medium hover:bg-nav-hover',
             'cursor-pointer transition-all duration-150',
             'border border-solid border-transparent',
             isSelecting ? 'max-w-fit border-base' : '',

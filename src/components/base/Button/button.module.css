@@ -4,7 +4,7 @@
 }
 
 .primary {
-  @apply rounded-lg !bg-btn-primary text-white hover:bg-btn-primary-hover disabled:cursor-default disabled:bg-very-light-azure;
+  @apply rounded-lg !bg-btn-primary text-white hover:bg-btn-primary-hover disabled:cursor-default disabled:!bg-very-light-azure;
 }
 
 .secondary {
