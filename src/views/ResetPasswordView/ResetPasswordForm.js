@@ -26,8 +26,9 @@ const ResetPasswordForm = () => {
   const watchVerification = watch(FORM_RESET_PASSWORD.VERIFICATION, false)
 
   const onSubmit = (values) => {
+    // eslint-disable-next-line no-unused-vars
     const clarifyVerification = getEmailOrPhoneOrUsername(values.verification)
-    console.log(clarifyVerification)
+    // console.log(clarifyVerification)
   }
 
   return (

@@ -24,13 +24,13 @@ const HoverCard = ({ trigger, children, hasArrow = false, className }) => {
           'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
           'max-w-md rounded-lg p-4 md:w-full',
           'bg-background',
-          'focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75',
+          'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75',
           'shadow-55',
           className
         )}
       >
         {hasArrow && (
-          <HoverCardPrimitive.Arrow className="fill-current text-white dark:text-gray-800" />
+          <HoverCardPrimitive.Arrow className="fill-current dark:text-gray-800 text-white" />
         )}
 
         {children}

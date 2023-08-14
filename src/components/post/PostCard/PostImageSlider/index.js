@@ -3,18 +3,18 @@ import NextImage from 'next/image'
 const PostImageSlider = ({ images = [] }) => {
   return (
     <>
-      <div className="h-full hidden md:flex md:items-center md:justify-center relative">
+      <div className="relative hidden h-full md:flex md:items-center md:justify-center">
         <NextImage
           width={0}
           height={0}
           sizes="100vw"
           src={images[0]}
-          className="object-contain h-full w-full"
+          className="h-full w-full object-contain"
           alt="image"
         />
       </div>
 
-      <div className="relative w-full block md:hidden">
+      <div className="relative block w-full md:hidden">
         <NextImage width={1200} height={1200} src={images[0]} />
       </div>
     </>

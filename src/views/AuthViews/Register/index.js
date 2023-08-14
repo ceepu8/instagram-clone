@@ -6,7 +6,7 @@ import RegisterBox from './RegisterBox'
 
 const RegisterView = () => {
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
+    <div className="flex h-screen flex-col items-center justify-center">
       <RegisterBox />
       <AuthNavigation stage="register" />
       <AppDownloadNavigation />

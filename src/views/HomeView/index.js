@@ -4,12 +4,12 @@ const HomeView = () => {
   return (
     <div className="flex justify-center gap-16">
       <div className="max-w-[var(--feed-width-post)]">
-        <div className="text-center divide-y-[1px] divide-divide">
+        <div className="divide-y-[1px] divide-divide text-center">
           <Post />
           <Post />
         </div>
       </div>
-      <div className="max-w-[var(--feed-sidebar-width)] w-full lg:block hidden">Feed Sidebar</div>
+      <div className="hidden w-full max-w-[var(--feed-sidebar-width)] lg:block">Feed Sidebar</div>
     </div>
   )
 }

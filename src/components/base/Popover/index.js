@@ -9,8 +9,8 @@ const CloseIcon = () => {
   return (
     <PopoverPrimitives.Close
       className={cn(
-        'absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1',
-        'focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75'
+        'absolute right-3.5 top-3.5 inline-flex items-center justify-center rounded-full p-1',
+        'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'
       )}
     >
       <XIcon />

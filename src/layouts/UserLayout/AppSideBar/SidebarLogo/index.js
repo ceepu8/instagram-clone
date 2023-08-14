@@ -18,7 +18,7 @@ const SideBarLogo = ({ navSelected }) => {
       height={24}
       className={cn(
         iconStyle,
-        navSelected || isMediumScreen ? 'scale-100 visible' : 'scale-0 invisible'
+        navSelected || isMediumScreen ? 'visible scale-100' : 'invisible scale-0'
       )}
     />
   )
@@ -28,13 +28,13 @@ const SideBarLogo = ({ navSelected }) => {
       height={60}
       className={cn(
         iconStyle,
-        !navSelected && !isMediumScreen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        !navSelected && !isMediumScreen ? 'visible opacity-100' : 'invisible opacity-0'
       )}
     />
   )
 
   return (
-    <div className="min-h-[80px] pl-3 flex items-center relative">
+    <div className="relative flex min-h-[80px] items-center pl-3">
       <Link href="/" className="text-base">
         {renderLogo}
         {renderLetterLogo}

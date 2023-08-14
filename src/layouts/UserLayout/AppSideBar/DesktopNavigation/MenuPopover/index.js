@@ -24,15 +24,15 @@ const MenuPopover = ({ navSelected }) => {
   const trigger = (
     <div
       className={cn(
-        'flex items-center gap-x-4 p-3 w-full',
-        'hover:bg-nav-hover rounded-lg font-medium text-md',
-        'transition-all duration-300 cursor-pointer'
+        'flex w-full items-center gap-x-4 p-3',
+        'text-md rounded-lg font-medium hover:bg-nav-hover',
+        'cursor-pointer transition-all duration-300'
       )}
     >
       <Menu width={25} height={25} className="shrink-0" />
       <span
         className={cn(
-          'duration-[100ms] delay-[50ms] transition-all',
+          'transition-all delay-[50ms] duration-[100ms]',
           navSelected ? 'invisible opacity-0' : 'invisible opacity-0 lg:visible lg:opacity-100'
         )}
       >
