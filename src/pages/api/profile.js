@@ -22,6 +22,7 @@ async function handler(req, res) {
           select: {
             posts: true,
             username: true,
+            name: true,
             image: true,
             followers: {
               where: {

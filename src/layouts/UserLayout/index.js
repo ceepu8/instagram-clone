@@ -12,7 +12,7 @@ const UserLayout = ({ children }) => {
   return (
     <main className="h-screen w-screen">
       <AppSideBar />
-      <div className="md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
+      <div className="bg-background md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
         {children}
       </div>
     </main>

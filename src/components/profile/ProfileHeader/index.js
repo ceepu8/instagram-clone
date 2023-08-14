@@ -25,7 +25,7 @@ const ProfileInfo = ({ user }) => {
         {!isMe && <UserProfileSettings user={user} />}
       </div>
       <DesktopUserStatistics user={user} />
-      <p className="hidden text-sm font-semibold sm:block">Description</p>
+      <p className="hidden text-sm font-semibold sm:block">{user?.name}</p>
     </div>
   )
 }
@@ -41,7 +41,7 @@ const ProfileHeader = () => {
           <ProfileImage image={user?.image} />
           <ProfileInfo user={user} />
         </div>
-        <p className="mt-6 text-sm font-semibold sm:hidden">Description</p>
+        <p className="mt-6 text-sm font-semibold sm:hidden">{user?.name}</p>
       </div>
       <MobileUserStatistics user={user} />
     </div>

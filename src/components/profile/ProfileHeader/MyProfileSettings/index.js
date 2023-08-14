@@ -12,7 +12,14 @@ const MyProfileSettings = () => {
       >
         Edit profile
       </Button>
-      <Button icon={SettingsIcon} variant="ghost" size="small" className="order-3 md:order-last" />
+      <Button
+        variant="secondary"
+        size="small"
+        className="order-last mt-4 w-full md:order-2 md:mt-0 md:w-auto"
+      >
+        View Archive
+      </Button>
+      <Button icon={SettingsIcon} variant="ghost" className="order-3 md:order-last" />
     </>
   )
 }
