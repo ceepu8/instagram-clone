@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 import {
   CompassIcon,
@@ -24,12 +26,23 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
   const { onOpen } = useUploadPostDialog()
 
+  const { t } = useTranslation()
+
+  const router = useRouter()
+
+  const onToggleLanguageClick = (newLocale) => {
+    const { pathname, asPath, query } = router
+    router.push({ pathname, query }, asPath, { locale: newLocale })
+  }
+
+  const changeTo = router.locale === 'en' ? 'vi' : 'en'
+
   const NAV_ITEMS = [
     {
       key: SIDEBAR_MENU_KEYS.HOME,
       route: Routes.HOME,
       icon: Home,
-      label: 'Home',
+      label: t('home'),
     },
     {
       key: SIDEBAR_MENU_KEYS.SEARCH,
@@ -37,25 +50,25 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
       },
       icon: Search,
-      label: 'Search',
+      label: t('search'),
     },
     {
       key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       icon: CompassIcon,
-      label: 'Explore',
+      label: t('explore'),
     },
     {
       key: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
       icon: Film,
-      label: 'Reels',
+      label: t('reels'),
     },
     {
       key: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
       icon: FacebookMessengerIcon,
-      label: 'Messages',
+      label: t('messages'),
     },
     {
       key: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
@@ -69,7 +82,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
       key: SIDEBAR_MENU_KEYS.CREATE,
       onPress: () => onOpen(),
       icon: PlusSquare,
-      label: 'Create',
+      label: t('create'),
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
@@ -109,6 +122,9 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
             </NavItem>
           )
         })}
+        <button type="button" onClick={() => onToggleLanguageClick(changeTo)}>
+          {t('change-locale', { changeTo })}
+        </button>
       </div>
     )
   }

@@ -1,3 +1,4 @@
+import { appWithTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
@@ -10,7 +11,7 @@ import UserLayout from '@/layouts/UserLayout'
 import '@/styles/globals.css'
 import { AUTH_LAYOUT_ROUTES, USER_LAYOUT_ROUTES } from '@/utils/routers'
 
-export default function App({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const router = useRouter()
 
   const [safeHydration, setSafeHydration] = useState(false)
@@ -43,3 +44,5 @@ export default function App({ Component, pageProps }) {
     </>
   )
 }
+
+export default appWithTranslation(App)
