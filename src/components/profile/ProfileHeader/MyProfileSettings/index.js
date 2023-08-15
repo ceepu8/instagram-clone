@@ -1,24 +1,17 @@
-import { SettingsIcon } from 'lucide-react'
-
 import { Button } from '@/components/base'
+import { SettingsIcon } from '@/components/icons'
 
 const MyProfileSettings = () => {
   return (
     <>
-      <Button
-        variant="secondary"
-        size="small"
-        className="order-last mt-4 w-full md:order-2 md:mt-0 md:w-auto"
-      >
-        Edit profile
-      </Button>
-      <Button
-        variant="secondary"
-        size="small"
-        className="order-last mt-4 w-full md:order-2 md:mt-0 md:w-auto"
-      >
-        View Archive
-      </Button>
+      <div className="order-last mt-4 flex basis-full gap-x-2 md:order-2 md:mt-0 md:basis-auto">
+        <Button variant="secondary" size="small">
+          Edit profile
+        </Button>
+        <Button variant="secondary" size="small">
+          View Archive
+        </Button>
+      </div>
       <Button icon={SettingsIcon} variant="ghost" className="order-3 md:order-last" />
     </>
   )
