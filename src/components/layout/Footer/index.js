@@ -1,10 +1,47 @@
-import { Button, Link } from '@/components/base'
+import { useTranslation } from 'react-i18next'
+
+import { Link } from '@/components/base'
 import { ChevronDown } from '@/components/icons'
+import { useChangeLanguage } from '@/hooks/custom'
 import { getCurrentYear } from '@/utils'
 
 const CopyRight = () => {
   const currentYear = getCurrentYear()
   return <span className="text-xs text-note">&copy; {currentYear} Instagram from Meta</span>
+}
+
+const LanguageSelect = () => {
+  const { t } = useTranslation()
+
+  const { onChangeLanguage, currentLocale } = useChangeLanguage()
+
+  const languages = [
+    {
+      label: t('languages.english'),
+      value: 'en',
+    },
+    {
+      label: t('languages.vietnam'),
+      value: 'vi',
+    },
+  ]
+
+  return (
+    <div className="flex items-center gap-x-2">
+      <select
+        value={currentLocale}
+        className="border-none p-0 text-xs text-comment"
+        onChange={(e) => onChangeLanguage(e.target.value)}
+      >
+        {languages.map(({ label, value }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
+      <ChevronDown size={16} className="text-comment" />
+    </div>
+  )
 }
 
 const Footer = () => {
@@ -77,11 +114,7 @@ const Footer = () => {
         {items.map(renderItem)}
       </div>
       <div className="flex items-center gap-x-4">
-        <Button variant="ghost" bold={false}>
-          <div className="flex items-center gap-x-2 text-xs font-medium text-note">
-            English <ChevronDown size={16} />
-          </div>
-        </Button>
+        <LanguageSelect />
         <CopyRight />
       </div>
     </footer>

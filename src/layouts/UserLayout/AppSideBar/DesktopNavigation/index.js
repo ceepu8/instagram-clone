@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useTranslation } from 'react-i18next'
 
 import {
   CompassIcon,
@@ -24,12 +25,14 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
   const { onOpen } = useUploadPostDialog()
 
+  const { t } = useTranslation()
+
   const NAV_ITEMS = [
     {
       key: SIDEBAR_MENU_KEYS.HOME,
       route: Routes.HOME,
       icon: Home,
-      label: 'Home',
+      label: t('navbar.home'),
     },
     {
       key: SIDEBAR_MENU_KEYS.SEARCH,
@@ -37,25 +40,25 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
       },
       icon: Search,
-      label: 'Search',
+      label: t('navbar.search'),
     },
     {
       key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       icon: CompassIcon,
-      label: 'Explore',
+      label: t('navbar.explore'),
     },
     {
       key: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
       icon: Film,
-      label: 'Reels',
+      label: t('navbar.reels'),
     },
     {
       key: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
       icon: FacebookMessengerIcon,
-      label: 'Messages',
+      label: t('navbar.messages'),
     },
     {
       key: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
@@ -63,18 +66,18 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
       },
       icon: Heart,
-      label: 'Notifications',
+      label: t('navbar.notifications'),
     },
     {
       key: SIDEBAR_MENU_KEYS.CREATE,
       onPress: () => onOpen(),
       icon: PlusSquare,
-      label: 'Create',
+      label: t('navbar.create'),
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
       route: Routes.PROFILE.replace('[id]', user?.username),
-      label: 'Profile',
+      label: t('navbar.profile'),
       content: (
         <div className="shrink-0">
           <Image
