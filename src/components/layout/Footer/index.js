@@ -1,5 +1,8 @@
-import { Button, Link } from '@/components/base'
+import { useTranslation } from 'react-i18next'
+
+import { Link } from '@/components/base'
 import { ChevronDown } from '@/components/icons'
+import { useChangeLanguage } from '@/hooks/custom'
 import { getCurrentYear } from '@/utils'
 
 const CopyRight = () => {
@@ -8,6 +11,9 @@ const CopyRight = () => {
 }
 
 const Footer = () => {
+  const { t } = useTranslation()
+
+  const { onChangeLanguage, currentLocale } = useChangeLanguage()
   const items = [
     {
       label: 'Meta',
@@ -63,6 +69,17 @@ const Footer = () => {
     },
   ]
 
+  const languages = [
+    {
+      label: t('languages.english'),
+      value: 'en',
+    },
+    {
+      label: t('languages.vietnam'),
+      value: 'vi',
+    },
+  ]
+
   const renderItem = ({ label, href }) => (
     <Link key={label} href={href} disabled>
       <span className="cursor-pointer text-xs text-note transition-all hover:underline">
@@ -77,11 +94,21 @@ const Footer = () => {
         {items.map(renderItem)}
       </div>
       <div className="flex items-center gap-x-4">
-        <Button variant="ghost" bold={false}>
-          <div className="flex items-center gap-x-2 text-xs font-medium text-note">
-            English <ChevronDown size={16} />
-          </div>
-        </Button>
+        <div className="flex items-center gap-x-2">
+          <select
+            value={currentLocale}
+            className="border-none p-0 text-xs text-comment"
+            onChange={(e) => onChangeLanguage(e.target.value)}
+          >
+            {languages.map(({ label, value }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+          <ChevronDown size={16} className="text-comment" />
+        </div>
+
         <CopyRight />
       </div>
     </footer>

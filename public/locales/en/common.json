@@ -2,6 +2,10 @@
     "create": "Create",
     "explore": "Explore",
     "home": "Home",
+    "languages": {
+        "english": "English",
+        "vietnam": "Tiếng Việt"
+    },
     "messages": "Messages",
     "notifications": "Notifications",
     "profile": "Profile",

@@ -28,15 +28,6 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
 
   const { t } = useTranslation()
 
-  const router = useRouter()
-
-  const onToggleLanguageClick = (newLocale) => {
-    const { pathname, asPath, query } = router
-    router.push({ pathname, query }, asPath, { locale: newLocale })
-  }
-
-  const changeTo = router.locale === 'en' ? 'vi' : 'en'
-
   const NAV_ITEMS = [
     {
       key: SIDEBAR_MENU_KEYS.HOME,
@@ -76,7 +67,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
       },
       icon: Heart,
-      label: 'Notifications',
+      label: t('notifications'),
     },
     {
       key: SIDEBAR_MENU_KEYS.CREATE,
@@ -87,7 +78,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
       route: Routes.PROFILE.replace('[id]', user?.username),
-      label: 'Profile',
+      label: t('profile'),
       content: (
         <div className="shrink-0">
           <Image
@@ -122,9 +113,6 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
             </NavItem>
           )
         })}
-        <button type="button" onClick={() => onToggleLanguageClick(changeTo)}>
-          {t('change-locale', { changeTo })}
-        </button>
       </div>
     )
   }
