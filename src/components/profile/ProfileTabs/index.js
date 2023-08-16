@@ -6,7 +6,7 @@ import { useGetProfile } from '@/api'
 import { LineBreak } from '@/components/base'
 import { BookmarkIcon, Film, GridIcon, TagIcon } from '@/components/icons'
 import { PROFILE_TAB_KEYS } from '@/constants/Keys'
-import { useIsMe } from '@/hooks/custom/useIsMe'
+import { useIsMe } from '@/hooks/custom'
 import { cn } from '@/utils'
 
 const ProfileTabs = () => {
