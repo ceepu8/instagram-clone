@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -33,7 +32,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
       key: SIDEBAR_MENU_KEYS.HOME,
       route: Routes.HOME,
       icon: Home,
-      label: t('home'),
+      label: t('navbar.home'),
     },
     {
       key: SIDEBAR_MENU_KEYS.SEARCH,
@@ -41,25 +40,25 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
       },
       icon: Search,
-      label: t('search'),
+      label: t('navbar.search'),
     },
     {
       key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       icon: CompassIcon,
-      label: t('explore'),
+      label: t('navbar.explore'),
     },
     {
       key: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
       icon: Film,
-      label: t('reels'),
+      label: t('navbar.reels'),
     },
     {
       key: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
       icon: FacebookMessengerIcon,
-      label: t('messages'),
+      label: t('navbar.messages'),
     },
     {
       key: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
@@ -67,18 +66,18 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
       },
       icon: Heart,
-      label: t('notifications'),
+      label: t('navbar.notifications'),
     },
     {
       key: SIDEBAR_MENU_KEYS.CREATE,
       onPress: () => onOpen(),
       icon: PlusSquare,
-      label: t('create'),
+      label: t('navbar.create'),
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
       route: Routes.PROFILE.replace('[id]', user?.username),
-      label: t('profile'),
+      label: t('navbar.profile'),
       content: (
         <div className="shrink-0">
           <Image
