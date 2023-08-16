@@ -21,11 +21,10 @@ const ProfileInfo = ({ user }) => {
     <div className="flex flex-col sm:flex-grow-[2] sm:basis-[30px]">
       <div className="mb-3 flex flex-wrap items-center gap-x-4 sm:mb-6 md:flex-nowrap">
         <h1 className={cn('text-xl', isMe && 'order-1')}>{user?.username || 'username'}</h1>
-        {isMe && <MyProfileSettings />}
-        {!isMe && <UserProfileSettings user={user} />}
+        {isMe ? <MyProfileSettings /> : <UserProfileSettings user={user} />}
       </div>
       <DesktopUserStatistics user={user} />
-      <p className="hidden text-sm font-semibold sm:block">Description</p>
+      <p className="hidden text-sm font-semibold sm:block">{user?.name}</p>
     </div>
   )
 }
@@ -41,7 +40,7 @@ const ProfileHeader = () => {
           <ProfileImage image={user?.image} />
           <ProfileInfo user={user} />
         </div>
-        <p className="mt-6 text-sm font-semibold sm:hidden">Description</p>
+        <p className="mt-6 text-sm font-semibold sm:hidden">{user?.name}</p>
       </div>
       <MobileUserStatistics user={user} />
     </div>
