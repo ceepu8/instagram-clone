@@ -36,7 +36,7 @@ const PostCard = (props) => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-110"
       >
-        <DialogContent className="max-h-[calc(100vh-40px)] max-w-[calc(100vw-64px-64px)] rounded-lg sm:rounded-none md:h-full md:w-max">
+        <DialogContent className="max-h-[calc(100vh-40px)] max-w-[calc(100vw-64px-64px)] rounded-lg bg-background sm:rounded-none md:h-full md:w-max">
           <div className="flex flex-col md:h-full md:flex-row">
             <div className="hidden h-full md:block">
               <PostImageSlider images={images} />

@@ -12,7 +12,7 @@ const UserLayout = ({ children }) => {
   return (
     <main className="h-screen w-screen">
       <AppSideBar />
-      <div className="flex min-h-screen flex-col pb-16 md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
+      <div className="flex min-h-screen flex-col bg-background pb-16 md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
         <div className="flex-1">{children}</div>
         {showFooter && <Footer />}
       </div>

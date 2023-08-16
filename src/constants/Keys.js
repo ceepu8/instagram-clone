@@ -21,6 +21,8 @@ export const SIDEBAR_MENU_KEYS = {
 }
 
 export const PROFILE_TAB_KEYS = {
-  posts: 'posts',
-  tagged: 'tagged',
+  POSTS: 'posts',
+  REELS: 'reels',
+  SAVED: 'saved',
+  TAGGED: 'tagged',
 }

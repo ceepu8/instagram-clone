@@ -3,7 +3,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
-import { useToast } from '../custom'
+import { useToast } from '../custom/useToast'
 
 export const useRegister = () => {
   const [isLoading, setLoading] = useState(false)
