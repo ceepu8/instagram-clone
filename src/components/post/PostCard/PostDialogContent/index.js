@@ -71,7 +71,7 @@ const BlueTick = () => {
     <div className="relative ml-1 inline-block h-3 w-3 rounded-full bg-primary">
       <CheckIcon
         size={8}
-        className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 text-base-reverse"
+        className="absolute left-1/2 top-1/2 inline -translate-x-1/2 -translate-y-1/2 text-default-reverse"
       />
     </div>
   )

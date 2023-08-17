@@ -57,7 +57,7 @@ export const SelectItem = React.forwardRef(
         className={cn(
           'relative flex items-center pl-5',
           'h-6 cursor-pointer select-none rounded-md leading-none hover:border-none focus:outline-none',
-          'text-base text-xs hover:text-hover',
+          'text-xs text-default hover:text-hover',
           className
         )}
         {...props}
@@ -82,7 +82,7 @@ export const SelectTrigger = ({
   const rootClassName = cn(
     'h-9 rounded-md bg-background focus:outline-none',
     'inline-flex items-center justify-center space-x-1 px-3 py-0',
-    'text-base text-xs leading-none hover:text-hover',
+    'text-default text-xs leading-none hover:text-hover',
     hasShadow && 'focus:shadow-55',
     className
   )

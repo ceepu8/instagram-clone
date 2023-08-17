@@ -59,7 +59,7 @@ const ProfileTabs = () => {
             active && 'border-base'
           )}
         >
-          <Icon className={cn('sm:h-4 sm:w-4', active && 'text-primary sm:text-base')} />
+          <Icon className={cn('sm:h-4 sm:w-4', active && 'text-primary sm:text-default')} />
           <span className="hidden uppercase sm:block">{label}</span>
         </div>
       </Pressable>
