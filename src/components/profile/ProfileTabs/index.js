@@ -56,7 +56,7 @@ const ProfileTabs = () => {
             'cursor-pointer text-xs font-bold tracking-wide text-comment',
             'border-t border-transparent',
             'flex-1 sm:flex-initial',
-            active && 'border-base'
+            active && 'border-default'
           )}
         >
           <Icon className={cn('sm:h-4 sm:w-4', active && 'text-primary sm:text-default')} />
