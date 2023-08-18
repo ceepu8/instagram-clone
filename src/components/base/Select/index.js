@@ -1,4 +1,4 @@
-import * as SelectPrimitive from '@radix-ui/react-select'
+import * as RadixSelect from '@radix-ui/react-select'
 import React from 'react'
 
 import { CheckIcon, ChevronDown, ChevronUp } from '@/components/icons'
@@ -6,10 +6,10 @@ import { cn } from '@/utils'
 
 export const Select = ({ children, trigger, className, ...props }) => {
   return (
-    <SelectPrimitive.Root className={className} {...props}>
+    <RadixSelect.Root className={className} {...props}>
       {trigger}
-      <SelectPrimitive.Portal>{children}</SelectPrimitive.Portal>
-    </SelectPrimitive.Root>
+      <RadixSelect.Portal>{children}</RadixSelect.Portal>
+    </RadixSelect.Root>
   )
 }
 
@@ -17,9 +17,9 @@ const ScrollUpButton = () => {
   const rootClassName = 'flex h-6 cursor-default items-center justify-center'
 
   return (
-    <SelectPrimitive.ScrollUpButton className={rootClassName}>
+    <RadixSelect.ScrollUpButton className={rootClassName}>
       <ChevronUp size={18} />
-    </SelectPrimitive.ScrollUpButton>
+    </RadixSelect.ScrollUpButton>
   )
 }
 
@@ -27,15 +27,15 @@ const ScrollDownButton = () => {
   const rootClassName = 'flex h-6 cursor-default items-center justify-center'
 
   return (
-    <SelectPrimitive.ScrollDownButton className={rootClassName}>
+    <RadixSelect.ScrollDownButton className={rootClassName}>
       <ChevronDown size={18} />
-    </SelectPrimitive.ScrollDownButton>
+    </RadixSelect.ScrollDownButton>
   )
 }
 
 export const SelectContent = ({ children, className, ...props }) => {
   return (
-    <SelectPrimitive.Content
+    <RadixSelect.Content
       className={cn(
         'shadow-xl overflow-hidden rounded-md bg-popover',
         'border border-divide',
@@ -44,16 +44,16 @@ export const SelectContent = ({ children, className, ...props }) => {
       {...props}
     >
       <ScrollUpButton />
-      <SelectPrimitive.Viewport className="p-2">{children}</SelectPrimitive.Viewport>
+      <RadixSelect.Viewport className="p-2">{children}</RadixSelect.Viewport>
       <ScrollDownButton />
-    </SelectPrimitive.Content>
+    </RadixSelect.Content>
   )
 }
 
 export const SelectItem = React.forwardRef(
   ({ children, className, hasCheckIcon = false, ...props }, forwardedRef) => {
     return (
-      <SelectPrimitive.Item
+      <RadixSelect.Item
         className={cn(
           'relative flex items-center pl-5',
           'h-6 cursor-pointer select-none rounded-md leading-none hover:border-none focus:outline-none',
@@ -63,11 +63,11 @@ export const SelectItem = React.forwardRef(
         {...props}
         ref={forwardedRef}
       >
-        <SelectPrimitive.ItemText className="text-xs">{children}</SelectPrimitive.ItemText>
-        <SelectPrimitive.ItemIndicator className="absolute left-0 inline-flex w-6 items-center justify-center">
+        <RadixSelect.ItemText className="text-xs">{children}</RadixSelect.ItemText>
+        <RadixSelect.ItemIndicator className="absolute left-0 inline-flex w-6 items-center justify-center">
           {hasCheckIcon && <CheckIcon size={12} />}
-        </SelectPrimitive.ItemIndicator>
-      </SelectPrimitive.Item>
+        </RadixSelect.ItemIndicator>
+      </RadixSelect.Item>
     )
   }
 )
@@ -94,25 +94,25 @@ export const SelectTrigger = ({
   )
 
   return (
-    <SelectPrimitive.Trigger class={cn(rootClassName)} {...props}>
+    <RadixSelect.Trigger class={cn(rootClassName)} {...props}>
       <SelectValue placeholder={children} />
       {hasIcon && icon}
-    </SelectPrimitive.Trigger>
+    </RadixSelect.Trigger>
   )
 }
 export const SelectSeparator = () => {
-  return <SelectPrimitive.Separator className="my-2 h-px bg-divide" />
+  return <RadixSelect.Separator className="my-2 h-px bg-divide" />
 }
 
 export const SelectLabel = ({ children, className, ...props }) => {
   return (
-    <SelectPrimitive.Label className={cn('px-5 text-xs leading-6', className)} {...props}>
+    <RadixSelect.Label className={cn('px-5 text-xs leading-6', className)} {...props}>
       {children}
-    </SelectPrimitive.Label>
+    </RadixSelect.Label>
   )
 }
 
-export const SelectValue = SelectPrimitive.Value
-export const SelectIcon = SelectPrimitive.Icon
+export const SelectValue = RadixSelect.Value
+export const SelectIcon = RadixSelect.Icon
 
-export const SelectGroup = SelectPrimitive.Group
+export const SelectGroup = RadixSelect.Group
