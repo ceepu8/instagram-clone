@@ -134,7 +134,7 @@ const PostComment = ({ value, onChange }) => {
 const Post = () => {
   const [comment, getCommentInputOnChange] = useInputState('')
   return (
-    <div className="space-y-2 py-4">
+    <div className="max-w-[var(--feed-width-post)] space-y-2 py-4">
       <PostHeader />
       <PostImage />
       <div className="flex flex-col">

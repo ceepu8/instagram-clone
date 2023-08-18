@@ -1,13 +1,12 @@
-import { Post } from '@/components/shared'
+import PostList from './PostList'
+import StorySlider from './StorySlider'
 
 const HomeView = () => {
   return (
     <div className="flex justify-center gap-16">
-      <div className="max-w-[var(--feed-width-post)]">
-        <div className="divide-y-[1px] divide-divide text-center">
-          <Post />
-          <Post />
-        </div>
+      <div className="flex flex-1 flex-col items-center space-y-12 pt-12">
+        <StorySlider />
+        <PostList />
       </div>
       <div className="hidden w-full max-w-[var(--feed-sidebar-width)] lg:block">Feed Sidebar</div>
     </div>

@@ -57,6 +57,7 @@ module.exports = {
       'philippine-gray': 'var(--philippine-gray)',
       'anti-flash-gray': 'var(--anti-flash-gray)',
 
+      'main-gradient': 'var(--main-gradient)',
       gradient: 'var(--gradient)',
     },
     backgroundOpacity: ['active'],
