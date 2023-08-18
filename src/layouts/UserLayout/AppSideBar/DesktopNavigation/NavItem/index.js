@@ -32,7 +32,7 @@ const NavItem = ({
             'rounded-lg font-medium hover:bg-nav-hover',
             'cursor-pointer transition-all duration-150',
             'border border-solid border-transparent',
-            isSelecting ? 'max-w-fit border-base' : '',
+            isSelecting ? 'max-w-fit border-default' : '',
             active ? 'font-bold' : '',
             _size.letter,
             className

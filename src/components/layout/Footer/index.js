@@ -1,7 +1,13 @@
 import { useTranslation } from 'react-i18next'
 
 import { Link } from '@/components/base'
-import { ChevronDown } from '@/components/icons'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+} from '@/components/base/Select'
 import { useChangeLanguage } from '@/hooks/custom'
 import { getCurrentYear } from '@/utils'
 
@@ -10,9 +16,8 @@ const CopyRight = () => {
   return <span className="text-xs text-note">&copy; {currentYear} Instagram from Meta</span>
 }
 
-const LanguageSelect = () => {
+const LanguagesSelect = () => {
   const { t } = useTranslation()
-
   const { onChangeLanguage, currentLocale } = useChangeLanguage()
 
   const languages = [
@@ -26,20 +31,31 @@ const LanguageSelect = () => {
     },
   ]
 
+  const trigger = (
+    <SelectTrigger className="text-comment" hasShadow={false}>
+      {currentLocale}
+    </SelectTrigger>
+  )
+
+  const renderItem = ({ label, value }) => (
+    <SelectItem key={value} value={value} hasCheckIcon>
+      {label}
+    </SelectItem>
+  )
+
   return (
     <div className="flex items-center gap-x-2">
-      <select
+      <Select
+        trigger={trigger}
         value={currentLocale}
-        className="border-none p-0 text-xs text-comment"
-        onChange={(e) => onChangeLanguage(e.target.value)}
+        onValueChange={(e) => {
+          onChangeLanguage(e)
+        }}
       >
-        {languages.map(({ label, value }) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
-      <ChevronDown size={16} className="text-comment" />
+        <SelectContent>
+          <SelectGroup>{languages.map(renderItem)}</SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
   )
 }
@@ -114,7 +130,7 @@ const Footer = () => {
         {items.map(renderItem)}
       </div>
       <div className="flex items-center gap-x-4">
-        <LanguageSelect />
+        <LanguagesSelect />
         <CopyRight />
       </div>
     </footer>

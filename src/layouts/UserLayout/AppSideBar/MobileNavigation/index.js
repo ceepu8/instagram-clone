@@ -20,7 +20,7 @@ const ProfileImage = ({ size = 24, className, active }) => {
         height={size}
         src={user?.image || Assets.COMMON.PLACEHOLDER}
         alt="profile-image"
-        className={cn('rounded-full border-2', active ? 'border-base' : 'border-transparent')}
+        className={cn('rounded-full border-2', active ? 'border-default' : 'border-transparent')}
       />
     </div>
   )

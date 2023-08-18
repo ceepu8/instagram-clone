@@ -35,7 +35,7 @@ const SideBarLogo = ({ navSelected }) => {
 
   return (
     <div className="relative flex min-h-[80px] items-center pl-3">
-      <Link href="/" className="text-base">
+      <Link href="/" className="text-default">
         {renderLogo}
         {renderLetterLogo}
       </Link>

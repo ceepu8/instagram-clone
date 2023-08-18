@@ -11,7 +11,7 @@ const EraseInputButton = ({ onClick }) => {
       variant="secondary"
       className={cn('bg-chinese-silver p-px')}
       icon={XIcon}
-      iconClassName="w-3 h-3 stroke-1 text-base-reverse"
+      iconClassName="w-3 h-3 stroke-1 text-default-reverse"
       onMouseDown={onClick}
     />
   )

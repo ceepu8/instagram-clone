@@ -3,7 +3,7 @@ import { cn } from '@/utils'
 
 const UploadImageView = ({ handleImageChange }) => {
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 text-base">
+    <div className="flex flex-col items-center justify-center space-y-4 text-default">
       <UploadImageFileIcon width={96} height={77} />
       <h2 className="text-xl">Drag photos and videos here</h2>
       <label

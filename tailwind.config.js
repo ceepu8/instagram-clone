@@ -26,9 +26,9 @@ module.exports = {
       'metallic-blue': 'var(--metallic-blue)',
       'very-light-azure': 'var(--very-light-azure)',
 
-      base: 'var(--base)',
+      default: 'var(--default)',
       note: 'var(--note)',
-      'base-reverse': 'var(--base-reverse)',
+      'default-reverse': 'var(--default-reverse)',
       footer: 'var(--footer)',
       background: 'var(--background)',
       comment: 'var(--comment)',

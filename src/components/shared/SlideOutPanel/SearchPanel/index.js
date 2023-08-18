@@ -32,7 +32,7 @@ const SearchItem = (props) => {
             className="rounded-full"
           />
           <div className="flex-1">
-            <h1 className="text-base text-sm font-bold leading-4">{username}</h1>
+            <h1 className="text-sm font-bold leading-4 text-default">{username}</h1>
             <p className="text-sm leading-4 text-note">description</p>
           </div>
         </div>
