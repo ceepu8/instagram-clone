@@ -29,13 +29,13 @@ const Slideshow = ({
   arrowClassname,
 }) => {
   const nextArrow = (
-    <button className={cn(arrowClassname)} type="button">
-      <ChevronRight />
+    <button className={cn('shadow-55', arrowClassname)} type="button">
+      <ChevronRight size={22} currentColor="var(--anti-flash-gray)" />
     </button>
   )
   const prevArrow = (
-    <button className={cn(arrowClassname)} type="button">
-      <ChevronLeft />
+    <button className={cn('shadow-55', arrowClassname)} type="button">
+      <ChevronLeft size={22} currentColor="var(--anti-flash-gray)" />
     </button>
   )
 
@@ -114,7 +114,7 @@ const StoryList = () => {
         rootClass="mx-auto"
         width={640}
         infinite={false}
-        arrowClassname="top-6 bg-popover rounded-full border-philippine-gray border-[0.25px]"
+        arrowClassname="top-6 bg-popover rounded-full border-philippine-gray border-none"
       >
         {Array(16)
           .fill('')
