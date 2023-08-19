@@ -57,6 +57,7 @@ module.exports = {
       'philippine-gray': 'var(--philippine-gray)',
       'anti-flash-gray': 'var(--anti-flash-gray)',
 
+      'main-gradient': 'var(--main-gradient)',
       gradient: 'var(--gradient)',
     },
     backgroundOpacity: ['active'],
@@ -68,6 +69,20 @@ module.exports = {
       md: '768px',
       lg: '1160px',
       xl: '1264px',
+    },
+    extend: {
+      keyframes: {
+        pulse: {
+          '0%': { opacity: 0.3 },
+          '25%': { opacity: 0.6 },
+          '50%': { opacity: 0.9 },
+          '75%': { opacity: 0.6 },
+          '100%': { opacity: 0.3 },
+        },
+      },
+      animation: {
+        wiggle: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
     },
     container: {},
   },
