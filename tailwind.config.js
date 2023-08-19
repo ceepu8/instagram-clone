@@ -70,6 +70,20 @@ module.exports = {
       lg: '1160px',
       xl: '1264px',
     },
+    extend: {
+      keyframes: {
+        pulse: {
+          '0%': { opacity: 0.3 },
+          '25%': { opacity: 0.6 },
+          '50%': { opacity: 0.9 },
+          '75%': { opacity: 0.6 },
+          '100%': { opacity: 0.3 },
+        },
+      },
+      animation: {
+        wiggle: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+    },
     container: {},
   },
   plugins: [

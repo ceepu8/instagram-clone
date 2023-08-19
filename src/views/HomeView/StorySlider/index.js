@@ -1,5 +1,6 @@
 import { Pressable } from '@react-aria/interactions'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { Slide } from 'react-slideshow-image'
 
 import { ChevronLeft, ChevronRight } from '@/components/icons'
@@ -65,6 +66,17 @@ const Slideshow = ({
   )
 }
 
+const StoryItemSkeleton = ({ item }) => {
+  const delay = item * 200
+
+  return (
+    <div
+      style={{ animationDelay: `${delay}ms`, animationDuration: '1600ms' }}
+      className="mx-auto h-[62px] w-[62px] animate-pulse rounded-full border-[0.5px] border-chinese-silver bg-bright-gray opacity-75"
+    />
+  )
+}
+
 const StoryItem = ({ index, user, active = true }) => {
   const activeStyle = active
     ? { background: 'linear-gradient(45deg, #ffd600, #ff7a00, #ff0069, #d300c5, #7638fa)' }
@@ -91,26 +103,55 @@ const StoryItem = ({ index, user, active = true }) => {
   )
 }
 
-const StorySlider = () => {
+const StoryList = () => {
   return (
-    <Slideshow
-      transitionDuration={300}
-      autoplay={false}
-      slidesToShow={8}
-      slidesToScroll={8}
-      rootClass="mx-auto"
-      width={680}
-      infinite={false}
-      arrowClassname="top-6 bg-popover rounded-full border-philippine-gray border-[0.25px]"
-    >
-      {Array(8)
-        .fill('')
-        .map((_) => (
-          <div key={_} className="flex justify-center">
-            <StoryItem alt="show-image" />
-          </div>
-        ))}
-    </Slideshow>
+    <div className="relative h-[100px] w-full">
+      <Slideshow
+        transitionDuration={300}
+        autoplay={false}
+        slidesToShow={8}
+        slidesToScroll={4}
+        rootClass="mx-auto"
+        width={640}
+        infinite={false}
+        arrowClassname="top-6 bg-popover rounded-full border-philippine-gray border-[0.25px]"
+      >
+        {Array(16)
+          .fill('')
+          .map((_) => (
+            <div key={_} className="flex justify-center">
+              <StoryItem />
+            </div>
+          ))}
+      </Slideshow>
+    </div>
+  )
+}
+
+const StorySlider = () => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <div className="flex w-full flex-col pt-12">
+      {isLoading && (
+        <div className="mx-auto flex h-[100px] w-full max-w-[640px] justify-between">
+          {Array(8)
+            .fill('')
+            .map((_, index) => (
+              <StoryItemSkeleton key={_} item={index} />
+            ))}
+        </div>
+      )}
+
+      {!isLoading && <StoryList />}
+    </div>
   )
 }
 

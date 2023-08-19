@@ -3,11 +3,9 @@ import StorySlider from './StorySlider'
 
 const HomeView = () => {
   return (
-    <div className="flex justify-center gap-16">
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <div className="relative h-[100px] w-full pt-12">
-          <StorySlider />
-        </div>
+    <div className="flex justify-center">
+      <div className="flex flex-1 flex-col items-center justify-center gap-x-4">
+        <StorySlider />
         <PostList />
       </div>
       <div className="hidden w-full max-w-[var(--feed-sidebar-width)] lg:block">Feed Sidebar</div>
