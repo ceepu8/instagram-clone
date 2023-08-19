@@ -56,6 +56,7 @@
     --feed-width-post: 470px;
     --feed-sidebar-width: 319px;
     --slide-panel-width: 397px;
+    --desktop-home-story: 640px;
 
     --gradient: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
       radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
@@ -122,6 +123,7 @@
     --feed-width-post: 470px;
     --feed-sidebar-width: 319px;
     --slide-panel-width: 397px;
+    --desktop-home-story: 640px;
 
     --main-gradient: linear-gradient(45deg, #ffd600, #ff7a00, #ff0069, #d300c5, #7638fa);
     --gradient: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
@@ -216,6 +218,14 @@ input:checked + span {
 }
 input:checked + span svg {
   @apply block;
+}
+
+.react-slideshow-container .nav:first-of-type {
+  left: 20px;
+}
+
+.react-slideshow-container .nav:last-of-type {
+  right: 20px;
 }
 
 @keyframes slide-out-right {

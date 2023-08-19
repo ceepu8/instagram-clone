@@ -28,13 +28,16 @@ const Slideshow = ({
   width,
   arrowClassname,
 }) => {
+  const rootArrowStyle = 'border-[0.5px] border-anti-flash-gray shadow-55 disabled:hidden'
+
   const nextArrow = (
-    <button className={cn('shadow-55', arrowClassname)} type="button">
+    <button className={cn(rootArrowStyle, arrowClassname)} type="button">
       <ChevronRight size={22} currentColor="var(--anti-flash-gray)" />
     </button>
   )
+
   const prevArrow = (
-    <button className={cn('shadow-55', arrowClassname)} type="button">
+    <button className={cn(rootArrowStyle, arrowClassname)} type="button">
       <ChevronLeft size={22} currentColor="var(--anti-flash-gray)" />
     </button>
   )
@@ -66,18 +69,19 @@ const Slideshow = ({
   )
 }
 
-const StoryItemSkeleton = ({ item }) => {
+const StoryItemSkeleton = ({ item, length }) => {
   const delay = item * 200
+  const duration = 200 * length
 
   return (
     <div
-      style={{ animationDelay: `${delay}ms`, animationDuration: '1600ms' }}
+      style={{ animationDelay: `${delay}ms`, animationDuration: `${duration}ms` }}
       className="mx-auto h-[62px] w-[62px] animate-pulse rounded-full border-[0.5px] border-chinese-silver bg-bright-gray opacity-75"
     />
   )
 }
 
-const StoryItem = ({ index, user, active = true }) => {
+const StoryItem = ({ user, active = true }) => {
   const activeStyle = active
     ? { background: 'linear-gradient(45deg, #ffd600, #ff7a00, #ff0069, #d300c5, #7638fa)' }
     : { background: 'var(--chinese-silver)' }
@@ -92,18 +96,22 @@ const StoryItem = ({ index, user, active = true }) => {
               src={user?.image || Assets.COMMON.PLACEHOLDER}
               fill
               alt="story-image"
-              className="rounded-full border-2 border-background"
+              className="rounded-full border-2 border-background "
             />
           </div>
         </div>
         <p className="truncate text-xs">{user?.username || 'username123123'}</p>
-        <span>{index}</span>
       </div>
     </Pressable>
   )
 }
 
 const StoryList = () => {
+  const renderItem = (_) => (
+    <div key={_} className="flex justify-center">
+      <StoryItem />
+    </div>
+  )
   return (
     <div className="relative h-[100px] w-full">
       <Slideshow
@@ -112,18 +120,24 @@ const StoryList = () => {
         slidesToShow={8}
         slidesToScroll={4}
         rootClass="mx-auto"
-        width={640}
+        width="var(--desktop-home-story)"
         infinite={false}
         arrowClassname="top-6 bg-popover rounded-full border-philippine-gray border-none"
       >
-        {Array(16)
-          .fill('')
-          .map((_) => (
-            <div key={_} className="flex justify-center">
-              <StoryItem />
-            </div>
-          ))}
+        {Array(16).fill('').map(renderItem)}
       </Slideshow>
+    </div>
+  )
+}
+
+const StoryLoading = () => {
+  return (
+    <div className="mx-auto flex h-[100px] w-full max-w-[var(--desktop-home-story)] justify-between">
+      {Array(8)
+        .fill('')
+        .map((_, index) => (
+          <StoryItemSkeleton key={_} item={index} length={8} />
+        ))}
     </div>
   )
 }
@@ -134,24 +148,12 @@ const StorySlider = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 5000)
+    }, 3000)
     return () => clearTimeout(timer)
   }, [])
 
   return (
-    <div className="flex w-full flex-col pt-12">
-      {isLoading && (
-        <div className="mx-auto flex h-[100px] w-full max-w-[640px] justify-between">
-          {Array(8)
-            .fill('')
-            .map((_, index) => (
-              <StoryItemSkeleton key={_} item={index} />
-            ))}
-        </div>
-      )}
-
-      {!isLoading && <StoryList />}
-    </div>
+    <div className="flex w-full flex-col pt-12">{isLoading ? <StoryLoading /> : <StoryList />}</div>
   )
 }
 
