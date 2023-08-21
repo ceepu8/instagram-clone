@@ -1,27 +1,20 @@
 import Image from 'next/image'
+import { forwardRef } from 'react'
 
 import Assets from '@/constants/Assets'
-import { cn } from '@/utils'
 
-const ProfileAvatar = ({ image, size, ...props }) => {
-  const variantSize = {
-    xs: 'w-[32px] h-[32px]',
-    sm: 'w-[44px] h-[44px]',
-    md: 'w-[56px] h-[56px]',
-  }
-
+const ProfileAvatar = forwardRef(({ image, size = 20, className, ...props }, ref) => {
   return (
-    <div className="shrink-0" {...props}>
-      <div className={cn('relative mx-auto', variantSize[size])}>
-        <Image
-          fill
-          className="rounded-full border border-chinese-silver"
-          src={image || Assets.COMMON.PLACEHOLDER}
-          alt="Profile Image"
-        />
-      </div>
+    <div className={className} ref={ref} {...props}>
+      <Image
+        width={size}
+        height={size}
+        className="rounded-full border border-chinese-silver"
+        src={image || Assets.COMMON.PLACEHOLDER}
+        alt="Profile Image"
+      />
     </div>
   )
-}
+})
 
 export default ProfileAvatar

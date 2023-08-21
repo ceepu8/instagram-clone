@@ -1,4 +1,4 @@
-import UploadPostDialog from '@/components/post/UploadPostDialog'
+import { UploadPostDialog } from '@/components/post'
 
 const DialogProvider = ({ children }) => {
   return (

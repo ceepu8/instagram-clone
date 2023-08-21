@@ -17,7 +17,9 @@ const HoverCard = ({ trigger, children, hasArrow = false, className }) => {
         left: popoverPosition.left,
       }}
     >
-      <HoverCardPrimitive.Trigger asChild>{trigger}</HoverCardPrimitive.Trigger>
+      <HoverCardPrimitive.Trigger className="cursor-pointer" asChild>
+        {trigger}
+      </HoverCardPrimitive.Trigger>
       <HoverCardPrimitive.Content
         sideOffset={4}
         className={twMerge(

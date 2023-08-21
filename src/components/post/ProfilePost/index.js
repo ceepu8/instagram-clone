@@ -9,7 +9,7 @@ import { cn } from '@/utils'
 import PostDialogContent from './PostDialogContent'
 import PostImageSlider from './PostImageSlider'
 
-const PostCard = (props) => {
+const ProfilePost = (props) => {
   const { images, isMultipleImages } = props
   const [isOpen, setIsOpen] = useState(false)
 
@@ -51,4 +51,4 @@ const PostCard = (props) => {
   )
 }
 
-export default PostCard
+export default ProfilePost

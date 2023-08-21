@@ -1,7 +1,6 @@
 import Image from 'next/image'
 
-import Button from '@/components/base/Button'
-import HoverCard from '@/components/base/HoverCard'
+import { HoverCard, Button } from '@/components/base'
 import {
   BookmarkIcon,
   HeartIcon,
@@ -9,39 +8,30 @@ import {
   MoreHorizontalIcon,
   Send,
 } from '@/components/icons'
+import ProfileAvatar from '@/components/profile/ProfileAvatar'
 import { useInputState } from '@/hooks/shared'
 import { cn } from '@/utils'
 
-import CardProfilePreview from '../CardProfilePreview'
-import CommentInput from '../CommentInput'
+import CardProfilePreview from '../../shared/CardProfilePreview'
+import CommentInput from '../../shared/CommentInput'
 
-const PreviewProfileHoverCard = ({ triggerContent }) => {
-  const triggerBtn = (
-    <Button variant="ghost" type="trigger" size="small" className="inline p-0">
-      {triggerContent}
-    </Button>
-  )
+const PreviewProfileHoverCard = ({ children }) => {
   return (
-    <HoverCard trigger={triggerBtn}>
+    <HoverCard trigger={children}>
       <CardProfilePreview />
     </HoverCard>
   )
 }
 
 const PostHeader = () => {
-  const profileImage = (
-    <Image
-      width={24}
-      height={24}
-      src="/profile.jpeg"
-      alt="profile-image"
-      className="rounded-full"
-    />
-  )
   return (
     <div className="flex items-center gap-x-3">
-      <PreviewProfileHoverCard triggerContent={profileImage} />
-      <PreviewProfileHoverCard triggerContent="mirea_03" />
+      <PreviewProfileHoverCard>
+        <ProfileAvatar size={24} />
+      </PreviewProfileHoverCard>
+      <PreviewProfileHoverCard>
+        <b className="text-xs">mirea_03</b>
+      </PreviewProfileHoverCard>
       <Button variant="ghost" icon={MoreHorizontalIcon} className="ml-auto" />
     </div>
   )
@@ -103,7 +93,9 @@ const PostActions = () => {
 const PostContent = () => {
   return (
     <div className="h-fit text-left">
-      <PreviewProfileHoverCard triggerContent="mirea_03" />
+      <PreviewProfileHoverCard>
+        <b className="text-xs">mirea_03</b>
+      </PreviewProfileHoverCard>
       <span>&nbsp;</span>
       <span className="text-sm tracking-tight">
         Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -131,7 +123,7 @@ const PostComment = ({ value, onChange }) => {
   )
 }
 
-const Post = () => {
+const HomePost = () => {
   const [comment, getCommentInputOnChange] = useInputState('')
   return (
     <div className="max-w-[var(--feed-width-post)] space-y-2 py-4">
@@ -146,4 +138,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default HomePost

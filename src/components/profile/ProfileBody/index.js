@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { useGetPostsByUser } from '@/api'
 import { AnimatedSpinnerIcon } from '@/components/icons'
-import { PostCard } from '@/components/post'
+import ProfilePost from '@/components/post/ProfilePost'
 
 const ProfileBody = () => {
   const router = useRouter()
@@ -17,7 +17,7 @@ const ProfileBody = () => {
       {isLoading && <AnimatedSpinnerIcon className="text-primary" />}
       <div className="grid grid-cols-3 justify-start gap-1">
         {posts.map((post) => {
-          return <PostCard key={post.id} {...post} />
+          return <ProfilePost key={post.id} {...post} />
         })}
       </div>
     </div>
