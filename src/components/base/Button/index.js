@@ -67,10 +67,10 @@ const Button = forwardRef(
     }
 
     const rootClassName = cn(
-      className,
       buttonVariants({ variant, size: getSize() }),
       fullWidth && 'w-full',
-      bold && 'font-bold'
+      bold && 'font-bold',
+      className
     )
 
     const rootIconClassName = cn(

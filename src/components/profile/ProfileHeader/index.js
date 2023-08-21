@@ -1,11 +1,12 @@
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 
 import { useGetProfile } from '@/api'
+import Assets from '@/constants/Assets'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
-import ProfileImage from '../ProfileImage'
 import DesktopUserStatistics from './DesktopUserStatistics'
 import MobileUserStatistics from './MobileUserStatistics'
 import MyProfileSettings from './MyProfileSettings'
@@ -37,7 +38,16 @@ const ProfileHeader = () => {
     <div>
       <div className="px-5 py-8">
         <div className="flex">
-          <ProfileImage image={user?.image} />
+          <div className="mr-8 shrink-0 sm:mr-0 sm:flex-grow-[1] sm:basis-0">
+            <div className="relative mx-auto h-[70px] w-[70px] sm:h-[150px] sm:w-[150px]">
+              <Image
+                className="rounded-full border border-chinese-silver"
+                fill
+                src={user?.image || Assets.COMMON.PLACEHOLDER}
+                alt="Profile Image"
+              />
+            </div>
+          </div>
           <ProfileInfo user={user} />
         </div>
         <p className="mt-6 text-sm font-semibold sm:hidden">{user?.name}</p>
