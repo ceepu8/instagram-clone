@@ -2,7 +2,7 @@ import NextImage from 'next/image'
 
 import { Button, HoverCard, LineBreak } from '@/components/base'
 import { CheckIcon, MoreHorizontalIcon } from '@/components/icons'
-import { CardProfilePreview } from '@/components/shared'
+import CardProfilePreview from '@/components/shared/CardProfilePreview'
 import Assets from '@/constants/Assets'
 import { useInputState } from '@/hooks/shared'
 import { getTimeFromNow } from '@/utils'
@@ -27,14 +27,9 @@ const ProfileImage = ({ image }) => {
   )
 }
 
-const PreviewProfileHoverCard = ({ triggerContent }) => {
-  const triggerBtn = (
-    <Button variant="ghost" className="inline h-[30px] w-fit shrink-0 p-0">
-      {triggerContent}
-    </Button>
-  )
+const PreviewProfileHoverCard = ({ children }) => {
   return (
-    <HoverCard trigger={triggerBtn}>
+    <HoverCard trigger={children}>
       <CardProfilePreview />
     </HoverCard>
   )
@@ -44,11 +39,13 @@ const PostHeader = ({ owner }) => {
   return (
     <div className="flex items-center space-x-4 border-b border-divide px-4 pb-3">
       <div className="shrink-0">
-        <PreviewProfileHoverCard triggerContent={<ProfileImage image={owner?.image} />} />
+        <PreviewProfileHoverCard>
+          <ProfileImage image={owner?.image} />
+        </PreviewProfileHoverCard>
       </div>
 
       <div className="flex-1">
-        <PreviewProfileHoverCard triggerContent={owner?.username} />
+        <PreviewProfileHoverCard>{owner?.username}</PreviewProfileHoverCard>
       </div>
       <Button variant="ghost" icon={MoreHorizontalIcon} />
     </div>

@@ -20,7 +20,7 @@ export const buttonVariants = cva(s.root, {
     },
     size: {
       small: 'h-8 px-4 text-sm',
-      medium: 'h-9 px-6 text-default',
+      medium: 'h-9 px-6',
       large: 'h-10 px-8 text-lg',
       icon: 'h-auto w-fit',
       text: 'h-auto w-fit text-sm',
@@ -55,7 +55,7 @@ const Button = forwardRef(
 
     const getSize = () => {
       if (Icon && children) {
-        return 'medium'
+        return size
       }
       if (Icon && !children) {
         return 'icon'
@@ -67,10 +67,10 @@ const Button = forwardRef(
     }
 
     const rootClassName = cn(
-      className,
       buttonVariants({ variant, size: getSize() }),
       fullWidth && 'w-full',
-      bold && 'font-bold'
+      bold && 'font-bold',
+      className
     )
 
     const rootIconClassName = cn(

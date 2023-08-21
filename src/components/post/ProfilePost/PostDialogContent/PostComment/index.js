@@ -1,4 +1,4 @@
-import { CommentInput } from '@/components/shared'
+import CommentInput from '@/components/shared/CommentInput'
 
 const PostComment = ({ value, onChange }) => {
   return (
