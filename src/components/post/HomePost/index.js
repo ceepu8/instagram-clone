@@ -9,11 +9,9 @@ import {
   Send,
 } from '@/components/icons'
 import ProfileAvatar from '@/components/profile/ProfileAvatar'
+import { CardProfilePreview, CommentInput } from '@/components/shared'
 import { useInputState } from '@/hooks/shared'
 import { cn } from '@/utils'
-
-import CardProfilePreview from '../../shared/CardProfilePreview'
-import CommentInput from '../../shared/CommentInput'
 
 const PreviewProfileHoverCard = ({ children }) => {
   return (
