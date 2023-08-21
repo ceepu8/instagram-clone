@@ -57,7 +57,7 @@ const FeedSidebarFooter = () => {
   const renderItem = ({ label, href }) => (
     <li>
       <Link key={label} href={href} disabled>
-        <div className="flex cursor-pointer gap-x-0.5 text-xs text-footer transition-all">
+        <div className="flex cursor-pointer gap-x-0.5 pt-1 text-xs text-footer transition-all">
           &#x2022;
           <span className="hover:underline">{label}</span>
         </div>

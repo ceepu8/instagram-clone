@@ -1,18 +1,35 @@
 import React from 'react'
 
-import { Button } from '@/components/base'
+import { Button, HoverCard } from '@/components/base'
 import { ProfileAvatar } from '@/components/profile'
+import { CardProfilePreview } from '@/components/shared'
 import { useAuth } from '@/hooks/query/auth'
 
 import FeedSidebarFooter from './FeedSidebarFooter'
 
+const PreviewProfileHoverCard = ({ trigger }) => {
+  return (
+    <HoverCard trigger={trigger}>
+      <CardProfilePreview />
+    </HoverCard>
+  )
+}
+
 const SuggestProfile = () => {
   return (
     <div className="flex items-center gap-x-2">
-      <ProfileAvatar size="sm" />
+      <PreviewProfileHoverCard
+        trigger={
+          <div className="cursor-pointer">
+            <ProfileAvatar size="xs" />
+          </div>
+        }
+      />
       <div className="flex flex-1 flex-col">
-        <p className="text-sm font-bold">username1</p>
-        <span className="text-sm text-comment">username</span>
+        <PreviewProfileHoverCard
+          trigger={<p className="cursor-pointer text-sm font-bold">username1</p>}
+        />
+        <span className="text-xs text-comment">Suggested for you</span>
       </div>
       <Button variant="link" size="text" className="text-xs">
         Switch
@@ -28,8 +45,8 @@ const MyProfile = () => {
     <div className="flex items-center gap-x-2">
       <ProfileAvatar size="sm" />
       <div className="flex flex-1 flex-col">
-        <p className="text-sm font-bold">{user?.username}</p>
-        <span className="text-sm text-comment">{user?.name}</span>
+        <p className="cursor-pointer text-sm font-bold">{user?.username}</p>
+        <span className="cursor-pointer text-sm text-comment">{user?.name}</span>
       </div>
       <Button variant="link" size="text" className="text-xs">
         Switch

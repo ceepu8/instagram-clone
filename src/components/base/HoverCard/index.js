@@ -26,6 +26,7 @@ const HoverCard = ({ trigger, children, hasArrow = false, className }) => {
           'bg-background',
           'focus-visible:ring-purple-500 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75',
           'shadow-55',
+          'z-50',
           className
         )}
       >
