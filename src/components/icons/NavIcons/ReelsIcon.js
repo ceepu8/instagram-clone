@@ -1,4 +1,4 @@
-export const Film = ({ size = 24, active }) => {
+export const ReelsIcon = ({ size = 24, active }) => {
   if (active) {
     return (
       <svg
@@ -76,4 +76,4 @@ export const Film = ({ size = 24, active }) => {
   )
 }
 
-export default Film
+export default ReelsIcon

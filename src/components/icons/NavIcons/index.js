@@ -1,3 +1,6 @@
 export { default as CompassIcon } from './CompassIcon'
-export { default as Film } from './Film'
+export { default as ReelsIcon } from './ReelsIcon'
 export { default as FacebookMessengerIcon } from './FacebookMessengerIcon'
+export { default as HomeIcon } from './HomeIcon'
+export { default as NotificationsIcon } from './NotificationsIcon'
+export { default as SearchIcon } from './SearchIcon'

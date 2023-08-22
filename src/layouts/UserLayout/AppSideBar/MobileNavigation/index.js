@@ -1,6 +1,12 @@
 import Image from 'next/image'
 
-import { CompassIcon, FacebookMessengerIcon, Film, Home, PlusSquare } from '@/components/icons'
+import {
+  CompassIcon,
+  FacebookMessengerIcon,
+  ReelsIcon,
+  HomeIcon,
+  PlusSquare,
+} from '@/components/icons'
 import { Routes } from '@/constants'
 import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
@@ -34,7 +40,7 @@ const MobileNavigation = () => {
     {
       key: SIDEBAR_MENU_KEYS.HOME,
       route: Routes.HOME,
-      icon: Home,
+      icon: HomeIcon,
       label: 'Home',
     },
     {
@@ -49,7 +55,7 @@ const MobileNavigation = () => {
     {
       key: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
-      icon: Film,
+      icon: ReelsIcon,
       label: 'Reels',
     },
     {

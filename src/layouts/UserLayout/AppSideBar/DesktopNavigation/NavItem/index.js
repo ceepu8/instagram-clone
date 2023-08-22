@@ -41,15 +41,7 @@ const NavItem = ({
       >
         {Icon && (
           <div className="shrink-0">
-            <Icon
-              active={active}
-              width={_size.icon}
-              height={_size.icon}
-              className={cn(
-                'shrink-0 stroke-black stroke-[2px]',
-                active ? 'fill-black' : 'fill-white '
-              )}
-            />
+            <Icon active={active} width={_size.icon} height={_size.icon} />
           </div>
         )}
         {children}
