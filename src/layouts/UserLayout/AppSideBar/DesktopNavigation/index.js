@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
@@ -6,14 +5,13 @@ import {
   CompassIcon,
   FacebookMessengerIcon,
   HomeIcon,
-  PlusSquare,
-  SearchIcon,
-  ReelsIcon,
   NotificationsIcon,
+  PlusSquare,
+  ReelsIcon,
+  SearchIcon,
 } from '@/components/icons'
 import { ProfileAvatar } from '@/components/profile'
 import { Routes } from '@/constants'
-import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
@@ -34,11 +32,9 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     if ([SIDEBAR_MENU_KEYS.SEARCH, SIDEBAR_MENU_KEYS.NOTIFICATIONS].includes(item.key)) {
       return item.key === navSelected
     }
-
     if (!navSelected) {
       return checkRouteActive(router, item.route)
     }
-
     return false
   }
 
@@ -104,14 +100,14 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     const itemLabel = (
       <span
         className={cn(
-          'hidden lg:block',
-          'transition-all delay-[50ms] duration-[100ms]',
+          'hidden transition-all delay-[50ms] duration-[100ms] lg:block',
           navSelected ? 'invisible opacity-0' : 'visible opacity-100'
         )}
       >
         {item?.label}
       </span>
     )
+
     return (
       <NavItem
         key={item?.key}

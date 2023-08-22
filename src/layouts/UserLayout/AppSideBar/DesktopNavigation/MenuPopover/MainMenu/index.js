@@ -65,8 +65,8 @@ export default function MainMenu({ setMenu }) {
               key={item.label}
               onPress={item.onPress}
               icon={item.icon}
-              size="small"
-              className="hover:bg-nav-menu-item"
+              className="text-sm hover:bg-nav-menu-item"
+              iconSize={20}
             >
               {item.label}
             </NavItem>

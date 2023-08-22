@@ -10,16 +10,16 @@ import HomeView from '@/views/HomeView'
 const Home = () => {
   const { isAuthenticated } = useAuth()
 
-  if (!isAuthenticated) {
-    return (
-      <AuthLayout showHeader={false}>
-        <Head>
-          <title>Login</title>
-        </Head>
-        <LoginView />
-      </AuthLayout>
-    )
-  }
+  // if (!isAuthenticated) {
+  //   return (
+  //     <AuthLayout showHeader={false}>
+  //       <Head>
+  //         <title>Login</title>
+  //       </Head>
+  //       <LoginView />
+  //     </AuthLayout>
+  //   )
+  // }
 
   return (
     <UserLayout>
