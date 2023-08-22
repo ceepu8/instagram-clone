@@ -88,13 +88,14 @@ const StoryItem = ({ user, active = true }) => {
 
   return (
     <Pressable onPress={() => {}}>
-      <div className="flex max-w-[70px] cursor-pointer flex-col space-y-1 overflow-auto py-1">
-        <div className="relative mx-auto w-fit rounded-full">
+      <div className="flex cursor-pointer flex-col space-y-1 overflow-auto py-1">
+        <div className="relative mx-auto rounded-full">
           <div className="absolute -inset-0.5 rounded-full" style={activeStyle} />
-          <div className="relative h-[58px] w-[58px] rounded-full">
+          <div className="relative rounded-full">
             <Image
               src={user?.image || Assets.COMMON.PLACEHOLDER}
-              fill
+              width={58}
+              height={58}
               alt="story-image"
               className="rounded-full border-2 border-background "
             />
@@ -106,39 +107,25 @@ const StoryItem = ({ user, active = true }) => {
   )
 }
 
-const StoryList = () => {
+const StoryList = ({ loading }) => {
   const renderItem = (_) => (
     <div key={_} className="flex justify-center">
-      <StoryItem />
+      {loading ? <StoryItemSkeleton /> : <StoryItem />}
     </div>
   )
   return (
-    <div className="relative h-[100px] w-full">
-      <Slideshow
-        transitionDuration={300}
-        autoplay={false}
-        slidesToShow={8}
-        slidesToScroll={4}
-        rootClass="mx-auto"
-        width="var(--desktop-home-story)"
-        infinite={false}
-        arrowClassname="top-6 bg-popover rounded-full border-philippine-gray border-none"
-      >
-        {Array(16).fill('').map(renderItem)}
-      </Slideshow>
-    </div>
-  )
-}
-
-const StoryLoading = () => {
-  return (
-    <div className="mx-auto flex h-[100px] w-full max-w-[var(--desktop-home-story)] justify-between">
-      {Array(8)
-        .fill('')
-        .map((_, index) => (
-          <StoryItemSkeleton key={_} item={index} length={8} />
-        ))}
-    </div>
+    <Slideshow
+      transitionDuration={300}
+      autoplay={false}
+      slidesToShow={8}
+      slidesToScroll={4}
+      rootClass="mx-auto"
+      width="var(--desktop-home-story)"
+      infinite={false}
+      arrowClassname="top-6 bg-popover rounded-full border-philippine-gray border-none"
+    >
+      {Array(16).fill('').map(renderItem)}
+    </Slideshow>
   )
 }
 
@@ -153,7 +140,11 @@ const StorySlider = () => {
   }, [])
 
   return (
-    <div className="flex w-full flex-col pt-12">{isLoading ? <StoryLoading /> : <StoryList />}</div>
+    <div className="mx-auto w-full pt-12">
+      <div className="relative flex h-[100px] w-full max-w-[var(--desktop-home-story)] justify-between">
+        <StoryList loading={isLoading} />
+      </div>
+    </div>
   )
 }
 
