@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { checkRouteActive, cn } from '@/utils'
+import { cn } from '@/utils'
 
 const NavItem = ({
   onPress,
@@ -12,11 +12,11 @@ const NavItem = ({
   icon: Icon,
   route,
   size = 'medium',
+  selectedPanel,
   className,
-  isSelecting = false,
+  active,
 }) => {
   const router = useRouter()
-  const active = checkRouteActive(router, route)
 
   const _size = {
     icon: size === 'medium' ? '24px' : '20px',
@@ -32,7 +32,7 @@ const NavItem = ({
             'rounded-lg font-medium hover:bg-nav-hover',
             'cursor-pointer transition-all duration-150',
             'border border-solid border-transparent',
-            isSelecting ? 'max-w-fit border-default' : '',
+            selectedPanel ? 'max-w-fit border-default' : '',
             active ? 'font-bold' : '',
             _size.letter,
             className
@@ -65,7 +65,6 @@ NavItem.propTypes = {
   route: PropTypes.string,
   size: PropTypes.oneOf('medium', 'small'),
   className: PropTypes.string,
-  isSelecting: PropTypes.bool,
 }
 
 export default memo(NavItem)

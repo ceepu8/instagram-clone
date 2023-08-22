@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -15,17 +16,30 @@ import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
-import { cn } from '@/utils'
+import { checkRouteActive, cn } from '@/utils'
 
 import MenuPopover from './MenuPopover'
 import NavItem from './NavItem'
 
 const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   const { user } = useAuth()
+  const router = useRouter()
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
   const { onOpen } = useUploadPostDialog()
 
   const { t } = useTranslation()
+
+  const getActive = (item) => {
+    if ([SIDEBAR_MENU_KEYS.SEARCH, SIDEBAR_MENU_KEYS.NOTIFICATIONS].includes(item.key)) {
+      return item.key === navSelected
+    }
+
+    if (!navSelected) {
+      return checkRouteActive(router, item.route)
+    }
+
+    return false
+  }
 
   const NAV_ITEMS = [
     {
@@ -96,9 +110,16 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     return (
       <div className="space-y-2">
         {NAV_ITEMS.map((item) => {
-          const isNavSelected = item.key === navSelected
+          const active = getActive(item)
+          const selectedPanel = item.key === navSelected
           return (
-            <NavItem key={item?.key} isSelecting={isNavSelected} {...item}>
+            <NavItem
+              key={item?.key}
+              active={active}
+              selectedPanel={selectedPanel}
+              name={item?.key}
+              {...item}
+            >
               {item?.content}
               <span
                 className={cn(

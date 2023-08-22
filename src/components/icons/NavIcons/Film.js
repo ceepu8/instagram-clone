@@ -1,4 +1,4 @@
-export const Film = ({ size = 24, active, ...props }) => {
+export const Film = ({ size = 24, active }) => {
   if (active) {
     return (
       <svg
