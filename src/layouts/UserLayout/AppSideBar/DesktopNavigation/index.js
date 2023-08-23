@@ -6,6 +6,7 @@ import {
   FacebookMessengerIcon,
   HomeIcon,
   NotificationsIcon,
+  PlusIcon,
   PlusSquare,
   ReelsIcon,
   SearchIcon,
@@ -29,7 +30,13 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   const { t } = useTranslation()
 
   const getActive = (item) => {
-    if ([SIDEBAR_MENU_KEYS.SEARCH, SIDEBAR_MENU_KEYS.NOTIFICATIONS].includes(item.key)) {
+    if (
+      [
+        SIDEBAR_MENU_KEYS.SEARCH,
+        SIDEBAR_MENU_KEYS.NOTIFICATIONS,
+        SIDEBAR_MENU_KEYS.CREATE,
+      ].includes(item.key)
+    ) {
       return item.key === navSelected
     }
     if (!navSelected) {
@@ -81,8 +88,11 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     },
     {
       key: SIDEBAR_MENU_KEYS.CREATE,
-      onPress: () => onOpen(),
-      icon: PlusSquare,
+      onPress: () => {
+        doSetNavSelected(SIDEBAR_MENU_KEYS.CREATE)
+        onOpen()
+      },
+      icon: PlusIcon,
       label: t('navbar.create'),
     },
     {
@@ -95,29 +105,17 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
 
   const renderItem = (item) => {
     const active = getActive(item)
-    const selectedPanel = item.key === navSelected
-
-    const itemLabel = (
-      <span
-        className={cn(
-          'hidden transition-all delay-[50ms] duration-[100ms] lg:block',
-          navSelected ? 'invisible opacity-0' : 'visible opacity-100'
-        )}
-      >
-        {item?.label}
-      </span>
-    )
+    const selectedPanel = item.key === navSelected && item.key !== 'create'
 
     return (
       <NavItem
         key={item?.key}
         active={active}
         selectedPanel={selectedPanel}
+        navSelected={navSelected}
         name={item?.key}
         {...item}
-      >
-        {itemLabel}
-      </NavItem>
+      />
     )
   }
 

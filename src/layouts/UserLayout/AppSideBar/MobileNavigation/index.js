@@ -6,6 +6,7 @@ import {
   ReelsIcon,
   HomeIcon,
   PlusSquare,
+  PlusIcon,
 } from '@/components/icons'
 import { Routes } from '@/constants'
 import Assets from '@/constants/Assets'
@@ -61,7 +62,7 @@ const MobileNavigation = () => {
     {
       key: SIDEBAR_MENU_KEYS.CREATE,
       onPress: () => onOpen(),
-      icon: PlusSquare,
+      icon: PlusIcon,
       label: 'Create',
     },
     {

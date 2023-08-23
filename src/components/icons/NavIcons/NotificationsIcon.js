@@ -3,8 +3,8 @@ const NotificationsIcon = ({ size = 24, active }) => {
     return (
       <svg
         aria-label="Notifications"
-        color="rgb(0, 0, 0)"
-        fill="rgb(0, 0, 0)"
+        color="var(--default)"
+        fill="var(--default)"
         height={size}
         role="img"
         viewBox="0 0 24 24"
@@ -19,8 +19,8 @@ const NotificationsIcon = ({ size = 24, active }) => {
   return (
     <svg
       aria-label="Notifications"
-      color="rgb(0, 0, 0)"
-      fill="rgb(0, 0, 0)"
+      color="var(--default)"
+      fill="var(--default)"
       height={size}
       role="img"
       viewBox="0 0 24 24"

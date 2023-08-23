@@ -67,9 +67,8 @@ export default function MainMenu({ setMenu }) {
               icon={item.icon}
               className="text-sm hover:bg-nav-menu-item"
               iconSize={20}
-            >
-              {item.label}
-            </NavItem>
+              {...item}
+            />
           )}
           {index === 4 && <LineBreak className="-mx-2 h-[6px] bg-popover-divide" />}
           {index === 5 && <LineBreak className="-mx-2 bg-popover-divide" />}

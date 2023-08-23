@@ -5,8 +5,8 @@ const CompassIcon = ({ size = 24, ...props }) => {
     return (
       <svg
         aria-label="Explore"
-        color="rgb(0, 0, 0)"
-        fill="rgb(0, 0, 0)"
+        color="var(--default)"
+        fill="var(--default)"
         height={size}
         role="img"
         viewBox="0 0 24 24"
@@ -21,8 +21,8 @@ const CompassIcon = ({ size = 24, ...props }) => {
     <svg
       aria-label="Explore"
       className="_ab6-"
-      color="rgb(0, 0, 0)"
-      fill="rgb(0, 0, 0)"
+      color="var(--default)"
+      fill="var(--default)"
       height={size}
       role="img"
       viewBox="0 0 24 24"

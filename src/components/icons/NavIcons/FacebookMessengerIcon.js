@@ -5,8 +5,8 @@ const FacebookMessengerIcon = ({ size = 24, active = false }) => {
     return (
       <svg
         aria-label="Messenger"
-        color="rgb(0, 0, 0)"
-        fill="rgb(0, 0, 0)"
+        color="var(--default)"
+        fill="var(--default)"
         height={size}
         role="img"
         viewBox="0 0 24 24"
@@ -20,8 +20,8 @@ const FacebookMessengerIcon = ({ size = 24, active = false }) => {
   return (
     <svg
       aria-label="Messenger"
-      color="rgb(0, 0, 0)"
-      fill="rgb(0, 0, 0)"
+      color="var(--default)"
+      fill="var(--default)"
       height={size}
       role="img"
       viewBox="0 0 24 24"

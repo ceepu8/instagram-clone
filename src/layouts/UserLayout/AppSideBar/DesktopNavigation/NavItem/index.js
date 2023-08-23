@@ -5,17 +5,19 @@ import { memo, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { Routes } from '@/constants'
+import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { cn } from '@/utils'
 
 const NavItem = ({
   onPress,
-  children,
   icon: Icon,
   route,
   selectedPanel,
   className,
   active,
   iconSize = 24,
+  label,
+  navSelected,
 }) => {
   const router = useRouter()
 
@@ -45,18 +47,27 @@ const NavItem = ({
       <div
         className={twMerge(
           cn(
-            'flex items-center gap-x-4 p-3',
+            'flex items-center gap-x-4 p-2',
             'rounded-lg font-medium hover:bg-nav-hover',
             'cursor-pointer transition-all duration-150',
             'border border-solid border-transparent',
-            selectedPanel ? 'max-w-fit border-default' : '',
+            selectedPanel ? 'max-w-fit border-gainsboro' : '',
             active ? 'font-bold' : '',
             className
           )
         )}
       >
         {renderIcon()}
-        {children}
+        <span
+          className={cn(
+            'hidden transition-all delay-[50ms] duration-[100ms] lg:block',
+            [SIDEBAR_MENU_KEYS.SEARCH, SIDEBAR_MENU_KEYS.NOTIFICATIONS].includes(navSelected)
+              ? 'invisible opacity-0'
+              : 'visible opacity-100'
+          )}
+        >
+          {label}
+        </span>
       </div>
     </Pressable>
   )
@@ -64,7 +75,6 @@ const NavItem = ({
 
 NavItem.propTypes = {
   onPress: PropTypes.func,
-  children: PropTypes.node,
   icon: PropTypes.node,
   route: PropTypes.string,
   className: PropTypes.string,

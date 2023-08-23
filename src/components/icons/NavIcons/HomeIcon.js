@@ -3,8 +3,8 @@ const HomeIcon = ({ size = 24, active }) => {
     return (
       <svg
         aria-label="Home"
-        color="currentColor"
-        fill="currentColor"
+        color="var(--default)"
+        fill="var(--default)"
         height={size}
         role="img"
         viewBox="0 0 24 24"
@@ -18,8 +18,8 @@ const HomeIcon = ({ size = 24, active }) => {
   return (
     <svg
       aria-label="Home"
-      color="rgb(0, 0, 0)"
-      fill="rgb(0, 0, 0)"
+      color="var(--default)"
+      fill="var(--default)"
       height={size}
       role="img"
       viewBox="0 0 24 24"
