@@ -18,7 +18,8 @@ const TriggerItem = ({
   panelTriggered = false,
   name,
 }) => {
-  const isDialogTrigger = [SIDEBAR_MENU_KEYS.CREATE].includes(name)
+  const DIALOG_ITEMS = [SIDEBAR_MENU_KEYS.CREATE, SIDEBAR_MENU_KEYS.MORE]
+  const isDialogTrigger = DIALOG_ITEMS.includes(name)
 
   const rootClassnames = cn(
     'flex items-center gap-x-4 p-2',
