@@ -6,7 +6,7 @@ import { SCREENS } from '@/constants'
 import { useWindowSize } from '@/hooks/shared'
 import { cn } from '@/utils'
 
-const SideBarLogo = ({ navSelected }) => {
+const SideBarLogo = ({ panel }) => {
   const windowSize = useWindowSize()
   const isMediumScreen = useMemo(() => windowSize.width <= SCREENS.LARGE, [windowSize])
 
@@ -16,10 +16,7 @@ const SideBarLogo = ({ navSelected }) => {
     <InstagramIcon
       width={24}
       height={24}
-      className={cn(
-        iconStyle,
-        navSelected || isMediumScreen ? 'visible scale-100' : 'invisible scale-0'
-      )}
+      className={cn(iconStyle, panel || isMediumScreen ? 'visible scale-100' : 'invisible scale-0')}
     />
   )
   const renderLetterLogo = (
@@ -28,7 +25,7 @@ const SideBarLogo = ({ navSelected }) => {
       height={60}
       className={cn(
         iconStyle,
-        !navSelected && !isMediumScreen ? 'visible opacity-100' : 'invisible opacity-0'
+        !panel && !isMediumScreen ? 'visible opacity-100' : 'invisible opacity-0'
       )}
     />
   )
