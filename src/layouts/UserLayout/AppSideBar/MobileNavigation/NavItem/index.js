@@ -1,8 +1,7 @@
 import { Pressable } from '@react-aria/interactions'
 import { useRouter } from 'next/router'
 
-import { FacebookMessengerIcon } from '@/components/icons'
-import { checkRouteActive, cn } from '@/utils'
+import { checkRouteActive } from '@/utils'
 
 const NavItem = (props) => {
   const router = useRouter()
@@ -13,14 +12,7 @@ const NavItem = (props) => {
   return (
     <Pressable onPress={() => (route ? router.push(route) : onPress?.())}>
       <div className="flex h-[26px] w-[26px] flex-1 items-center justify-center">
-        {Icon && (
-          <Icon
-            size={active ? 26 : 24}
-            className={cn(
-              active && Icon !== FacebookMessengerIcon && 'fill-black stroke-white stroke-[1px]'
-            )}
-          />
-        )}
+        {Icon && <Icon active={active} size={active ? 26 : 24} />}
         {Content && <Content active={active} />}
       </div>
     </Pressable>

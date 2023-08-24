@@ -1,37 +1,55 @@
-import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
 import {
   CompassIcon,
   FacebookMessengerIcon,
-  Film,
-  Heart,
-  Home,
+  HomeIcon,
+  NotificationsIcon,
+  PlusIcon,
   PlusSquare,
-  Search,
+  ReelsIcon,
+  SearchIcon,
 } from '@/components/icons'
+import { ProfileAvatar } from '@/components/profile'
 import { Routes } from '@/constants'
-import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
-import { cn } from '@/utils'
+import { checkRouteActive, cn } from '@/utils'
 
 import MenuPopover from './MenuPopover'
 import NavItem from './NavItem'
 
 const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   const { user } = useAuth()
+  const router = useRouter()
   const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
   const { onOpen } = useUploadPostDialog()
 
   const { t } = useTranslation()
 
+  const getActive = (item) => {
+    if (
+      [
+        SIDEBAR_MENU_KEYS.SEARCH,
+        SIDEBAR_MENU_KEYS.NOTIFICATIONS,
+        SIDEBAR_MENU_KEYS.CREATE,
+      ].includes(item.key)
+    ) {
+      return item.key === navSelected
+    }
+    if (!navSelected) {
+      return checkRouteActive(router, item.route)
+    }
+    return false
+  }
+
   const NAV_ITEMS = [
     {
       key: SIDEBAR_MENU_KEYS.HOME,
       route: Routes.HOME,
-      icon: Home,
+      icon: HomeIcon,
       label: t('navbar.home'),
     },
     {
@@ -39,7 +57,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
       onPress: () => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
       },
-      icon: Search,
+      icon: SearchIcon,
       label: t('navbar.search'),
     },
     {
@@ -51,7 +69,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
     {
       key: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
-      icon: Film,
+      icon: ReelsIcon,
       label: t('navbar.reels'),
     },
     {
@@ -65,59 +83,45 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
       onPress: () => {
         doSetNavSelected(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
       },
-      icon: Heart,
+      icon: NotificationsIcon,
       label: t('navbar.notifications'),
     },
     {
       key: SIDEBAR_MENU_KEYS.CREATE,
-      onPress: () => onOpen(),
-      icon: PlusSquare,
+      onPress: () => {
+        doSetNavSelected(SIDEBAR_MENU_KEYS.CREATE)
+        onOpen()
+      },
+      icon: PlusIcon,
       label: t('navbar.create'),
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
       route: Routes.PROFILE.replace('[id]', user?.username),
       label: t('navbar.profile'),
-      content: (
-        <div className="shrink-0">
-          <Image
-            width={24}
-            height={24}
-            src={user?.image || Assets.COMMON.PLACEHOLDER}
-            alt="profile-image"
-            className="rounded-full"
-          />
-        </div>
-      ),
+      icon: ProfileAvatar,
     },
   ]
 
-  const renderNavItems = () => {
+  const renderItem = (item) => {
+    const active = getActive(item)
+    const selectedPanel = item.key === navSelected && item.key !== 'create'
+
     return (
-      <div className="space-y-2">
-        {NAV_ITEMS.map((item) => {
-          const isNavSelected = item.key === navSelected
-          return (
-            <NavItem key={item?.key} isSelecting={isNavSelected} {...item}>
-              {item?.content}
-              <span
-                className={cn(
-                  'hidden lg:block',
-                  'transition-all delay-[50ms] duration-[100ms]',
-                  navSelected ? 'invisible opacity-0' : 'visible opacity-100'
-                )}
-              >
-                {item?.label}
-              </span>
-            </NavItem>
-          )
-        })}
-      </div>
+      <NavItem
+        key={item?.key}
+        active={active}
+        selectedPanel={selectedPanel}
+        navSelected={navSelected}
+        name={item?.key}
+        {...item}
+      />
     )
   }
+
   return (
     <div className="flex flex-1 flex-col justify-between">
-      {renderNavItems()}
+      <div className="space-y-2">{NAV_ITEMS.map(renderItem)}</div>
       <MenuPopover navSelected={navSelected} />
     </div>
   )

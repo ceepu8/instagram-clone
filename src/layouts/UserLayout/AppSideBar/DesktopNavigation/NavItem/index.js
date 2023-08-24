@@ -1,26 +1,45 @@
 import { Pressable } from '@react-aria/interactions'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { checkRouteActive, cn } from '@/utils'
+import { Routes } from '@/constants'
+import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
+import { cn } from '@/utils'
 
 const NavItem = ({
   onPress,
-  children,
   icon: Icon,
   route,
-  size = 'medium',
+  selectedPanel,
   className,
-  isSelecting = false,
+  active,
+  iconSize = 24,
+  label,
+  navSelected,
 }) => {
   const router = useRouter()
-  const active = checkRouteActive(router, route)
 
-  const _size = {
-    icon: size === 'medium' ? '24px' : '20px',
-    letter: size === 'medium' ? 'text-md' : 'text-sm',
+  const isProfile = useMemo(
+    () => router.pathname === Routes.PROFILE && !selectedPanel,
+    [router.pathname]
+  )
+
+  const renderIcon = () => {
+    if (!Icon) {
+      return null
+    }
+    return (
+      <div
+        className={cn(
+          'shrink-0 border-[2px]  border-transparent',
+          isProfile && active && 'rounded-full border-black'
+        )}
+      >
+        <Icon active={active} size={iconSize} />
+      </div>
+    )
   }
 
   return (
@@ -28,19 +47,27 @@ const NavItem = ({
       <div
         className={twMerge(
           cn(
-            'flex items-center gap-x-4 p-3',
+            'flex items-center gap-x-4 p-2',
             'rounded-lg font-medium hover:bg-nav-hover',
             'cursor-pointer transition-all duration-150',
             'border border-solid border-transparent',
-            isSelecting ? 'max-w-fit border-default' : '',
+            selectedPanel ? 'max-w-fit border-gainsboro' : '',
             active ? 'font-bold' : '',
-            _size.letter,
             className
           )
         )}
       >
-        {Icon && <Icon width={_size.icon} height={_size.icon} className="shrink-0" />}
-        {children}
+        {renderIcon()}
+        <span
+          className={cn(
+            'hidden transition-all delay-[50ms] duration-[100ms] lg:block',
+            [SIDEBAR_MENU_KEYS.SEARCH, SIDEBAR_MENU_KEYS.NOTIFICATIONS].includes(navSelected)
+              ? 'invisible opacity-0'
+              : 'visible opacity-100'
+          )}
+        >
+          {label}
+        </span>
       </div>
     </Pressable>
   )
@@ -48,12 +75,10 @@ const NavItem = ({
 
 NavItem.propTypes = {
   onPress: PropTypes.func,
-  children: PropTypes.node,
   icon: PropTypes.node,
   route: PropTypes.string,
-  size: PropTypes.oneOf('medium', 'small'),
   className: PropTypes.string,
-  isSelecting: PropTypes.bool,
+  iconSize: PropTypes.number,
 }
 
 export default memo(NavItem)

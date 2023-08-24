@@ -4,4 +4,5 @@ export * from './useDevelopingMessage'
 export * from './useChangeLanguage'
 export * from './useIsMe'
 export * from './useToast'
+export * from './useClassifyNavType'
 //

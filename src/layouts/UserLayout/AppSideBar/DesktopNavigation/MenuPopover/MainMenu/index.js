@@ -65,11 +65,10 @@ export default function MainMenu({ setMenu }) {
               key={item.label}
               onPress={item.onPress}
               icon={item.icon}
-              size="small"
-              className="hover:bg-nav-menu-item"
-            >
-              {item.label}
-            </NavItem>
+              className="text-sm hover:bg-nav-menu-item"
+              iconSize={20}
+              {...item}
+            />
           )}
           {index === 4 && <LineBreak className="-mx-2 h-[6px] bg-popover-divide" />}
           {index === 5 && <LineBreak className="-mx-2 bg-popover-divide" />}

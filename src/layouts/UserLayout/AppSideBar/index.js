@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 
+import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useClickOutside } from '@/hooks/shared'
 import { cn } from '@/utils'
 
@@ -23,7 +24,7 @@ const AppSideBar = () => {
           'border-r border-solid border-divide',
           'transition-all duration-300',
           'hidden w-0 md:flex',
-          navSelected
+          [SIDEBAR_MENU_KEYS.SEARCH, SIDEBAR_MENU_KEYS.NOTIFICATIONS].includes(navSelected)
             ? 'w-[--nav-narrow-width]'
             : 'w-[var(--nav-medium-width)] md:w-[--nav-narrow-width] lg:w-[var(--nav-medium-width)]'
         )}
