@@ -12,10 +12,10 @@ const TriggerItem = ({
   onPress,
   icon,
   className,
-  active,
   iconSize = 24,
   label,
-  panelTriggered,
+  active = false,
+  panelTriggered = false,
   name,
 }) => {
   const isDialogTrigger = [SIDEBAR_MENU_KEYS.CREATE].includes(name)
@@ -31,7 +31,7 @@ const TriggerItem = ({
   )
 
   return (
-    <Pressable onPress={() => onPress()}>
+    <Pressable onPress={() => onPress?.()}>
       <div className={rootClassnames}>
         <ItemSymbol active={active} icon={icon} iconSize={iconSize} />
         <ItemLabel isVisible={!panelTriggered} active={active} label={label} />
