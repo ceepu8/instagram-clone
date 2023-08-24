@@ -20,7 +20,7 @@ const PopoverContent = () => {
   )
 }
 
-const MenuPopover = ({ navSelected }) => {
+const MenuPopover = ({ panel }) => {
   const trigger = (
     <div
       className={cn(
@@ -33,7 +33,7 @@ const MenuPopover = ({ navSelected }) => {
       <span
         className={cn(
           'transition-all delay-[50ms] duration-[100ms]',
-          navSelected ? 'invisible opacity-0' : 'invisible opacity-0 lg:visible lg:opacity-100'
+          panel ? 'invisible opacity-0' : 'invisible opacity-0 lg:visible lg:opacity-100'
         )}
       >
         More

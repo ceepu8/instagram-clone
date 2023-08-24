@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 
-import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useClickOutside } from '@/hooks/shared'
 import { cn } from '@/utils'
 
@@ -10,10 +9,21 @@ import SideBarLogo from './SidebarLogo'
 import SlideOutPanelList from './SlideOutPanelList'
 
 const AppSideBar = () => {
-  const [navSelected, setNavSelected] = useState(null)
+  const [panel, setOpenPanel] = useState(null)
+
+  const togglePanel = (newPanel) => {
+    setOpenPanel((oldPanel) => {
+      const closePanel = oldPanel === newPanel
+      if (closePanel) {
+        return null
+      }
+      return newPanel
+    })
+  }
 
   const appSideBarRef = useRef()
-  useClickOutside(appSideBarRef, () => setNavSelected(null))
+
+  useClickOutside(appSideBarRef, () => setOpenPanel(null))
 
   return (
     <aside ref={appSideBarRef}>
@@ -24,15 +34,15 @@ const AppSideBar = () => {
           'border-r border-solid border-divide',
           'transition-all duration-300',
           'hidden w-0 md:flex',
-          [SIDEBAR_MENU_KEYS.SEARCH, SIDEBAR_MENU_KEYS.NOTIFICATIONS].includes(navSelected)
+          panel
             ? 'w-[--nav-narrow-width]'
             : 'w-[var(--nav-medium-width)] md:w-[--nav-narrow-width] lg:w-[var(--nav-medium-width)]'
         )}
       >
-        <SideBarLogo navSelected={navSelected} />
-        <DesktopNavigation navSelected={navSelected} setNavSelected={setNavSelected} />
+        <SideBarLogo panel={panel} />
+        <DesktopNavigation panel={panel} togglePanel={togglePanel} />
       </div>
-      <SlideOutPanelList navSelected={navSelected} />
+      <SlideOutPanelList panel={panel} />
       <MobileNavigation />
     </aside>
   )

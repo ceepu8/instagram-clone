@@ -3,7 +3,7 @@ import NotificationPanel from '@/components/shared/SlideOutPanel/NotificationsPa
 import SearchPanel from '@/components/shared/SlideOutPanel/SearchPanel'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 
-const SlideOutPanelList = ({ navSelected }) => {
+const SlideOutPanelList = ({ panel }) => {
   const PANEL_LIST = [
     {
       key: SIDEBAR_MENU_KEYS.SEARCH,
@@ -18,7 +18,7 @@ const SlideOutPanelList = ({ navSelected }) => {
     <>
       {PANEL_LIST.map(({ key, component }) => {
         return (
-          <SlideOutPanel key={key} isShow={key === navSelected}>
+          <SlideOutPanel key={key} isShow={key === panel}>
             {component}
           </SlideOutPanel>
         )

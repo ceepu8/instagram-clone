@@ -7,7 +7,6 @@ import {
   HomeIcon,
   NotificationsIcon,
   PlusIcon,
-  PlusSquare,
   ReelsIcon,
   SearchIcon,
 } from '@/components/icons'
@@ -16,33 +15,34 @@ import { Routes } from '@/constants'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
-import { checkRouteActive, cn } from '@/utils'
+import { checkRouteActive } from '@/utils'
 
 import MenuPopover from './MenuPopover'
 import NavItem from './NavItem'
+import TriggerItem from './TriggerItem'
 
-const DesktopNavigation = ({ navSelected, setNavSelected }) => {
+const DesktopNavigation = ({ panel, togglePanel }) => {
   const { user } = useAuth()
   const router = useRouter()
-  const doSetNavSelected = (key) => setNavSelected((prev) => (prev !== key ? key : ''))
-  const { onOpen } = useUploadPostDialog()
+
+  const { isOpen: isUploadPostDialogOpen, onOpen: onOpenUploadPostDialog } = useUploadPostDialog()
 
   const { t } = useTranslation()
 
   const getActive = (item) => {
-    if (
-      [
-        SIDEBAR_MENU_KEYS.SEARCH,
-        SIDEBAR_MENU_KEYS.NOTIFICATIONS,
-        SIDEBAR_MENU_KEYS.CREATE,
-      ].includes(item.key)
-    ) {
-      return item.key === navSelected
+    if (panel) {
+      return item.key === panel
     }
-    if (!navSelected) {
-      return checkRouteActive(router, item.route)
+
+    if (item.key === SIDEBAR_MENU_KEYS.CREATE) {
+      return isUploadPostDialogOpen
     }
-    return false
+
+    if (item.key !== SIDEBAR_MENU_KEYS.CREATE && isUploadPostDialogOpen) {
+      return false
+    }
+
+    return checkRouteActive(router, item.route)
   }
 
   const NAV_ITEMS = [
@@ -51,68 +51,74 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
       route: Routes.HOME,
       icon: HomeIcon,
       label: t('navbar.home'),
+      component: NavItem,
     },
     {
       key: SIDEBAR_MENU_KEYS.SEARCH,
       onPress: () => {
-        doSetNavSelected(SIDEBAR_MENU_KEYS.SEARCH)
+        togglePanel(SIDEBAR_MENU_KEYS.SEARCH)
       },
       icon: SearchIcon,
       label: t('navbar.search'),
+      component: TriggerItem,
     },
     {
       key: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       icon: CompassIcon,
       label: t('navbar.explore'),
+      component: NavItem,
     },
     {
       key: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
       icon: ReelsIcon,
       label: t('navbar.reels'),
+      component: NavItem,
     },
     {
       key: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
       icon: FacebookMessengerIcon,
       label: t('navbar.messages'),
+      component: NavItem,
     },
     {
       key: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
       onPress: () => {
-        doSetNavSelected(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
+        togglePanel(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
       },
       icon: NotificationsIcon,
       label: t('navbar.notifications'),
+      component: TriggerItem,
     },
     {
       key: SIDEBAR_MENU_KEYS.CREATE,
       onPress: () => {
-        doSetNavSelected(SIDEBAR_MENU_KEYS.CREATE)
-        onOpen()
+        onOpenUploadPostDialog()
       },
       icon: PlusIcon,
       label: t('navbar.create'),
+      component: TriggerItem,
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
       route: Routes.PROFILE.replace('[id]', user?.username),
       label: t('navbar.profile'),
       icon: ProfileAvatar,
+      component: NavItem,
     },
   ]
 
   const renderItem = (item) => {
+    const { component: Component } = item
     const active = getActive(item)
-    const selectedPanel = item.key === navSelected && item.key !== 'create'
 
     return (
-      <NavItem
+      <Component
         key={item?.key}
         active={active}
-        selectedPanel={selectedPanel}
-        navSelected={navSelected}
+        panelTriggered={panel}
         name={item?.key}
         {...item}
       />
@@ -122,7 +128,7 @@ const DesktopNavigation = ({ navSelected, setNavSelected }) => {
   return (
     <div className="flex flex-1 flex-col justify-between">
       <div className="space-y-2">{NAV_ITEMS.map(renderItem)}</div>
-      <MenuPopover navSelected={navSelected} />
+      <MenuPopover panel={panel} />
     </div>
   )
 }
