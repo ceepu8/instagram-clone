@@ -62,7 +62,7 @@ const Input = forwardRef(
 
 Input.propTypes = {
   clean: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,

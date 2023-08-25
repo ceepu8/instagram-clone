@@ -43,7 +43,7 @@ const TriggerItem = ({
 
 TriggerItem.propTypes = {
   onPress: PropTypes.func,
-  icon: PropTypes.node,
+  icon: PropTypes.any,
   className: PropTypes.string,
   iconSize: PropTypes.number,
 }

@@ -73,7 +73,7 @@ const PostMenuDialog = () => {
 
   const trigger = (
     <DialogTrigger className="ml-auto">
-      <Button type="trigger" variant="ghost" icon={MoreHorizontalIcon} />
+      <MoreHorizontalIcon />
     </DialogTrigger>
   )
 

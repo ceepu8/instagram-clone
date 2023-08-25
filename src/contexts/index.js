@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { SSRProvider } from 'react-aria'
 
 import DialogProvider from './Dialog'
 import AuthProvider from './NextAuth'
@@ -12,17 +11,15 @@ import { ToastProvider } from './Toast'
 export function AppProviders({ children, pageProps }) {
   return (
     <AuthProvider>
-      <SSRProvider>
-        <ReduxProvider initialReduxState={pageProps.initialReduxState}>
-          <ReactQueryProvider pageProps={pageProps}>
-            <ThemeProvider>
-              <ToastProvider>
-                <DialogProvider>{children}</DialogProvider>
-              </ToastProvider>
-            </ThemeProvider>
-          </ReactQueryProvider>
-        </ReduxProvider>
-      </SSRProvider>
+      <ReduxProvider initialReduxState={pageProps.initialReduxState}>
+        <ReactQueryProvider pageProps={pageProps}>
+          <ThemeProvider>
+            <ToastProvider>
+              <DialogProvider>{children}</DialogProvider>
+            </ToastProvider>
+          </ThemeProvider>
+        </ReactQueryProvider>
+      </ReduxProvider>
     </AuthProvider>
   )
 }

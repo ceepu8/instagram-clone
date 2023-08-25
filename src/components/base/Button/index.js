@@ -117,7 +117,7 @@ Button.propTypes = {
   onClick: propTypes.func,
   icon: propTypes.elementType,
   iconClassName: propTypes.string,
-  size: propTypes.oneOf(['small', 'medium', 'large']),
+  size: propTypes.oneOf(['small', 'medium', 'large', 'icon', 'text', 'extra-small']),
   disabled: propTypes.bool,
   fullWidth: propTypes.bool,
   loading: propTypes.bool,

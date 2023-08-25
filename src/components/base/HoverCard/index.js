@@ -1,15 +1,17 @@
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card'
 import propTypes from 'prop-types'
+import { forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { useAutoPosition } from '@/hooks/shared'
+import { mergeRefs } from '@/utils'
 
-const HoverCard = ({ trigger, children, hasArrow = false, className }) => {
+const HoverCard = forwardRef(({ trigger, children, hasArrow = false, className }, ref) => {
   const { popoverPosition, popoverRef } = useAutoPosition()
 
   return (
     <HoverCardPrimitive.Root
-      ref={popoverRef}
+      ref={mergeRefs([ref, popoverRef])}
       className="z-50"
       style={{
         position: 'absolute',
@@ -40,7 +42,7 @@ const HoverCard = ({ trigger, children, hasArrow = false, className }) => {
       </HoverCardPrimitive.Content>
     </HoverCardPrimitive.Root>
   )
-}
+})
 
 HoverCard.propTypes = {
   trigger: propTypes.node.isRequired,

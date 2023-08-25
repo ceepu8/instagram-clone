@@ -94,7 +94,7 @@ export const SelectTrigger = ({
   )
 
   return (
-    <RadixSelect.Trigger class={cn(rootClassName)} {...props}>
+    <RadixSelect.Trigger className={cn(rootClassName)} {...props}>
       <SelectValue placeholder={children} />
       {hasIcon && icon}
     </RadixSelect.Trigger>
