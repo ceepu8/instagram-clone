@@ -1,13 +1,6 @@
 import Image from 'next/image'
 
-import {
-  CompassIcon,
-  FacebookMessengerIcon,
-  ReelsIcon,
-  HomeIcon,
-  PlusSquare,
-  PlusIcon,
-} from '@/components/icons'
+import { CompassIcon, ReelsIcon, HomeIcon, PlusIcon, MessengerIcon } from '@/components/icons'
 import { Routes } from '@/constants'
 import Assets from '@/constants/Assets'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
@@ -68,7 +61,7 @@ const MobileNavigation = () => {
     {
       key: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
-      icon: FacebookMessengerIcon,
+      icon: MessengerIcon,
       label: 'Messages',
     },
     {

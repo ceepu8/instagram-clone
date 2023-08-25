@@ -15,6 +15,10 @@
   @apply text-btn-link hover:text-btn-link-hover disabled:cursor-default disabled:text-btn-link-hover;
 }
 
+.danger {
+  @apply text-btn-danger hover:text-btn-danger-hover disabled:cursor-default disabled:text-btn-danger-hover;
+}
+
 .ghost {
   @apply text-btn-ghost hover:text-btn-ghost-hover;
 }

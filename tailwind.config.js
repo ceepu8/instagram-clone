@@ -42,6 +42,8 @@ module.exports = {
 
       'btn-primary': 'var(--btn-primary)',
       'btn-primary-hover': 'var(--btn-primary-hover)',
+      'btn-danger': 'var(--btn-danger)',
+      'btn-danger-hover': 'var(--btn-danger-hover)',
       'btn-secondary': 'var(--btn-secondary)',
       'btn-secondary-hover': 'var(--btn-secondary-hover)',
       'btn-link': 'var(--btn-link)',

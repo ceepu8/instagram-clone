@@ -8,7 +8,15 @@ import { cn } from '@/utils'
 import ItemLabel from '../components/ItemLabel'
 import ItemSymbol from '../components/ItemSymbol'
 
-const NavItem = ({ icon, route, className, active, label, iconSize, panelTriggered }) => {
+const NavItem = ({
+  icon,
+  route,
+  className,
+  active = false,
+  label,
+  iconSize,
+  panelTriggered = false,
+}) => {
   const router = useRouter()
 
   const hasActiveBorder = useMemo(() => router.pathname === Routes.PROFILE, [router.pathname])

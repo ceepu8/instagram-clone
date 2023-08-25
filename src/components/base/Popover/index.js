@@ -24,6 +24,7 @@ const Popover = ({
   hasCloseIcon = false,
   hasArrow = false,
   contentClassName,
+  ...props
 }) => {
   const contentStyle = cn(
     'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
@@ -33,7 +34,7 @@ const Popover = ({
   )
 
   return (
-    <PopoverPrimitives.Root>
+    <PopoverPrimitives.Root {...props}>
       <PopoverPrimitives.Trigger asChild>{trigger}</PopoverPrimitives.Trigger>
       <PopoverPrimitives.Content className={twMerge(contentStyle, contentClassName)} sideOffset={5}>
         {children}

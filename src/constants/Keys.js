@@ -18,6 +18,7 @@ export const SIDEBAR_MENU_KEYS = {
   NOTIFICATIONS: 'notifications',
   CREATE: 'create',
   PROFILE: 'profile',
+  MORE: 'more',
 }
 
 export const PROFILE_TAB_KEYS = {

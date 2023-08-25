@@ -12,13 +12,14 @@ const TriggerItem = ({
   onPress,
   icon,
   className,
-  active,
   iconSize = 24,
   label,
-  panelTriggered,
+  active = false,
+  panelTriggered = false,
   name,
 }) => {
-  const isDialogTrigger = [SIDEBAR_MENU_KEYS.CREATE].includes(name)
+  const DIALOG_ITEMS = [SIDEBAR_MENU_KEYS.CREATE, SIDEBAR_MENU_KEYS.MORE]
+  const isDialogTrigger = DIALOG_ITEMS.includes(name)
 
   const rootClassnames = cn(
     'flex items-center gap-x-4 p-2',
@@ -31,7 +32,7 @@ const TriggerItem = ({
   )
 
   return (
-    <Pressable onPress={() => onPress()}>
+    <Pressable onPress={() => onPress?.()}>
       <div className={rootClassnames}>
         <ItemSymbol active={active} icon={icon} iconSize={iconSize} />
         <ItemLabel isVisible={!panelTriggered} active={active} label={label} />
