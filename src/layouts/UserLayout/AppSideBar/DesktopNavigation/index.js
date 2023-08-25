@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 import {
   CompassIcon,
-  FacebookMessengerIcon,
   HomeIcon,
+  MessengerIcon,
   NotificationsIcon,
   PlusIcon,
   ReelsIcon,
@@ -79,7 +79,7 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
     {
       key: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
-      icon: FacebookMessengerIcon,
+      icon: MessengerIcon,
       label: t('navbar.messages'),
       component: NavItem,
     },
