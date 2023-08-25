@@ -4,9 +4,15 @@ import { Fragment, useState } from 'react'
 import { Button } from '@/components/base'
 import Dialog, { DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { MoreHorizontalIcon } from '@/components/icons'
+import { useToast } from '@/hooks/custom'
+import { useCopyToClipboard } from '@/hooks/shared'
 
 const PostMenuDialog = () => {
   const [open, setOpen] = useState(false)
+  const toast = useToast()
+
+  const onCopySuccess = () => toast.success('Copied!')
+  const { copyToClipboard, isLoading } = useCopyToClipboard(onCopySuccess)
 
   const ITEM_LIST = [
     {
@@ -32,7 +38,8 @@ const PostMenuDialog = () => {
     {
       key: 'copy-link',
       label: 'Copy link',
-      onClick: null,
+      onClick: () => copyToClipboard('copied!'),
+      loading: isLoading,
     },
     {
       key: 'embed',
@@ -46,20 +53,14 @@ const PostMenuDialog = () => {
     },
   ]
 
-  const trigger = (
-    <DialogTrigger className="ml-auto">
-      <Button type="trigger" variant="ghost" icon={MoreHorizontalIcon} />
-    </DialogTrigger>
-  )
-
   const renderItem = (item, index) => {
     const isFirst = index === 0
     const variant = isFirst ? 'danger' : 'ghost'
     const bold = !!isFirst
-    const { label, key, onClick } = item
+    const { label, key, onClick, loading = false } = item
     return (
-      <div className="w-full py-3 text-center">
-        <Button bold={bold} onClick={onClick} key={key} variant={variant}>
+      <div className="flex w-full items-center justify-center py-3">
+        <Button bold={bold} onClick={onClick} key={key} loading={loading} variant={variant}>
           {label}
         </Button>
       </div>
@@ -70,6 +71,12 @@ const PostMenuDialog = () => {
     <div className="flex flex-col items-center divide-y divide-divide">
       {ITEM_LIST.map(renderItem)}
     </div>
+  )
+
+  const trigger = (
+    <DialogTrigger className="ml-auto">
+      <Button type="trigger" variant="ghost" icon={MoreHorizontalIcon} />
+    </DialogTrigger>
   )
 
   return (

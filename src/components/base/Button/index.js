@@ -67,20 +67,24 @@ const Button = forwardRef(
       return size
     }
 
+    const _size = getSize()
+
     const rootClassName = cn(
-      buttonVariants({ variant, size: getSize() }),
+      buttonVariants({ variant, size: _size }),
       fullWidth && 'w-full',
       bold && 'font-bold',
+      // _size === 'text' && 'flex items-center justify-center mx-auto',
       className
     )
 
     const rootIconClassName = cn(
       'shrink-0',
       {
-        'w-3 h-3 leading-3': size === 'extra-small',
-        'w-4 h-4 leading-4': size === 'small',
-        'w-6 h-6 leading-6': size === 'medium',
-        'w-8 h-8 leading-8': size === 'large',
+        'w-3 h-3 leading-3': _size === 'extra-small',
+        'w-4 h-4 leading-4': _size === 'small',
+        'w-5 h-5 leading-5': _size === 'text',
+        'w-6 h-6 leading-6': _size === 'medium',
+        'w-8 h-8 leading-8': _size === 'large',
       },
       iconClassName
     )
