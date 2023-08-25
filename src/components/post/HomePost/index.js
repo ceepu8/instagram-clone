@@ -1,8 +1,8 @@
 import { useInputState } from '@/hooks/shared'
 
-import PostContent from './Post Content'
 import PostActions from './PostActions'
 import PostComment from './PostComment'
+import PostContent from './PostContent'
 import PostHeader from './PostHeader'
 import PostImage from './PostImage'
 
