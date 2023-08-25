@@ -2,7 +2,7 @@ import NextImage from 'next/image'
 
 import { Button, HoverCard, LineBreak } from '@/components/base'
 import { CheckIcon, MoreHorizontalIcon } from '@/components/icons'
-import CardProfilePreview from '@/components/shared/CardProfilePreview'
+import PreviewProfileCard from '@/components/shared/PreviewProfileCard'
 import Assets from '@/constants/Assets'
 import { useInputState } from '@/hooks/shared'
 import { getTimeFromNow } from '@/utils'
@@ -30,7 +30,7 @@ const ProfileImage = ({ image }) => {
 const PreviewProfileHoverCard = ({ children }) => {
   return (
     <HoverCard trigger={children}>
-      <CardProfilePreview />
+      <PreviewProfileCard />
     </HoverCard>
   )
 }

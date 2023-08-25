@@ -1,10 +1,10 @@
 import { HoverCard } from '@/components/base'
-import { CardProfilePreview } from '@/components/shared'
+import { PreviewProfileCard } from '@/components/shared'
 
 const PreviewProfileHoverCard = ({ children }) => {
   return (
     <HoverCard trigger={children}>
-      <CardProfilePreview />
+      <PreviewProfileCard />
     </HoverCard>
   )
 }

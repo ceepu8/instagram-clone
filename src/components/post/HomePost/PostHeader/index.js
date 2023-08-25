@@ -1,13 +1,13 @@
 import { HoverCard } from '@/components/base'
 import ProfileAvatar from '@/components/profile/ProfileAvatar'
-import { CardProfilePreview } from '@/components/shared'
+import { PreviewProfileCard } from '@/components/shared'
 
 import PostMenuDialog from './PostMenuDialog'
 
 const PreviewProfileHoverCard = ({ children }) => {
   return (
     <HoverCard trigger={children}>
-      <CardProfilePreview />
+      <PreviewProfileCard />
     </HoverCard>
   )
 }
