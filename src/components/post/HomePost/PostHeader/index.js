@@ -1,7 +1,8 @@
-import { Button, HoverCard } from '@/components/base'
-import { MoreHorizontalIcon } from '@/components/icons'
+import { HoverCard } from '@/components/base'
 import ProfileAvatar from '@/components/profile/ProfileAvatar'
 import { CardProfilePreview } from '@/components/shared'
+
+import PostMenuDialog from './PostMenuDialog'
 
 const PreviewProfileHoverCard = ({ children }) => {
   return (
@@ -20,7 +21,7 @@ const PostHeader = () => {
       <PreviewProfileHoverCard>
         <b className="text-xs">mirea_03</b>
       </PreviewProfileHoverCard>
-      <Button variant="ghost" icon={MoreHorizontalIcon} className="ml-auto" />
+      <PostMenuDialog />
     </div>
   )
 }

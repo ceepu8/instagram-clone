@@ -16,6 +16,7 @@ export const buttonVariants = cva(s.root, {
       secondary: s.secondary,
       link: s.link,
       ghost: s.ghost,
+      danger: s.danger,
       // link: 'underline-offset-4 hover:underline text-primary',
     },
     size: {
@@ -60,7 +61,7 @@ const Button = forwardRef(
       if (Icon && !children) {
         return 'icon'
       }
-      if (children && (variant === 'ghost' || variant === 'link')) {
+      if (children && (variant === 'ghost' || variant === 'link' || variant === 'danger')) {
         return 'text'
       }
       return size
@@ -108,7 +109,7 @@ const Button = forwardRef(
 
 Button.propTypes = {
   type: propTypes.oneOf(['button', 'submit', 'reset', 'trigger']),
-  variant: propTypes.oneOf(['primary', 'secondary', 'link', 'ghost', 'icon']),
+  variant: propTypes.oneOf(['primary', 'secondary', 'link', 'ghost', 'danger', 'icon']),
   onClick: propTypes.func,
   icon: propTypes.elementType,
   iconClassName: propTypes.string,
