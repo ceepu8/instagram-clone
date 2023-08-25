@@ -11,8 +11,9 @@ const PostMenuDialog = () => {
   const [open, setOpen] = useState(false)
   const toast = useToast()
 
-  const onCopySuccess = () => toast.success('Copied!')
-  const { copyToClipboard, isLoading } = useCopyToClipboard(onCopySuccess)
+  const { copyToClipboard, isLoading } = useCopyToClipboard({
+    onSuccess: () => toast.success('Copied!'),
+  })
 
   const ITEM_LIST = [
     {
@@ -57,12 +58,9 @@ const PostMenuDialog = () => {
     const isFirst = index === 0
     const variant = isFirst ? 'danger' : 'ghost'
     const bold = !!isFirst
-    const { label, key, onClick, loading = false } = item
     return (
-      <div className="flex w-full items-center justify-center py-3">
-        <Button bold={bold} onClick={onClick} key={key} loading={loading} variant={variant}>
-          {label}
-        </Button>
+      <div key={item.key} className="flex w-full items-center justify-center py-3">
+        <Button {...{ ...item, bold, variant }}>{item.label}</Button>
       </div>
     )
   }

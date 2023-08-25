@@ -2,7 +2,7 @@
 import delay from 'lodash/delay'
 import { useState } from 'react'
 
-export function useCopyToClipboard(onSuccess) {
+export function useCopyToClipboard({ onSuccess } = {}) {
   const [copiedText, setCopiedText] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -25,7 +25,7 @@ export function useCopyToClipboard(onSuccess) {
         }, 1000)
       })
 
-      onSuccess()
+      onSuccess?.()
       return true
     } catch (error) {
       console.warn('Copy failed', error)
