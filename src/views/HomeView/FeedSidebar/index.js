@@ -1,4 +1,4 @@
-import { Button, HoverCard } from '@/components/base'
+import { Button } from '@/components/base'
 import { ProfileAvatar } from '@/components/profile'
 import { PreviewProfileCard } from '@/components/shared'
 import { useAuth } from '@/hooks/query/auth'
@@ -8,13 +8,13 @@ import FeedSidebarFooter from './FeedSidebarFooter'
 const SuggestProfile = () => {
   return (
     <div className="flex items-center gap-x-2">
-      <HoverCard trigger={<ProfileAvatar size={32} className="cursor-pointer" />}>
-        <PreviewProfileCard />
-      </HoverCard>
+      <PreviewProfileCard>
+        <ProfileAvatar size={32} className="cursor-pointer" />
+      </PreviewProfileCard>
       <div className="flex flex-1 flex-col">
-        <HoverCard trigger={<p className="cursor-pointer text-sm font-bold">username1</p>}>
-          <PreviewProfileCard />
-        </HoverCard>
+        <PreviewProfileCard>
+          <b className="text-sm">username1</b>
+        </PreviewProfileCard>
         <span className="text-xs text-comment">Suggested for you</span>
       </div>
       <Button variant="link" size="text" className="text-xs">

@@ -1,8 +1,9 @@
 import Image from 'next/image'
 
-import { Button, Link } from '@/components/base'
+import { Button, HoverCard, Link } from '@/components/base'
 import { FacebookMessengerIcon } from '@/components/icons'
 import ProfileAvatar from '@/components/profile/ProfileAvatar'
+import { cn } from '@/utils'
 
 const CardFooter = () => {
   return (
@@ -63,14 +64,17 @@ const CardUserPostList = () => {
   return <div className="-mx-4 flex gap-x-1">{Array(3).fill('').map(renderItem)}</div>
 }
 
-const PreviewProfileCard = () => {
+const PreviewProfileCard = ({ children, triggerClassName }) => {
+  const trigger = <div className={cn(triggerClassName)}>{children}</div>
   return (
-    <div className="flex min-w-[320px] flex-col gap-y-4">
-      <CardHeader />
-      <CardUserStatistics />
-      <CardUserPostList />
-      <CardFooter />
-    </div>
+    <HoverCard trigger={trigger}>
+      <div className="flex min-w-[320px] flex-col gap-y-4">
+        <CardHeader />
+        <CardUserStatistics />
+        <CardUserPostList />
+        <CardFooter />
+      </div>
+    </HoverCard>
   )
 }
 
