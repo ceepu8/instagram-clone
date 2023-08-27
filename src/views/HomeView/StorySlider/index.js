@@ -5,6 +5,7 @@ import { Slide } from 'react-slideshow-image'
 
 import { ChevronLeft, ChevronRight } from '@/components/icons'
 import Assets from '@/constants/Assets'
+import { useBreakpoints } from '@/hooks/shared/useBreakPoints'
 import { cn } from '@/utils'
 
 const Slideshow = ({
@@ -108,6 +109,8 @@ const StoryItem = ({ user, active = true }) => {
 }
 
 const StoryList = ({ loading }) => {
+  const { isMobile } = useBreakpoints()
+
   const renderItem = (_) => (
     <div key={_} className="flex justify-center">
       {loading ? <StoryItemSkeleton /> : <StoryItem />}
@@ -117,7 +120,7 @@ const StoryList = ({ loading }) => {
     <Slideshow
       transitionDuration={300}
       autoplay={false}
-      slidesToShow={8}
+      slidesToShow={isMobile ? 5 : 8}
       slidesToScroll={4}
       rootClass="mx-auto"
       width="var(--desktop-home-story)"
