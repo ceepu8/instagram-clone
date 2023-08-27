@@ -1,4 +1,4 @@
-export { default as CardProfilePreview } from './CardProfilePreview'
+export { default as PreviewProfileCard } from './PreviewProfileCard'
 export { default as CommentInput } from './CommentInput'
 export { default as EmojiPicker } from './EmojiPicker'
 export { default as MiniEmojiPicker } from './MiniEmojiPicker'

@@ -1,8 +1,8 @@
 import NextImage from 'next/image'
 
-import { Button, HoverCard, LineBreak } from '@/components/base'
+import { Button, LineBreak } from '@/components/base'
 import { CheckIcon, MoreHorizontalIcon } from '@/components/icons'
-import CardProfilePreview from '@/components/shared/CardProfilePreview'
+import PreviewProfileCard from '@/components/shared/PreviewProfileCard'
 import Assets from '@/constants/Assets'
 import { useInputState } from '@/hooks/shared'
 import { getTimeFromNow } from '@/utils'
@@ -27,25 +27,17 @@ const ProfileImage = ({ image }) => {
   )
 }
 
-const PreviewProfileHoverCard = ({ children }) => {
-  return (
-    <HoverCard trigger={children}>
-      <CardProfilePreview />
-    </HoverCard>
-  )
-}
-
 const PostHeader = ({ owner }) => {
   return (
     <div className="flex items-center space-x-4 border-b border-divide px-4 pb-3">
       <div className="shrink-0">
-        <PreviewProfileHoverCard>
+        <PreviewProfileCard>
           <ProfileImage image={owner?.image} />
-        </PreviewProfileHoverCard>
+        </PreviewProfileCard>
       </div>
 
       <div className="flex-1">
-        <PreviewProfileHoverCard>{owner?.username}</PreviewProfileHoverCard>
+        <PreviewProfileCard>{owner?.username}</PreviewProfileCard>
       </div>
       <Button variant="ghost" icon={MoreHorizontalIcon} />
     </div>
@@ -79,10 +71,12 @@ const PostCaption = ({ owner, caption = '', createdAt }) => {
 
   return (
     <div className="hidden space-x-4 px-4 md:flex">
-      <PreviewProfileHoverCard triggerContent={<ProfileImage image={owner?.image} />} />
+      <PreviewProfileCard>
+        <ProfileImage image={owner?.image} />
+      </PreviewProfileCard>
       <div className="flex flex-col space-y-1">
         <div className="text-left">
-          <PreviewProfileHoverCard triggerContent={owner?.username} />
+          <PreviewProfileCard>{owner?.username}</PreviewProfileCard>
           <BlueTick />
           <span className="ml-1 text-sm">{caption}</span>
         </div>
