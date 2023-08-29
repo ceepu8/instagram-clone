@@ -6,7 +6,7 @@ import { Swiper } from '@/components/base'
 
 import ProfileStoryAddButton from './ProfileStoryAddButton'
 
-const StoryItem = ({ user, active = true }) => {
+const StoryItem = ({ name, image, active = true }) => {
   const activeStyle = { background: 'var(--chinese-silver)' }
 
   return (
@@ -16,14 +16,14 @@ const StoryItem = ({ user, active = true }) => {
           <div className="absolute -inset-px rounded-full" style={activeStyle} />
           <div className="relative h-14 w-14 rounded-full md:h-[77px] md:w-[77px]">
             <Image
-              src={user?.image || '/guinea-pig-2.jpeg'}
+              src={image || '/guinea-pig-2.jpeg'}
               fill
               alt="story-image"
               className="rounded-full border-2 border-background"
             />
           </div>
         </div>
-        <p className="truncate text-center text-xs font-bold">{user?.username || '2023'}</p>
+        <p className="truncate text-center text-xs font-bold">{name || '2023'}</p>
       </div>
     </Pressable>
   )
@@ -43,6 +43,27 @@ const StoryItemSkeleton = ({ item, length }) => {
 
 const ProfileStory = () => {
   const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState([
+    {
+      name: '2023',
+      image: '/guinea-pig-1.jpeg',
+      stories: [],
+    },
+    {
+      name: '2023',
+      image: '/guinea-pig-2.jpeg',
+      stories: [],
+    },
+    {
+      name: '2021',
+      image: '/guinea-pig-3.jpeg',
+      stories: [],
+    },
+  ])
+
+  const handleAddStoryHighlight = (newData) => {
+    setData((prev) => ({ ...prev, newData }))
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,11 +76,10 @@ const ProfileStory = () => {
     <div className="py-4 md:mb-14 md:px-16">
       <div className="relative flex w-full justify-between">
         <Swiper>
-          <StoryItem />
-          <StoryItem />
-          <StoryItem />
-          <StoryItem />
-          <ProfileStoryAddButton />
+          {data.map((item) => {
+            return <StoryItem key={item.name} {...item} />
+          })}
+          <ProfileStoryAddButton handleAddStoryHighlight={handleAddStoryHighlight} />
         </Swiper>
       </div>
     </div>
