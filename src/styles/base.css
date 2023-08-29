@@ -22,7 +22,10 @@
     --popover: #ffffff;
     --popover-divide: #f2f2f2;
 
-    --link: #01376b;
+    --story-item-bg: #fafafa;
+    --story-line: #c7c7c7;
+
+    --link: #0b0b0b;
 
     --nav-menu-item: #f2f2f2;
 
@@ -51,6 +54,7 @@
     --metallic-blue: #385185;
     --dark-electric-blue: #5a6e81;
     --very-light-azure: #67b5fa;
+    --chinese-black: #121212;
 
     --nav-medium-width: 244px;
     --nav-narrow-width: 72px;
@@ -91,6 +95,9 @@
     --popover: #262626;
     --popover-divide: #353535;
 
+    --story-item-bg: #121212;
+    --story-line: #737373;
+
     --link: #e0f1ff;
 
     --nav-menu-item: #3c3c3c;
@@ -120,6 +127,7 @@
     --metallic-blue: #385185;
     --dark-electric-blue: #5a6e81;
     --very-light-azure: #67b5fa;
+    --chinese-black: #121212;
 
     --nav-medium-width: 244px;
     --nav-narrow-width: 72px;

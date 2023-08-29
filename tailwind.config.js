@@ -25,6 +25,7 @@ module.exports = {
       nickel: 'var(--nickel)',
       'metallic-blue': 'var(--metallic-blue)',
       'very-light-azure': 'var(--very-light-azure)',
+      'chinese-black': 'var(--chinese-black)',
 
       default: 'var(--default)',
       note: 'var(--note)',
@@ -38,6 +39,10 @@ module.exports = {
       popover: 'var(--popover)',
       'popover-divide': 'var(--popover-divide)',
       'nav-menu-item': 'var(--nav-menu-item)',
+
+      'story-item-bg': 'var(--story-item-bg)',
+      'story-line': 'var(--story-line)',
+
       link: 'var(--link)',
 
       'btn-primary': 'var(--btn-primary)',
