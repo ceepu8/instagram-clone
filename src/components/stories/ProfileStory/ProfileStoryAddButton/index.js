@@ -1,23 +1,46 @@
 import { Transition } from '@headlessui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import isEmpty from 'lodash/isEmpty'
 import { Fragment, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 import { Button, LineBreak } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { Input } from '@/components/form'
 import { Plus, XIcon } from '@/components/icons'
 
-const StoryNameForm = ({ handleAddStoryHighlight }) => {
+const StoryNameForm = ({ onSubmit }) => {
+  const { register, handleSubmit, watch } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      name: '',
+      image: '/guinea-pig-4.jpeg',
+      stories: [],
+    },
+  })
+
+  const watchName = watch('name', false)
+
   return (
-    <form className="flex flex-col items-center justify-center space-y-4 py-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col items-center justify-center space-y-4 py-4"
+    >
       <div className="w-full px-4">
         <Input
+          name="name"
+          id="name"
+          isHaveValue={!isEmpty(watchName)}
           wrapperClassName="bg-story-item-bg p-2 w-full rounded-md border-story-line border-[0.5px]"
           inputClassName="text-sm placeholder-story-line leading-[14px]"
           placeholder="Highlight Name"
+          {...register('name', { required: true })}
         />
       </div>
       <LineBreak className="w-full" />
-      <Button variant="ghost">Add</Button>
+      <Button type="submit" variant="ghost" disabled={!watchName}>
+        Add
+      </Button>
     </form>
   )
 }
@@ -36,6 +59,11 @@ const ProfileStoryAddButton = ({ handleAddStoryHighlight }) => {
     </div>
   )
 
+  const onSubmit = (data) => {
+    setOpen(false)
+    handleAddStoryHighlight(data)
+  }
+
   return (
     <Dialog isOpen={open} onClose={setOpen} trigger={<DialogTrigger>{trigger}</DialogTrigger>}>
       <Transition.Child
@@ -51,7 +79,7 @@ const ProfileStoryAddButton = ({ handleAddStoryHighlight }) => {
           <DialogClose className="absolute right-2 top-2">
             <Button variant="ghost" icon={XIcon} />
           </DialogClose>
-          <StoryNameForm handleAddStoryHighlight={handleAddStoryHighlight} />
+          <StoryNameForm onSubmit={onSubmit} />
         </DialogContent>
       </Transition.Child>
     </Dialog>

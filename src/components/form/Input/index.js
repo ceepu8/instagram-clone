@@ -23,10 +23,10 @@ const Input = forwardRef(
   ) => {
     const [isFocused, setIsFocused] = useState(false)
 
-    const handleInputBlur = () => {
+    const handleInputBlur = (e) => {
       setIsFocused(false)
       if (!onBlur) return
-      onBlur()
+      onBlur(e)
     }
 
     const inputClasses =
