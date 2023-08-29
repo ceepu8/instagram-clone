@@ -1,5 +1,4 @@
 import { Transition } from '@headlessui/react'
-import { yupResolver } from '@hookform/resolvers/yup'
 import isEmpty from 'lodash/isEmpty'
 import { Fragment, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -31,13 +30,13 @@ const StoryNameForm = ({ onSubmit }) => {
           name="name"
           id="name"
           isHaveValue={!isEmpty(watchName)}
-          wrapperClassName="bg-story-item-bg p-2 w-full rounded-md border-story-line border-[0.5px]"
+          wrapperClassName="bg-secondary-bg p-2 w-full rounded-md border-story-line border-[0.5px]"
           inputClassName="text-sm placeholder-story-line leading-[14px]"
           placeholder="Highlight Name"
           {...register('name', { required: true })}
         />
       </div>
-      <LineBreak className="w-full" />
+      <LineBreak className="w-full bg-divide" />
       <Button type="submit" variant="ghost" disabled={!watchName}>
         Add
       </Button>
@@ -45,13 +44,13 @@ const StoryNameForm = ({ onSubmit }) => {
   )
 }
 
-const ProfileStoryAddButton = ({ handleAddStoryHighlight }) => {
+const ProfileStoryAddDialog = ({ handleAddStoryHighlight }) => {
   const [open, setOpen] = useState(false)
 
   const trigger = (
     <div className="flex w-[72.5px] shrink-0 cursor-pointer  flex-col items-center justify-center space-y-1 overflow-auto py-1 md:w-[115px]">
       <div className="h-14 w-14 rounded-full border-[0.5px] border-story-line p-0.5 md:h-[79px] md:w-[79px]">
-        <div className="flex h-full w-full items-center justify-center rounded-full bg-story-item-bg">
+        <div className="bg-secondary-bg flex h-full w-full items-center justify-center rounded-full">
           <Plus size={44} className="text-story-line" />
         </div>
       </div>
@@ -86,4 +85,4 @@ const ProfileStoryAddButton = ({ handleAddStoryHighlight }) => {
   )
 }
 
-export default ProfileStoryAddButton
+export default ProfileStoryAddDialog
