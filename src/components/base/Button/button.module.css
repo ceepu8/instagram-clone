@@ -20,7 +20,7 @@
 }
 
 .ghost {
-  @apply text-btn-ghost hover:text-btn-ghost-hover;
+  @apply text-btn-ghost hover:text-btn-ghost-hover disabled:text-btn-ghost-hover;
 }
 
 .root:disabled {
