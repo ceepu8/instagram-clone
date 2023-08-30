@@ -64,7 +64,11 @@ const ProfileStoryAddDialog = ({ handleAddStoryHighlight }) => {
   }
 
   return (
-    <Dialog isOpen={open} onClose={setOpen} trigger={<DialogTrigger>{trigger}</DialogTrigger>}>
+    <Dialog
+      isOpen={open}
+      onClose={setOpen}
+      trigger={<DialogTrigger className="focus-visible:outline-none">{trigger}</DialogTrigger>}
+    >
       <Transition.Child
         as={Fragment}
         enter="ease-out duration-100"
@@ -75,8 +79,8 @@ const ProfileStoryAddDialog = ({ handleAddStoryHighlight }) => {
         leaveTo="opacity-0 scale-110"
       >
         <DialogContent className="min-w-[300px] max-w-[400px]" title="New Highlight">
-          <DialogClose className="absolute right-2 top-2">
-            <Button variant="ghost" icon={XIcon} />
+          <DialogClose className="absolute right-2 top-2 focus-visible:outline-none">
+            <XIcon className="hover:text-btn-ghost-hover" />
           </DialogClose>
           <StoryNameForm onSubmit={onSubmit} />
         </DialogContent>
