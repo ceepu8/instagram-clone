@@ -11,15 +11,21 @@ const ProfilePost = () => {
   const { data: posts, isLoading } = useGetPostsByUser(router.query?.id)
 
   return (
-    <div className="grid grid-cols-3 justify-start gap-1">
-      {isLoading && <ProfilePostListSkeleton />}
-      {posts?.map((post) => {
-        return (
-          <ProfilePostDialog key={post.id} {...post}>
-            <ProfilePostItem {...post} />
-          </ProfilePostDialog>
-        )
-      })}
+    <div>
+      <div className="grid grid-cols-3 justify-start gap-1">
+        {isLoading && <ProfilePostListSkeleton />}
+        {!isLoading &&
+          (posts || []).map((post) => {
+            return (
+              <ProfilePostDialog key={post.id} {...post}>
+                <ProfilePostItem {...post} />
+              </ProfilePostDialog>
+            )
+          })}
+      </div>
+      {!isLoading && !posts?.length && (
+        <p className="text-center text-comment">There is no post yet</p>
+      )}
     </div>
   )
 }

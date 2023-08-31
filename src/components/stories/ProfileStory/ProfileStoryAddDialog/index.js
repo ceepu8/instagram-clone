@@ -30,8 +30,8 @@ const StoryNameForm = ({ onSubmit }) => {
           name="name"
           id="name"
           isHaveValue={!isEmpty(watchName)}
-          wrapperClassName="bg-secondary-bg p-2 w-full rounded-md border-story-line border-[0.5px]"
-          inputClassName="text-sm placeholder-story-line leading-[14px]"
+          wrapperClassName="bg-secondary-bg w-full rounded-md border-story-line border-[0.5px]"
+          inputClassName="text-sm p-2 placeholder-story-line leading-[14px]"
           placeholder="Highlight Name"
           {...register('name', { required: true })}
         />

@@ -78,7 +78,7 @@ const PostCaption = ({ owner, caption = '', createdAt }) => {
 
 const PostDialogContent = (props) => {
   const [comment, getCommentInputOnChange] = useInputState('')
-  const { owner, caption, createdAt, liked, images } = props || {}
+  const { owner, caption, createdAt, liked, images } = props
 
   return (
     <div className="relative flex h-full flex-col justify-between py-4 md:space-y-4">

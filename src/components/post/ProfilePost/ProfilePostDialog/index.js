@@ -6,9 +6,7 @@ import Dialog, { DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import PostDialogContent from './PostDialogContent'
 import PostImageSlider from './PostImageSlider'
 
-const ProfilePostDialog = ({ children, ...props }) => {
-  const { images } = props || {}
-
+const ProfilePostDialog = ({ children, images, ...props }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const trigger = (
