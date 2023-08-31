@@ -1,5 +1,13 @@
 @tailwind base;
 
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  background-color: transparent;
+  background-image: none;
+}
+
 @layer base {
   :root {
     --black: #000000;

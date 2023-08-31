@@ -43,7 +43,7 @@ const SwitchAppearance = (props) => {
           onClick={() => setMenu(POPOVER_MENU_KEYS.MAIN)}
         />
         <h1 className="mr-auto font-semibold">Switch Appearance</h1>
-        {isDarkTheme ? <Moon width={16.5} height={16.5} /> : <Sun width={16.5} height={16.5} />}
+        {isDarkTheme ? <Moon size={16.5} /> : <Sun size={16.5} />}
       </div>
       <LineBreak className="bg-popover-divide" />
       {renderThemeSwitch()}

@@ -6,6 +6,9 @@ export const Routes = {
   DIRECT_DETAIL: 'direct/[id]',
   PROFILE: '/profile/[id]',
   RESET_PASSWORD: '/accounts/password/reset',
+  ACCOUNT_EDIT: '/accounts/edit',
+
+  ARCHIVE_STORIES: '/archive/stories',
 
   LOGIN: '/login',
   REGISTER: '/register',

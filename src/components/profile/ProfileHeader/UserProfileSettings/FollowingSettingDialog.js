@@ -28,8 +28,8 @@ const FollowingSettingDialog = ({ user, doUnfollow, trigger }) => {
         leaveTo="opacity-0 scale-110"
       >
         <DialogContent className="min-w-[420px]">
-          <DialogClose className="absolute right-2 top-2">
-            <Button variant="ghost" icon={XIcon} />
+          <DialogClose className="absolute right-2 top-2 focus-visible:outline-none">
+            <XIcon className="hover:text-btn-ghost-hover" />
           </DialogClose>
           <div className="py-4">
             <div className="text-center">

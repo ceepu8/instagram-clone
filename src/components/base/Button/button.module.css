@@ -8,7 +8,7 @@
 }
 
 .secondary {
-  @apply rounded-lg !bg-btn-secondary text-black hover:bg-btn-secondary-hover;
+  @apply rounded-lg !bg-btn-secondary text-black hover:!bg-btn-secondary-hover;
 }
 
 .link {
