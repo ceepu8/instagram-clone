@@ -20,6 +20,7 @@ const getPostsByUser = async (username) => {
         ownerId: user.id,
       },
       select: {
+        id: true,
         createdAt: true,
         owner: true,
         caption: true,

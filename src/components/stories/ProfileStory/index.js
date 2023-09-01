@@ -84,7 +84,7 @@ const ProfileStory = () => {
   }, [])
 
   return (
-    <div className="mx-auto w-[805px] py-4 md:mb-14">
+    <div className="mx-auto w-full max-w-[var(--profile-highlight-width)] py-4 md:mb-14">
       <Swiper>
         {isLoading && <StoryItemListLoading />}
         {!isLoading && <StoryItemList data={data} />}

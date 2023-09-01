@@ -1,9 +1,7 @@
-import NextImage from 'next/image'
-
 import { Button, LineBreak } from '@/components/base'
 import { CheckIcon, MoreHorizontalIcon } from '@/components/icons'
+import ProfileAvatar from '@/components/profile/ProfileAvatar'
 import PreviewProfileCard from '@/components/shared/PreviewProfileCard'
-import Assets from '@/constants/Assets'
 import { useInputState } from '@/hooks/shared'
 import { getTimeFromNow } from '@/utils'
 
@@ -15,29 +13,19 @@ const PostCommentList = () => {
   return <div>Comment</div>
 }
 
-const ProfileImage = ({ image }) => {
-  return (
-    <NextImage
-      width={30}
-      height={30}
-      src={image || Assets.COMMON.PLACEHOLDER}
-      className="rounded-full border border-divide"
-      alt="Profile image"
-    />
-  )
-}
-
 const PostHeader = ({ owner }) => {
   return (
     <div className="flex items-center space-x-4 border-b border-divide px-4 pb-3">
       <div className="shrink-0">
         <PreviewProfileCard>
-          <ProfileImage image={owner?.image} />
+          <ProfileAvatar size={32} image={owner?.image} />
         </PreviewProfileCard>
       </div>
 
       <div className="flex-1">
-        <PreviewProfileCard>{owner?.username}</PreviewProfileCard>
+        <PreviewProfileCard>
+          <b className="text-sm">{owner?.username}</b>
+        </PreviewProfileCard>
       </div>
       <Button variant="ghost" icon={MoreHorizontalIcon} />
     </div>
@@ -72,15 +60,17 @@ const PostCaption = ({ owner, caption = '', createdAt }) => {
   return (
     <div className="hidden space-x-4 px-4 md:flex">
       <PreviewProfileCard>
-        <ProfileImage image={owner?.image} />
+        <ProfileAvatar size={32} image={owner?.image} />
       </PreviewProfileCard>
       <div className="flex flex-col space-y-1">
-        <div className="text-left">
-          <PreviewProfileCard>{owner?.username}</PreviewProfileCard>
+        <div className="text-left leading-4">
+          <PreviewProfileCard triggerClassName="inline">
+            <b className="text-sm">{owner?.username}</b>
+          </PreviewProfileCard>
           <BlueTick />
           <span className="ml-1 text-sm">{caption}</span>
         </div>
-        <p className="text-xs text-comment"> {postCreatedTime}</p>
+        <p className="text-xs text-comment">{postCreatedTime}</p>
       </div>
     </div>
   )
