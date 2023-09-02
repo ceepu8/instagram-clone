@@ -1,10 +1,10 @@
-import NextImage from 'next/image'
+import Image from 'next/image'
 
 const PostImageSlider = ({ images = [] }) => {
   return (
     <>
       <div className="relative hidden h-full md:flex md:items-center md:justify-center">
-        <NextImage
+        <Image
           width={0}
           height={0}
           sizes="100vw"
@@ -15,7 +15,7 @@ const PostImageSlider = ({ images = [] }) => {
       </div>
 
       <div className="relative block w-full md:hidden">
-        <NextImage width={1200} height={1200} src={images[0]} />
+        <Image width={1200} height={1200} src={images[0]} />
       </div>
     </>
   )

@@ -1,10 +1,10 @@
 import { Transition } from '@headlessui/react'
+import { Pressable } from '@react-aria/interactions'
 import { Fragment, useEffect, useState } from 'react'
 
 import { Button, LineBreak, Link } from '@/components/base'
 import Dialog, { DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { SettingsIcon } from '@/components/icons'
-import { Routes } from '@/constants'
 import { useLogout } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
@@ -12,11 +12,32 @@ const LogoutSuccessDialog = ({ open }) => {
   const handleLogout = useLogout()
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setTimeout(async () => {
       if (open) handleLogout()
     }, 1000)
     return () => clearTimeout(timer)
   }, [open])
+
+  const renderLogoutSuccessDialogContent = () => {
+    return (
+      <div className="flex flex-col items-center pb-2 pt-6">
+        <h1 className="text-xl">Logging Out</h1>
+        <p className="text-comment">You need to log back in</p>
+        <LineBreak className="mt-6 w-full" />
+        <Pressable onClick={() => handleLogout()}>
+          <span
+            className={cn(
+              'inline-flex cursor-pointer select-none appearance-none items-center justify-center gap-x-2 focus:outline-none',
+              'h-8 px-4 text-sm text-default',
+              'transition-colors duration-150 ease-linear'
+            )}
+          >
+            Log in
+          </span>
+        </Pressable>
+      </div>
+    )
+  }
 
   return (
     <Dialog isOpen={open} onClose={null}>
@@ -30,22 +51,7 @@ const LogoutSuccessDialog = ({ open }) => {
         leaveTo="opacity-0 scale-110"
       >
         <DialogContent className="min-w-[420px]">
-          <div className="flex flex-col items-center pb-2 pt-6">
-            <h1 className="text-xl">Logging Out</h1>
-            <p className="text-comment">You need to log back in</p>
-            <LineBreak className="mt-6 w-full" />
-            <Link href={Routes.HOME}>
-              <span
-                className={cn(
-                  'inline-flex cursor-pointer select-none appearance-none items-center justify-center gap-x-2 focus:outline-none',
-                  'h-8 px-4 text-sm text-default',
-                  'transition-colors duration-150 ease-linear'
-                )}
-              >
-                Log in
-              </span>
-            </Link>
-          </div>
+          {renderLogoutSuccessDialogContent()}
         </DialogContent>
       </Transition.Child>
     </Dialog>
