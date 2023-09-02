@@ -1,8 +1,7 @@
 import { Transition } from '@headlessui/react'
-import { Pressable } from '@react-aria/interactions'
 import { Fragment, useEffect, useState } from 'react'
 
-import { Button, LineBreak, Link } from '@/components/base'
+import { Button, LineBreak } from '@/components/base'
 import Dialog, { DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { SettingsIcon } from '@/components/icons'
 import { useLogout } from '@/hooks/query/auth'
@@ -24,17 +23,9 @@ const LogoutSuccessDialog = ({ open }) => {
         <h1 className="text-xl">Logging Out</h1>
         <p className="text-comment">You need to log back in</p>
         <LineBreak className="mt-6 w-full" />
-        <Pressable onClick={() => handleLogout()}>
-          <span
-            className={cn(
-              'inline-flex cursor-pointer select-none appearance-none items-center justify-center gap-x-2 focus:outline-none',
-              'h-8 px-4 text-sm text-default',
-              'transition-colors duration-150 ease-linear'
-            )}
-          >
-            Log in
-          </span>
-        </Pressable>
+        <Button variant="ghost" onClick={() => handleLogout()} bold={false}>
+          Log in
+        </Button>
       </div>
     )
   }
@@ -59,8 +50,8 @@ const LogoutSuccessDialog = ({ open }) => {
 }
 
 const MoreSettingsDialog = () => {
-  const [open, setOpen] = useState(false)
-  const [openLogoutSuccess, setOpenLogoutSuccess] = useState(false)
+  const [openMainDialog, setOpenMainDialog] = useState(false)
+  const [openLogoutSuccessDialog, setOpenLogoutSuccessDialog] = useState(false)
 
   const ITEM_LIST = [
     {
@@ -92,15 +83,15 @@ const MoreSettingsDialog = () => {
       key: 'log-out',
       label: 'Log out',
       onClick: () => {
-        setOpen(false)
-        setOpenLogoutSuccess(true)
+        setOpenMainDialog(false)
+        setOpenLogoutSuccessDialog(true)
       },
     },
     {
       key: 'cancel',
       label: 'Cancel',
       onClick: () => {
-        setOpen(false)
+        setOpenMainDialog(false)
       },
     },
   ]
@@ -135,7 +126,7 @@ const MoreSettingsDialog = () => {
 
   return (
     <>
-      <Dialog isOpen={open} onClose={setOpen} trigger={trigger}>
+      <Dialog isOpen={openMainDialog} onClose={setOpenMainDialog} trigger={trigger}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-100"
@@ -148,7 +139,7 @@ const MoreSettingsDialog = () => {
           <DialogContent className="min-w-[420px]">{content}</DialogContent>
         </Transition.Child>
       </Dialog>
-      <LogoutSuccessDialog open={openLogoutSuccess} setOpen={setOpenLogoutSuccess} />
+      <LogoutSuccessDialog open={openLogoutSuccessDialog} setOpen={setOpenLogoutSuccessDialog} />
     </>
   )
 }
