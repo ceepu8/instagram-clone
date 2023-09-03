@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 
-import { useFollow, useGetFollows, useUnfollow } from '@/api/follow'
+import { useFollow, useGetFollows, useUnfollow } from '@/apis/follow'
 import { Button } from '@/components/base'
 import { GET_FOLLOWS_KEY } from '@/constants'
 import Assets from '@/constants/Assets'

@@ -1,4 +1,4 @@
-import { useFollow, useUnfollow } from '@/api/follow'
+import { useFollow, useUnfollow } from '@/apis/follow'
 import { Button } from '@/components/base'
 import { ChevronDown, MoreHorizontalIcon, UserPlusIcon } from '@/components/icons'
 

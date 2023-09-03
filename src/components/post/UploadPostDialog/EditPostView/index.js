@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 
-import { useUploadPost } from '@/api'
+import { useUploadPost } from '@/apis'
 import { Button } from '@/components/base'
 import { ArrowLeftIcon } from '@/components/icons'
 import { useImageUpload, useToast, useUploadPostDialog } from '@/hooks/custom'
