@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { useGetPostsByUser } from '@/api'
+import { useGetPostsByUser } from '@/apis'
 
 import ProfilePostDialog from './ProfilePostDialog'
 import ProfilePostItem from './ProfilePostItem'

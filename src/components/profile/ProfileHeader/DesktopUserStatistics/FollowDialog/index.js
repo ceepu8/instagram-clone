@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
-import { useGetFollowers, useGetFollowings } from '@/api/follow'
+import { useGetFollowers, useGetFollowings } from '@/apis/follow'
 import { Button } from '@/components/base'
 import Dialog, { DialogClose, DialogContent, DialogTrigger } from '@/components/base/Dialog'
 import { XIcon } from '@/components/icons'
