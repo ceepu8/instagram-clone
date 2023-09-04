@@ -9,6 +9,9 @@ import prisma from '@/libs/prismadb'
 import { generateAccessToken } from '@/pages/api/utils/jwt'
 
 export const authOptions = {
+  session: {
+    strategy: 'jwt',
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -16,14 +19,14 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      name: 'credentials',
+      name: 'Instagram Clone',
       credentials: {
         email: { label: 'email', type: 'text' },
         phoneNumber: { label: 'phoneNumber', type: 'text' },
         username: { label: 'username', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
-      async authorize(credentials) {
+      authorize: async (credentials) => {
         if (!credentials?.password) {
           throw new Error('Invalid Credentials')
         }
@@ -62,20 +65,18 @@ export const authOptions = {
       },
     }),
   ],
-
   callbacks: {
-    async signIn(response) {
+    signIn: async (response) => {
       return response
     },
-    async jwt({ token, user }) {
+    jwt: async ({ token, user }) => {
       if (user) {
         token.user = user
         token.accessToken = generateAccessToken(user)
       }
       return token
     },
-    async session({ session, token }) {
-      console.log(session)
+    session: async ({ session, token }) => {
       if (token.user) {
         session.user = {
           id: token.user.id,
@@ -91,12 +92,6 @@ export const authOptions = {
       return session
     },
   },
-  session: {
-    strategy: 'jwt',
-  },
-  secret: process.env.NEXTAUTH_SECRET,
-  pages: {
-    signIn: Routes.HOME,
-  },
+  pages: { signIn: Routes.HOME },
 }
 export default NextAuth(authOptions)

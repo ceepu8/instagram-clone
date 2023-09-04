@@ -21,5 +21,5 @@ export const useClassifyNavType = () => {
     return false
   }
 
-  return { navSelected, setNavSelected }
+  return { navSelected, setNavSelected, getActive }
 }

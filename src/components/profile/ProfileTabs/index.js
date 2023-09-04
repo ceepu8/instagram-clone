@@ -2,7 +2,7 @@ import { Pressable } from '@react-aria/interactions'
 import { queryTypes, useQueryState } from 'next-usequerystate'
 import { useRouter } from 'next/router'
 
-import { useGetProfile } from '@/api'
+import { useGetProfile } from '@/apis'
 import { LineBreak } from '@/components/base'
 import { BookmarkIcon, Film, GridIcon, TagIcon } from '@/components/icons'
 import { PROFILE_TAB_KEYS } from '@/constants/Keys'

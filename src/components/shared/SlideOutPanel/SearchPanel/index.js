@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
-import { useGetUserByName } from '@/api'
+import { useGetUserByName } from '@/apis'
 import { Button, LineBreak } from '@/components/base'
 import { AnimatedBarSpinnerIcon, XIcon } from '@/components/icons'
 import { Routes } from '@/constants'
