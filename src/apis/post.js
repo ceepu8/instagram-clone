@@ -1,12 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import axios from 'axios'
 
 import { Axios } from '@/configs'
 import { API, CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, USER_POST_LIST_KEY } from '@/constants'
+import { useAuth } from '@/hooks/query/auth'
 
 export const useUploadPost = () => {
+  const queryClient = useQueryClient()
+  const { user } = useAuth()
+
   const uploadPost = async (dataRequest) => {
     const response = await Axios.post(API.POST.UPLOAD, dataRequest)
+
+    queryClient.invalidateQueries(USER_POST_LIST_KEY, user.username)
     return response
   }
 
@@ -17,7 +24,11 @@ export const useUploadPost = () => {
 
     const URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/image/upload`
 
-    const response = await Axios.post(URL, formData)
+    const response = await axios({
+      method: 'post',
+      url: URL,
+      data: formData,
+    })
     return response
   }
 
