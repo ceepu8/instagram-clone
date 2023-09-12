@@ -1,5 +1,4 @@
-import { Transition } from '@headlessui/react'
-import { Fragment, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import Dialog, { DialogContent } from '@/components/base/Dialog'
 import { useImageUpload, useUploadPostDialog } from '@/hooks/custom'
@@ -48,30 +47,20 @@ const UploadPostDialog = () => {
         setStep(1)
       }}
     >
-      <Transition.Child
-        as={Fragment}
-        enter="ease-out duration-100"
-        enterFrom="opacity-0 scale-110"
-        enterTo="opacity-100 scale-100"
-        leave="ease-in duration-100"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-110"
-      >
-        <DialogContent title={dialogTitle}>
-          <div
-            className={cn(
-              'h-[40vh] md:h-[70vh]',
-              'w-[50vw] min-w-[348px] max-w-[590px] md:w-[80vw]',
-              'flex items-center justify-center',
-              'transition-all duration-500',
-              step === 3 &&
-                'h-[40vh] w-[95vw] min-w-[688px] md:h-[70vh] md:w-[95vw] md:max-w-[1038px]'
-            )}
-          >
-            {views[step]}
-          </div>
-        </DialogContent>
-      </Transition.Child>
+      <DialogContent title={dialogTitle}>
+        <div
+          className={cn(
+            'h-[40vh] md:h-[70vh]',
+            'w-[50vw] min-w-[348px] max-w-[590px] md:w-[80vw]',
+            'flex items-center justify-center',
+            'transition-all duration-500',
+            step === 3 &&
+              'h-[40vh] w-[95vw] min-w-[688px] md:h-[70vh] md:w-[95vw] md:max-w-[1038px]'
+          )}
+        >
+          {views[step]}
+        </div>
+      </DialogContent>
     </Dialog>
   )
 }

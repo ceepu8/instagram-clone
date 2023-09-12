@@ -53,6 +53,11 @@ const MoreSettingsDialog = () => {
   const [openMainDialog, setOpenMainDialog] = useState(false)
   const [openLogoutSuccessDialog, setOpenLogoutSuccessDialog] = useState(false)
 
+  const onLogout = () => {
+    setOpenMainDialog(false)
+    setOpenLogoutSuccessDialog(true)
+  }
+
   const ITEM_LIST = [
     {
       key: 'apps-and-websites',
@@ -82,10 +87,7 @@ const MoreSettingsDialog = () => {
     {
       key: 'log-out',
       label: 'Log out',
-      onClick: () => {
-        setOpenMainDialog(false)
-        setOpenLogoutSuccessDialog(true)
-      },
+      onClick: onLogout,
     },
     {
       key: 'cancel',
@@ -111,7 +113,7 @@ const MoreSettingsDialog = () => {
   const renderItem = (item) => {
     return (
       <div key={item.key} className="flex w-full items-center justify-center py-3">
-        <Button variant="ghost" bold={false} {...{ ...item }}>
+        <Button variant="ghost" bold={false} {...item}>
           {item.label}
         </Button>
       </div>
