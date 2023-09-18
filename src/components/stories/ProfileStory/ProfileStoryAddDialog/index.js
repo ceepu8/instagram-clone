@@ -1,6 +1,5 @@
-import { Transition } from '@headlessui/react'
 import isEmpty from 'lodash/isEmpty'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button, LineBreak } from '@/components/base'
@@ -69,22 +68,12 @@ const ProfileStoryAddDialog = ({ handleAddStoryHighlight }) => {
       onClose={setOpen}
       trigger={<DialogTrigger className="focus-visible:outline-none">{trigger}</DialogTrigger>}
     >
-      <Transition.Child
-        as={Fragment}
-        enter="ease-out duration-100"
-        enterFrom="opacity-0 scale-110"
-        enterTo="opacity-100 scale-100"
-        leave="ease-in duration-100"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-110"
-      >
-        <DialogContent className="min-w-[300px] max-w-[400px]" title="New Highlight">
-          <DialogClose className="absolute right-2 top-2 focus-visible:outline-none">
-            <XIcon className="hover:text-btn-ghost-hover" />
-          </DialogClose>
-          <StoryNameForm onSubmit={onSubmit} />
-        </DialogContent>
-      </Transition.Child>
+      <DialogContent size="small" className="max-w-[400px]" title="New Highlight">
+        <DialogClose className="absolute right-2 top-2 focus-visible:outline-none">
+          <XIcon className="hover:text-btn-ghost-hover" />
+        </DialogClose>
+        <StoryNameForm onSubmit={onSubmit} />
+      </DialogContent>
     </Dialog>
   )
 }

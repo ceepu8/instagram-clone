@@ -1,5 +1,4 @@
-import { Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 
 import { Button } from '@/components/base'
 import Dialog, { DialogContent, DialogTrigger } from '@/components/base/Dialog'
@@ -79,17 +78,7 @@ const PostMenuDialog = () => {
 
   return (
     <Dialog isOpen={open} onClose={setOpen} trigger={trigger}>
-      <Transition.Child
-        as={Fragment}
-        enter="ease-out duration-100"
-        enterFrom="opacity-0 scale-110"
-        enterTo="opacity-100 scale-100"
-        leave="ease-in duration-100"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-110"
-      >
-        <DialogContent className="min-w-[420px]">{content}</DialogContent>
-      </Transition.Child>
+      <DialogContent>{content}</DialogContent>
     </Dialog>
   )
 }

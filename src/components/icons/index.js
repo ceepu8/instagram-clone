@@ -349,8 +349,8 @@ const SettingsIcon = ({ size = 24, ...props }) => {
   return (
     <svg
       aria-label="Options"
-      color="rgb(0, 0, 0)"
-      fill="rgb(0, 0, 0)"
+      color="currentColor"
+      fill="currentColor"
       height={size}
       role="img"
       viewBox="0 0 24 24"

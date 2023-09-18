@@ -1,5 +1,4 @@
-import { Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 
 import { useGetFollowers, useGetFollowings } from '@/apis/follow'
 import { Button } from '@/components/base'
@@ -28,22 +27,12 @@ export const FollowDialog = ({ variant = 'followings', userId, trigger }) => {
 
   return (
     <Dialog isOpen={open} onClose={setOpen} trigger={<DialogTrigger>{trigger}</DialogTrigger>}>
-      <Transition.Child
-        as={Fragment}
-        enter="ease-out duration-100"
-        enterFrom="opacity-0 scale-110"
-        enterTo="opacity-100 scale-100"
-        leave="ease-in duration-100"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-110"
-      >
-        <DialogContent className="min-w-[420px]" title={<h1 className="capitalize">{variant}</h1>}>
-          <DialogClose className="absolute right-2 top-2">
-            <Button variant="ghost" icon={XIcon} />
-          </DialogClose>
-          {content[variant]}
-        </DialogContent>
-      </Transition.Child>
+      <DialogContent title={<h1 className="capitalize">{variant}</h1>}>
+        <DialogClose className="absolute right-2 top-2">
+          <Button variant="ghost" icon={XIcon} />
+        </DialogClose>
+        {content[variant]}
+      </DialogContent>
     </Dialog>
   )
 }
