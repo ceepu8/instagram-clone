@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 import { Button, Heading, LineBreak, Link } from '@/components/base'
 import { MetaIcon } from '@/components/icons'
+import { Footer } from '@/components/layout'
 import { Routes } from '@/constants'
 import { cn } from '@/utils'
 
@@ -37,10 +38,25 @@ const AccountsCenterSection = () => {
   )
 }
 
+const View1 = () => {
+  return (
+    <Heading bold={false} className="pl-12 pt-8">
+      Edit Profile
+    </Heading>
+  )
+}
+
+const View2 = () => {
+  return (
+    <Heading bold={false} className="pl-12 pt-8">
+      Language Preferences
+    </Heading>
+  )
+}
+
 const AccountFAQ = () => {
   const router = useRouter()
-
-  const FAQ_LIST = [
+  const faqList = [
     {
       key: 'edit-profile',
       label: 'Edit Profle',
@@ -99,7 +115,7 @@ const AccountFAQ = () => {
       <Heading size="xl" className="mb-4 pl-4">
         Settings
       </Heading>
-      <ul className="flex flex-col">{FAQ_LIST.map(renderItem)}</ul>
+      <ul className="flex flex-col">{faqList.map(renderItem)}</ul>
       <Button variant="link" className="mt-4 pl-4 text-left">
         Switch to professional account
       </Button>
@@ -108,6 +124,25 @@ const AccountFAQ = () => {
 }
 
 const AccountEditPage = () => {
+  const router = useRouter()
+
+  const faqList = {
+    'edit-profile': {
+      key: 'edit-profile',
+      label: 'Edit Profle',
+      component: View1,
+    },
+    'language-preferences': {
+      key: 'language-preferences',
+      label: 'Language Preferences',
+      component: View2,
+    },
+  }
+
+  const Component = !router.query.tab
+    ? faqList['edit-profile'].component
+    : faqList[router.query.tab].component
+
   return (
     <div className="flex h-full flex-col">
       <div className="flex h-full w-full pt-4">
@@ -115,8 +150,13 @@ const AccountEditPage = () => {
           <AccountsCenterSection />
           <AccountFAQ />
         </div>
-        <LineBreak className="h-full w-[1px]" />
-        <div className="flex-1">123</div>
+        <LineBreak className="my-0 h-full w-[1px]" />
+        <div className="flex flex-1 flex-col">
+          <div className="flex-1">
+            <Component />
+          </div>
+          <Footer />
+        </div>
       </div>
     </div>
   )

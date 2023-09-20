@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 
 import { Footer } from '@/components/layout'
+import { cn } from '@/utils'
 import { SHOW_FOOTER_ROUTES } from '@/utils/routers'
 
 import AppSideBar from './AppSideBar'
@@ -13,7 +14,13 @@ const UserLayout = ({ children }) => {
     <main className="h-screen w-screen">
       <AppSideBar />
       <div className="bg-background md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
-        <div className="h-[calc(100vh-51px)] min-h-fit md:min-h-[calc(100vh-var(--footer-height)-64px)]">
+        <div
+          className={cn(
+            'h-screen max-h-fit',
+            showFooter &&
+              'h-fit min-h-[calc(100vh-51px)] md:min-h-[calc(100vh-var(--footer-height))]'
+          )}
+        >
           {children}
         </div>
         {showFooter && <Footer />}
