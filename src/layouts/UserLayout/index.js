@@ -13,7 +13,9 @@ const UserLayout = ({ children }) => {
     <main className="h-screen w-screen">
       <AppSideBar />
       <div className="bg-background md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
-        <div className="max-h-fit min-h-[calc(100vh-var(--footer-height)-64px)]">{children}</div>
+        <div className="h-[calc(100vh-51px)] min-h-fit md:min-h-[calc(100vh-var(--footer-height)-64px)]">
+          {children}
+        </div>
         {showFooter && <Footer />}
       </div>
     </main>

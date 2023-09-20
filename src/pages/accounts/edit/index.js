@@ -1,7 +1,7 @@
 import { Newspaper, ShieldCheck, User2 } from 'lucide-react'
 import { useRouter } from 'next/router'
 
-import { Button, Heading, Link } from '@/components/base'
+import { Button, Heading, LineBreak, Link } from '@/components/base'
 import { MetaIcon } from '@/components/icons'
 import { Routes } from '@/constants'
 import { cn } from '@/utils'
@@ -95,7 +95,7 @@ const AccountFAQ = () => {
     )
   }
   return (
-    <div className="px-4">
+    <div className="md:px-4">
       <Heading size="xl" className="mb-4 pl-4">
         Settings
       </Heading>
@@ -110,14 +110,13 @@ const AccountFAQ = () => {
 const AccountEditPage = () => {
   return (
     <div className="flex h-full flex-col">
-      <div className="h-full w-full">
-        <div className="flex h-full w-full pt-6">
-          <div className="flex w-[315px] flex-col gap-y-4 border-r border-divide px-6">
-            <AccountsCenterSection />
-            <AccountFAQ />
-          </div>
-          <div className="flex-1">123</div>
+      <div className="flex h-full w-full pt-4">
+        <div className="flex w-[235px] flex-col gap-y-4 overflow-y-auto pl-5 pr-2 pt-2 md:w-[315px] md:pr-5">
+          <AccountsCenterSection />
+          <AccountFAQ />
         </div>
+        <LineBreak className="h-full w-[1px]" />
+        <div className="flex-1">123</div>
       </div>
     </div>
   )
