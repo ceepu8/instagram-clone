@@ -6,14 +6,16 @@ import { cn } from '@/utils'
 
 const AccountFAQItem = ({ href, label, active }) => {
   return (
-    <Link
-      href={href}
-      className={cn(
-        'block cursor-pointer rounded-lg px-5 py-3 hover:bg-bright-gray',
-        active && 'bg-bright-gray hover:bg-gainsboro'
-      )}
-    >
-      <span className="text-sm text-default">{label}</span>
+    <Link href={href} disabled={active || !href}>
+      <span
+        className={cn(
+          'text-sm text-default',
+          'block cursor-pointer rounded-lg px-5 py-3 hover:bg-bright-gray',
+          active && 'bg-bright-gray hover:bg-gainsboro'
+        )}
+      >
+        {label}
+      </span>
     </Link>
   )
 }
