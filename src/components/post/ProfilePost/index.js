@@ -1,7 +1,9 @@
+import { PackageOpen } from 'lucide-react'
 import { useRouter } from 'next/router'
 
 import { useGetPostsByUser } from '@/apis'
 
+import NoPostYet from '../NoPostYet'
 import ProfilePostDialog from './ProfilePostDialog'
 import ProfilePostItem from './ProfilePostItem'
 import ProfilePostListSkeleton from './ProfilePostListSkeleton'
@@ -11,7 +13,7 @@ const ProfilePost = () => {
   const { data: posts, isLoading } = useGetPostsByUser(router.query?.id)
 
   return (
-    <div>
+    <div className="flex flex-1 flex-col justify-center">
       <div className="grid grid-cols-3 justify-start gap-1">
         {isLoading && <ProfilePostListSkeleton />}
         {!isLoading &&
@@ -24,7 +26,11 @@ const ProfilePost = () => {
           })}
       </div>
       {!isLoading && !posts?.length && (
-        <p className="text-center text-comment">There is no post yet</p>
+        <NoPostYet
+          icon={PackageOpen}
+          title="No Post Uploaded"
+          message="If you upload a post, it'll appear here"
+        />
       )}
     </div>
   )
