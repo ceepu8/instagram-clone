@@ -1,5 +1,9 @@
+import React from 'react'
+
+import AccountEditView from '@/views/AccountEditView'
+
 const AccountEditPage = () => {
-  return <div>AccountEditPage</div>
+  return <AccountEditView />
 }
 
 export default AccountEditPage
