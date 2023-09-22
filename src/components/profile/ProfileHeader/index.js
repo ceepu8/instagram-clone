@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
 
 import { useGetProfile } from '@/apis'
 import Assets from '@/constants/Assets'
