@@ -13,7 +13,7 @@ const ProfilePost = () => {
   const { data: posts, isLoading } = useGetPostsByUser(router.query?.id)
 
   return (
-    <div className="flex flex-1 flex-col justify-center">
+    <div className="flex flex-1 flex-col">
       <div className="grid grid-cols-3 justify-start gap-1">
         {isLoading && <ProfilePostListSkeleton />}
         {!isLoading &&

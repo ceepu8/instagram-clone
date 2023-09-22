@@ -1,8 +1,14 @@
 import { Tag } from 'lucide-react'
+import { useRouter } from 'next/router'
+
+import { useIsMe } from '@/hooks/custom'
 
 import NoPostYet from '../NoPostYet'
 
 const ProfileTaggedPost = () => {
+  const router = useRouter()
+  const isMe = useIsMe(router.query?.id)
+
   const data = false
 
   return (
@@ -10,8 +16,8 @@ const ProfileTaggedPost = () => {
       {!data?.length ? (
         <NoPostYet
           icon={Tag}
-          title="Photos of you"
-          message="When people tag you in photos, they'll appear here."
+          title={isMe ? 'Photos of you' : 'No Photos'}
+          message={isMe && "When people tag you in photos, they'll appear here."}
         />
       ) : null}
     </div>

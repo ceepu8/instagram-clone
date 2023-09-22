@@ -16,6 +16,9 @@ const ProfileBody = () => {
     tagged: {
       component: ProfileTaggedPost,
     },
+    reels: {
+      component: ProfileTaggedPost,
+    },
   }
 
   const Component = !router.query?.tab
