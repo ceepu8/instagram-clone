@@ -13,16 +13,8 @@ const UserLayout = ({ children }) => {
   return (
     <main className="h-screen w-screen">
       <AppSideBar />
-      <div className="bg-background md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
-        <div
-          className={cn(
-            'h-screen max-h-fit',
-            showFooter &&
-              'h-fit min-h-[calc(100vh-51px)] md:min-h-[calc(100vh-var(--footer-height))]'
-          )}
-        >
-          {children}
-        </div>
+      <div className="flex h-full flex-col bg-background md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
+        <div className="flex-1">{children}</div>
         {showFooter && <Footer />}
       </div>
     </main>

@@ -27,3 +27,16 @@ export const PROFILE_TAB_KEYS = {
   SAVED: 'saved',
   TAGGED: 'tagged',
 }
+
+export const ACCOUNT_EDIT_VIEW_TAB = {
+  PROFILE: 'edit-profile',
+  LANGUAGE: 'language-preferences',
+  APPS: 'apps-and-websites',
+  EMAIL: 'email-notifications',
+  PUSH: 'push-notifications',
+  DISPLAY: 'what-you-see',
+  CONTENT_PRIVACY: 'who-can-see-your-content',
+  INTERACTIONS: 'how-others-can-interact-with-you',
+  SUPERVISION: 'supervision',
+  HELP: 'help',
+}

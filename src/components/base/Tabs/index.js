@@ -12,7 +12,7 @@ const TabTrigger = ({ value, children }) => {
         'group',
         'border-b border-r first:border-t',
         'border-gray-300 dark:border-gray-600',
-        'radix-state-active:border-b-gray-700 radix-state-inactive:bg-gray-50 dark:radix-state-active:border-b-gray-100 dark:radix-state-active:bg-gray-900 dark:radix-state-inactive:bg-gray-800 focus-visible:radix-state-active:border-b-transparent focus-visible:dark:radix-state-active:border-b-transparent',
+        'radix-state-active:border-b-gray-700 radix-state-inactive:bg-gray-50 focus-visible:radix-state-active:border-b-transparent',
         'flex-1 px-3 py-2.5',
         'focus:radix-state-active:border-b-red',
         'focus-visible:ring-purple-500 focus:z-10 focus:outline-none focus-visible:ring focus-visible:ring-opacity-75'

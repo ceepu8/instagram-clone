@@ -125,7 +125,7 @@ const Footer = () => {
   )
 
   return (
-    <footer className="hidden h-[var(--footer-height)] flex-col items-center justify-center gap-y-2 md:flex">
+    <footer className="hidden h-[var(--footer-height)] shrink-0 flex-col items-center justify-center gap-y-2 md:flex">
       <div className="flex flex-wrap items-center justify-center gap-y-2 space-x-4">
         {items.map(renderItem)}
       </div>
