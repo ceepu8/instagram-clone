@@ -4,7 +4,7 @@ export const Routes = {
   REELS: '/reels/[id]',
   DIRECT_INBOX: '/direct/inbox',
   DIRECT_DETAIL: 'direct/[id]',
-  PROFILE: '/profile/[id]',
+  PROFILE: '/profile/[username]',
   RESET_PASSWORD: '/accounts/password/reset',
   ACCOUNT_EDIT: '/accounts/edit',
 

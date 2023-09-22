@@ -13,7 +13,7 @@ const ProfileTabs = () => {
   const [tab, setTab] = useQueryState('tab', queryTypes.string.withDefault(PROFILE_TAB_KEYS.POSTS))
 
   const router = useRouter()
-  const { data: user } = useGetProfile(router.query.id)
+  const { data: user } = useGetProfile(router.query.username)
   const isMe = useIsMe(user?.username)
 
   const tabList = [

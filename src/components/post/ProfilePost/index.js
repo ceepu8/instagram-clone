@@ -10,7 +10,7 @@ import ProfilePostListSkeleton from './ProfilePostListSkeleton'
 
 const ProfilePost = () => {
   const router = useRouter()
-  const { data: posts, isLoading } = useGetPostsByUser(router.query?.id)
+  const { data: posts, isLoading } = useGetPostsByUser(router.query?.username)
 
   return (
     <div className="flex flex-1 flex-col">

@@ -20,7 +20,7 @@ const SearchItem = (props) => {
   return (
     <div className="flex w-full cursor-pointer items-center">
       <Pressable
-        onPress={() => router.push({ pathname: Routes.PROFILE, query: { id: username } })}
+        onPress={() => router.push({ pathname: Routes.PROFILE, query: { username } })}
         isDisabled={!username}
       >
         <div className="flex w-full cursor-pointer items-center space-x-4">
