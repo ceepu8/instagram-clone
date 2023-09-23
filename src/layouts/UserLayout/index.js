@@ -10,7 +10,7 @@ const UserLayout = ({ children }) => {
   const showFooter = SHOW_FOOTER_ROUTES.includes(router.pathname)
 
   return (
-    <main className="min-h-screen w-screen">
+    <main className="h-screen min-h-screen w-screen">
       <AppSideBar />
       <div className="flex flex-col bg-background md:pl-[var(--nav-narrow-width)] lg:pl-[var(--nav-medium-width)]">
         <div className="flex-1">{children}</div>

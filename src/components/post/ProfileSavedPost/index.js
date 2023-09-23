@@ -43,15 +43,13 @@ const ProfileSavedPost = () => {
   const data = []
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-y-4">
+    <div className="flex flex-1 flex-col items-center gap-y-4">
       {isMe && <CreateCollectionSection />}
-      <div className="w-fit">
-        <div className="flex flex-1 flex-wrap items-center gap-4">
-          <CollectionItem name="All Posts" />
-          <CollectionItem name="123" />
-          <CollectionItem name="123" />
-          <CollectionItem name="123" />
-        </div>
+      <div className="flex max-w-[300px] flex-wrap gap-4 md:max-w-[616px] lg:max-w-full">
+        <CollectionItem name="All Posts" />
+        <CollectionItem name="123" />
+        <CollectionItem name="123" />
+        <CollectionItem name="123" />
       </div>
     </div>
   )

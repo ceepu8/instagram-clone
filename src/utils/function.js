@@ -5,7 +5,10 @@ import { EMAIL_REGEX, PHONE_REGEX } from '@/constants'
 
 export const checkRouteActive = (router, route) => {
   const active =
-    router.asPath === route || router.pathname === route || router.asPath.endsWith(route)
+    router.asPath === route ||
+    router.pathname === route ||
+    router.asPath.endsWith(route) ||
+    (router.asPath.startsWith(route) && route !== '/')
   return active
 }
 
