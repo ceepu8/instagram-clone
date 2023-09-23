@@ -2,21 +2,22 @@ import { useRouter } from 'next/router'
 
 import { ProfilePost, ProfileSavedPost } from '@/components/post'
 import ProfileTaggedPost from '@/components/post/ProfileTaggedPost'
+import { PROFILE_TAB_KEYS } from '@/constants/Keys'
 
 const ProfileBody = () => {
   const router = useRouter()
 
   const profileTabs = {
-    posts: {
+    [PROFILE_TAB_KEYS.POSTS]: {
       component: ProfilePost,
     },
-    saved: {
+    [PROFILE_TAB_KEYS.SAVED]: {
       component: ProfileSavedPost,
     },
-    tagged: {
+    [PROFILE_TAB_KEYS.POSTS]: {
       component: ProfileTaggedPost,
     },
-    reels: {
+    [PROFILE_TAB_KEYS.REELS]: {
       component: ProfileTaggedPost,
     },
   }

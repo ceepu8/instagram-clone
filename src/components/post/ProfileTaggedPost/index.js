@@ -9,7 +9,7 @@ const ProfileTaggedPost = () => {
   const router = useRouter()
   const isMe = useIsMe(router.query?.username)
 
-  const data = false
+  const data = []
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
