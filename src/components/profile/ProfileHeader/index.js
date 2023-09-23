@@ -14,7 +14,6 @@ import UserProfileSettings from './UserProfileSettings'
 
 const ProfileInfo = ({ user }) => {
   const router = useRouter()
-  const { user: authUser } = useAuth()
   const { username } = router.query
   const isMe = useIsMe(username)
 

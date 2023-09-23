@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 
 import { Footer } from '@/components/layout'
-import { cn } from '@/utils'
 import { SHOW_FOOTER_ROUTES } from '@/utils/routers'
 
 import AppSideBar from './AppSideBar'
