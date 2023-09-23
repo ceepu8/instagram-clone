@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Button } from '@/components/base'
 import { useIsMe } from '@/hooks/custom'
 
-import NoPostYet from '../NoPostYet'
+import EmptyPost from '../EmptyPost'
 
 // TODO:
 const CreateCollectionSection = () => {
@@ -29,7 +29,7 @@ const ProfileSavedPost = () => {
     <div className="flex flex-1 flex-col items-center justify-center">
       {isMe && <CreateCollectionSection />}
       {!data?.length && (
-        <NoPostYet
+        <EmptyPost
           icon={Save}
           title="No Saved Post"
           message={isMe && "When you save a post, it'll appear here."}
