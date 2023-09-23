@@ -1,0 +1,7 @@
+.collection-item-bg {
+  background-image: var(--profile-collection-gradient);
+}
+
+.collection-item-bg:hover {
+  background-image: var(--profile-collection-gradient-hover);
+}

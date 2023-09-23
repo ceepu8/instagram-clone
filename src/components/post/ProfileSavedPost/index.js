@@ -3,8 +3,9 @@ import { useRouter } from 'next/router'
 
 import { Button } from '@/components/base'
 import { useIsMe } from '@/hooks/custom'
+import { cn } from '@/utils'
 
-import NoPostYet from '../NoPostYet'
+import s from './styles.module.css'
 
 // TODO:
 const CreateCollectionSection = () => {
@@ -19,22 +20,39 @@ const CreateCollectionSection = () => {
   )
 }
 
+const CollectionItem = ({ name }) => {
+  return (
+    <div
+      className={cn(
+        s['collection-item-bg'],
+        'h-[300px] w-[300px]',
+        'rounded-md border border-divide',
+        'cursor-pointer',
+        'flex justify-items-end'
+      )}
+    >
+      <span className="mt-auto pb-4 pl-4 text-xl font-medium text-white">{name}</span>
+    </div>
+  )
+}
+
 const ProfileSavedPost = () => {
   const router = useRouter()
   const isMe = useIsMe(router.query?.username)
 
-  const data = false
+  const data = []
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center">
+    <div className="flex flex-1 flex-col items-center justify-center gap-y-4">
       {isMe && <CreateCollectionSection />}
-      {!data?.length && (
-        <NoPostYet
-          icon={Save}
-          title="No Saved Post"
-          message={isMe && "When you save a post, it'll appear here."}
-        />
-      )}
+      <div className="w-fit">
+        <div className="flex flex-1 flex-wrap items-center gap-4">
+          <CollectionItem name="All Posts" />
+          <CollectionItem name="123" />
+          <CollectionItem name="123" />
+          <CollectionItem name="123" />
+        </div>
+      </div>
     </div>
   )
 }
