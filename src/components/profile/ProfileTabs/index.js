@@ -13,8 +13,8 @@ const ProfileTabs = () => {
   const [tab, setTab] = useQueryState('tab', queryTypes.string.withDefault(PROFILE_TAB_KEYS.POSTS))
 
   const router = useRouter()
-  const { data: user } = useGetProfile(router.query.id)
-  const isMe = useIsMe(user?.id)
+  const { data: user } = useGetProfile(router.query.username)
+  const isMe = useIsMe(user?.username)
 
   const tabList = [
     {
@@ -27,7 +27,7 @@ const ProfileTabs = () => {
       active: tab === PROFILE_TAB_KEYS.REELS,
       icon: Film,
       label: PROFILE_TAB_KEYS.REELS,
-      isShow: !isMe,
+      isShow: !isMe && user?.reels?.length > 0,
     },
     {
       active: tab === PROFILE_TAB_KEYS.SAVED,
@@ -56,7 +56,7 @@ const ProfileTabs = () => {
             'cursor-pointer text-xs font-bold tracking-wide text-comment',
             'border-t border-transparent',
             'flex-1 sm:flex-initial',
-            active && 'border-default'
+            active && 'border-default text-default'
           )}
         >
           <Icon className={cn('sm:h-4 sm:w-4', active && 'text-primary sm:text-default')} />

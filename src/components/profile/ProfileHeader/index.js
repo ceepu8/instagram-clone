@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
 
 import { useGetProfile } from '@/apis'
 import Assets from '@/constants/Assets'
+import { useIsMe } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
@@ -14,9 +14,8 @@ import UserProfileSettings from './UserProfileSettings'
 
 const ProfileInfo = ({ user }) => {
   const router = useRouter()
-  const { user: authUser } = useAuth()
-  const { id } = router.query
-  const isMe = useMemo(() => authUser?.username === id, [authUser, id])
+  const { username } = router.query
+  const isMe = useIsMe(username)
 
   return (
     <div className="flex flex-col sm:flex-grow-[2] sm:basis-[30px]">
@@ -32,7 +31,7 @@ const ProfileInfo = ({ user }) => {
 
 const ProfileHeader = () => {
   const router = useRouter()
-  const { data: user } = useGetProfile(router.query.id)
+  const { data: user } = useGetProfile(router.query?.username)
 
   return (
     <div>

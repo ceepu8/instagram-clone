@@ -103,7 +103,7 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
     },
     {
       key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: Routes.PROFILE.replace('[id]', user?.username),
+      route: Routes.PROFILE.replace('[username]', user?.username),
       label: t('navbar.profile'),
       icon: ProfileAvatar,
       component: NavItem,
