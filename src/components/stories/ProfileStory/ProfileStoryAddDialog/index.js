@@ -36,7 +36,7 @@ const StoryNameForm = ({ onSubmit }) => {
         />
       </div>
       <LineBreak className="w-full bg-divide" />
-      <Button type="submit" variant="ghost" disabled={!watchName}>
+      <Button type="submit" variant="ghost" fullWidth disabled={!watchName}>
         Add
       </Button>
     </form>
