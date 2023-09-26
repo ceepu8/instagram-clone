@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { useIsMe } from '@/hooks/custom'
 
-import NoPostYet from '../NoPostYet'
+import EmptyPost from '../EmptyPost'
 
 const ProfileTaggedPost = () => {
   const router = useRouter()
@@ -14,7 +14,7 @@ const ProfileTaggedPost = () => {
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
       {!data?.length && (
-        <NoPostYet
+        <EmptyPost
           icon={Tag}
           title={isMe ? 'Photos of you' : 'No Photos'}
           message={isMe && "When people tag you in photos, they'll appear here."}

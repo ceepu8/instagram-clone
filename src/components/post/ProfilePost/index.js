@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { useGetPostsByUser } from '@/apis'
 
-import NoPostYet from '../NoPostYet'
+import EmptyPost from '../EmptyPost'
 import ProfilePostDialog from './ProfilePostDialog'
 import ProfilePostItem from './ProfilePostItem'
 import ProfilePostListSkeleton from './ProfilePostListSkeleton'
@@ -26,7 +26,7 @@ const ProfilePost = () => {
           })}
       </div>
       {!isLoading && !posts?.length && (
-        <NoPostYet
+        <EmptyPost
           icon={PackageOpen}
           title="No Post Uploaded"
           message="If you upload a post, it'll appear here"

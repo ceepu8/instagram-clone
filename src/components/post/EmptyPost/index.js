@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Heading } from '@/components/base'
 
-const NoPostYet = ({ icon: Icon, title, message }) => {
+const EmptyPost = ({ icon: Icon, title, message }) => {
   return (
     <div className="flex flex-1 flex-col items-center justify-center md:gap-y-4">
       <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-default">
@@ -14,4 +14,4 @@ const NoPostYet = ({ icon: Icon, title, message }) => {
   )
 }
 
-export default NoPostYet
+export default EmptyPost

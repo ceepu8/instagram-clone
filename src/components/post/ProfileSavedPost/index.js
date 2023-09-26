@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty'
-import { Plus, XIcon } from 'lucide-react'
+import { Plus, Save, XIcon } from 'lucide-react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { FormProvider, useForm, useFormContext } from 'react-hook-form'
@@ -10,6 +10,7 @@ import { Input } from '@/components/form'
 import { useIsMe } from '@/hooks/custom'
 import { cn } from '@/utils'
 
+import EmptyPost from '../EmptyPost'
 import s from './styles.module.css'
 
 const CreateCollectionSection = () => {
@@ -152,6 +153,13 @@ const ProfileSavedPost = () => {
         <CollectionItem name="123" />
         <CollectionItem name="123" />
       </div>
+      {!data?.length && (
+        <EmptyPost
+          icon={Save}
+          title="No Saved Post"
+          message={isMe && "When you save a post, it'll appear here."}
+        />
+      )}
     </div>
   )
 }
