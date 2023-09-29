@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { useGetProfile } from '@/apis'
 import Assets from '@/constants/Assets'
 import { useIsMe } from '@/hooks/custom'
-import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
 import DesktopUserStatistics from './DesktopUserStatistics'

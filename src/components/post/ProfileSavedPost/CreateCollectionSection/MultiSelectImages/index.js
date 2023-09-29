@@ -4,42 +4,43 @@ import { Check } from 'lucide-react'
 import { Image } from '@/components/base'
 import { cn } from '@/utils'
 
-const MultiSelectImages = ({ images, selected, onSelected }) => {
-  return (
-    <ul className="grid grid-cols-3">
-      {images?.map((item) => {
-        const isSelected = !!selected.find((each) => {
-          return each === item.id
-        })
+const ImageOption = ({ item, onSelected, isSelected }) => {
+  const handlePress = () => {
+    onSelected(item.id)
+  }
 
-        return (
-          <li key={item.id}>
-            <Pressable onPress={() => onSelected(item.id)}>
-              <div className="group relative cursor-pointer">
-                <div className="aspect-square w-full">
-                  <Image alt="item-image" fill src={item.images[0]} />
-                </div>
-                <div
-                  className={cn(
-                    'absolute inset-0 transition-all group-hover:bg-[rgba(255,255,255,0.2)]',
-                    isSelected && 'bg-[rgba(255,255,255,0.2)]'
-                  )}
-                >
-                  <Check
-                    className={cn(
-                      'absolute right-1/2 top-1/2 h-8 w-8 -translate-y-1/2 translate-x-1/2 text-default',
-                      'transition-all',
-                      !isSelected && 'scale-0'
-                    )}
-                  />
-                </div>
-              </div>
-            </Pressable>
-          </li>
-        )
-      })}
-    </ul>
+  const overlayClassName = cn(
+    'absolute inset-0 transition-all group-hover:bg-[rgba(255,255,255,0.2)]',
+    'flex items-center justify-center',
+    isSelected && 'bg-[rgba(255,255,255,0.2)]'
   )
+
+  const checkClassName = cn('h-8 w-8 text-default transition-all', !isSelected && 'scale-0')
+
+  return (
+    <Pressable onPress={handlePress}>
+      <div className="group relative cursor-pointer">
+        <div className="aspect-square w-full">
+          <Image fill src={item.images[0]} alt="item-image" />
+        </div>
+        <div className={overlayClassName}>
+          <Check className={checkClassName} />
+        </div>
+      </div>
+    </Pressable>
+  )
+}
+
+const MultiSelectImages = ({ images, selected, onSelected }) => {
+  const renderItem = (item) => {
+    const isSelected = selected.includes(item.id)
+    return (
+      <li key={item.id}>
+        <ImageOption item={item} onSelected={onSelected} isSelected={isSelected} />
+      </li>
+    )
+  }
+  return <ul className="grid grid-cols-3">{images?.map(renderItem)}</ul>
 }
 
 export default MultiSelectImages

@@ -14,10 +14,8 @@ const CollectionItem = ({ name }) => {
       <div
         className={cn(
           s['collection-item-bg'],
-          'h-[300px] w-[300px]',
-          'rounded-md border border-divide',
-          'cursor-pointer',
-          'flex justify-items-end'
+          'flex h-[300px] w-[300px] cursor-pointer justify-items-end',
+          'rounded-md border border-divide'
         )}
       >
         <span className="mt-auto pb-4 pl-4 text-xl font-medium text-white">{name}</span>
@@ -38,7 +36,7 @@ const ProfileSavedPost = () => {
     <div className="flex flex-1 flex-col items-center gap-y-4">
       {isMe && <CreateCollectionSection setCollection={setCollection} />}
       <div className="flex max-w-[300px] flex-wrap gap-4 md:max-w-[616px] min-[1280px]:max-w-full">
-        <CollectionItem name="All Posts" />
+        <CollectionItem name="All Posts" id="all-posts" />
         {collection.map(renderCollectionItem)}
       </div>
     </div>

@@ -23,10 +23,6 @@ const ProfileBody = () => {
     },
   }
 
-  // const Component = !router.query?.tab
-  //   ? profileTabs.posts.component
-  //   : profileTabs[router.query?.tab].component
-
   const { component: Component } = profileTabs[router.query?.tab || PROFILE_TAB_KEYS.POSTS] || {}
 
   return (
