@@ -1,21 +1,26 @@
-import { Plus, Save } from 'lucide-react'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
-import { Button } from '@/components/base'
+import { Link } from '@/components/base'
 import { useIsMe } from '@/hooks/custom'
+import { cn } from '@/utils'
 
-import EmptyPost from '../EmptyPost'
+import CreateCollectionSection from './CreateCollectionSection'
+import s from './styles.module.css'
 
-// TODO:
-const CreateCollectionSection = () => {
+const CollectionItem = ({ name }) => {
   return (
-    <div className="flex w-full items-center justify-between">
-      <p className="text-xs text-comment">Only you can see what you&apos;ve saved</p>
-      <Button variant="link" className="shrink-0">
-        <Plus size={12} />
-        New Collection
-      </Button>
-    </div>
+    <Link href="/" disabled={name}>
+      <div
+        className={cn(
+          s['collection-item-bg'],
+          'flex h-[300px] w-[300px] cursor-pointer justify-items-end',
+          'rounded-md border border-divide'
+        )}
+      >
+        <span className="mt-auto pb-4 pl-4 text-xl font-medium text-white">{name}</span>
+      </div>
+    </Link>
   )
 }
 
@@ -23,18 +28,17 @@ const ProfileSavedPost = () => {
   const router = useRouter()
   const isMe = useIsMe(router.query?.username)
 
-  const data = false
+  const [collection, setCollection] = useState([])
+
+  const renderCollectionItem = (item) => <CollectionItem key={item.name} name={item.name} />
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center">
-      {isMe && <CreateCollectionSection />}
-      {!data?.length && (
-        <EmptyPost
-          icon={Save}
-          title="No Saved Post"
-          message={isMe && "When you save a post, it'll appear here."}
-        />
-      )}
+    <div className="flex flex-1 flex-col items-center gap-y-4">
+      {isMe && <CreateCollectionSection setCollection={setCollection} />}
+      <div className="flex max-w-[300px] flex-wrap gap-4 md:max-w-[616px] min-[1280px]:max-w-full">
+        <CollectionItem name="All Posts" id="all-posts" />
+        {collection.map(renderCollectionItem)}
+      </div>
     </div>
   )
 }

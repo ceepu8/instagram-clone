@@ -69,15 +69,11 @@ const AccountEditView = () => {
     },
   }
 
-  // const Component = !router.query.tab
-  //   ? faqList['edit-profile'].component
-  //   : faqList[router.query.tab].component
-
   const { component: Component } = faqList[router.query.tab || 'edit-profile'] || {}
 
   return (
-    <div className="flex h-full max-h-screen flex-col">
-      <div className="flex h-full w-full">
+    <div className="flex h-full flex-col">
+      <div className="flex h-full max-h-screen w-full">
         <div className="flex w-[235px] flex-col gap-y-4 overflow-y-auto py-4 pl-5 pr-2 md:w-[315px] md:pr-5">
           <AccountsCenterSection />
           <AccountFAQ faqList={faqList} />
