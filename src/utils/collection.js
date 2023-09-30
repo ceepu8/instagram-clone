@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export const useCreateCollection = (setCollection) => {
+import { collectionInitialValues } from '@/validates/collection.schema'
+
+export const useCreateCollection = () => {
   const [open, setOpen] = useState(false)
   const [step, setStep] = useState(1)
 
   const methods = useForm({
     mode: 'onChange',
-    defaultValues: {
-      name: '',
-      posts: [],
-    },
+    defaultValues: collectionInitialValues,
   })
 
   const handleOpenDialog = () => {
@@ -32,8 +31,7 @@ export const useCreateCollection = (setCollection) => {
   }
 
   const handleFinalSubmit = async () => {
-    const values = methods.getValues()
-    setCollection((prev) => [...prev, { ...values }])
+    // TODO: call api create new collection
     handleCloseDialog()
   }
 

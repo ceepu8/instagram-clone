@@ -3,23 +3,24 @@ import { useFormContext } from 'react-hook-form'
 
 import { Button, LineBreak } from '@/components/base'
 import { Input } from '@/components/form'
+import { COLLECTION_FORM } from '@/validates/collection.schema'
 
 const CollectionNameForm = ({ onSubmit }) => {
   const { register, watch } = useFormContext()
 
-  const watchName = watch('name', false)
+  const watchName = watch(COLLECTION_FORM.NAME, false)
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center justify-center">
       <div className="w-full px-4 py-4">
         <Input
-          name="name"
-          id="name"
+          name={COLLECTION_FORM.NAME}
+          id={COLLECTION_FORM.NAME}
           isHaveValue={!isEmpty(watchName)}
           wrapperClassName="bg-secondary-bg w-full rounded-md border-story-line border-[0.5px]"
           inputClassName="text-sm p-2 placeholder-story-line leading-[14px]"
           placeholder="Collection Name"
-          {...register('name', { required: true })}
+          {...register(COLLECTION_FORM.NAME, { required: true })}
         />
       </div>
       <LineBreak className="my-0 w-full bg-divide" />

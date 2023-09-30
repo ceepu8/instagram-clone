@@ -9,6 +9,8 @@ const ImageOption = ({ item, onSelected, isSelected }) => {
     onSelected(item.id)
   }
 
+  const imageUrl = item?.images?.[0] || ''
+
   const overlayClassName = cn(
     'absolute inset-0 transition-all group-hover:bg-[rgba(255,255,255,0.2)]',
     'flex items-center justify-center',
@@ -21,7 +23,7 @@ const ImageOption = ({ item, onSelected, isSelected }) => {
     <Pressable onPress={handlePress}>
       <div className="group relative cursor-pointer">
         <div className="aspect-square w-full">
-          <Image fill src={item.images[0]} alt="item-image" />
+          {imageUrl && <Image fill src={imageUrl} alt="item-image" />}
         </div>
         <div className={overlayClassName}>
           <Check className={checkClassName} />
@@ -33,14 +35,14 @@ const ImageOption = ({ item, onSelected, isSelected }) => {
 
 const MultiSelectImages = ({ images, selected, onSelected }) => {
   const renderItem = (item) => {
-    const isSelected = selected.includes(item.id)
+    const isSelected = selected.includes(item?.id)
     return (
       <li key={item.id}>
         <ImageOption item={item} onSelected={onSelected} isSelected={isSelected} />
       </li>
     )
   }
-  return <ul className="grid grid-cols-3">{images?.map(renderItem)}</ul>
+  return <ul className="grid grid-cols-3">{(images || []).map(renderItem)}</ul>
 }
 
 export default MultiSelectImages

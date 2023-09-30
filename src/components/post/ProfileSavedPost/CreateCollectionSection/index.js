@@ -3,7 +3,7 @@ import { FormProvider } from 'react-hook-form'
 
 import { Button } from '@/components/base'
 import Dialog, { DialogClose, DialogContent } from '@/components/base/Dialog'
-import { useCreateCollection } from '@/hooks/custom'
+import { useCreateCollection } from '@/utils/collection'
 
 import CollectionNameForm from './CollectionNameForm.'
 import SavedPostSelectForm from './SavedPostSelectForm'
@@ -18,7 +18,14 @@ const CreateCollectionSection = ({ setCollection }) => {
     handleOpenDialog,
     handleCloseDialog,
     handleStepBack,
-  } = useCreateCollection(setCollection)
+  } = useCreateCollection()
+
+  // used for static data only, update later
+  const handleSubmit = () => {
+    const values = methods.getValues()
+    setCollection((prev) => [...prev, { ...values }])
+    handleFinalSubmit()
+  }
 
   const VIEW_BY_STEP = {
     1: {
@@ -27,7 +34,7 @@ const CreateCollectionSection = ({ setCollection }) => {
     },
     2: {
       title: 'Add from saved',
-      renderComponent: () => <SavedPostSelectForm onSubmit={handleFinalSubmit} />,
+      renderComponent: () => <SavedPostSelectForm onSubmit={handleSubmit} />,
     },
   }
 
