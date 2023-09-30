@@ -26,8 +26,30 @@ const UploadImageButton = ({ className }) => {
   )
 }
 
+const ProfileImageDialogContent = ({ onClose }) => {
+  return (
+    <div className="flex flex-col divide-y divide-divide">
+      <Heading size="xl" bold={false} className="py-4 text-center">
+        Change Profile Photo
+      </Heading>
+      <div className="flex flex-col items-center justify-center divide-y divide-divide">
+        <UploadImageButton />
+        <Button variant="danger" fullWidth className="py-3">
+          Remove Current Photo
+        </Button>
+        <Button variant="ghost" fullWidth className="py-3" onClick={onClose}>
+          Cancel
+        </Button>
+      </div>
+    </div>
+  )
+}
+
 const ProfileImage = ({ image }) => {
   const [open, setOpen] = useState(false)
+
+  const onClose = () => setOpen(false)
+
   return (
     <div>
       <Pressable onPress={() => setOpen(true)}>
@@ -41,27 +63,12 @@ const ProfileImage = ({ image }) => {
         </div>
       </Pressable>
 
-      <Dialog isOpen={open} onClose={() => setOpen(false)}>
+      <Dialog isOpen={open} onClose={onClose}>
         <DialogContent>
           <DialogClose className="absolute right-2 top-2">
             <Button variant="ghost" icon={XIcon} />
           </DialogClose>
-          <div className="flex flex-col divide-y divide-divide">
-            <Heading size="xl" bold={false} className="py-4 text-center">
-              Change Profile Photo
-            </Heading>
-            <div className="flex flex-col items-center justify-center divide-y divide-divide">
-              <UploadImageButton />
-
-              <Button variant="danger" fullWidth className="py-3">
-                Remove Current Photo
-              </Button>
-
-              <Button variant="ghost" fullWidth className="py-3">
-                Cancel
-              </Button>
-            </div>
-          </div>
+          <ProfileImageDialogContent onClose={onClose} />
         </DialogContent>
       </Dialog>
     </div>

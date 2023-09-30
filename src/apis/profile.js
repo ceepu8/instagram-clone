@@ -21,3 +21,5 @@ export const useGetProfile = (username) => {
     }
   )
 }
+
+export const useUpdateProfileImage = (image) => {}
