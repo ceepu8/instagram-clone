@@ -17,7 +17,7 @@ const SavedPostSelectForm = ({ onSubmit }) => {
 
   const onSelected = (newSelected) => {
     setSelected((prev) => {
-      if (prev.includes(newSelected)) {
+      if (prev?.includes(newSelected)) {
         return (prev || []).filter((each) => each !== newSelected)
       }
       return Array.from(new Set([...prev, newSelected]))

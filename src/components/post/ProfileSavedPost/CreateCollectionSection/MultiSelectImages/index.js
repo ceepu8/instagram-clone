@@ -6,7 +6,9 @@ import { cn } from '@/utils'
 
 const ImageOption = ({ item, onSelected, isSelected }) => {
   const handlePress = () => {
-    onSelected(item.id)
+    if (item?.id) {
+      onSelected(item.id)
+    }
   }
 
   const imageUrl = item?.images?.[0] || ''
@@ -37,7 +39,7 @@ const MultiSelectImages = ({ images, selected, onSelected }) => {
   const renderItem = (item) => {
     const isSelected = selected.includes(item?.id)
     return (
-      <li key={item.id}>
+      <li key={item?.id}>
         <ImageOption item={item} onSelected={onSelected} isSelected={isSelected} />
       </li>
     )
