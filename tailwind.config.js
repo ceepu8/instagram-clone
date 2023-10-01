@@ -66,6 +66,7 @@ module.exports = {
 
       'main-gradient': 'var(--main-gradient)',
       gradient: 'var(--gradient)',
+      'profile-collection-gradient': 'var(--profile-collection-gradient)',
     },
     backgroundOpacity: ['active'],
     boxShadow: {
