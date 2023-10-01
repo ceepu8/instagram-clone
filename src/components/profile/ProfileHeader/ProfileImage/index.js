@@ -1,27 +1,41 @@
 import { Pressable } from '@react-aria/interactions'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Button, Heading } from '@/components/base'
 import Dialog, { DialogClose, DialogContent } from '@/components/base/Dialog'
 import { XIcon } from '@/components/icons'
+import { useToast } from '@/hooks/custom'
 import { cn } from '@/utils'
+import { validateImage } from '@/utils/images'
 
-const UploadImageButton = ({ className }) => {
+const UploadImage = ({ children }) => {
+  const fileInputRef = useRef(null)
+  const { error } = useToast()
+
+  const handleImageChange = (event) => {
+    const selectedFile = event.target.files[0]
+    const isValid = validateImage(selectedFile)
+
+    if (!isValid) {
+      error('Image Size exceeds 10MB or invalid Image File!')
+    }
+
+    // TODO: upload image to backend
+  }
   return (
     <div className="w-full text-center">
-      <label
-        htmlFor="file"
-        className={cn(
-          'block py-3',
-          'text-sm font-bold text-btn-link',
-          'cursor-pointer hover:text-btn-link-hover focus:outline-none',
-          className
-        )}
-      >
-        Upload Photo
-      </label>
-      <input id="file" type="file" className="hidden" onChange={(e) => {}} />
+      <div role="presentation" onClick={() => fileInputRef.current.click()}>
+        {children}
+      </div>
+      <input
+        id="file"
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg, image/png, image/jpg"
+        className="hidden"
+        onChange={handleImageChange}
+      />
     </div>
   )
 }
@@ -33,7 +47,17 @@ const ProfileImageDialogContent = ({ onClose }) => {
         Change Profile Photo
       </Heading>
       <div className="flex flex-col items-center justify-center divide-y divide-divide">
-        <UploadImageButton />
+        <UploadImage>
+          <span
+            className={cn(
+              'block py-3',
+              'text-sm font-bold text-btn-link',
+              'cursor-pointer hover:text-btn-link-hover focus:outline-none'
+            )}
+          >
+            Upload Photo
+          </span>
+        </UploadImage>
         <Button variant="danger" fullWidth className="py-3">
           Remove Current Photo
         </Button>
