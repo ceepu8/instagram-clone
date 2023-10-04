@@ -20,7 +20,7 @@ async function handler(req, res) {
         return res.status(200).json({ updatedUser })
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.log(error, 'UPDATE_PROFILE_IMAGE_ERROR')
+        console.log(error, 'GET_PROFILE_IMAGE_ERROR')
         return res.status(500).json({ message: 'Internal Error' })
       }
 
@@ -31,6 +31,23 @@ async function handler(req, res) {
         const updatedUser = await prisma.user.update({
           where: { id: userId },
           data: { image: '' },
+        })
+
+        return res.status(200).json({ updatedUser })
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error, 'DELETE_PROFILE_IMAGE_ERROR')
+        return res.status(500).json({ message: 'Internal Error' })
+      }
+
+    case 'PATCH':
+      try {
+        const { userId } = req.user
+        const { image } = req.body
+
+        const updatedUser = await prisma.user.update({
+          where: { id: userId },
+          data: { image },
         })
 
         return res.status(200).json({ updatedUser })

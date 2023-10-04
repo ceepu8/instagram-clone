@@ -1,53 +1,22 @@
 import { Pressable } from '@react-aria/interactions'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
 
 import { Button, Heading } from '@/components/base'
 import Dialog, { DialogClose, DialogContent } from '@/components/base/Dialog'
-import { XIcon } from '@/components/icons'
-import { useToast } from '@/hooks/custom'
+import { XIcon, AnimatedBarSpinnerIcon } from '@/components/icons'
 import { cn } from '@/utils'
-import { validateImage } from '@/utils/images'
+import { useProfileImageDialog } from '@/utils/images'
 
-const UploadImage = ({ children }) => {
-  const fileInputRef = useRef(null)
-  const { error } = useToast()
+import UploadImage from './UploadImage'
 
-  const handleImageChange = (event) => {
-    const selectedFile = event.target.files[0]
-    const isValid = validateImage(selectedFile)
-
-    if (!isValid) {
-      error('Image Size exceeds 10MB or invalid Image File!')
-    }
-
-    // TODO: upload image to backend
-  }
-  return (
-    <div className="w-full text-center">
-      <div role="presentation" onClick={() => fileInputRef.current.click()}>
-        {children}
-      </div>
-      <input
-        id="file"
-        ref={fileInputRef}
-        type="file"
-        accept="image/jpeg, image/png, image/jpg"
-        className="hidden"
-        onChange={handleImageChange}
-      />
-    </div>
-  )
-}
-
-const ProfileImageDialogContent = ({ onClose }) => {
+const ProfileImageDialogContent = ({ onCloseDialog, handleImageChange, handleRemoveImage }) => {
   return (
     <div className="flex flex-col divide-y divide-divide">
       <Heading size="xl" bold={false} className="py-4 text-center">
         Change Profile Photo
       </Heading>
       <div className="flex flex-col items-center justify-center divide-y divide-divide">
-        <UploadImage>
+        <UploadImage handleImageChange={handleImageChange}>
           <span
             className={cn(
               'block py-3',
@@ -58,10 +27,10 @@ const ProfileImageDialogContent = ({ onClose }) => {
             Upload Photo
           </span>
         </UploadImage>
-        <Button variant="danger" fullWidth className="py-3">
+        <Button variant="danger" fullWidth className="py-3" onClick={handleRemoveImage}>
           Remove Current Photo
         </Button>
-        <Button variant="ghost" fullWidth className="py-3" onClick={onClose}>
+        <Button variant="ghost" fullWidth className="py-3" onClick={onCloseDialog}>
           Cancel
         </Button>
       </div>
@@ -70,29 +39,37 @@ const ProfileImageDialogContent = ({ onClose }) => {
 }
 
 const ProfileImage = ({ image }) => {
-  const [open, setOpen] = useState(false)
-
-  const onClose = () => setOpen(false)
+  const { open, setOpen, onCloseDialog, loading, handleImageChange, handleRemoveImage } =
+    useProfileImageDialog()
 
   return (
     <div>
       <Pressable onPress={() => setOpen(true)}>
-        <div className="relative mx-auto h-[70px] w-[70px] cursor-pointer sm:h-[150px] sm:w-[150px]">
+        <div className="relative mx-auto flex h-[70px] w-[70px] cursor-pointer items-center justify-center rounded-full bg-lotion sm:h-[150px] sm:w-[150px]">
           <Image
-            className="rounded-full border border-chinese-silver"
+            className="rounded-full border border-chinese-silver object-cover"
             fill
             src={image}
             alt="Profile Image"
           />
+          {loading && (
+            <div className="absolute flex h-full w-full items-center justify-center bg-[rgba(255,255,255,0.5)]">
+              <AnimatedBarSpinnerIcon />
+            </div>
+          )}
         </div>
       </Pressable>
 
-      <Dialog isOpen={open} onClose={onClose}>
+      <Dialog isOpen={open} onClose={onCloseDialog}>
         <DialogContent>
           <DialogClose className="absolute right-2 top-2">
             <Button variant="ghost" icon={XIcon} />
           </DialogClose>
-          <ProfileImageDialogContent onClose={onClose} />
+          <ProfileImageDialogContent
+            onClose={onCloseDialog}
+            handleImageChange={handleImageChange}
+            handleRemoveImage={handleRemoveImage}
+          />
         </DialogContent>
       </Dialog>
     </div>
