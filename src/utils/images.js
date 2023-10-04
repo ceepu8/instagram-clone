@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { useRemoveProfileImage, useUpdateProfileImage } from '@/apis'
@@ -16,14 +17,12 @@ export const validateImage = (file, acceptedFileTypes = DEFAULT_ACCEPTED_FILE_TY
       isValid: false,
     }
   }
-
   if (file.size > MAX_FILE_SIZE) {
     return {
       message: 'File size must be below 10MB',
       isValid: false,
     }
   }
-
   const acceptedTypesArray = Array.isArray(acceptedFileTypes)
     ? acceptedFileTypes
     : acceptedFileTypes.split(',').map((type) => type.trim())
@@ -34,7 +33,6 @@ export const validateImage = (file, acceptedFileTypes = DEFAULT_ACCEPTED_FILE_TY
       isValid: false,
     }
   }
-
   return { message: 'Success', isValid: true }
 }
 
@@ -42,14 +40,19 @@ export const useProfileImageDialog = () => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const router = useRouter()
+  const username = router?.query?.username || ''
+
   const onCloseDialog = () => setOpen(false)
 
   const { error, success } = useToast()
   const { doUpdateProfileImage } = useUpdateProfileImage(
+    username,
     () => success('Upload image success'),
     () => error('Oops! Something went wrong. Please try again later!')
   )
   const { doRemoveProfileImage } = useRemoveProfileImage(
+    username,
     () => success('Remove image success'),
     () => error('Oops! Something went wrong. Please try again later!')
   )
@@ -71,7 +74,6 @@ export const useProfileImageDialog = () => {
       error(message)
       return
     }
-
     setLoading(true)
     onCloseDialog()
     const response = await uploadToCloudinary(selectedFile)
