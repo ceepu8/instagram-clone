@@ -46,6 +46,7 @@ export const useProfileImageDialog = () => {
   const onCloseDialog = () => setOpen(false)
 
   const { error, success } = useToast()
+
   const { doUpdateProfileImage } = useUpdateProfileImage(
     username,
     () => success('Upload image success'),
@@ -68,25 +69,38 @@ export const useProfileImageDialog = () => {
   }
 
   const handleImageChange = async (event) => {
+    setLoading(true)
     const selectedFile = event.target.files[0]
     const { isValid, message } = validateImage(selectedFile, ['image/jpeg'])
     if (!isValid) {
       error(message)
+      setLoading(false)
       return
     }
-    setLoading(true)
     onCloseDialog()
-    const response = await uploadToCloudinary(selectedFile)
-    const imageUrl = response.url
-    await doUpdateProfileImage(imageUrl)
-    setLoading(false)
+    try {
+      const response = await uploadToCloudinary(selectedFile)
+      const imageUrl = response.url
+      await doUpdateProfileImage(imageUrl)
+    } catch (err) {
+      error(err.message)
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const handleRemoveImage = async () => {
-    setLoading(true)
-    onCloseDialog()
-    await doRemoveProfileImage()
-    setLoading(false)
+    try {
+      setLoading(true)
+      onCloseDialog()
+      await doRemoveProfileImage()
+    } catch (err) {
+      error(err.message)
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return { onCloseDialog, open, setOpen, loading, setLoading, handleImageChange, handleRemoveImage }

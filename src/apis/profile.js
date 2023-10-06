@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { Axios } from '@/configs'
 import {
@@ -29,6 +29,8 @@ export const useGetProfile = (username) => {
 }
 
 export const useUpdateProfileImage = (username, onSuccess, onError) => {
+  const queryClient = useQueryClient()
+
   const { mutate, isLoading, isSuccess } = useMutation([USER_UPDATE_PROFILE_IMAGE_KEY, username], {
     mutationFn: async (data) => {
       const response = await Axios.patch(API.PROFILE.IMAGE, { image: data })
@@ -36,6 +38,7 @@ export const useUpdateProfileImage = (username, onSuccess, onError) => {
     },
     onSuccess: () => {
       onSuccess?.()
+      queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, username])
     },
     onError: () => {
       onError?.()
@@ -48,6 +51,8 @@ export const useUpdateProfileImage = (username, onSuccess, onError) => {
 }
 
 export const useRemoveProfileImage = (username, onSuccess, onError) => {
+  const queryClient = useQueryClient()
+
   const { mutate, isLoading, isSuccess } = useMutation([USER_REMOVE_PROFILE_IMAGE_KEY, username], {
     mutationFn: async () => {
       const response = await Axios.delete(API.PROFILE.IMAGE)
@@ -55,6 +60,7 @@ export const useRemoveProfileImage = (username, onSuccess, onError) => {
     },
     onSuccess: () => {
       onSuccess?.()
+      queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, username])
     },
     onError: () => {
       onError?.()
