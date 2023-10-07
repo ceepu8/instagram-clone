@@ -15,7 +15,7 @@ const ProfileImageDialogContent = ({ onCloseDialog, handleImageChange, handleRem
       <Heading size="xl" bold={false} className="py-4 text-center">
         Change Profile Photo
       </Heading>
-      <div className="flex flex-col items-center justify-center divide-y divide-divide">
+      <main className="flex flex-col items-center justify-center divide-y divide-divide">
         <UploadImage handleImageChange={handleImageChange}>
           <span
             className={cn(
@@ -33,7 +33,7 @@ const ProfileImageDialogContent = ({ onCloseDialog, handleImageChange, handleRem
         <Button variant="ghost" fullWidth className="py-3" onClick={onCloseDialog}>
           Cancel
         </Button>
-      </div>
+      </main>
     </div>
   )
 }

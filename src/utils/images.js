@@ -3,11 +3,11 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { useRemoveProfileImage, useUpdateProfileImage } from '@/apis'
-import { CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET } from '@/constants'
+import { CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, DEFAULT_ACCEPTED_FILE_TYPES } from '@/constants'
 import { useToast } from '@/hooks/custom'
 
 // utils/imageUtils.js
-const DEFAULT_ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/jpg']
+
 const MAX_FILE_SIZE = 10 * 1024 * 1024
 
 export const validateImage = (file, acceptedFileTypes = DEFAULT_ACCEPTED_FILE_TYPES) => {
@@ -45,18 +45,10 @@ export const useProfileImageDialog = () => {
 
   const onCloseDialog = () => setOpen(false)
 
-  const { error, success } = useToast()
+  const { error } = useToast()
 
-  const { doUpdateProfileImage } = useUpdateProfileImage(
-    username,
-    () => success('Upload image success'),
-    () => error('Oops! Something went wrong. Please try again later!')
-  )
-  const { doRemoveProfileImage } = useRemoveProfileImage(
-    username,
-    () => success('Remove image success'),
-    () => error('Oops! Something went wrong. Please try again later!')
-  )
+  const { doUpdateProfileImage } = useUpdateProfileImage(username)
+  const { doRemoveProfileImage } = useRemoveProfileImage(username)
 
   const uploadToCloudinary = async (imageUrl) => {
     const formData = new FormData()

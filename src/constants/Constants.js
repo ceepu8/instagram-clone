@@ -14,3 +14,5 @@ export const SCREENS = {
   LARGE: 1200, // Large
   EXTRA_LARGE: 1440, // Extra Large
 }
+
+export const DEFAULT_ACCEPTED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/jpg']

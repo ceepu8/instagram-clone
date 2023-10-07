@@ -1,10 +1,18 @@
 import { useRef } from 'react'
 
-const UploadImage = ({ children, handleImageChange }) => {
+import { DEFAULT_ACCEPTED_FILE_TYPES } from '@/constants'
+import { cn } from '@/utils'
+
+const UploadImage = ({
+  children,
+  handleImageChange,
+  accept = DEFAULT_ACCEPTED_FILE_TYPES,
+  className,
+}) => {
   const fileInputRef = useRef(null)
 
   return (
-    <div className="w-full text-center">
+    <div className={cn('h-full w-full text-center', className)}>
       <div role="presentation" onClick={() => fileInputRef.current.click()}>
         {children}
       </div>
@@ -12,7 +20,7 @@ const UploadImage = ({ children, handleImageChange }) => {
         id="file"
         ref={fileInputRef}
         type="file"
-        accept="image/jpeg, image/png, image/jpg"
+        accept={accept}
         className="hidden"
         onChange={handleImageChange}
       />

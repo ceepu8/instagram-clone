@@ -32,6 +32,7 @@ export const API = {
     DETAIL: '/api/follow/:id',
   },
   PROFILE: {
+    ROOT: '/api/profile',
     IMAGE: '/api/profile/profile-image',
   },
 }
