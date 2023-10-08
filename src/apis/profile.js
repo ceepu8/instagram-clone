@@ -20,7 +20,7 @@ export const useGetProfile = (username) => {
 
 export const useUpdateProfileImage = (username) => {
   const queryClient = useQueryClient()
-  const { error, success } = useToast()
+  const toast = useToast()
 
   const { mutate, isLoading, isSuccess } = useMutation(
     async (data) => {
@@ -29,11 +29,11 @@ export const useUpdateProfileImage = (username) => {
     },
     {
       onSuccess: () => {
-        success('Upload image success')
+        toast.success('Upload image success!')
         queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, username])
       },
       onError: () => {
-        error('Oops! Something went wrong. Please try again later!')
+        toast.error('Oops! Something went wrong. Please try again later!')
       },
       enabled: !!username,
     }
@@ -46,7 +46,7 @@ export const useUpdateProfileImage = (username) => {
 
 export const useRemoveProfileImage = (username) => {
   const queryClient = useQueryClient()
-  const { error, success } = useToast()
+  const toast = useToast()
 
   const { mutate, isLoading, isSuccess } = useMutation(
     async () => {
@@ -55,11 +55,11 @@ export const useRemoveProfileImage = (username) => {
     },
     {
       onSuccess: () => {
-        success('Remove image success')
+        toast.success('Remove image success!')
         queryClient.invalidateQueries([USER_PROFILE_DETAIL_KEY, username])
       },
       onError: () => {
-        error('Oops! Something went wrong. Please try again later!')
+        toast.error('Oops! Something went wrong. Please try again later!')
       },
       enabled: !!username,
     }

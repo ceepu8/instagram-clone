@@ -13,7 +13,11 @@ const UploadImage = ({
 
   return (
     <div className={cn('h-full w-full text-center', className)}>
-      <div role="presentation" onClick={() => fileInputRef.current.click()}>
+      <div
+        onClick={() => fileInputRef.current.click()}
+        className="h-full w-full"
+        role="presentation"
+      >
         {children}
       </div>
       <input

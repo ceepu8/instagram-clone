@@ -9,6 +9,12 @@ import { useProfileImageDialog } from '@/utils/images'
 
 import UploadImage from './UploadImage'
 
+const ImageLoading = () => (
+  <div className="absolute flex h-full w-full items-center justify-center bg-[rgba(255,255,255,0.5)]">
+    <AnimatedBarSpinnerIcon />
+  </div>
+)
+
 const ProfileImageDialogContent = ({ onCloseDialog, handleImageChange, handleRemoveImage }) => {
   return (
     <div className="flex flex-col divide-y divide-divide">
@@ -46,17 +52,15 @@ const ProfileImage = ({ image }) => {
     <div>
       <Pressable onPress={() => setOpen(true)}>
         <div className="relative mx-auto flex h-[70px] w-[70px] cursor-pointer items-center justify-center rounded-full bg-lotion sm:h-[150px] sm:w-[150px]">
-          <Image
-            className="rounded-full border border-chinese-silver object-cover"
-            fill
-            src={image}
-            alt="Profile Image"
-          />
-          {loading && (
-            <div className="absolute flex h-full w-full items-center justify-center bg-[rgba(255,255,255,0.5)]">
-              <AnimatedBarSpinnerIcon />
-            </div>
+          {image && (
+            <Image
+              className="rounded-full border border-chinese-silver object-cover"
+              alt="Profile Image"
+              src={image}
+              fill
+            />
           )}
+          {loading && <ImageLoading />}
         </div>
       </Pressable>
 

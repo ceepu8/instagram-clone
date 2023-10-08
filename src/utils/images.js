@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -73,7 +74,10 @@ export const useProfileImageDialog = () => {
     try {
       const response = await uploadToCloudinary(selectedFile)
       const imageUrl = response.url
-      await doUpdateProfileImage(imageUrl)
+
+      if (imageUrl) {
+        await doUpdateProfileImage(imageUrl)
+      }
     } catch (err) {
       error(err.message)
       console.log(err)

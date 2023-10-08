@@ -33,7 +33,7 @@ const ProfileHeader = () => {
   const { data: user } = useGetProfile(router.query?.username)
 
   return (
-    <div>
+    <section>
       <div className="px-5 py-8">
         <div className="flex">
           <div className="mr-8 shrink-0 sm:mr-0 sm:flex-grow-[1]">
@@ -46,7 +46,7 @@ const ProfileHeader = () => {
         <p className="mt-6 text-sm font-semibold sm:hidden">{user?.name}</p>
       </div>
       <MobileUserStatistics user={user} />
-    </div>
+    </section>
   )
 }
 
