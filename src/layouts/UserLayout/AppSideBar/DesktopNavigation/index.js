@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 
+import { Link } from '@/components/base'
 import {
   CompassIcon,
   HomeIcon,
@@ -20,6 +21,23 @@ import { checkRouteActive } from '@/utils'
 import MenuPopover from './MenuPopover'
 import NavItem from './NavItem'
 import TriggerItem from './TriggerItem'
+import ItemLabel from './components/ItemLabel'
+
+const ProfileNavItem = ({ active, panelTriggered }) => {
+  const { user } = useAuth()
+  const { t } = useTranslation()
+
+  return (
+    <Link href={Routes.PROFILE.replace('[username]', user?.username)} className="block">
+      <li className="flex cursor-pointer items-center gap-x-4 rounded-lg border border-solid border-transparent p-2 font-medium text-default transition-all duration-150 hover:bg-nav-hover">
+        <div className="shrink-0 border-[2px] border-transparent">
+          <ProfileAvatar size={24} image={user?.image} active={active} />
+        </div>
+        <ItemLabel isVisible={!panelTriggered} active={active} label={t('navbar.profile')} />
+      </li>
+    </Link>
+  )
+}
 
 const DesktopNavigation = ({ panel, togglePanel }) => {
   const { user } = useAuth()
@@ -29,20 +47,20 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
 
   const { t } = useTranslation()
 
-  const getActive = (item) => {
+  const getActive = (key, route) => {
     if (panel) {
-      return item.key === panel
+      return key === panel
     }
 
-    if (item.key === SIDEBAR_MENU_KEYS.CREATE) {
+    if (key === SIDEBAR_MENU_KEYS.CREATE) {
       return isUploadPostDialogOpen
     }
 
-    if (item.key !== SIDEBAR_MENU_KEYS.CREATE && isUploadPostDialogOpen) {
+    if (key !== SIDEBAR_MENU_KEYS.CREATE && isUploadPostDialogOpen) {
       return false
     }
 
-    return checkRouteActive(router, item.route)
+    return checkRouteActive(router, route)
   }
 
   const NAV_ITEMS = [
@@ -101,18 +119,11 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
       label: t('navbar.create'),
       component: TriggerItem,
     },
-    {
-      key: SIDEBAR_MENU_KEYS.PROFILE,
-      route: Routes.PROFILE.replace('[username]', user?.username),
-      label: t('navbar.profile'),
-      icon: ProfileAvatar,
-      component: NavItem,
-    },
   ]
 
   const renderItem = (item) => {
     const { component: Component } = item
-    const active = getActive(item)
+    const active = getActive(item.key, item.route)
 
     return (
       <Component
@@ -126,10 +137,21 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-between">
-      <div className="space-y-2">{NAV_ITEMS.map(renderItem)}</div>
+    <nav className="flex flex-1 flex-col justify-between">
+      <ul className="space-y-2">
+        {NAV_ITEMS.map(renderItem)}
+
+        <ProfileNavItem
+          active={getActive(
+            SIDEBAR_MENU_KEYS.PROFILE,
+            Routes.PROFILE.replace('[username]', user?.username)
+          )}
+          panelTriggered={panel}
+        />
+      </ul>
+
       <MenuPopover panel={panel} />
-    </div>
+    </nav>
   )
 }
 
