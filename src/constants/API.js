@@ -31,4 +31,8 @@ export const API = {
     FOLLOWERS: '/api/follow/followers/:id',
     DETAIL: '/api/follow/:id',
   },
+  PROFILE: {
+    ROOT: '/api/profile',
+    IMAGE: '/api/profile/profile-image',
+  },
 }

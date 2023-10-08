@@ -1,6 +1,8 @@
+import { useAuth } from '@/hooks/query/auth'
 import { cn } from '@/utils'
 
 const ItemSymbol = ({ icon: Icon, active, iconSize = 24, hasActiveBorder = false }) => {
+  const { user } = useAuth()
   if (!Icon) {
     return null
   }
@@ -12,7 +14,7 @@ const ItemSymbol = ({ icon: Icon, active, iconSize = 24, hasActiveBorder = false
         hasActiveBorder && active && 'rounded-full border-black'
       )}
     >
-      <Icon active={active} size={iconSize} />
+      <Icon active={active} size={iconSize} image={user?.image} />
     </div>
   )
 }

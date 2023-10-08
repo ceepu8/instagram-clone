@@ -112,11 +112,9 @@ const MoreSettingsDialog = () => {
 
   const renderItem = (item) => {
     return (
-      <div key={item.key} className="flex w-full items-center justify-center py-3">
-        <Button variant="ghost" bold={false} {...item}>
-          {item.label}
-        </Button>
-      </div>
+      <Button key={item.key} fullWidth variant="ghost" bold={false} className="py-3" {...item}>
+        {item.label}
+      </Button>
     )
   }
 

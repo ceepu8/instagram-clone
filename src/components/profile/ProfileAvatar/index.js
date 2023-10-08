@@ -9,7 +9,7 @@ const ProfileAvatar = forwardRef(({ image, size = 20, className, ...props }, ref
       <Image
         width={size}
         height={size}
-        className="rounded-full border border-chinese-silver"
+        className="rounded-full border border-chinese-silver object-cover"
         src={image || Assets.COMMON.PLACEHOLDER}
         alt="Profile Image"
       />

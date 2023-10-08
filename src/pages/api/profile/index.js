@@ -1,6 +1,6 @@
 import prisma from '@/libs/prismadb'
 
-import authMiddleware from './middlewares/authMiddleware'
+import authMiddleware from '../middlewares/authMiddleware'
 
 async function handler(req, res) {
   const requestMethod = req.method
