@@ -73,6 +73,7 @@ button,
     --desktop-home-story: 640px;
 
     --footer-height: 84px;
+    --mobile-nav-bar-height: 48px;
 
     --profile-highlight-width: 805px;
 
@@ -161,6 +162,7 @@ button,
     --desktop-home-story: 640px;
 
     --footer-height: 84px;
+    --mobile-nav-bar-height: 48px;
 
     --main-gradient: linear-gradient(45deg, #ffd600, #ff7a00, #ff0069, #d300c5, #7638fa);
     --gradient: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
