@@ -16,21 +16,21 @@ const NavItem = ({
   panelTriggered = false,
 }) => {
   const rootClassnames = cn(
-    'flex items-center gap-x-4 p-2',
-    'text-default',
     'rounded-lg font-medium hover:bg-nav-hover',
-    'cursor-pointer transition-all duration-150',
+    'cursor-pointer transition-[background] duration-150',
     'border border-solid border-transparent',
     className
   )
 
   return (
-    <Link href={route} disabled={!route} className="block">
-      <li className={rootClassnames}>
-        <ItemSymbol active={active} icon={icon} iconSize={iconSize} />
-        <ItemLabel isVisible={!panelTriggered} active={active} label={label} />
-      </li>
-    </Link>
+    <li className={rootClassnames}>
+      <Link href={route} disabled={!route}>
+        <div className="flex items-center gap-x-4 p-2 text-default">
+          <ItemSymbol active={active} icon={icon} iconSize={iconSize} />
+          <ItemLabel isVisible={!panelTriggered} active={active} label={label} />
+        </div>
+      </Link>
+    </li>
   )
 }
 
