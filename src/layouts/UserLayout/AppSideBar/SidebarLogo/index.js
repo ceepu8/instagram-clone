@@ -10,12 +10,13 @@ const SideBarLogo = ({ panel }) => {
   const windowSize = useWindowSize()
   const isMediumScreen = useMemo(() => windowSize.width <= SCREENS.LARGE, [windowSize])
 
-  const iconStyle = 'shrink-0 transition-all duration-300 absolute left-3 -translate-y-1/2 top-1/2'
+  const iconStyle = 'shrink-0 absolute left-3 -translate-y-1/2 top-1/2'
 
   const renderLogo = (
     <InstagramIcon
       width={24}
       height={24}
+      style={{ transition: 'visibility 300ms, transform 300ms' }}
       className={cn(iconStyle, panel || isMediumScreen ? 'visible scale-100' : 'invisible scale-0')}
     />
   )
@@ -23,6 +24,7 @@ const SideBarLogo = ({ panel }) => {
     <InstagramLetterIcon
       width={103}
       height={60}
+      style={{ transition: 'visibility 300ms, opacity 300ms' }}
       className={cn(
         iconStyle,
         !panel && !isMediumScreen ? 'visible opacity-100' : 'invisible opacity-0'

@@ -25,7 +25,7 @@ const TriggerItem = ({
     'flex items-center gap-x-4 p-2',
     'text-default',
     'rounded-lg font-medium hover:bg-nav-hover',
-    'cursor-pointer transition-all duration-150',
+    'cursor-pointer transition-[background] duration-150',
     'border border-solid border-transparent',
     active && !isDialogTrigger && 'border-gainsboro',
     className
@@ -33,10 +33,10 @@ const TriggerItem = ({
 
   return (
     <Pressable onPress={() => onPress?.()}>
-      <div className={rootClassnames}>
+      <li className={rootClassnames}>
         <ItemSymbol active={active} icon={icon} iconSize={iconSize} />
         <ItemLabel isVisible={!panelTriggered} active={active} label={label} />
-      </div>
+      </li>
     </Pressable>
   )
 }

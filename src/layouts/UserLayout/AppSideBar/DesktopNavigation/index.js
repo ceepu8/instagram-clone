@@ -29,7 +29,7 @@ const ProfileNavItem = ({ active, panelTriggered }) => {
 
   return (
     <Link href={Routes.PROFILE.replace('[username]', user?.username)} className="block">
-      <li className="flex cursor-pointer items-center gap-x-4 rounded-lg border border-solid border-transparent p-2 font-medium text-default transition-all duration-150 hover:bg-nav-hover">
+      <li className="flex cursor-pointer items-center gap-x-4 rounded-lg border border-solid border-transparent p-2 font-medium text-default transition-[background] duration-150 hover:bg-nav-hover">
         <div className="shrink-0 border-[2px] border-transparent">
           <ProfileAvatar size={24} image={user?.image} active={active} />
         </div>
