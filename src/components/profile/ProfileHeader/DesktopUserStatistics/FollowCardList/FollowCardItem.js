@@ -1,10 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query'
-import Image from 'next/image'
 
 import { useFollow, useGetFollows, useUnfollow } from '@/apis/follow'
 import { Button } from '@/components/base'
+import ProfileAvatar from '@/components/profile/ProfileAvatar'
 import { GET_FOLLOWS_KEY } from '@/constants'
-import Assets from '@/constants/Assets'
 
 const FollowCardItem = ({ user }) => {
   const queryClient = useQueryClient()
@@ -40,9 +39,7 @@ const FollowCardItem = ({ user }) => {
 
   return (
     <div className="flex items-center space-x-2">
-      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border-[0.5px]">
-        <Image fill src={image || Assets.COMMON.PLACEHOLDER} alt="profile image" />
-      </div>
+      <ProfileAvatar size={40} image={image} />
       <div className="flex flex-1 flex-col">
         <h2 className="text-sm font-bold">{username || 'username'}</h2>
         <p className="text-sm text-comment">{username || 'description'}</p>

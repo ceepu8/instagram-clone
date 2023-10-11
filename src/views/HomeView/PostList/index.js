@@ -4,9 +4,6 @@ const PostList = () => {
   return (
     <div className="divide-y-px divide-divide text-center">
       <HomePost />
-      <HomePost />
-      <HomePost />
-      <HomePost />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 .root {
   @apply inline-flex cursor-pointer select-none appearance-none items-center
-      justify-center gap-x-2 transition-colors duration-150 ease-linear focus:outline-none;
+      justify-center gap-x-2 ease-linear focus:outline-none;
 }
 
 .primary {

@@ -11,20 +11,7 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
   }
 
   return (
-    <div className={cn('relative flex w-full items-center gap-x-2')}>
-      <Popover
-        contentClassName="p-0"
-        trigger={
-          <Button
-            variant="ghost"
-            size={variant === 'main' ? 'medium' : 'extra-small'}
-            className={cn(variant === 'secondary' && 'order-3')}
-            icon={SmileIcon}
-          />
-        }
-      >
-        <EmojiPicker onEmojiClick={handleInputEmoji} />
-      </Popover>
+    <form className={cn('relative flex w-full items-center gap-x-2')}>
       <Input
         clean
         value={value}
@@ -33,7 +20,6 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
         inputClassName="placeholder-comment font-medium text-sm"
         wrapperClassName="flex-1"
       />
-
       <Button
         variant="link"
         disabled={!value}
@@ -44,7 +30,18 @@ const CommentInput = ({ variant = 'main', onChange, value }) => {
       >
         Post
       </Button>
-    </div>
+
+      <Popover
+        contentClassName="p-0"
+        trigger={
+          <Button variant="ghost" className={cn(variant === 'secondary' && 'order-3')}>
+            <SmileIcon size={13} />
+          </Button>
+        }
+      >
+        <EmojiPicker onEmojiClick={handleInputEmoji} />
+      </Popover>
+    </form>
   )
 }
 

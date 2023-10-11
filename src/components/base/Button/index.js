@@ -73,7 +73,6 @@ const Button = forwardRef(
       buttonVariants({ variant, size: _size }),
       fullWidth && 'w-full',
       bold && 'font-bold',
-      // _size === 'text' && 'flex items-center justify-center mx-auto',
       className
     )
 
