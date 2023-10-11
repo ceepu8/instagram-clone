@@ -1,44 +1,35 @@
-import { Pressable } from '@react-aria/interactions'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import { useGetUserByName } from '@/apis'
-import { Button, LineBreak } from '@/components/base'
+import { Button, LineBreak, Link } from '@/components/base'
 import { AnimatedBarSpinnerIcon, XIcon } from '@/components/icons'
+import { ProfileAvatar } from '@/components/profile'
 import { Routes } from '@/constants'
-import Assets from '@/constants/Assets'
 import { cn } from '@/utils'
 
 import SearchInput from '../../SearchInput'
 
 const SearchItem = (props) => {
   const { username, image } = props || {}
-  const router = useRouter()
 
   return (
-    <div className="flex w-full cursor-pointer items-center">
-      <Pressable
-        onPress={() => router.push({ pathname: Routes.PROFILE, query: { username } })}
-        isDisabled={!username}
+    <li className="flex w-full cursor-pointer items-center px-6 py-2 transition-[background] hover:bg-nav-hover">
+      <Link
+        className="flex-1"
+        href={Routes.PROFILE.replace('[username]', username)}
+        disabled={!username}
       >
         <div className="flex w-full cursor-pointer items-center space-x-4">
-          <Image
-            width={40}
-            height={40}
-            src={image || Assets.COMMON.PLACEHOLDER}
-            alt="search-image"
-            className="rounded-full"
-          />
-          <div className="flex-1">
+          <ProfileAvatar image={image} size={44} />
+          <div>
             <h1 className="text-sm font-bold leading-4 text-default">{username}</h1>
             <p className="text-sm leading-4 text-note">description</p>
           </div>
         </div>
-      </Pressable>
+      </Link>
       <Button variant="ghost" icon={XIcon} iconClassName="stroke-3 text-note" />
-    </div>
+    </li>
   )
 }
 
@@ -58,22 +49,22 @@ const SearchList = ({ value }) => {
   })
 
   return (
-    <div className="mt-4 flex flex-1 flex-col px-2">
-      <div className="flex justify-between">
+    <div className="-mx-4 mt-4 flex flex-1 flex-col space-y-3">
+      <div className="flex justify-between px-6">
         <h2 className="font-bold">Recent</h2>
         <Button variant="link" size="small">
           Clear all
         </Button>
       </div>
-      <div
-        className={cn(
-          'mt-6 flex flex-1 flex-col items-center space-y-4',
-          !data?.users?.length && 'justify-center'
-        )}
-      >
+      <div className={cn('flex flex-1 flex-col items-center justify-center')}>
         {isLoading && <AnimatedBarSpinnerIcon size={20} />}
-        {!isLoading &&
-          (data?.users || []).map((user) => <SearchItem key={user.username} {...user} />)}
+        {!isLoading && data?.users?.length > 0 && (
+          <ul className="flex w-full flex-1 flex-col items-center">
+            {(data?.users || []).map((user) => (
+              <SearchItem key={user.username} {...user} />
+            ))}
+          </ul>
+        )}
         {!isLoading && !data?.users?.length && value && (
           <p className="text-sm font-semibold text-comment">No results found</p>
         )}
@@ -97,7 +88,7 @@ const SearchPanel = () => {
   const clearSearch = useCallback(() => setSearchValue(''), [])
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col ">
       <SearchPanelHeader onSearch={onSearch} clearSearch={clearSearch} searchValue={searchValue} />
       <SearchList value={value} />
     </div>

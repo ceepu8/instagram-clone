@@ -41,15 +41,6 @@ async function handler(req, res) {
         return res.status(500).json({ message: 'Internal Error' })
       }
 
-    case 'GET':
-      try {
-        const { username } = req.params
-        const posts = await getPostsByUser(username)
-        return res.status(200).json({ message: 'Success', data: posts })
-      } catch (error) {
-        return res.status(500).json({ message: 'Internal Error' })
-      }
-
     default:
       return res.status(200).json({ message: 'Welcome to API Routes!' })
   }
