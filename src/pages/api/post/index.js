@@ -1,5 +1,5 @@
 import getCurrentUser from '@/actions/getCurrentUser'
-import getPostsByUser from '@/actions/getPostByUser'
+import getPostsNewsFeed from '@/actions/getPostsNewsFeed'
 import prisma from '@/libs/prismadb'
 
 import authMiddleware from '../middlewares/authMiddleware'
@@ -38,6 +38,16 @@ async function handler(req, res) {
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error, 'REGISTRATION_ERROR')
+        return res.status(500).json({ message: 'Internal Error' })
+      }
+
+    case 'GET':
+      try {
+        const { page = 1, limit = 5 } = req.query
+        const { userId } = req.user
+        const posts = await getPostsNewsFeed(userId, page, limit)
+        return res.status(200).json(posts)
+      } catch (error) {
         return res.status(500).json({ message: 'Internal Error' })
       }
 

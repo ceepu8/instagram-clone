@@ -6,14 +6,15 @@ import PostContent from './PostContent'
 import PostHeader from './PostHeader'
 import PostImage from './PostImage'
 
-const HomePost = () => {
+const HomePost = ({ data }) => {
+  const { caption, images, owner } = data || {}
   const [comment, getCommentInputOnChange] = useInputState('')
   return (
     <div className="max-w-[var(--feed-width-post)] space-y-2 py-4">
-      <PostHeader />
-      <PostImage />
+      <PostHeader user={owner} />
+      <PostImage image={images?.[0]} />
       <PostActions />
-      <PostContent />
+      <PostContent owner={owner} caption={caption} />
       <PostComment value={comment} onChange={getCommentInputOnChange} />
     </div>
   )

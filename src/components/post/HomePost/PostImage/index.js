@@ -1,14 +1,14 @@
 import Image from 'next/image'
 
-const PostImage = () => {
+const PostImage = ({ image }) => {
   return (
-    <div className="w-full rounded border border-solid border-divide">
+    <div className="w-full border border-solid border-divide">
       <Image
         height={1200}
         width={1200}
-        src="/guinea-pig-4.jpeg"
+        src={image || '/guinea-pig-4.jpeg'}
         alt="post-image"
-        className="rounded object-contain"
+        className="object-contain"
       />
     </div>
   )

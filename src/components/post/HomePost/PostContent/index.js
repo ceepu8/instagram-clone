@@ -1,15 +1,14 @@
 import { PreviewProfileCard } from '@/components/shared'
 
-const PostContent = () => {
+const PostContent = ({ owner, caption }) => {
+  const { username } = owner || {}
   return (
     <div className="h-fit text-left">
       <PreviewProfileCard triggerClassName="inline-block">
-        <b className="text-xs">mirea_03</b>
+        <b className="text-xs">{username}</b>
       </PreviewProfileCard>
       <span>&nbsp;</span>
-      <span className="text-sm tracking-tight">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      </span>
+      <span className="text-sm tracking-tight">{caption}</span>
     </div>
   )
 }

@@ -3,7 +3,13 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 
 import { Axios } from '@/configs'
-import { API, CLOUDINARY_NAME, CLOUDINARY_UPLOAD_PRESET, USER_POST_LIST_KEY } from '@/constants'
+import {
+  API,
+  CLOUDINARY_NAME,
+  CLOUDINARY_UPLOAD_PRESET,
+  NEWS_FEED_POST_LIST_KEY,
+  USER_POST_LIST_KEY,
+} from '@/constants'
 import { useAuth } from '@/hooks/query/auth'
 
 export const useUploadPost = () => {
@@ -46,6 +52,20 @@ export const useGetPostsByUser = (username) => {
       keepPreviousData: true,
       staleTime: Infinity,
       enabled: !!username,
+    }
+  )
+}
+
+export const useGetPostsNewsFeed = (username) => {
+  return useQuery(
+    [NEWS_FEED_POST_LIST_KEY, username],
+    async () => {
+      const response = await Axios.get('/api/post')
+      return response.data
+    },
+    {
+      keepPreviousData: true,
+      staleTime: Infinity,
     }
   )
 }
