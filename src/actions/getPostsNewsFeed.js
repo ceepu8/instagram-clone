@@ -16,6 +16,9 @@ const getPostsNewsFeed = async (userId, page, limit) => {
     threeDaysAgo.setDate(today.getDate() - 3)
 
     const posts = await prisma.post.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
       where: {
         owner: {
           followers: {
