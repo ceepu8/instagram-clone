@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 
 import { Axios } from '@/configs'
@@ -57,15 +57,20 @@ export const useGetPostsByUser = (username) => {
 }
 
 export const useGetPostsNewsFeed = (username) => {
-  return useQuery(
-    [NEWS_FEED_POST_LIST_KEY, username],
-    async () => {
-      const response = await Axios.get('/api/post')
-      return response.data
+  return useInfiniteQuery({
+    queryKey: [NEWS_FEED_POST_LIST_KEY, username],
+    queryFn: async ({ pageParam = 1 }) => {
+      const url = `/api/post?page=${pageParam}`
+      const response = await Axios.get(url)
+      return {
+        data: response.data?.data,
+        nextPage: response.data?.pagination,
+      }
     },
-    {
-      keepPreviousData: true,
-      staleTime: Infinity,
-    }
-  )
+    getNextPageParam: (lastPage, pages) => {
+      console.log(lastPage)
+      const nextPage = lastPage[0]?.nextPage?.pagination?.nextPage
+      return nextPage
+    },
+  })
 }

@@ -3,7 +3,21 @@ import prisma from '@/libs/prismadb'
 const getPostsNewsFeed = async (userId, page, limit) => {
   try {
     if (!userId) {
-      return []
+      return {
+        data: [],
+        pagination: {
+          totalPages: 0,
+          totalItems: 0,
+          itemsPerPage: +limit,
+          currentPage: +page,
+          links: {
+            nextPage: null,
+            prevPage: null,
+            firstPage: null,
+            lastPage: null,
+          },
+        },
+      }
     }
 
     const skip = (+page - 1) * +limit
@@ -15,10 +29,7 @@ const getPostsNewsFeed = async (userId, page, limit) => {
     // Lấy thời điểm 3 ngày trước
     threeDaysAgo.setDate(today.getDate() - 3)
 
-    const posts = await prisma.post.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
+    const totalItems = await prisma.post.count({
       where: {
         owner: {
           followers: {
@@ -29,6 +40,26 @@ const getPostsNewsFeed = async (userId, page, limit) => {
         },
         createdAt: {
           gte: threeDaysAgo, // Ngày tạo post lớn hơn hoặc bằng threeDaysAgo
+        },
+      },
+    })
+
+    const totalPages = Math.ceil(totalItems / take)
+
+    const posts = await prisma.post.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      where: {
+        owner: {
+          followers: {
+            some: {
+              followingId: userId,
+            },
+          },
+        },
+        createdAt: {
+          gte: threeDaysAgo,
         },
       },
       select: {
@@ -48,13 +79,39 @@ const getPostsNewsFeed = async (userId, page, limit) => {
       take,
     })
 
-    if (!posts.length) {
-      return []
+    const response = {
+      data: posts,
+      pagination: {
+        totalPages,
+        totalItems,
+        itemsPerPage: take,
+        currentPage: +page,
+        links: {
+          nextPage: page < totalPages ? +page + 1 : null,
+          prevPage: page > 1 ? +page - 1 : null,
+          firstPage: 1,
+          lastPage: totalPages > 0 ? totalPages : null,
+        },
+      },
     }
 
-    return posts
+    return response
   } catch (error) {
-    return []
+    return {
+      data: [],
+      pagination: {
+        totalPages: 0,
+        totalItems: 0,
+        itemsPerPage: +limit,
+        currentPage: +page,
+        links: {
+          nextPage: null,
+          prevPage: null,
+          firstPage: null,
+          lastPage: null,
+        },
+      },
+    }
   }
 }
 

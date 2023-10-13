@@ -26,7 +26,7 @@ const ProfileBody = () => {
   const { component: Component } = profileTabs[router.query?.tab || PROFILE_TAB_KEYS.POSTS] || {}
 
   return (
-    <div className="mb-[calc(var(--mobile-nav-bar-height)+12px)] flex min-h-[420px] flex-1 flex-col sm:px-4 md:mb-0">
+    <div className="mb-[calc(var(--mobile-nav-bar-height)+12px)] flex min-h-[420px] flex-1 flex-col md:mb-0 md:px-4">
       <Component />
     </div>
   )

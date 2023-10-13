@@ -45,8 +45,8 @@ async function handler(req, res) {
       try {
         const { page = 1, limit = 5 } = req.query
         const { userId } = req.user
-        const posts = await getPostsNewsFeed(userId, page, limit)
-        return res.status(200).json(posts)
+        const data = await getPostsNewsFeed(userId, page, limit)
+        return res.status(200).json(data)
       } catch (error) {
         return res.status(500).json({ message: 'Internal Error' })
       }
