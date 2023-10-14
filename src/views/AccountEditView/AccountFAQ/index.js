@@ -9,9 +9,9 @@ const AccountFAQItem = ({ href, label, active }) => {
     <Link href={href} disabled={active || !href}>
       <span
         className={cn(
-          'text-sm text-default',
+          'text-sm text-default hover:text-black',
           'block cursor-pointer rounded-lg px-5 py-3 hover:bg-bright-gray',
-          active && 'bg-bright-gray hover:bg-gainsboro'
+          active && 'bg-bright-gray text-black hover:bg-gainsboro'
         )}
       >
         {label}

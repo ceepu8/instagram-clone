@@ -22,7 +22,7 @@ export const ReactQueryProvider = ({ children, pageProps = {} }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>{children}</Hydrate>
-      {DEBUG && <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />}
+      {/* {DEBUG && <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />} */}
     </QueryClientProvider>
   )
 }

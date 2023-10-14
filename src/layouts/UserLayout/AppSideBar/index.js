@@ -32,7 +32,7 @@ const AppSideBar = () => {
           'h-full max-h-screen',
           'fixed z-50 flex-col bg-background p-3',
           'border-r border-solid border-divide',
-          'transition-all duration-300',
+          'transition-[width] duration-300',
           'hidden w-0 md:flex',
           panel
             ? 'w-[--nav-narrow-width]'

@@ -52,7 +52,7 @@ const UploadPostDialog = () => {
           className={cn(
             'h-[40vh] md:h-[70vh]',
             'w-[50vw] min-w-[348px] max-w-[590px] md:w-[80vw]',
-            'flex items-center justify-center',
+            'flex-center',
             'transition-all duration-500',
             step === 3 &&
               'h-[40vh] w-[95vw] min-w-[688px] md:h-[70vh] md:w-[95vw] md:max-w-[1038px]'

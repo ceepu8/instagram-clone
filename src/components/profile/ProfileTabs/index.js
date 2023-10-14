@@ -52,7 +52,7 @@ const ProfileTabs = () => {
       <Pressable key={label} onPress={() => setTab(label)}>
         <div
           className={cn(
-            'flex items-center justify-center space-x-1 py-2 sm:py-6',
+            'flex-center space-x-1 py-2 sm:py-6',
             'cursor-pointer text-xs font-bold tracking-wide text-comment',
             'border-t border-transparent',
             'flex-1 sm:flex-initial',

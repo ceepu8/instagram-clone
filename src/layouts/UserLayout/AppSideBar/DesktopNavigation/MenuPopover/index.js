@@ -2,9 +2,10 @@ import { useState } from 'react'
 
 import Popover from '@/components/base/Popover'
 import { MenuIcon } from '@/components/icons'
+import { MENU_NAV_TYPES } from '@/constants'
 import { POPOVER_MENU_KEYS, SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 
-import TriggerItem from '../TriggerItem'
+import NavItem from '../NavItem'
 import MainMenu from './MainMenu'
 import SwitchAppearance from './SwitchAppearance'
 
@@ -12,19 +13,15 @@ const MenuPopover = ({ panel }) => {
   const [menu, setMenu] = useState(POPOVER_MENU_KEYS.MAIN)
   const [openPopover, setOpenPopover] = useState(false)
 
-  const trigger = (
-    <div>
-      <TriggerItem
-        icon={MenuIcon}
-        name={SIDEBAR_MENU_KEYS.MORE}
-        onPress={() => setOpenPopover(true)}
-        label="More"
-        active={openPopover}
-        hasBorderActive={false}
-        panelTriggered={panel}
-      />
-    </div>
-  )
+  const item = {
+    name: SIDEBAR_MENU_KEYS.MORE,
+    icon: MenuIcon,
+    onPress: () => setOpenPopover(true),
+    label: 'More',
+    type: MENU_NAV_TYPES.TRIGGER,
+  }
+
+  const trigger = <NavItem as="div" active={openPopover} panelTriggered={panel} item={item} />
 
   return (
     <Popover

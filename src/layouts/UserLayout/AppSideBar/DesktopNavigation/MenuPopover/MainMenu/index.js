@@ -1,15 +1,42 @@
+import { Pressable } from '@react-aria/interactions'
 import PropTypes from 'prop-types'
-import { Fragment } from 'react'
+import { Fragment, memo } from 'react'
 
-import { LineBreak } from '@/components/base'
+import { LineBreak, Link } from '@/components/base'
 import { AlertTriangle, BookmarkIcon, History, SettingsIcon, Sun } from '@/components/icons'
+import { Routes } from '@/constants'
 import { POPOVER_MENU_KEYS } from '@/constants/Keys'
-import { useLogout } from '@/hooks/query/auth'
+import { useAuth, useLogout } from '@/hooks/query/auth'
 
-import NavItem from '../../NavItem'
-import TriggerItem from '../../TriggerItem'
+const MenuItem = memo(({ item }) => {
+  const { icon: Icon, label, onPress, route } = item || {}
+
+  const renderChildren = () => {
+    return (
+      <div className="flex items-center gap-x-4 p-2 text-default">
+        {Icon && (
+          <div className="shrink-0 border-[2px] border-transparent">
+            <Icon />
+          </div>
+        )}
+        <span className="flex-1">{label}</span>
+      </div>
+    )
+  }
+
+  if (route) {
+    return (
+      <Link href={route} disabled={!route}>
+        {renderChildren()}
+      </Link>
+    )
+  }
+
+  return <Pressable onPress={onPress}>{renderChildren()}</Pressable>
+})
 
 export default function MainMenu({ setMenu }) {
+  const { user } = useAuth()
   const handleLogout = useLogout()
 
   const POPOVER_ITEMS = [
@@ -17,74 +44,59 @@ export default function MainMenu({ setMenu }) {
       key: POPOVER_MENU_KEYS.SETTINGS,
       icon: SettingsIcon,
       label: 'Settings',
-      route: '/',
-      component: NavItem,
+      route: Routes.ACCOUNT_EDIT,
     },
     {
       key: POPOVER_MENU_KEYS.YOUR_ACTIVITY,
       icon: History,
       label: 'Your Activity',
       route: '/',
-      component: NavItem,
     },
     {
       key: POPOVER_MENU_KEYS.SAVED,
-      onPress: null,
       icon: BookmarkIcon,
       label: 'Saved',
-      route: '/',
-      component: NavItem,
+      route: `${Routes.PROFILE.replace('[username]', user?.username)}?tab=saved`,
     },
     {
       key: POPOVER_MENU_KEYS.SWITCH_APPEARANCE,
       icon: Sun,
       label: 'Switch Appearance',
-      onPress: () => {
-        setMenu(POPOVER_MENU_KEYS.SWITCH_APPEARANCE)
-      },
-      component: TriggerItem,
+      onPress: () => setMenu(POPOVER_MENU_KEYS.SWITCH_APPEARANCE),
     },
     {
       key: POPOVER_MENU_KEYS.REPORT_PROBLEM,
       icon: AlertTriangle,
       label: 'Report a problem',
-      onPress: null,
-      component: TriggerItem,
+      onPress: () => {},
     },
     {
       key: POPOVER_MENU_KEYS.SWITCH_ACCOUNT,
       icon: null,
       label: 'Switch account',
-      onPress: null,
-      component: TriggerItem,
+      onPress: () => {},
     },
     {
       key: POPOVER_MENU_KEYS.LOG_OUT,
       icon: null,
       label: 'Log out',
       onPress: () => handleLogout(),
-      component: TriggerItem,
     },
   ]
 
   const renderItem = (item, index) => {
-    const { component: Component } = item
     return (
       <Fragment key={item.key}>
-        <Component
-          icon={item.icon}
-          className="text-sm hover:bg-nav-menu-item"
-          iconSize={20}
-          name={item.key}
-          {...item}
-        />
+        <li className="cursor-pointer rounded-lg border border-solid border-transparent text-sm font-medium transition-all duration-150 hover:bg-nav-menu-item">
+          <MenuItem item={item} />
+        </li>
         {index === 4 && <LineBreak className="-mx-2 h-[6px] bg-popover-divide" />}
         {index === 5 && <LineBreak className="-mx-2 bg-popover-divide" />}
       </Fragment>
     )
   }
 
-  return <div className="flex flex-col">{POPOVER_ITEMS.map(renderItem)}</div>
+  return <ul className="flex flex-col">{POPOVER_ITEMS.map(renderItem)}</ul>
 }
 
 MainMenu.propTypes = {
