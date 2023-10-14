@@ -7,7 +7,7 @@ import { cn } from '@/utils'
 const ProfileAvatar = forwardRef(
   ({ image, size = 20, hasBorder, className, active, ...props }, ref) => {
     return (
-      <div className={('aspect-[1/1]', className)} ref={ref} {...props}>
+      <div className={cn('aspect-[1/1] shrink-0', className)} ref={ref} {...props}>
         <Image
           width={size}
           height={size}

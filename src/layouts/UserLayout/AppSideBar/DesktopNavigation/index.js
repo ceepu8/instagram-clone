@@ -12,7 +12,7 @@ import {
   SearchIcon,
 } from '@/components/icons'
 import { ProfileAvatar } from '@/components/profile'
-import { Routes } from '@/constants'
+import { MENU_NAV_TYPES, Routes } from '@/constants'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
@@ -20,22 +20,25 @@ import { checkRouteActive } from '@/utils'
 
 import MenuPopover from './MenuPopover'
 import NavItem from './NavItem'
-import TriggerItem from './TriggerItem'
 import ItemLabel from './components/ItemLabel'
 
 const ProfileNavItem = ({ active, panelTriggered }) => {
   const { user } = useAuth()
   const { t } = useTranslation()
 
+  const href = Routes.PROFILE.replace('[username]', user?.username)
+
+  const rootClassnames =
+    'cursor-pointer gap-x-4 rounded-lg border border-solid border-transparent transition-[background] duration-150 hover:bg-nav-hover'
   return (
-    <Link href={Routes.PROFILE.replace('[username]', user?.username)} className="block">
-      <li className="flex cursor-pointer items-center gap-x-4 rounded-lg border border-solid border-transparent p-2 font-medium text-default transition-[background] duration-150 hover:bg-nav-hover">
-        <div className="shrink-0 border-[2px] border-transparent">
-          <ProfileAvatar size={24} image={user?.image} active={active} />
+    <li className={rootClassnames}>
+      <Link href={href} disabled={!user?.username} className="block">
+        <div className="flex items-center gap-x-4 p-2 font-medium text-default">
+          <ProfileAvatar size={28} image={user?.image} active={active} />
+          <ItemLabel isVisible={!panelTriggered} active={active} label={t('navbar.profile')} />
         </div>
-        <ItemLabel isVisible={!panelTriggered} active={active} label={t('navbar.profile')} />
-      </li>
-    </Link>
+      </Link>
+    </li>
   )
 }
 
@@ -47,93 +50,86 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
 
   const { t } = useTranslation()
 
-  const getActive = (key, route) => {
+  const getActive = (type, route) => {
+    // active trigger panel nav item
     if (panel) {
-      return key === panel
+      return type === panel
     }
-
-    if (key === SIDEBAR_MENU_KEYS.CREATE) {
+    // active trigger dialog nav item (create post feature)
+    if (type === SIDEBAR_MENU_KEYS.CREATE) {
       return isUploadPostDialogOpen
     }
 
-    if (key !== SIDEBAR_MENU_KEYS.CREATE && isUploadPostDialogOpen) {
+    // if dialog is triggered, block other active items
+    if (type !== SIDEBAR_MENU_KEYS.CREATE && isUploadPostDialogOpen) {
       return false
     }
 
+    // active nav item by routes
     return checkRouteActive(router, route)
   }
 
   const NAV_ITEMS = [
     {
-      key: SIDEBAR_MENU_KEYS.HOME,
+      name: SIDEBAR_MENU_KEYS.HOME,
       route: Routes.HOME,
       icon: HomeIcon,
       label: t('navbar.home'),
-      component: NavItem,
+      type: MENU_NAV_TYPES.LINK,
     },
     {
-      key: SIDEBAR_MENU_KEYS.SEARCH,
+      name: SIDEBAR_MENU_KEYS.SEARCH,
       onPress: () => {
         togglePanel(SIDEBAR_MENU_KEYS.SEARCH)
       },
       icon: SearchIcon,
       label: t('navbar.search'),
-      component: TriggerItem,
+      type: MENU_NAV_TYPES.TRIGGER,
     },
     {
-      key: SIDEBAR_MENU_KEYS.EXPLORE,
+      name: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       icon: CompassIcon,
       label: t('navbar.explore'),
-      component: NavItem,
+      type: MENU_NAV_TYPES.LINK,
     },
     {
-      key: SIDEBAR_MENU_KEYS.REELS,
+      name: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
       icon: ReelsIcon,
       label: t('navbar.reels'),
-      component: NavItem,
+      type: MENU_NAV_TYPES.LINK,
     },
     {
-      key: SIDEBAR_MENU_KEYS.MESSAGES,
+      name: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
       icon: MessengerIcon,
       label: t('navbar.messages'),
-      component: NavItem,
+      type: MENU_NAV_TYPES.LINK,
     },
     {
-      key: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
+      name: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
       onPress: () => {
         togglePanel(SIDEBAR_MENU_KEYS.NOTIFICATIONS)
       },
       icon: NotificationsIcon,
       label: t('navbar.notifications'),
-      component: TriggerItem,
+      type: MENU_NAV_TYPES.TRIGGER,
     },
     {
-      key: SIDEBAR_MENU_KEYS.CREATE,
+      name: SIDEBAR_MENU_KEYS.CREATE,
       onPress: () => {
         onOpenUploadPostDialog()
       },
       icon: PlusIcon,
       label: t('navbar.create'),
-      component: TriggerItem,
+      type: MENU_NAV_TYPES.TRIGGER,
     },
   ]
 
   const renderItem = (item) => {
-    const { component: Component } = item
-    const active = getActive(item.key, item.route)
-
-    return (
-      <Component
-        key={item?.key}
-        active={active}
-        panelTriggered={panel}
-        name={item?.key}
-        {...item}
-      />
-    )
+    const active = getActive(item.name, item.route)
+    return <NavItem key={item?.name} active={active} panelTriggered={panel} item={item} />
   }
 
   return (
