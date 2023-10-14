@@ -5,7 +5,7 @@ import { Link } from '@/components/base'
 import { MENU_NAV_TYPES } from '@/constants'
 import { checkRouteActive } from '@/utils'
 
-const NavItem = ({ item }) => {
+const MobileNavItem = ({ item }) => {
   const router = useRouter()
   const { icon: Icon, route, type, onPress } = item || {}
 
@@ -19,9 +19,9 @@ const NavItem = ({ item }) => {
   }
 
   return (
-    <li>
+    <li className="shrink-0">
       <Element onPress={() => onPress?.()} href={route} disabled={!route}>
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex-center">
           {Icon && <Icon active={active} size={active ? 26 : 24} />}
         </div>
       </Element>
@@ -29,4 +29,4 @@ const NavItem = ({ item }) => {
   )
 }
 
-export default NavItem
+export default MobileNavItem

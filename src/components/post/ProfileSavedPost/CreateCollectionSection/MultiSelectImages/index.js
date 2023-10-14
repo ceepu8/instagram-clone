@@ -15,7 +15,7 @@ const ImageOption = ({ item, onSelected, isSelected }) => {
 
   const overlayClassName = cn(
     'absolute inset-0 transition-all group-hover:bg-[rgba(255,255,255,0.2)]',
-    'flex items-center justify-center',
+    'flex-center',
     isSelected && 'bg-[rgba(255,255,255,0.2)]'
   )
 

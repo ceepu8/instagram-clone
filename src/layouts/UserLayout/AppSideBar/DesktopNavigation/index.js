@@ -12,7 +12,7 @@ import {
   SearchIcon,
 } from '@/components/icons'
 import { ProfileAvatar } from '@/components/profile'
-import { Routes } from '@/constants'
+import { MENU_NAV_TYPES, Routes } from '@/constants'
 import { SIDEBAR_MENU_KEYS } from '@/constants/Keys'
 import { useUploadPostDialog } from '@/hooks/custom'
 import { useAuth } from '@/hooks/query/auth'
@@ -29,7 +29,7 @@ const ProfileNavItem = ({ active, panelTriggered }) => {
   const href = Routes.PROFILE.replace('[username]', user?.username)
 
   return (
-    <Link href={href} disabled={!href} className="block">
+    <Link href={href} disabled={!user?.username} className="block">
       <li className="flex cursor-pointer items-center gap-x-4 rounded-lg border border-solid border-transparent p-2 font-medium text-default transition-[background] duration-150 hover:bg-nav-hover">
         <div className="shrink-0 border-[2px] border-transparent">
           <ProfileAvatar size={24} image={user?.image} active={active} />
@@ -73,7 +73,7 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
       route: Routes.HOME,
       icon: HomeIcon,
       label: t('navbar.home'),
-      type: 'link',
+      type: MENU_NAV_TYPES.LINK,
     },
     {
       name: SIDEBAR_MENU_KEYS.SEARCH,
@@ -82,28 +82,28 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
       },
       icon: SearchIcon,
       label: t('navbar.search'),
-      type: 'trigger',
+      type: MENU_NAV_TYPES.TRIGGER,
     },
     {
       name: SIDEBAR_MENU_KEYS.EXPLORE,
       route: Routes.EXPLORE,
       icon: CompassIcon,
       label: t('navbar.explore'),
-      type: 'link',
+      type: MENU_NAV_TYPES.LINK,
     },
     {
       name: SIDEBAR_MENU_KEYS.REELS,
       route: Routes.REELS.replace('[id]', 123),
       icon: ReelsIcon,
       label: t('navbar.reels'),
-      type: 'link',
+      type: MENU_NAV_TYPES.LINK,
     },
     {
       name: SIDEBAR_MENU_KEYS.MESSAGES,
       route: Routes.DIRECT_INBOX,
       icon: MessengerIcon,
       label: t('navbar.messages'),
-      type: 'link',
+      type: MENU_NAV_TYPES.LINK,
     },
     {
       name: SIDEBAR_MENU_KEYS.NOTIFICATIONS,
@@ -112,7 +112,7 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
       },
       icon: NotificationsIcon,
       label: t('navbar.notifications'),
-      type: 'trigger',
+      type: MENU_NAV_TYPES.TRIGGER,
     },
     {
       name: SIDEBAR_MENU_KEYS.CREATE,
@@ -121,7 +121,7 @@ const DesktopNavigation = ({ panel, togglePanel }) => {
       },
       icon: PlusIcon,
       label: t('navbar.create'),
-      type: 'trigger',
+      type: MENU_NAV_TYPES.TRIGGER,
     },
   ]
 
