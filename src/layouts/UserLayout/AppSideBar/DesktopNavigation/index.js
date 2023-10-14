@@ -28,15 +28,17 @@ const ProfileNavItem = ({ active, panelTriggered }) => {
 
   const href = Routes.PROFILE.replace('[username]', user?.username)
 
+  const rootClassnames =
+    'cursor-pointer gap-x-4 rounded-lg border border-solid border-transparent transition-[background] duration-150 hover:bg-nav-hover'
   return (
-    <Link href={href} disabled={!user?.username} className="block">
-      <li className="flex cursor-pointer items-center gap-x-4 rounded-lg border border-solid border-transparent p-2 font-medium text-default transition-[background] duration-150 hover:bg-nav-hover">
-        <div className="shrink-0 border-[2px] border-transparent">
-          <ProfileAvatar size={24} image={user?.image} active={active} />
+    <li className={rootClassnames}>
+      <Link href={href} disabled={!user?.username} className="block">
+        <div className="flex items-center gap-x-4 p-2 font-medium text-default">
+          <ProfileAvatar size={28} image={user?.image} active={active} />
+          <ItemLabel isVisible={!panelTriggered} active={active} label={t('navbar.profile')} />
         </div>
-        <ItemLabel isVisible={!panelTriggered} active={active} label={t('navbar.profile')} />
-      </li>
-    </Link>
+      </Link>
+    </li>
   )
 }
 
